@@ -1,6 +1,12 @@
+import { GlobalStyle } from './GlobalStyle';
+
 function App() {
-  console.log('hi');
-  return <div>hello, react</div>;
+	return (
+		<>
+			<GlobalStyle />
+			<div>hello, react</div>
+		</>
+	);
 }
 
 export default App;
