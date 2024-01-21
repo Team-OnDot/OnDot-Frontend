@@ -1,7 +1,7 @@
-import * as S from './login.style';
-import LoginForm from '../../components/Login/loginForm';
+import * as S from './Login.style';
+import LoginForm from '../../components/Login/LoginForm';
 
-function login() {
+function Login() {
 	return (
 		<div>
 			{/*Header*/}
@@ -23,4 +23,4 @@ function login() {
 	);
 }
 
-export default login;
+export default Login;

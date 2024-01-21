@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import * as S from './loginForm.style';
+import * as S from './LoginForm.style';
 
-function loginForm() {
+function LoginForm() {
 
 	return (
         <S.loginForm>
@@ -26,8 +26,8 @@ function loginForm() {
                 </S.formHeader>
                 <S.loginInputBox>
                     <S.loginInput
-                        id="userId"
-                        type="userId"
+                        id="userPw"
+                        type="password"
                         placeholder="비밀번호를 입력해주세요"
                     />
                 </S.loginInputBox>
@@ -46,4 +46,4 @@ function loginForm() {
 	);
 }
 
-export default loginForm;
+export default LoginForm;

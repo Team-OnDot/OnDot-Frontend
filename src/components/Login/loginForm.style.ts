@@ -52,7 +52,7 @@ export const loginInput = styled.input`
     color: var(--gray-02, #606060);
     padding: 21px 22px;
     border-radius: 15px;
-    border: 2px solid var(--gray-01, #303030);
+    border: 2px solid var(--gray-04, #959595);
     font-weight: 600;
 `;
 
@@ -69,7 +69,7 @@ export const loginBtn = styled.button`
     justify-content: center;
     align-items: center;
     border-radius: 15px;
-    background: var(--red-01, #FF4A4A);
+    background: #C8C8C8;
 `;
 
 //구글 로그인버튼
