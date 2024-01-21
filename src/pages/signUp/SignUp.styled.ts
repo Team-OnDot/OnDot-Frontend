@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 //헤더
 export const loginHeader = styled.div`
@@ -27,27 +27,3 @@ export const loginHeaderDot = styled.div`
     border: none;
     border-radius: 12px;
 `;
-
-//Footer
-export const LoginFooter = styled.div`
-    width: 399px;
-    margin: 33px auto 30px auto;
-    display: flex;
-`;
-
-//Footer 텍스트(아이디, 비밀번호 찾기)
-export const findText = styled.div`
-    font-weight: 600;
-    font-size: 15px;
-    color: #606060;
-    margin-right: 31px;
-`;
-
-//Footer 텍스트(회원가입)
-export const signInText = styled(findText)`
-    color: #FF4A4A;
-    margin-right: 0px;
-    margin-left: auto;
-    cursor: pointer;
-`;
-

@@ -1,7 +1,16 @@
 import * as S from './Login.style';
 import LoginForm from '../../components/Login/LoginForm';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+
+	const navigate = useNavigate();
+
+	//회원가입 클릭 시
+	const onClickSignIn = () => {
+		navigate(`/sign-up-id`);
+	};
+
 	return (
 		<div>
 			{/*Header*/}
@@ -17,7 +26,7 @@ function Login() {
 			<S.LoginFooter>
 				<S.findText>아이디 찾기</S.findText>
 				<S.findText>비밀번호 찾기</S.findText>
-				<S.signInText>회원가입</S.signInText>
+				<S.signInText onClick={onClickSignIn}>회원가입</S.signInText>
 			</S.LoginFooter>
 		</div>
 	);

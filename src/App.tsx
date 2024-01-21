@@ -2,6 +2,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import Header from './pages/header/Header';
 import Login from './pages/login/Login';
+import SignUpId from './pages/signUp/SignUpId';
 import Home from './pages/home/Home';
 
 
@@ -15,6 +16,7 @@ function App() {
 					<Route element={<Header />}>
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<Login />} />
+						<Route path="/sign-up-id" element={<SignUpId />} />
 					</Route>
 					{/*헤더가 필요없는 컴포넌트 */}
 
