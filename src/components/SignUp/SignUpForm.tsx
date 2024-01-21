@@ -1,5 +1,6 @@
 import * as L from '../Login/LoginForm.style';
 import * as S from './SignUpForm.style';
+import GroupType from './GroupType';
 import {useForm} from 'react-hook-form';
 
 function SignUpForm(){
@@ -101,15 +102,7 @@ function SignUpForm(){
                     <L.formHeaderText>그룹 분류</L.formHeaderText>
                 </L.formHeader>
                 <L.loginInputBox>
-                    <S.groupTypeBox>
-                        <S.groupTypeLabel>동아리</S.groupTypeLabel>
-                        <S.groupTypeUl>
-                            <S.groupTypeLiTop>동아리</S.groupTypeLiTop>
-                            <S.groupTypeLi>학생회</S.groupTypeLi>
-                            <S.groupTypeLi>학술 모임</S.groupTypeLi>
-                            <S.groupTypeLiBottom>기타</S.groupTypeLiBottom>
-                        </S.groupTypeUl>
-                    </S.groupTypeBox>
+                    <GroupType/>
                 </L.loginInputBox>
             </L.pwForm>
 
