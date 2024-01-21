@@ -101,12 +101,15 @@ function SignUpForm(){
                     <L.formHeaderText>그룹 분류</L.formHeaderText>
                 </L.formHeader>
                 <L.loginInputBox>
-                    <L.loginInput
-                        id="groupType"
-                        type="text"
-                        placeholder="비밀번호를 입력해 주세요"
-                        {...register("groupType")}
-                    />
+                    <S.groupTypeBox>
+                        <S.groupTypeLabel>동아리</S.groupTypeLabel>
+                        <S.groupTypeUl>
+                            <S.groupTypeLiTop>동아리</S.groupTypeLiTop>
+                            <S.groupTypeLi>학생회</S.groupTypeLi>
+                            <S.groupTypeLi>학술 모임</S.groupTypeLi>
+                            <S.groupTypeLiBottom>기타</S.groupTypeLiBottom>
+                        </S.groupTypeUl>
+                    </S.groupTypeBox>
                 </L.loginInputBox>
             </L.pwForm>
 

@@ -51,7 +51,7 @@ export const loginInput = styled.input`
     font-size: 15px;
     color: var(--gray-02, #606060);
     padding: 21px 22px;
-    border-radius: 15px;
+    border-radius: 11px;
     border: 2px solid var(--gray-04, #959595);
     font-weight: 600;
 `;
