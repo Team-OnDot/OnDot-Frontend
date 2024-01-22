@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 //그룹 분류 select 박스
 export const groupTypeBox = styled.div<{toggle:boolean}>`
@@ -9,13 +9,34 @@ export const groupTypeBox = styled.div<{toggle:boolean}>`
     border: 2px solid ${props=>(props.toggle ? '#FF4A4A': '#303030')};
     padding: 21px 22px;
 
-    //화살표 커스텀 
-    background:url('/images/groupTypePolygon.svg') no-repeat right 23px center; //화살표 사진 가져오기
-    background-size: 14px; //화살표 크기
+    // toggle이 true일 때 180도 회전
+    &:after {
+        content: '';
+        position: absolute;
+        top: 38%;
+        right: 23px;
+        width: 14px;
+        height: 14px;
+        background: url('/images/groupTypePolygon.svg') no-repeat center center;
+
+        // toggle이 true일 때 180도 회전
+        ${(props) =>
+            props.toggle &&
+            css`
+                transform: rotate(180deg);
+            `}
     
     &:hover{
         border: 2px solid #FF4A4A;
     }
+
+`;
+
+//그룹 분류 select 박스
+export const groupTypePolygon = styled.img<{toggle:boolean}>`
+    //화살표 커스텀 
+    background:url('/images/groupTypePolygon.svg') no-repeat right 23px center; //화살표 사진 가져오기
+    background-size: 14px; //화살표 크기
 `;
 
 //그룹 분류 라벨
