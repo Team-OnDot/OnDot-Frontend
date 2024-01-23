@@ -8,6 +8,10 @@ export const groupTypeBox = styled.div<{toggle:boolean}>`
     border-radius: 11px;
     border: 2px solid ${props=>(props.toggle ? '#FF4A4A': '#303030')};
     padding: 21px 22px;
+    
+    &:hover{
+        border: 2px solid ${props => props.theme.colors.red1};
+    }
 
     // toggle이 true일 때 180도 회전
     &:after {
@@ -25,11 +29,6 @@ export const groupTypeBox = styled.div<{toggle:boolean}>`
             css`
                 transform: rotate(180deg);
             `}
-    
-    &:hover{
-        border: 2px solid #FF4A4A;
-    }
-
 `;
 
 //그룹 분류 select 박스
@@ -54,12 +53,12 @@ export const groupTypeUl = styled.ul<{toggle:boolean}>`
     width: 399px;
     height: 236px;
     border-radius: 11px;
-    border: 2px solid #FF4A4A;
+    border: 2px solid ${props => props.theme.colors.red1};
     position: absolute;
-    background: #fff;
+    background: white;
     margin: 31px 0 0 -24px; //label기준으로 위치 조정
     cursor: pointer;
-    display:${props=>(props.toggle ? 'null': 'none')};
+    display: ${props=>(props.toggle ? 'null': 'none')};
 `;
 
 //그룹 분류 option
@@ -71,7 +70,7 @@ export const groupTypeLi = styled.li`
 
     //마우스 닿으면 색변경
     &:hover{
-        background: #FFF2F2;
+        background: ${props => props.theme.colors.red4};
     }
 `;
 
@@ -99,5 +98,5 @@ export const signUpBtn = styled.button`
     justify-content: center;
     align-items: center;
     border-radius: 15px;
-    background: #C8C8C8;
+    background: ${props => props.theme.colors.gray5};
 `;

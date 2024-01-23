@@ -1,4 +1,4 @@
-import * as L from '../Login/LoginForm.style';
+import * as L from '../login/LoginForm.style';
 import * as S from './SignUpForm.style';
 import GroupType from './GroupType';
 import {useForm} from 'react-hook-form';

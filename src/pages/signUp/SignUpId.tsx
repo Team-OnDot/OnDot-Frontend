@@ -1,5 +1,5 @@
 import * as S from '../login/Login.style';
-import SignUpForm from '../../components/SignUp/SignUpForm';
+import SignUpForm from '../../components/signUp/SignUpForm';
 
 function SignUpId(){
     return(

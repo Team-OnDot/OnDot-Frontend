@@ -1,5 +1,5 @@
 import * as S from './Login.style';
-import LoginForm from '../../components/Login/LoginForm';
+import LoginForm from '../../components/login/LoginForm';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {

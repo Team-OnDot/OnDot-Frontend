@@ -16,7 +16,7 @@ export const headerWrapper = styled.div`
     display: inline-flex;
     margin-left: 576px;
     font-size: 20px;
-    color: var(--gray-02, #606060);
+    color: ${props => props.theme.colors.gray2};
     font-weight: 700;
 `;
 

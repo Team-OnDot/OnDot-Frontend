@@ -23,7 +23,7 @@ export const loginHeaderDot = styled.div`
     margin-bottom: 2px;
     width: 6.173px;
     height: 6.173px;
-    background-color: #FF4A4A;
+    background-color: ${props => props.theme.colors.red1};
     border: none;
     border-radius: 12px;
 `;
@@ -39,13 +39,13 @@ export const LoginFooter = styled.div`
 export const findText = styled.div`
     font-weight: 600;
     font-size: 15px;
-    color: #606060;
+    color: ${props => props.theme.colors.gray2};
     margin-right: 31px;
 `;
 
 //Footer 텍스트(회원가입)
 export const signInText = styled(findText)`
-    color: #FF4A4A;
+    color: ${props => props.theme.colors.red1};
     margin-right: 0px;
     margin-left: auto;
     cursor: pointer;

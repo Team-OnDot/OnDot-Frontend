@@ -23,7 +23,7 @@ export const loginHeaderDot = styled.div`
     margin-bottom: 2px;
     width: 6.173px;
     height: 6.173px;
-    background-color: #FF4A4A;
+    background-color: ${props => props.theme.colors.red1};
     border: none;
     border-radius: 12px;
 `;

@@ -23,13 +23,13 @@ export const formHeader = styled.div`
 
 //header ellipse
 export const ellipse = styled.div`
-    border: 1px solid var(--red-01, #FF4A4A);
+    border: 1px solid ${props => props.theme.colors.red1};
     width: 12px;
     height: 12px;
-    color: var(--red-01, #FF4A4A);
+    color: ${props => props.theme.colors.red1};
     border-radius: 10px;
     margin: auto 0;
-    background-color: var(--red-01, #FF4A4A);
+    background-color: ${props => props.theme.colors.red1};
 `;
 
 //form 헤더 텍스트
@@ -49,10 +49,10 @@ export const loginInput = styled.input`
     height: 60px;
     border: 1px solid black;
     font-size: 15px;
-    color: var(--gray-02, #606060);
+    color: ${props => props.theme.colors.gray2};
     padding: 21px 22px;
     border-radius: 11px;
-    border: 2px solid var(--gray-04, #959595);
+    border: 2px solid ${props => props.theme.colors.gray4};
     font-weight: 600;
 `;
 
@@ -69,13 +69,13 @@ export const loginBtn = styled.button`
     justify-content: center;
     align-items: center;
     border-radius: 15px;
-    background: #C8C8C8;
+    background: ${props => props.theme.colors.gray5};
 `;
 
 //구글 로그인버튼
 export const googleLoginBtn = styled(loginBtn)`
     margin-top: 26px;
-    background-color: #303030;
+    background-color: ${props => props.theme.colors.gray1};
     justify-content: left;
     align-items: left;
 `;
