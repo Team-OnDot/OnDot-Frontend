@@ -26,7 +26,6 @@ export const ellipse = styled.div`
     border: 1px solid ${props => props.theme.colors.red1};
     width: 9px;
     height: 9px;
-    color: ${props => props.theme.colors.red1};
     border-radius: 10px;
     margin: auto 0;
     background-color: ${props => props.theme.colors.red1};
@@ -35,7 +34,8 @@ export const ellipse = styled.div`
 //form 헤더 텍스트
 export const formHeaderText = styled.div`
     font-size: 16px;
-    margin-left: 9px;
+    margin-left: 6px;
+    
 `;
 
 //입력 박스
@@ -66,7 +66,7 @@ export const inputCancelBtn = styled.img`
 //로그인 버튼
 export const loginBtn = styled.button<{toggle:boolean}>`
     display: flex;
-    margin-top: 49px;
+    margin-top: 34px;
     border: none;
     color: white;
     font-size: 17px;
