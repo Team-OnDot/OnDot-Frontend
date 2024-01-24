@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 //로그인 form
 export const loginForm = styled.form`
-    margin: 31px auto 0px auto;
-    width: 399px;
+    margin: 23px auto 0px auto;
+    width: 352px;
 `;
 
 //아이디 form
@@ -13,7 +13,7 @@ export const idForm = styled.div`
 
 //비밀번호 form
 export const pwForm = styled.div`
-    margin-top: 27px;
+    margin-top: 21px;
 `;
 
 //form header
@@ -24,8 +24,8 @@ export const formHeader = styled.div`
 //header ellipse
 export const ellipse = styled.div`
     border: 1px solid ${props => props.theme.colors.red1};
-    width: 12px;
-    height: 12px;
+    width: 9px;
+    height: 9px;
     color: ${props => props.theme.colors.red1};
     border-radius: 10px;
     margin: auto 0;
@@ -34,22 +34,22 @@ export const ellipse = styled.div`
 
 //form 헤더 텍스트
 export const formHeaderText = styled.div`
-    font-size: 17px;
+    font-size: 16px;
     margin-left: 9px;
 `;
 
 //입력 박스
 export const loginInputBox = styled.div`
-    margin-top: 12px;
+    margin-top: 9px;
 `;
 
 //아이디, 비밀번호 입력창
 export const loginInput = styled.input`
-    width: 399px;
-    height: 60px;
+    width: 352px;
+    height: 47px;
     border: 1px solid black;
     font-size: 15px;
-    color: ${props => props.theme.colors.gray2};
+    color: ${props => props.theme.colors.gray4};
     padding: 21px 22px;
     border-radius: 11px;
     border: 2px solid ${props => props.theme.colors.gray4};
@@ -62,10 +62,10 @@ export const loginBtn = styled.button<{toggle:boolean}>`
     margin-top: 49px;
     border: none;
     color: white;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 700;
-    width: 399px;
-    height: 60px;
+    width: 352px;
+    height: 49px;
     justify-content: center;
     align-items: center;
     border-radius: 30px;
@@ -74,17 +74,17 @@ export const loginBtn = styled.button<{toggle:boolean}>`
 
 //구글 로그인버튼
 export const googleLoginBtn = styled(loginBtn)`
-    margin-top: 26px;
-    background-color: ${props => props.theme.colors.gray1};
+    margin-top: 19px;
+    background-color: ${props => props.theme.colors.gray2};
     justify-content: left;
     align-items: left;
 `;
 
 //구글 로고 박스
 export const googleLogo = styled.div`
-    width: 25.843px;
-    height: 27.759px;
-    margin-left: 24.7px;
+    width: 21.209px;
+    height: 21.343px;
+    margin-left: 21px;
 `;
 
 
@@ -96,5 +96,5 @@ export const googleLogoImg = styled.img`
 
 //구글 로그인 텍스트
 export const googleLoginText = styled.div`
-    margin-left: 60.46px;
+    margin-left: 52px;
 `;

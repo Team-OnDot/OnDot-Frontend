@@ -24,9 +24,11 @@ function Login() {
 			<LoginForm/>
 			{/*Footer*/}
 			<S.LoginFooter>
-				<S.findText>아이디 찾기</S.findText>
-				<S.findText>비밀번호 찾기</S.findText>
-				<S.signInText onClick={onClickSignIn}>회원가입</S.signInText>
+				<S.LoginFooterWrap>
+					<S.findText>아이디 찾기</S.findText>
+					<S.findText>비밀번호 찾기</S.findText>
+					<S.signInText onClick={onClickSignIn}>회원가입</S.signInText>
+				</S.LoginFooterWrap>
 			</S.LoginFooter>
 		</div>
 	);
