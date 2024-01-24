@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components";
+import styled from "styled-components";
 
 //로그인 form
 export const loginForm = styled.form`
@@ -40,38 +40,27 @@ export const formHeaderText = styled.div`
 
 //입력 박스
 export const loginInputBox = styled.div`
+    display: flex;
     margin-top: 9px;
-`;
-
-//아이디 입력창
-export const loginInputId = styled.input<{toggle: boolean}>`
     width: 352px;
     height: 47px;
-    font-size: 15px;
-    color: ${props => props.theme.colors.gray4};
-    padding: 21px 22px;
     border-radius: 11px;
     border: 2px solid ${props => props.theme.colors.gray4};
-    font-weight: 600;
-
-    //toggle == true
-    ${(props) =>
-        props.toggle &&
-        css`
-            background: url('/images/loginInputCancelIcon.svg') no-repeat right 5px center;
-            color: ${props => props.theme.colors.gray1};
-            border: 2px solid ${props => props.theme.colors.gray2};
-        `}
 `;
 
-export const loginInputPw = styled(loginInputId)<{toggle: boolean}>`
-    
-    //입력 취소 버튼 생성
-    ${(props) =>
-        props.toggle &&
-        css`
-            background: url('/images/loginInputCancelIcon.svg') no-repeat right 5px center;
-        `}
+//아이디, 비밀번호 입력창
+export const loginInput = styled.input`
+    font-size: 15px;
+    margin-left: 15px;
+    border: none;
+    color: ${props => props.theme.colors.gray4};
+    font-weight: 600;
+`;
+
+//입력 취소 버튼
+export const inputCancelBtn = styled.img`
+    margin-right: 5px;
+    margin-left: auto;
 `;
 
 //로그인 버튼

@@ -3,6 +3,7 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 
 type IUserData = {
+    content: string,
     userId: string;
     userPw: string;
   }
@@ -13,6 +14,8 @@ function LoginForm() {
         register,
         handleSubmit,
         watch,
+        reset,
+        resetField,
         formState: { errors }
       } = useForm<IUserData>({
         mode: "onSubmit"
@@ -21,6 +24,7 @@ function LoginForm() {
     //submit이 정상적으로 되었을 때 data를 다루는 함수
     const onValid = (data: IUserData) => {
         console.log("# onValid", data);
+        
       };
 
     //유효성 검사에 실패했을 때 errors를 다루는 함수
@@ -29,37 +33,20 @@ function LoginForm() {
       };
 
     const [isActive, setIsActive] = useState(false);
-    const [checkId, setCheckId] = useState(false);
-    const [checkPw, setCheckPw] = useState(false);
+    const onChangeId = watch("userId")?.length ?? 0;
+    const onChangePw = watch("userPw")?.length ?? 0;
 
-    const subscirbe = watch((data, { name }) => {
-        
-        //id, pw가 모두 입력되면 로그인 버튼 활성화
-        if(data.userPw === '' || data.userId === ''){
-            setIsActive(false);
-        }
-        else{
+    useEffect(() => {
+        if(onChangeId > 0 && onChangePw > 0)
             setIsActive(true);
-        }
-
-        
-        if(data.userId !== ''){
-            setCheckId(true);
-        }
-
-        else{
-            setCheckId(false);
-        }
-        
-        if(data.userPw !== ''){
-            setCheckPw(true);
-        }
-
-        else{
-            setCheckPw(false);
-        }
+        else
+            setIsActive(false);
         
     });
+
+    const removeInput = (name:any) => {
+        resetField(name);
+    }
 
 	return (
         <S.loginForm onSubmit={handleSubmit(onValid, onInValid)}>
@@ -69,15 +56,21 @@ function LoginForm() {
                     <S.formHeaderText>아이디</S.formHeaderText>
                 </S.formHeader>
                 <S.loginInputBox>
-                    <S.loginInputId
-                        toggle={checkId}
+                    <S.loginInput
                         id="userId"
                         type="id"
                         placeholder="아이디를 입력해 주세요"
                         {...register("userId",{
                             required: true
                         })}
+                        
                     />
+                    {onChangeId > 0 && 
+                        <S.inputCancelBtn 
+                            src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
+                            onClick={e => removeInput("userId")}
+                        />
+                    }
                 </S.loginInputBox>
             </S.idForm>
 
@@ -87,8 +80,7 @@ function LoginForm() {
                     <S.formHeaderText>비밀번호</S.formHeaderText>
                 </S.formHeader>
                 <S.loginInputBox>
-                    <S.loginInputPw
-                        toggle={checkPw}
+                    <S.loginInput
                         id="userPw"
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"
@@ -96,6 +88,12 @@ function LoginForm() {
                             required: true
                         })}
                     />
+                    {onChangePw > 0 && 
+                        <S.inputCancelBtn 
+                            src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
+                            onClick={e => removeInput("userPw")}
+                        />
+                    }
                 </S.loginInputBox>
             </S.pwForm>
 
