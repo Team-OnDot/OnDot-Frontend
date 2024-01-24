@@ -57,7 +57,7 @@ export const loginInput = styled.input`
 `;
 
 //로그인 버튼
-export const loginBtn = styled.button`
+export const loginBtn = styled.button<{toggle:boolean}>`
     display: flex;
     margin-top: 49px;
     border: none;
@@ -68,8 +68,8 @@ export const loginBtn = styled.button`
     height: 60px;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
-    background: ${props => props.theme.colors.gray5};
+    border-radius: 30px;
+    background: ${props=>(props.toggle ? '#FF4A4A': '#C8C8C8')};
 `;
 
 //구글 로그인버튼
