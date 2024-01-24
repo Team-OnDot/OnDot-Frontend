@@ -33,6 +33,7 @@ function LoginForm() {
     const [isActive, setIsActive] = useState(false);
     const [checkId, setCheckId] = useState(false);
     const [checkPw, setCheckPw] = useState(false);
+    //길이 변화 감시 변수
     const onChangeId = watch("userId")?.length ?? 0;
     const onChangePw = watch("userPw")?.length ?? 0;
 
@@ -61,6 +62,7 @@ function LoginForm() {
 
 	return (
         <S.loginForm onSubmit={handleSubmit(onValid, onInValid)}>
+            {/*아이디*/}
             <S.idForm>
                 <S.formHeader>
                     <S.ellipse></S.ellipse>
@@ -85,6 +87,7 @@ function LoginForm() {
                 </S.loginInputBox>
             </S.idForm>
 
+            {/*비밀번호*/}
             <S.pwForm>
                 <S.formHeader>
                     <S.ellipse></S.ellipse>
@@ -108,6 +111,7 @@ function LoginForm() {
                 </S.loginInputBox>
             </S.pwForm>
 
+            {/*버튼*/}
             <S.loginBtn type="submit" toggle={isActive}>
                 로그인
             </S.loginBtn>

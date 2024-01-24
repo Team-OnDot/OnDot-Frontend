@@ -44,13 +44,13 @@ export const groupTypeLabel = styled.div`
 
 //그룹 분류 선택리스트 박스(option박스)
 export const groupTypeUl = styled.ul<{toggle:boolean}>`
-    width: 399px;
-    height: 236px;
+    width: 352px;
+    height: 185px;
     border-radius: 11px;
     border: 2px solid ${props => props.theme.colors.red1};
     position: absolute;
     background: white;
-    margin: 31px 0 0 -24px; //label기준으로 위치 조정
+    margin: 22px 0 0 -16px; //label기준으로 위치 조정
     cursor: pointer;
     display: ${props=>(props.toggle ? 'null': 'none')};
 `;
@@ -59,8 +59,8 @@ export const groupTypeUl = styled.ul<{toggle:boolean}>`
 export const groupTypeLi = styled.li`
     font-size: 15px;
     font-weight: 600;
-    height: 58px;
-    padding: 19px 25px;
+    height: 45.5px;
+    padding: 15px 15px;
 
     //마우스 닿으면 색변경
     &:hover{
@@ -79,18 +79,18 @@ export const groupTypeLiBottom = styled(groupTypeLi)`
 `;
 
 //회원가입 버튼
-export const signUpBtn = styled.button`
+export const signUpBtn = styled.button<{toggle: boolean}>`
     display: flex;
-    margin-top: 60px;
+    margin-top: 48.5px;
     margin-bottom: 100px;
     border: none;
     color: white;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 700;
-    width: 399px;
-    height: 60px;
+    width: 352px;
+    height: 49px;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
-    background: ${props => props.theme.colors.gray5};
+    border-radius: 30px;
+    background: ${props=>(props.toggle ? `${props.theme.colors.red1}`: `${props.theme.colors.gray2}`)};
 `;
