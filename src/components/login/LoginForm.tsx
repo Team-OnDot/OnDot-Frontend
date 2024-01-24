@@ -29,15 +29,36 @@ function LoginForm() {
       };
 
     const [isActive, setIsActive] = useState(false);
+    const [checkId, setCheckId] = useState(false);
+    const [checkPw, setCheckPw] = useState(false);
+
     const subscirbe = watch((data, { name }) => {
         
+        //id, pw가 모두 입력되면 로그인 버튼 활성화
         if(data.userPw === '' || data.userId === ''){
             setIsActive(false);
         }
         else{
             setIsActive(true);
         }
-        //console.log(data.userId, name)    
+
+        
+        if(data.userId !== ''){
+            setCheckId(true);
+        }
+
+        else{
+            setCheckId(false);
+        }
+        
+        if(data.userPw !== ''){
+            setCheckPw(true);
+        }
+
+        else{
+            setCheckPw(false);
+        }
+        
     });
 
 	return (
@@ -48,7 +69,8 @@ function LoginForm() {
                     <S.formHeaderText>아이디</S.formHeaderText>
                 </S.formHeader>
                 <S.loginInputBox>
-                    <S.loginInput
+                    <S.loginInputId
+                        toggle={checkId}
                         id="userId"
                         type="id"
                         placeholder="아이디를 입력해 주세요"
@@ -65,7 +87,8 @@ function LoginForm() {
                     <S.formHeaderText>비밀번호</S.formHeaderText>
                 </S.formHeader>
                 <S.loginInputBox>
-                    <S.loginInput
+                    <S.loginInputPw
+                        toggle={checkPw}
                         id="userPw"
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"

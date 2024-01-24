@@ -2,6 +2,7 @@ import * as L from '../login/LoginForm.style';
 import * as S from './SignUpForm.style';
 import GroupType from './GroupType';
 import {useForm} from 'react-hook-form';
+import { useState } from 'react';
 
 function SignUpForm(){
 
@@ -21,6 +22,9 @@ function SignUpForm(){
         formState: { errors },
     } = useForm<FormValue>();
 
+    const [checkId, setCheckId] = useState(false);
+    const [checkPw, setCheckPw] = useState(false);
+
     return(
         <L.loginForm>
 
@@ -32,7 +36,8 @@ function SignUpForm(){
                     </L.formHeaderText>
                 </L.formHeader>
                 <L.loginInputBox>
-                    <L.loginInput
+                    <L.loginInputId
+                        toggle={checkId}
                         id="userId"
                         type="id"
                         placeholder="아이디를 입력해 주세요"
@@ -52,7 +57,8 @@ function SignUpForm(){
                     <L.formHeaderText>비밀번호</L.formHeaderText>
                 </L.formHeader>
                 <L.loginInputBox>
-                    <L.loginInput
+                    <L.loginInputPw
+                        toggle={checkPw}
                         id="userPw"
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"
@@ -72,7 +78,8 @@ function SignUpForm(){
                     <L.formHeaderText>비밀번호 확인</L.formHeaderText>
                 </L.formHeader>
                 <L.loginInputBox>
-                    <L.loginInput
+                    <L.loginInputPw
+                        toggle={checkPw}
                         id="userPwCheck"
                         type="password"
                         placeholder="비밀번호를 다시 한 번 입력해 주세요"
@@ -87,7 +94,8 @@ function SignUpForm(){
                     <L.formHeaderText>그룹 이름</L.formHeaderText>
                 </L.formHeader>
                 <L.loginInputBox>
-                    <L.loginInput
+                    <L.loginInputId
+                        toggle={checkId}
                         id="groundName"
                         type="text"
                         placeholder="그룹이름을 입력해 주세요"
@@ -112,7 +120,8 @@ function SignUpForm(){
                     <L.formHeaderText>그룹 프로필 주소</L.formHeaderText>
                 </L.formHeader>
                 <L.loginInputBox>
-                    <L.loginInput
+                    <L.loginInputId
+                        toggle={checkId}
                         id="groupProfile"
                         type="email"
                         placeholder="Ondot.co.kr"
