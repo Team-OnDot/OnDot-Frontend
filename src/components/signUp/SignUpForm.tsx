@@ -2,6 +2,7 @@ import * as L from '../login/LoginForm.style';
 import * as S from './SignUpForm.style';
 import GroupType from './GroupType';
 import {useForm} from 'react-hook-form';
+import { useState } from 'react';
 
 function SignUpForm(){
 
@@ -21,6 +22,9 @@ function SignUpForm(){
         formState: { errors },
     } = useForm<FormValue>();
 
+    const [checkId, setCheckId] = useState(false);
+    const [checkPw, setCheckPw] = useState(false);
+
     return(
         <L.loginForm>
 
@@ -31,7 +35,7 @@ function SignUpForm(){
                         <label htmlFor="userId">아이디</label>
                     </L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox>
+                <L.loginInputBox toggle={checkId}>
                     <L.loginInput
                         id="userId"
                         type="id"
@@ -51,7 +55,7 @@ function SignUpForm(){
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>비밀번호</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox>
+                <L.loginInputBox toggle={checkId}>
                     <L.loginInput
                         id="userPw"
                         type="password"
@@ -71,7 +75,7 @@ function SignUpForm(){
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>비밀번호 확인</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox>
+                <L.loginInputBox toggle={checkId}>
                     <L.loginInput
                         id="userPwCheck"
                         type="password"
@@ -86,7 +90,7 @@ function SignUpForm(){
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>그룹 이름</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox>
+                <L.loginInputBox toggle={checkId}>
                     <L.loginInput
                         id="groundName"
                         type="text"
@@ -101,7 +105,7 @@ function SignUpForm(){
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>그룹 분류</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox>
+                <L.loginInputBox toggle={checkId}>
                     <GroupType/>
                 </L.loginInputBox>
             </L.pwForm>
@@ -111,7 +115,7 @@ function SignUpForm(){
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>그룹 프로필 주소</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox>
+                <L.loginInputBox toggle={checkId}>
                     <L.loginInput
                         id="groupProfile"
                         type="email"

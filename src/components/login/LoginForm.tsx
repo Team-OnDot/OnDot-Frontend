@@ -3,7 +3,6 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 
 type IUserData = {
-    content: string,
     userId: string;
     userPw: string;
   }
@@ -14,7 +13,6 @@ function LoginForm() {
         register,
         handleSubmit,
         watch,
-        reset,
         resetField,
         formState: { errors }
       } = useForm<IUserData>({
@@ -33,17 +31,30 @@ function LoginForm() {
       };
 
     const [isActive, setIsActive] = useState(false);
+    const [checkId, setCheckId] = useState(false);
+    const [checkPw, setCheckPw] = useState(false);
     const onChangeId = watch("userId")?.length ?? 0;
     const onChangePw = watch("userPw")?.length ?? 0;
 
+    //로그인 버튼 활성화
     useEffect(() => {
         if(onChangeId > 0 && onChangePw > 0)
             setIsActive(true);
         else
             setIsActive(false);
         
+        if(onChangeId > 0)
+            setCheckId(true);
+        else
+            setCheckId(false);
+
+        if(onChangePw > 0)
+            setCheckPw(true);
+        else
+            setCheckPw(false);
     });
 
+    //입력 취소 버튼
     const removeInput = (name:any) => {
         resetField(name);
     }
@@ -55,7 +66,7 @@ function LoginForm() {
                     <S.ellipse></S.ellipse>
                     <S.formHeaderText>아이디</S.formHeaderText>
                 </S.formHeader>
-                <S.loginInputBox>
+                <S.loginInputBox toggle={checkId}>
                     <S.loginInput
                         id="userId"
                         type="id"
@@ -79,7 +90,7 @@ function LoginForm() {
                     <S.ellipse></S.ellipse>
                     <S.formHeaderText>비밀번호</S.formHeaderText>
                 </S.formHeader>
-                <S.loginInputBox>
+                <S.loginInputBox toggle={checkPw}>
                     <S.loginInput
                         id="userPw"
                         type="password"

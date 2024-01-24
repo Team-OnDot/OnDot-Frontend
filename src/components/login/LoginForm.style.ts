@@ -39,13 +39,14 @@ export const formHeaderText = styled.div`
 `;
 
 //입력 박스
-export const loginInputBox = styled.div`
+export const loginInputBox = styled.div<{toggle:boolean}>`
     display: flex;
     margin-top: 9px;
     width: 352px;
     height: 47px;
     border-radius: 11px;
-    border: 2px solid ${props => props.theme.colors.gray4};
+    border: 2px solid ${props=>(props.toggle ? `${props.theme.colors.gray2}`: `${props.theme.colors.gray4}`)};
+    color: ${props=>(props.toggle ? `${props.theme.colors.gray1}`: `${props.theme.colors.gray2}`)};
 `;
 
 //아이디, 비밀번호 입력창
@@ -53,7 +54,6 @@ export const loginInput = styled.input`
     font-size: 15px;
     margin-left: 15px;
     border: none;
-    color: ${props => props.theme.colors.gray4};
     font-weight: 600;
 `;
 
@@ -76,7 +76,7 @@ export const loginBtn = styled.button<{toggle:boolean}>`
     justify-content: center;
     align-items: center;
     border-radius: 30px;
-    background: ${props=>(props.toggle ? '#FF4A4A': '#C8C8C8')};
+    background: ${props=>(props.toggle ? `${props.theme.colors.red1}`: `${props.theme.colors.gray5}`)};
 `;
 
 //구글 로그인버튼
