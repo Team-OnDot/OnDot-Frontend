@@ -105,9 +105,7 @@ function SignUpForm(){
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>그룹 분류</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox toggle={checkId}>
                     <GroupType/>
-                </L.loginInputBox>
             </L.pwForm>
 
             <L.pwForm>

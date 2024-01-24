@@ -42,7 +42,7 @@ function LoginForm() {
             setIsActive(true);
         else
             setIsActive(false);
-        
+
         if(onChangeId > 0)
             setCheckId(true);
         else

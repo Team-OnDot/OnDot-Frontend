@@ -3,11 +3,12 @@ import styled, { css } from 'styled-components'
 //그룹 분류 select 박스
 export const groupTypeBox = styled.div<{toggle:boolean}>`
     position: relative;
-    width: 399px;
-    height: 60px;
+    margin-top: 8px;
+    width: 352px;
+    height: 47px;
     border-radius: 11px;
-    border: 2px solid ${props=>(props.toggle ? '#FF4A4A': '#303030')};
-    padding: 21px 22px;
+    border: 2px solid ${props=>(props.toggle ? `${props.theme.colors.red1}`: `${props.theme.colors.gray2}`)};
+    padding: 15px;
     
     &:hover{
         border: 2px solid ${props => props.theme.colors.red1};
@@ -17,8 +18,8 @@ export const groupTypeBox = styled.div<{toggle:boolean}>`
     &:after {
         content: '';
         position: absolute;
-        top: 38%;
-        right: 23px;
+        top: 35%;
+        right: 16px;
         width: 14px;
         height: 14px;
         background: url('/images/groupTypePolygon.svg') no-repeat center center;
@@ -29,13 +30,6 @@ export const groupTypeBox = styled.div<{toggle:boolean}>`
             css`
                 transform: rotate(180deg);
             `}
-`;
-
-//그룹 분류 select 박스
-export const groupTypePolygon = styled.img<{toggle:boolean}>`
-    //화살표 커스텀 
-    background:url('/images/groupTypePolygon.svg') no-repeat right 23px center; //화살표 사진 가져오기
-    background-size: 14px; //화살표 크기
 `;
 
 //그룹 분류 라벨
