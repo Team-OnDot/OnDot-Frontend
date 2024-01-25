@@ -1,6 +1,6 @@
 import * as S from './InterviewPreview.style';
 
-export type interview = {
+export type Interview = {
 	title: String,
 	date: String,
 	time: String,
@@ -8,28 +8,28 @@ export type interview = {
 	place: String
 };
 
-function InterviewPreview(info: interview) {
+function InterviewPreview(interview: Interview) {
 	return (
 		<S.PreviewContainer>
 			<S.PreviewWrap>
-				<S.PreviewTitle>{info.title}</S.PreviewTitle>
-				<S.PreviewDate>{info.date}</S.PreviewDate>
+				<S.PreviewTitle>{interview.title}</S.PreviewTitle>
+				<S.PreviewDate>{interview.date}</S.PreviewDate>
 			</S.PreviewWrap>
 			<S.PreviewText>
 				<img src={process.env.PUBLIC_URL + '/images/iconDate.svg'}/>
-				{info.date}
+				{interview.date}
 			</S.PreviewText>
 			<S.PreviewText>
 				<img src={process.env.PUBLIC_URL + '/images/iconTime.svg'}/>
-				{info.time}
+				{interview.time}
 			</S.PreviewText>
 			<S.PreviewText>
 				<img src={process.env.PUBLIC_URL + '/images/iconFormat.svg'}/>
-				{info.format}
+				{interview.format}
 			</S.PreviewText>
 			<S.PreviewText>
 				<img src={process.env.PUBLIC_URL + '/images/iconPlace.svg'}/>
-				{info.place}
+				{interview.place}
 			</S.PreviewText>
 			<S.PreviewShare>공유</S.PreviewShare>
 		</S.PreviewContainer>

@@ -2,12 +2,15 @@ import { useState } from 'react';
 import * as S from './GroupInfo.style';
 import { useNavigate } from 'react-router-dom';
 
-function GroupInfo() {
-	const [groupName, setGroupName] = useState('온닷');
-	const [groupType, setGroupType] = useState('동아리');
-	const [groupLink, setGroupLink] = useState('Ondot.co.kr');
-	const [groupText, setGroupText] = useState('안녕하세요. 온닷입니다.');
-	const [groupContact, setGroupContact] = useState('ondot@gmail.com');
+export type Group = {
+	name: String,
+	type: String,
+	link: String,
+	text: String,
+	contact: String
+}
+
+function GroupInfo(group: Group) {
 
 	const navigate = useNavigate();
 
@@ -24,16 +27,16 @@ function GroupInfo() {
 	return (
 		<S.GroupContainer>
 			<S.GroupImg src={process.env.PUBLIC_URL + '/images/profileImg.svg'}/>
-			<S.GroupName>{groupName}</S.GroupName>
-			<S.GroupType>{groupType}</S.GroupType>
+			<S.GroupName>{group.name}</S.GroupName>
+			<S.GroupType>{group.type}</S.GroupType>
 			<S.GroupLink>
 				<img src={process.env.PUBLIC_URL + '/images/iconLink.svg'}/>
-				{groupLink}
+				{group.link}
 			</S.GroupLink>
-			<S.GroupText>{groupText}</S.GroupText>
+			<S.GroupText>{group.text}</S.GroupText>
 			<S.GroupContact>
 				<img src={process.env.PUBLIC_URL + '/images/iconContact.svg'}/>
-				{groupContact}
+				{group.contact}
 			</S.GroupContact>
 			<S.IconWrap onClick={onClickSetting}>
 				<S.Icon onClick={onClickSetting}>

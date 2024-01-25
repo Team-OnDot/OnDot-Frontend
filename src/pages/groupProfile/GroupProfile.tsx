@@ -1,12 +1,21 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from './GroupProfile.style';
 import GroupInfo from './../../components/groupProfile/GroupInfo';
 import InterviewPreview from './../../components/groupProfile/InterviewPreview';
-import React, { useState } from 'react';
 import * as I from './../../components/groupProfile/InterviewPreview';
-import { useNavigate } from 'react-router-dom';
+import * as G from './../../components/groupProfile/GroupInfo';
 
 function GroupProfile() {
-	const interviews : I.interview[] = [ 
+	const group : G.Group = {
+		name: '온닷',
+		type: '동아리',
+		link: 'Ondot.co.kr',
+		text: '안녕하세요. 온닷입니다.',
+		contact: 'ondot@gmail.com'
+	};
+
+	const interviews : I.Interview[] = [ 
 		{
 			title: '제목',
 			date: '12/20 ~ 12/23',
@@ -39,7 +48,7 @@ function GroupProfile() {
 
 	return (
 		<>
-			<GroupInfo />
+			<GroupInfo {...group}/>
 			<S.InterviewsZone>
 				<S.NavWrap>
 					<S.NavText>
@@ -50,9 +59,9 @@ function GroupProfile() {
 				</S.NavWrap>
 				<S.InterviewComponentsZone>
 					{interviews.length?
-						interviews.map((info, index) => {
+						interviews.map((interview, index) => {
 							return (
-								<InterviewPreview {...info} />
+								<InterviewPreview {...interview} />
 							);
 						})
 						: <S.InterviewNull>진행중인 면접이 없습니다.</S.InterviewNull>
