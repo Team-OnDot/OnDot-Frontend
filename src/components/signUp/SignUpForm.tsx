@@ -3,6 +3,7 @@ import * as S from './SignUpForm.style';
 import GroupType from './GroupType';
 import {useForm} from 'react-hook-form';
 import { useState, useEffect } from 'react';
+import { getValue } from '@testing-library/user-event/dist/utils';
 
 function SignUpForm(){
 
@@ -19,9 +20,12 @@ function SignUpForm(){
         register,
         handleSubmit,
         watch,
+        setError,
         resetField,
+        clearErrors,
+        getValues,
         formState: { errors },
-    } = useForm<FormValue>();
+    } = useForm<FormValue>({ mode: 'onBlur' });
 
     //버튼 활성화 변수
     const [isActive, setIsActive] = useState(false);
@@ -33,72 +37,69 @@ function SignUpForm(){
     const onChangeGroupName = watch("groupName")?.length ?? 0;
     const onChangeGroupProfile = watch("groupProfile")?.length ?? 0;
 
-    const [checkId, setCheckId] = useState(false);
-    const [checkPw, setCheckPw] = useState(false);
-    const [checkPwCheck, setCheckPwCheck] = useState(false);
-    const [checkGroupName, setCheckGroupName] = useState(false);
-    const [checkGroupProfile, setCheckGroupProfile] = useState(false);
-
-
-    //회원가입 버튼 활성화
+    //비밀번호 일치 확인
     useEffect(() => {
-        //다 입력되면 버튼 색 활성화
-        if(onChangeId > 0 && onChangePw > 0 && onChangePwCheck > 0 && 
-            onChangeGroupName && onChangeGroupProfile)
-            setIsActive(true);
-        else
-            setIsActive(false);
 
-        //입력된 박스 border색 변경    
-        if(onChangeId > 0)
-            setCheckId(true);
-        else
-            setCheckId(false);
+        if (watch('userPw') !== watch('pwCheck') && watch('pwCheck')) {
+            setError('pwCheck', {
+                type: 'password-mismatch',
+                message: '비밀번호가 일치하지 않습니다'
+            })
+            } else { // 비밀번호 일치시 오류 제거
+            clearErrors('pwCheck');
+            }
+        }, [watch('userPw'), watch('pwCheck')])
 
-        if(onChangePw > 0)
-            setCheckPw(true);
-        else
-            setCheckPw(false);
-        
-        if(onChangePwCheck > 0)
-            setCheckPwCheck(true);
-        else
-            setCheckPwCheck(false);
-
-        if(onChangeGroupName > 0)
-            setCheckGroupName(true);
-        else
-            setCheckGroupName(false);
-
-        if(onChangeGroupProfile > 0)
-            setCheckGroupProfile(true);
-        else
-            setCheckGroupProfile(false);
-    });
+    
+     //회원가입 버튼 활성화    
+    const watchAll = Object.values(watch());
+    useEffect(() => {
+        if (watchAll.every((el) => el)) {
+        setIsActive(true);
+        } else {
+        setIsActive(false);
+        }
+    }, [watchAll]);
 
     //입력 취소 버튼
     const removeInput = (name:any) => {
         resetField(name);
     }
 
-    return(
-        <L.loginForm>
+    //값이 다 정상적으로 입력되었을 때 실행되는 함수
+    const onValid = (data: FormValue) => {
+        console.log("성공");
+        console.log(data);        
+      };
 
+    //값이 다 비정상적으로 입력되었을 때 실행되는 함수
+    const onError = (error:any) => {
+        console.log(error);
+    };
+
+    return(
+        <L.loginForm onSubmit={handleSubmit(onValid, onError)}>
+
+            {/*아이디*/}
             <L.idForm>
                 <L.formHeader>
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>아이디</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox toggle={checkId}>
+                <L.loginInputBox
+                    toggle={onChangeId > 0 ? true: false || errors.userId ? true: false} 
+                    color={errors.userId ? '#FF4A4A': '#606060'}                
+                >
                     <L.loginInput
                         id="userId"
-                        type="id"
+                        type="text"
                         placeholder="아이디를 입력해 주세요"
                         {...register("userId",{
                             required: true,
-                            maxLength: 16,
-                            minLength: 4,
-                            pattern: /^[a-zA-Z0-9]{4,12}$/,
+                            pattern: {
+                                value: /^[a-zA-Z0-9]{4,16}$/,
+                                message: "4~16자 영문, 숫자"
+                            },
                         })}
                     />
                     {onChangeId > 0 && 
@@ -108,22 +109,32 @@ function SignUpForm(){
                         />
                     }
                 </L.loginInputBox>
+                <S.errorMessage>
+                    {onChangeId === 0 && <S.heplerText error={errors.userId ? true : false}>4~16자 영문, 숫자</S.heplerText>}
+                    <S.errorText error={errors.userId ? true : false}>4~16자 영문, 숫자</S.errorText>
+                </S.errorMessage>
             </L.idForm>
 
+            {/*비밀번호*/}
             <L.pwForm>
                 <L.formHeader>
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>비밀번호</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox toggle={checkPw}>
+                <L.loginInputBox 
+                    toggle={onChangePw > 0 ? true: false || errors.userPw ? true: false} 
+                    color={errors.userPw ? '#FF4A4A': '#606060'}    
+                >
                     <L.loginInput
                         id="userPw"
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"
                         {...register("userPw",{
                             required: true,
-                            maxLength: 20,
-                            pattern: /^[A-Za-z0-9]{6,20}$/,
+                            pattern: {
+                                value:/^[a-z0-9#?!@$%^&*-](?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])[a-z0-9#?!@$%^&*-]{8,20}$/,
+                                message: "8~20자 영문, 숫자, 특수기호(_ @ ? !)"
+                            },
                         })}
                     />
                     {onChangePw > 0 && 
@@ -133,20 +144,35 @@ function SignUpForm(){
                         />
                     }
                 </L.loginInputBox>
+                <S.errorMessage>
+                    {onChangePw === 0 && <S.heplerText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.heplerText>}
+                    <S.errorText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.errorText>
+                </S.errorMessage>
             </L.pwForm>
 
-
+            {/*비밀번호 확인*/}
             <L.pwForm>
                 <L.formHeader>
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>비밀번호 확인</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox toggle={checkPwCheck}>
+                <L.loginInputBox 
+                    toggle={onChangePwCheck > 0 ? true: false || errors.pwCheck ? true: false} 
+                    color={errors.pwCheck ? '#FF4A4A': '#606060'}    
+                >
                     <L.loginInput
                         id="pwCheck"
                         type="password"
                         placeholder="비밀번호를 다시 한 번 입력해 주세요"
-                        {...register("pwCheck")}
+                        {...register("pwCheck",{
+                            required: true,
+                            validate: {
+                                matchPassword: (value) => {
+                                  const { userPw } = getValues();
+                                  return userPw === value || '비밀번호가 일치하지 않습니다'
+                                }
+                            }
+                        })}
                     />
                     {onChangePwCheck > 0 && 
                         <L.inputCancelBtn 
@@ -155,19 +181,33 @@ function SignUpForm(){
                         />
                     }
                 </L.loginInputBox>
+                <S.errorMessage>
+                    {onChangePwCheck === 0 && <S.heplerText error={errors.pwCheck ? true : false}>비밀번호가 일치하지 않습니다</S.heplerText>}
+                    <S.errorText error={errors.pwCheck ? true : false}>{errors?.pwCheck?.message}</S.errorText>
+                </S.errorMessage>
             </L.pwForm>
   
+            {/*그룹 이름*/}
             <L.pwForm>
                 <L.formHeader>
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>그룹 이름</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox toggle={checkGroupName}>
+                <L.loginInputBox 
+                    toggle={onChangeGroupName > 0 ? true: false || errors.groupName ? true: false} 
+                    color={errors.groupName ? '#FF4A4A': '#606060'}    
+                >
                     <L.loginInput
                         id="grounName"
                         type="text"
                         placeholder="그룹이름을 입력해 주세요"
-                        {...register("groupName")}
+                        {...register("groupName",{
+                            required: true,
+                            pattern: {
+                                value:/^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,12}$/,
+                                message: "2~12자 한글, 영문, 숫자"
+                            },
+                        })}
                     />
                     {onChangeGroupName > 0 && 
                         <L.inputCancelBtn 
@@ -176,8 +216,13 @@ function SignUpForm(){
                         />
                     }
                 </L.loginInputBox>
+                <S.errorMessage>
+                    {onChangeGroupName === 0 && <S.heplerText error={errors.groupName ? true : false}>2~12자 한글, 영문, 숫자</S.heplerText>}
+                    <S.errorText error={errors.groupName ? true : false}>2~12자 한글, 영문, 숫자</S.errorText>
+                </S.errorMessage>
             </L.pwForm>
 
+            {/*그룹 분류*/}
             <L.pwForm>
                 <L.formHeader>
                     <L.ellipse></L.ellipse>
@@ -186,18 +231,29 @@ function SignUpForm(){
                     <GroupType/>
             </L.pwForm>
 
+            {/*그룹 프로필 주소*/}
             <L.pwForm>
                 <L.formHeader>
                     <L.ellipse></L.ellipse>
                     <L.formHeaderText>그룹 프로필 주소</L.formHeaderText>
                 </L.formHeader>
-                <L.loginInputBox toggle={checkGroupProfile}>
+                <L.loginInputBox 
+                    toggle={onChangeGroupProfile > 0 ? true: false || errors.groupProfile ? true: false} 
+                    color={errors.groupProfile ? '#FF4A4A': '#606060'}     
+                >
                     <L.loginInput
                         id="groupProfile"
-                        type="email"
+                        type="text"
                         placeholder="Ondot.co.kr"
-                        {...register("groupProfile")}
+                        {...register("groupProfile",{
+                            required: true,
+                            pattern: {
+                                value: /^[a-zA-Z0-9]{1,100}$/,
+                                message: "ㅇ"
+                            },
+                        })}
                     />
+                    {/*clear버튼*/}
                     {onChangeGroupProfile > 0 && 
                         <L.inputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}

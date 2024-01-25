@@ -39,13 +39,13 @@ export const formHeaderText = styled.div`
 `;
 
 //입력 박스
-export const loginInputBox = styled.div<{toggle:boolean}>`
+export const loginInputBox = styled.div<{toggle:boolean, color: string}>`
     display: flex;
     margin-top: 9px;
     width: 352px;
     height: 47px;
     border-radius: 11px;
-    border: 2px solid ${props=>(props.toggle ? `${props.theme.colors.gray2}`: `${props.theme.colors.gray4}`)};
+    border: 2px solid ${props=>(props.toggle ? props.color: `${props.theme.colors.gray4}`)};
     color: ${props=>(props.toggle ? `${props.theme.colors.gray1}`: `${props.theme.colors.gray2}`)};
 `;
 
@@ -54,7 +54,9 @@ export const loginInput = styled.input`
     font-size: 15px;
     margin-left: 15px;
     border: none;
+    border-radius: 11px;
     font-weight: 600;
+    width: 352px;
 `;
 
 //입력 취소 버튼

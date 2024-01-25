@@ -59,12 +59,14 @@ export const groupTypeUl = styled.ul<{toggle:boolean}>`
 export const groupTypeLi = styled.li`
     font-size: 15px;
     font-weight: 600;
-    height: 45.5px;
+    height: 45px;
     padding: 15px 15px;
+    color: ${props => props.theme.colors.gray2};
 
     //마우스 닿으면 색변경
     &:hover{
         background: ${props => props.theme.colors.red4};
+        color: ${props => props.theme.colors.gray1};
     }
 `;
 
@@ -93,4 +95,23 @@ export const signUpBtn = styled.button<{toggle: boolean}>`
     align-items: center;
     border-radius: 30px;
     background: ${props=>(props.toggle ? `${props.theme.colors.red1}`: `${props.theme.colors.gray2}`)};
+`;
+
+//에러메세지
+export const errorMessage = styled.div`
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 7px;
+`;
+
+//헬퍼메시지
+export const heplerText = styled.text<{error:boolean}>`
+    color: ${props => props.theme.colors.gray4};
+    display: ${props => props.error ? 'none' : null};
+`;
+
+//에러메시지
+export const errorText = styled.text<{error:boolean}>`
+    color: ${props => props.theme.colors.red1};
+    display: ${props => props.error ? null : 'none'};
 `;

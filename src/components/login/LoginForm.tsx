@@ -68,7 +68,7 @@ function LoginForm() {
                     <S.ellipse></S.ellipse>
                     <S.formHeaderText>아이디</S.formHeaderText>
                 </S.formHeader>
-                <S.loginInputBox toggle={checkId}>
+                <S.loginInputBox toggle={checkId} color={""}>
                     <S.loginInput
                         id="userId"
                         type="id"
@@ -93,7 +93,7 @@ function LoginForm() {
                     <S.ellipse></S.ellipse>
                     <S.formHeaderText>비밀번호</S.formHeaderText>
                 </S.formHeader>
-                <S.loginInputBox toggle={checkPw}>
+                <S.loginInputBox toggle={checkPw} color={""}>
                     <S.loginInput
                         id="userPw"
                         type="password"
