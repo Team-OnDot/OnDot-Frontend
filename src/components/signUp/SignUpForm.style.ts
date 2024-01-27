@@ -94,7 +94,7 @@ export const SignUpBtn = styled.button<{toggle: boolean}>`
     justify-content: center;
     align-items: center;
     border-radius: 30px;
-    background: ${props=>(props.toggle ? `${props.theme.colors.red1}`: `${props.theme.colors.gray2}`)};
+    background: ${props=>(props.toggle ? `${props.theme.colors.red1}`: `${props.theme.colors.gray5}`)};
 `;
 
 //에러메세지
