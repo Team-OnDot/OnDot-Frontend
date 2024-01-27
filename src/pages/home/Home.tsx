@@ -3,9 +3,9 @@ import * as S from './Home.styled';
 function Home() {
 	return (
 		<div>
-            <S.home>
+            <S.Home>
                 메인화면
-            </S.home>
+            </S.Home>
         </div>
     );
 

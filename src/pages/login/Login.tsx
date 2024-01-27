@@ -14,19 +14,21 @@ function Login() {
 	return (
 		<div>
 			{/*Header*/}
-			<S.loginHeader>
-				<S.loginWrapper>
-					<S.loginHeaderText>로그인</S.loginHeaderText>
-					<S.loginHeaderDot/>
-				</S.loginWrapper>
-			</S.loginHeader>
+			<S.LoginHeader>
+				<S.LoginWrapper>
+					<S.LoginHeaderText>로그인</S.LoginHeaderText>
+					<S.LoginHeaderDot/>
+				</S.LoginWrapper>
+			</S.LoginHeader>
 			{/*Main*/}
 			<LoginForm/>
 			{/*Footer*/}
 			<S.LoginFooter>
-				<S.findText>아이디 찾기</S.findText>
-				<S.findText>비밀번호 찾기</S.findText>
-				<S.signInText onClick={onClickSignIn}>회원가입</S.signInText>
+				<S.LoginFooterWrap>
+					<S.FindText>아이디 찾기</S.FindText>
+					<S.FindText>비밀번호 찾기</S.FindText>
+					<S.SignInText onClick={onClickSignIn}>회원가입</S.SignInText>
+				</S.LoginFooterWrap>
 			</S.LoginFooter>
 		</div>
 	);

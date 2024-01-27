@@ -18,15 +18,15 @@ function GroupType(){
 
     return(
         <div>
-            <S.groupTypeBox toggle={isOption}>
-                <S.groupTypeLabel onClick={onClickLabel}>{groupType}</S.groupTypeLabel>
-                <S.groupTypeUl toggle={isOption}>
-                    <S.groupTypeLiTop onClick={(e) => handleClickedGroupType("동아리")}>동아리</S.groupTypeLiTop>
-                    <S.groupTypeLi onClick={(e) => handleClickedGroupType("학생회")}>학생회</S.groupTypeLi>
-                    <S.groupTypeLi onClick={(e) => handleClickedGroupType("학술 모임")}>학술 모임</S.groupTypeLi>
-                    <S.groupTypeLiBottom onClick={(e) => handleClickedGroupType("기타")}>기타</S.groupTypeLiBottom>
-                </S.groupTypeUl>
-            </S.groupTypeBox>
+            <S.GroupTypeBox toggle={isOption}>
+                <S.GroupTypeLabel onClick={onClickLabel}>{groupType}</S.GroupTypeLabel>
+                <S.GroupTypeUl toggle={isOption}>
+                    <S.GroupTypeLiTop onClick={(e) => handleClickedGroupType("동아리")}>동아리</S.GroupTypeLiTop>
+                    <S.GroupTypeLi onClick={(e) => handleClickedGroupType("학생회")}>학생회</S.GroupTypeLi>
+                    <S.GroupTypeLi onClick={(e) => handleClickedGroupType("학술 모임")}>학술 모임</S.GroupTypeLi>
+                    <S.GroupTypeLiBottom onClick={(e) => handleClickedGroupType("기타")}>기타</S.GroupTypeLiBottom>
+                </S.GroupTypeUl>
+            </S.GroupTypeBox>
         </div>
     );
 }
