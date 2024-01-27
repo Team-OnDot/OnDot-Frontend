@@ -1,28 +1,28 @@
 import styled from "styled-components";
 
 //로그인 form
-export const loginForm = styled.form`
+export const LoginForm = styled.form`
     margin: 23px auto 0px auto;
     width: 352px;
 `;
 
 //아이디 form
-export const idForm = styled.div`
+export const IdForm = styled.div`
 
 `;
 
 //비밀번호 form
-export const pwForm = styled.div`
+export const PwForm = styled.div`
     margin-top: 21px;
 `;
 
 //form header
-export const formHeader = styled.div`
+export const FormHeader = styled.div`
     display: inline-flex;
 `;
 
 //header ellipse
-export const ellipse = styled.div`
+export const Ellipse = styled.div`
     border: 1px solid ${props => props.theme.colors.red1};
     width: 9px;
     height: 9px;
@@ -32,14 +32,14 @@ export const ellipse = styled.div`
 `;
 
 //form 헤더 텍스트
-export const formHeaderText = styled.div`
+export const FormHeaderText = styled.div`
     font-size: 16px;
     margin-left: 6px;
     
 `;
 
 //입력 박스
-export const loginInputBox = styled.div<{toggle:boolean, color: string}>`
+export const LoginInputBox = styled.div<{toggle:boolean, color: string}>`
     display: flex;
     margin-top: 9px;
     width: 352px;
@@ -50,7 +50,7 @@ export const loginInputBox = styled.div<{toggle:boolean, color: string}>`
 `;
 
 //아이디, 비밀번호 입력창
-export const loginInput = styled.input`
+export const LoginInput = styled.input`
     font-size: 15px;
     margin-left: 15px;
     border: none;
@@ -60,13 +60,13 @@ export const loginInput = styled.input`
 `;
 
 //입력 취소 버튼
-export const inputCancelBtn = styled.img`
+export const InputCancelBtn = styled.img`
     margin-right: 5px;
     margin-left: auto;
 `;
 
 //로그인 버튼
-export const loginBtn = styled.button<{toggle:boolean}>`
+export const LoginBtn = styled.button<{toggle:boolean}>`
     display: flex;
     margin-top: 34px;
     border: none;
@@ -82,7 +82,7 @@ export const loginBtn = styled.button<{toggle:boolean}>`
 `;
 
 //구글 로그인버튼
-export const googleLoginBtn = styled(loginBtn)`
+export const GoogleLoginBtn = styled(LoginBtn)`
     margin-top: 19px;
     background-color: ${props => props.theme.colors.gray2};
     justify-content: left;
@@ -90,7 +90,7 @@ export const googleLoginBtn = styled(loginBtn)`
 `;
 
 //구글 로고 박스
-export const googleLogo = styled.div`
+export const GoogleLogo = styled.div`
     width: 21.209px;
     height: 21.343px;
     margin-left: 21px;
@@ -98,12 +98,12 @@ export const googleLogo = styled.div`
 
 
 //구글 로고 이미지
-export const googleLogoImg = styled.img`
+export const GoogleLogoImg = styled.img`
     width: 100%;
     height: 100%;
 `;
 
 //구글 로그인 텍스트
-export const googleLoginText = styled.div`
+export const GoogleLoginText = styled.div`
     margin-left: 52px;
 `;

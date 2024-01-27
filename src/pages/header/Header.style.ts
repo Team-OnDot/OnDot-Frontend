@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 //헤더
-export const headerDiv = styled.div`
+export const HeaderDiv = styled.div`
     width: 100%;
     height: 87px;
     display: flex;
@@ -9,12 +9,12 @@ export const headerDiv = styled.div`
 `;
 
 //온닷 로고
-export const ondotLogoDiv = styled.div`
+export const OndotLogoDiv = styled.div`
     display: inline-flex;
     margin: 32px auto auto 138px;
 `;
 
-export const headerWrapper = styled.div`
+export const HeaderWrapper = styled.div`
     display: inline-flex;
     margin-left: 621px;
     font-size: 17px;
@@ -22,17 +22,17 @@ export const headerWrapper = styled.div`
     font-weight: 600;
 `;
 
-export const headerText = styled.div`
+export const HeaderText = styled.div`
     margin: auto 40px auto auto;
 `;
 
 //로그인 버튼 박스
-export const loginBtnBox = styled.div`
+export const LoginBtnBox = styled.div`
     margin: auto 158px auto 10px;
 `;
 
 //로그인 버튼
-export const loginBtn = styled.button`
+export const LoginBtn = styled.button`
     border-radius: 31px;
     border: 3px solid ${props => props.theme.colors.red1};
     background: white;

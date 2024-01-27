@@ -1,23 +1,23 @@
 import styled from "styled-components";
 
 //헤더
-export const loginHeader = styled.div`
+export const LoginHeader = styled.div`
     margin-top: 49px;
     text-align: center;
 `;
 
-export const loginWrapper = styled.div`
+export const LoginWrapper = styled.div`
     display: inline-flex;
 `;
 
 //로그인 텍스트
-export const loginHeaderText = styled.div`
+export const LoginHeaderText = styled.div`
     font-size: 22px;
     font-weight: 900;
 `;
 
 //로그인 온점
-export const loginHeaderDot = styled.div`
+export const LoginHeaderDot = styled.div`
     margin-left: 8px;
     margin-top: auto;
     margin-bottom: 2px;
@@ -40,7 +40,7 @@ export const LoginFooterWrap = styled.div`
     margin: 0px auto 0px 48px;
 `;
 //Footer 텍스트(아이디, 비밀번호 찾기)
-export const findText = styled.div`
+export const FindText = styled.div`
     font-weight: 600;
     font-size: 15px;
     margin-right: 27px;
@@ -49,7 +49,7 @@ export const findText = styled.div`
 `;
 
 //Footer 텍스트(회원가입)
-export const signInText = styled(findText)`
+export const SignInText = styled(FindText)`
     color: ${props => props.theme.colors.red1};
     cursor: pointer;
 `;

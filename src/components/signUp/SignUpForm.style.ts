@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 //그룹 분류 select 박스
-export const groupTypeBox = styled.div<{toggle:boolean}>`
+export const GroupTypeBox = styled.div<{toggle:boolean}>`
     position: relative;
     margin-top: 8px;
     width: 352px;
@@ -33,7 +33,7 @@ export const groupTypeBox = styled.div<{toggle:boolean}>`
 `;
 
 //그룹 분류 라벨
-export const groupTypeLabel = styled.div`
+export const GroupTypeLabel = styled.div`
     display: flex;
     border: 0 none;
     background: transparent;
@@ -43,7 +43,7 @@ export const groupTypeLabel = styled.div`
 `;
 
 //그룹 분류 선택리스트 박스(option박스)
-export const groupTypeUl = styled.ul<{toggle:boolean}>`
+export const GroupTypeUl = styled.ul<{toggle:boolean}>`
     width: 352px;
     height: 185px;
     border-radius: 11px;
@@ -56,7 +56,7 @@ export const groupTypeUl = styled.ul<{toggle:boolean}>`
 `;
 
 //그룹 분류 option
-export const groupTypeLi = styled.li`
+export const GroupTypeLi = styled.li`
     font-size: 15px;
     font-weight: 600;
     height: 45px;
@@ -71,17 +71,17 @@ export const groupTypeLi = styled.li`
 `;
 
 //그룹 분류 option(동아리)
-export const groupTypeLiTop = styled(groupTypeLi)`
+export const GroupTypeLiTop = styled(GroupTypeLi)`
     border-radius: 9px 9px 0px 0px;
 `;
 
 //그룹 분류 option(기타)
-export const groupTypeLiBottom = styled(groupTypeLi)`
+export const GroupTypeLiBottom = styled(GroupTypeLi)`
     border-radius: 0px 0px 9px 9px;
 `;
 
 //회원가입 버튼
-export const signUpBtn = styled.button<{toggle: boolean}>`
+export const SignUpBtn = styled.button<{toggle: boolean}>`
     display: flex;
     margin-top: 48.5px;
     margin-bottom: 100px;
@@ -98,20 +98,20 @@ export const signUpBtn = styled.button<{toggle: boolean}>`
 `;
 
 //에러메세지
-export const errorMessage = styled.div`
+export const ErrorMessage = styled.div`
     font-size: 12px;
     font-weight: 600;
     margin-top: 7px;
 `;
 
 //헬퍼메시지
-export const heplerText = styled.text<{error:boolean}>`
+export const HeplerText = styled.text<{error:boolean}>`
     color: ${props => props.theme.colors.gray4};
     display: ${props => props.error ? 'none' : null};
 `;
 
 //에러메시지
-export const errorText = styled.text<{error:boolean}>`
+export const ErrorText = styled.text<{error:boolean}>`
     color: ${props => props.theme.colors.red1};
     display: ${props => props.error ? null : 'none'};
 `;

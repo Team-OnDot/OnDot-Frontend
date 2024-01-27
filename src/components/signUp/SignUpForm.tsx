@@ -78,19 +78,19 @@ function SignUpForm(){
     };
 
     return(
-        <L.loginForm onSubmit={handleSubmit(onValid, onError)}>
+        <L.LoginForm onSubmit={handleSubmit(onValid, onError)}>
 
             {/*아이디*/}
-            <L.idForm>
-                <L.formHeader>
-                    <L.ellipse></L.ellipse>
-                    <L.formHeaderText>아이디</L.formHeaderText>
-                </L.formHeader>
-                <L.loginInputBox
+            <L.IdForm>
+                <L.FormHeader>
+                    <L.Ellipse></L.Ellipse>
+                    <L.FormHeaderText>아이디</L.FormHeaderText>
+                </L.FormHeader>
+                <L.LoginInputBox
                     toggle={onChangeId > 0 ? true: false || errors.userId ? true: false} 
                     color={errors.userId ? '#FF4A4A': '#606060'}                
                 >
-                    <L.loginInput
+                    <L.LoginInput
                         id="userId"
                         type="text"
                         placeholder="아이디를 입력해 주세요"
@@ -103,29 +103,29 @@ function SignUpForm(){
                         })}
                     />
                     {onChangeId > 0 && 
-                        <L.inputCancelBtn 
+                        <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
                             onClick={e => removeInput("userId")}
                         />
                     }
-                </L.loginInputBox>
-                <S.errorMessage>
-                    {onChangeId === 0 && <S.heplerText error={errors.userId ? true : false}>4~16자 영문, 숫자</S.heplerText>}
-                    <S.errorText error={errors.userId ? true : false}>4~16자 영문, 숫자</S.errorText>
-                </S.errorMessage>
-            </L.idForm>
+                </L.LoginInputBox>
+                <S.ErrorMessage>
+                    {onChangeId === 0 && <S.HeplerText error={errors.userId ? true : false}>4~16자 영문, 숫자</S.HeplerText>}
+                    <S.ErrorText error={errors.userId ? true : false}>4~16자 영문, 숫자</S.ErrorText>
+                </S.ErrorMessage>
+            </L.IdForm>
 
             {/*비밀번호*/}
-            <L.pwForm>
-                <L.formHeader>
-                    <L.ellipse></L.ellipse>
-                    <L.formHeaderText>비밀번호</L.formHeaderText>
-                </L.formHeader>
-                <L.loginInputBox 
+            <L.PwForm>
+                <L.FormHeader>
+                    <L.Ellipse></L.Ellipse>
+                    <L.FormHeaderText>비밀번호</L.FormHeaderText>
+                </L.FormHeader>
+                <L.LoginInputBox 
                     toggle={onChangePw > 0 ? true: false || errors.userPw ? true: false} 
                     color={errors.userPw ? '#FF4A4A': '#606060'}    
                 >
-                    <L.loginInput
+                    <L.LoginInput
                         id="userPw"
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"
@@ -138,29 +138,29 @@ function SignUpForm(){
                         })}
                     />
                     {onChangePw > 0 && 
-                        <L.inputCancelBtn 
+                        <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
                             onClick={e => removeInput("userPw")}
                         />
                     }
-                </L.loginInputBox>
-                <S.errorMessage>
-                    {onChangePw === 0 && <S.heplerText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.heplerText>}
-                    <S.errorText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.errorText>
-                </S.errorMessage>
-            </L.pwForm>
+                </L.LoginInputBox>
+                <S.ErrorMessage>
+                    {onChangePw === 0 && <S.HeplerText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.HeplerText>}
+                    <S.ErrorText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.ErrorText>
+                </S.ErrorMessage>
+            </L.PwForm>
 
             {/*비밀번호 확인*/}
-            <L.pwForm>
-                <L.formHeader>
-                    <L.ellipse></L.ellipse>
-                    <L.formHeaderText>비밀번호 확인</L.formHeaderText>
-                </L.formHeader>
-                <L.loginInputBox 
+            <L.PwForm>
+                <L.FormHeader>
+                    <L.Ellipse></L.Ellipse>
+                    <L.FormHeaderText>비밀번호 확인</L.FormHeaderText>
+                </L.FormHeader>
+                <L.LoginInputBox 
                     toggle={onChangePwCheck > 0 ? true: false || errors.pwCheck ? true: false} 
                     color={errors.pwCheck ? '#FF4A4A': '#606060'}    
                 >
-                    <L.loginInput
+                    <L.LoginInput
                         id="pwCheck"
                         type="password"
                         placeholder="비밀번호를 다시 한 번 입력해 주세요"
@@ -175,29 +175,29 @@ function SignUpForm(){
                         })}
                     />
                     {onChangePwCheck > 0 && 
-                        <L.inputCancelBtn 
+                        <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
                             onClick={e => removeInput("pwCheck")}
                         />
                     }
-                </L.loginInputBox>
-                <S.errorMessage>
-                    {onChangePwCheck === 0 && <S.heplerText error={errors.pwCheck ? true : false}>비밀번호가 일치하지 않습니다</S.heplerText>}
-                    <S.errorText error={errors.pwCheck ? true : false}>{errors?.pwCheck?.message}</S.errorText>
-                </S.errorMessage>
-            </L.pwForm>
+                </L.LoginInputBox>
+                <S.ErrorMessage>
+                    {onChangePwCheck === 0 && <S.HeplerText error={errors.pwCheck ? true : false}>비밀번호가 일치하지 않습니다</S.HeplerText>}
+                    <S.ErrorText error={errors.pwCheck ? true : false}>{errors?.pwCheck?.message}</S.ErrorText>
+                </S.ErrorMessage>
+            </L.PwForm>
   
             {/*그룹 이름*/}
-            <L.pwForm>
-                <L.formHeader>
-                    <L.ellipse></L.ellipse>
-                    <L.formHeaderText>그룹 이름</L.formHeaderText>
-                </L.formHeader>
-                <L.loginInputBox 
+            <L.PwForm>
+                <L.FormHeader>
+                    <L.Ellipse></L.Ellipse>
+                    <L.FormHeaderText>그룹 이름</L.FormHeaderText>
+                </L.FormHeader>
+                <L.LoginInputBox 
                     toggle={onChangeGroupName > 0 ? true: false || errors.groupName ? true: false} 
                     color={errors.groupName ? '#FF4A4A': '#606060'}    
                 >
-                    <L.loginInput
+                    <L.LoginInput
                         id="grounName"
                         type="text"
                         placeholder="그룹이름을 입력해 주세요"
@@ -210,38 +210,38 @@ function SignUpForm(){
                         })}
                     />
                     {onChangeGroupName > 0 && 
-                        <L.inputCancelBtn 
+                        <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
                             onClick={e => removeInput("groupName")}
                         />
                     }
-                </L.loginInputBox>
-                <S.errorMessage>
-                    {onChangeGroupName === 0 && <S.heplerText error={errors.groupName ? true : false}>2~12자 한글, 영문, 숫자</S.heplerText>}
-                    <S.errorText error={errors.groupName ? true : false}>2~12자 한글, 영문, 숫자</S.errorText>
-                </S.errorMessage>
-            </L.pwForm>
+                </L.LoginInputBox>
+                <S.ErrorMessage>
+                    {onChangeGroupName === 0 && <S.HeplerText error={errors.groupName ? true : false}>2~12자 한글, 영문, 숫자</S.HeplerText>}
+                    <S.ErrorText error={errors.groupName ? true : false}>2~12자 한글, 영문, 숫자</S.ErrorText>
+                </S.ErrorMessage>
+            </L.PwForm>
 
             {/*그룹 분류*/}
-            <L.pwForm>
-                <L.formHeader>
-                    <L.ellipse></L.ellipse>
-                    <L.formHeaderText>그룹 분류</L.formHeaderText>
-                </L.formHeader>
+            <L.PwForm>
+                <L.FormHeader>
+                    <L.Ellipse></L.Ellipse>
+                    <L.FormHeaderText>그룹 분류</L.FormHeaderText>
+                </L.FormHeader>
                     <GroupType/>
-            </L.pwForm>
+            </L.PwForm>
 
             {/*그룹 프로필 주소*/}
-            <L.pwForm>
-                <L.formHeader>
-                    <L.ellipse></L.ellipse>
-                    <L.formHeaderText>그룹 프로필 주소</L.formHeaderText>
-                </L.formHeader>
-                <L.loginInputBox 
+            <L.PwForm>
+                <L.FormHeader>
+                    <L.Ellipse></L.Ellipse>
+                    <L.FormHeaderText>그룹 프로필 주소</L.FormHeaderText>
+                </L.FormHeader>
+                <L.LoginInputBox 
                     toggle={onChangeGroupProfile > 0 ? true: false || errors.groupProfile ? true: false} 
                     color={errors.groupProfile ? '#FF4A4A': '#606060'}     
                 >
-                    <L.loginInput
+                    <L.LoginInput
                         id="groupProfile"
                         type="text"
                         placeholder="Ondot.co.kr"
@@ -255,18 +255,18 @@ function SignUpForm(){
                     />
                     {/*clear버튼*/}
                     {onChangeGroupProfile > 0 && 
-                        <L.inputCancelBtn 
+                        <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
                             onClick={e => removeInput("groupProfile")}
                         />
                     }
-                </L.loginInputBox>
-            </L.pwForm>
+                </L.LoginInputBox>
+            </L.PwForm>
 
-            <S.signUpBtn type="submit" toggle={isActive}>
+            <S.SignUpBtn type="submit" toggle={isActive}>
                 회원가입
-            </S.signUpBtn>
-        </L.loginForm>
+            </S.SignUpBtn>
+        </L.LoginForm>
     );
 }
 

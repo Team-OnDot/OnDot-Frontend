@@ -61,15 +61,15 @@ function LoginForm() {
     }
 
 	return (
-        <S.loginForm onSubmit={handleSubmit(onValid, onInValid)}>
+        <S.LoginForm onSubmit={handleSubmit(onValid, onInValid)}>
             {/*아이디*/}
-            <S.idForm>
-                <S.formHeader>
-                    <S.ellipse></S.ellipse>
-                    <S.formHeaderText>아이디</S.formHeaderText>
-                </S.formHeader>
-                <S.loginInputBox toggle={checkId} color={""}>
-                    <S.loginInput
+            <S.IdForm>
+                <S.FormHeader>
+                    <S.Ellipse></S.Ellipse>
+                    <S.FormHeaderText>아이디</S.FormHeaderText>
+                </S.FormHeader>
+                <S.LoginInputBox toggle={checkId} color={""}>
+                    <S.LoginInput
                         id="userId"
                         type="id"
                         placeholder="아이디를 입력해 주세요"
@@ -79,22 +79,22 @@ function LoginForm() {
                         
                     />
                     {onChangeId > 0 && 
-                        <S.inputCancelBtn 
+                        <S.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
                             onClick={e => removeInput("userId")}
                         />
                     }
-                </S.loginInputBox>
-            </S.idForm>
+                </S.LoginInputBox>
+            </S.IdForm>
 
             {/*비밀번호*/}
-            <S.pwForm>
-                <S.formHeader>
-                    <S.ellipse></S.ellipse>
-                    <S.formHeaderText>비밀번호</S.formHeaderText>
-                </S.formHeader>
-                <S.loginInputBox toggle={checkPw} color={""}>
-                    <S.loginInput
+            <S.PwForm>
+                <S.FormHeader>
+                    <S.Ellipse></S.Ellipse>
+                    <S.FormHeaderText>비밀번호</S.FormHeaderText>
+                </S.FormHeader>
+                <S.LoginInputBox toggle={checkPw} color={""}>
+                    <S.LoginInput
                         id="userPw"
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"
@@ -103,25 +103,25 @@ function LoginForm() {
                         })}
                     />
                     {onChangePw > 0 && 
-                        <S.inputCancelBtn 
+                        <S.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
                             onClick={e => removeInput("userPw")}
                         />
                     }
-                </S.loginInputBox>
-            </S.pwForm>
+                </S.LoginInputBox>
+            </S.PwForm>
 
             {/*버튼*/}
-            <S.loginBtn type="submit" toggle={isActive}>
+            <S.LoginBtn type="submit" toggle={isActive}>
                 로그인
-            </S.loginBtn>
-            <S.googleLoginBtn type="submit" toggle={isActive}>
-                <S.googleLogo>
-                    <S.googleLogoImg src={`${process.env.PUBLIC_URL}/images/googleLogo.svg`}></S.googleLogoImg>
-                </S.googleLogo>
-                <S.googleLoginText>구글 계정으로 로그인</S.googleLoginText>
-            </S.googleLoginBtn>
-        </S.loginForm>
+            </S.LoginBtn>
+            <S.GoogleLoginBtn type="submit" toggle={isActive}>
+                <S.GoogleLogo>
+                    <S.GoogleLogoImg src={`${process.env.PUBLIC_URL}/images/googleLogo.svg`}></S.GoogleLogoImg>
+                </S.GoogleLogo>
+                <S.GoogleLoginText>구글 계정으로 로그인</S.GoogleLoginText>
+            </S.GoogleLoginBtn>
+        </S.LoginForm>
 	);
 }
 
