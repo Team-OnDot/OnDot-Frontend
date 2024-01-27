@@ -80,11 +80,11 @@ function SignUpForm(){
     return(
         <L.LoginForm onSubmit={handleSubmit(onValid, onError)}>
 
-            {/*아이디*/}
+            {/*이메일*/}
             <L.IdForm>
                 <L.FormHeader>
                     <L.Ellipse></L.Ellipse>
-                    <L.FormHeaderText>아이디</L.FormHeaderText>
+                    <L.FormHeaderText>이메일</L.FormHeaderText>
                 </L.FormHeader>
                 <L.LoginInputBox
                     toggle={onChangeId > 0 ? true: false || errors.userId ? true: false} 
@@ -93,7 +93,7 @@ function SignUpForm(){
                     <L.LoginInput
                         id="userId"
                         type="text"
-                        placeholder="아이디를 입력해 주세요"
+                        placeholder="이메일을 입력해 주세요"
                         {...register("userId",{
                             required: true,
                             pattern: {

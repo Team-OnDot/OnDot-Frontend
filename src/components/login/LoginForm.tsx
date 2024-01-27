@@ -62,17 +62,18 @@ function LoginForm() {
 
 	return (
         <S.LoginForm onSubmit={handleSubmit(onValid, onInValid)}>
-            {/*아이디*/}
+
+            {/*이메일*/}
             <S.IdForm>
                 <S.FormHeader>
                     <S.Ellipse></S.Ellipse>
-                    <S.FormHeaderText>아이디</S.FormHeaderText>
+                    <S.FormHeaderText>이메일</S.FormHeaderText>
                 </S.FormHeader>
                 <S.LoginInputBox toggle={checkId} color={""}>
                     <S.LoginInput
                         id="userId"
                         type="id"
-                        placeholder="아이디를 입력해 주세요"
+                        placeholder="이메일을 입력해 주세요"
                         {...register("userId",{
                             required: true
                         })}
