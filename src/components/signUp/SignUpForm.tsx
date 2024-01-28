@@ -1,14 +1,16 @@
 import * as L from '../login/LoginForm.style';
 import * as S from './SignUpForm.style';
 import GroupType from './GroupType';
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
-import { getValue } from '@testing-library/user-event/dist/utils';
+import { useRecoilValue } from 'recoil';
+import { GroupTypeAtom } from '../../recoil/SignUpAtoms';
+import axios from 'axios';
 
 function SignUpForm(){
 
     type FormValue = {
-        userId: string;
+        email: string;
         userPw: string;
         pwCheck: string;
         groupName: string;
@@ -25,13 +27,13 @@ function SignUpForm(){
         clearErrors,
         getValues,
         formState: { errors },
-    } = useForm<FormValue>({ mode: 'onBlur' });
+    } = useForm<FormValue>({ mode: 'onBlur' },);
 
     //버튼 활성화 변수
     const [isActive, setIsActive] = useState(false);
 
     //길이 변화 변수
-    const onChangeId = watch("userId")?.length ?? 0;
+    const onChangeEmail = watch("email")?.length ?? 0;
     const onChangePw = watch("userPw")?.length ?? 0;
     const onChangePwCheck = watch("pwCheck")?.length ?? 0;
     const onChangeGroupName = watch("groupName")?.length ?? 0;
@@ -67,10 +69,24 @@ function SignUpForm(){
     }
 
     //값이 다 정상적으로 입력되었을 때 실행되는 함수
+    const groupTypeAtom = useRecoilValue(GroupTypeAtom);
     const onValid = (data: FormValue) => {
+
+        data.groupType = groupTypeAtom;
+        
         console.log("성공");
-        console.log(data);        
-      };
+        console.log(data);  
+        
+        axios({
+            url: '/api/v1/auth/signup',
+            method: 'POST',
+            data: { },
+          }).then((response) => {
+            console.log(response.data);
+          }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    };
 
     //값이 다 비정상적으로 입력되었을 때 실행되는 함수
     const onError = (error:any) => {
@@ -87,31 +103,31 @@ function SignUpForm(){
                     <L.FormHeaderText>이메일</L.FormHeaderText>
                 </L.FormHeader>
                 <L.LoginInputBox
-                    toggle={onChangeId > 0 ? true: false || errors.userId ? true: false} 
-                    color={errors.userId ? '#FF4A4A': '#606060'}                
+                    toggle={onChangeEmail > 0 ? true: false || errors.email ? true: false} 
+                    color={errors.email ? '#FF4A4A': '#606060'}                
                 >
                     <L.LoginInput
-                        id="userId"
+                        id="email"
                         type="text"
                         placeholder="이메일을 입력해 주세요"
-                        {...register("userId",{
+                        {...register("email",{
                             required: true,
                             pattern: {
-                                value: /^[a-zA-Z0-9]{4,16}$/,
-                                message: "4~16자 영문, 숫자"
+                                value: /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/,
+                                message: "ex. ondot@email.com"
                             },
                         })}
                     />
-                    {onChangeId > 0 && 
+                    {onChangeEmail > 0 && 
                         <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
-                            onClick={e => removeInput("userId")}
+                            onClick={e => removeInput("email")}
                         />
                     }
                 </L.LoginInputBox>
                 <S.ErrorMessage>
-                    {onChangeId === 0 && <S.HeplerText error={errors.userId ? true : false}>4~16자 영문, 숫자</S.HeplerText>}
-                    <S.ErrorText error={errors.userId ? true : false}>4~16자 영문, 숫자</S.ErrorText>
+                    {onChangeEmail === 0 && <S.HeplerText error={errors.email ? true : false}>ex. ondot@email.com</S.HeplerText>}
+                    <S.ErrorText error={errors.email ? true : false}>ex. ondot@email.com</S.ErrorText>
                 </S.ErrorMessage>
             </L.IdForm>
 
@@ -249,7 +265,7 @@ function SignUpForm(){
                             required: true,
                             pattern: {
                                 value: /^[a-zA-Z0-9]{1,100}$/,
-                                message: "ㅇ"
+                                message: ""
                             },
                         })}
                     />
