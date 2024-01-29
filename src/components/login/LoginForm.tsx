@@ -132,12 +132,6 @@ function LoginForm() {
             <S.LoginBtn type="submit" toggle={isActive}>
                 로그인
             </S.LoginBtn>
-            <S.GoogleLoginBtn type="submit" toggle={isActive}>
-                <S.GoogleLogo>
-                    <S.GoogleLogoImg src={`${process.env.PUBLIC_URL}/images/googleLogo.svg`}></S.GoogleLogoImg>
-                </S.GoogleLogo>
-                <S.GoogleLoginText>구글 계정으로 로그인</S.GoogleLoginText>
-            </S.GoogleLoginBtn>
         </S.LoginForm>
 	);
 }

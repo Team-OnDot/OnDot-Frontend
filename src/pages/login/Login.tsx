@@ -20,8 +20,18 @@ function Login() {
 					<S.LoginHeaderDot/>
 				</S.LoginWrapper>
 			</S.LoginHeader>
+			
 			{/*Main*/}
 			<LoginForm/>
+
+			{/*구글로그인*/}
+			<S.GoogleLoginBtn>
+				<S.GoogleLogo>
+					<S.GoogleLogoImg src={`${process.env.PUBLIC_URL}/images/googleLogo.svg`}></S.GoogleLogoImg>
+				</S.GoogleLogo>
+				<S.GoogleLoginText>구글 계정으로 로그인</S.GoogleLoginText>
+			</S.GoogleLoginBtn>
+
 			{/*Footer*/}
 			<S.LoginFooter>
 				<S.LoginFooterWrap>

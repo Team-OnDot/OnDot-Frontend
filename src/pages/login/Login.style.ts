@@ -28,6 +28,41 @@ export const LoginHeaderDot = styled.div`
     border-radius: 12px;
 `;
 
+//구글 로그인버튼
+export const GoogleLoginBtn = styled.button`
+    background-color: ${props => props.theme.colors.gray2};
+    display: flex;
+    border: none;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    width: 352px;
+    height: 49px;
+    margin: 19px auto 0 auto;
+    border-radius: 30px;
+    justify-content: left;
+    align-items: center;
+`;
+
+//구글 로고 박스
+export const GoogleLogo = styled.div`
+    width: 21.209px;
+    height: 21.343px;
+    margin-left: 21px;
+`;
+
+
+//구글 로고 이미지
+export const GoogleLogoImg = styled.img`
+    width: 100%;
+    height: 100%;
+`;
+
+//구글 로그인 텍스트
+export const GoogleLoginText = styled.div`
+    margin-left: 52px;
+`;
+
 //Footer
 export const LoginFooter = styled.div`
     width: 352px;
@@ -38,6 +73,7 @@ export const LoginFooter = styled.div`
 export const LoginFooterWrap = styled.div`
     display: inline-flex;
     margin: 0px auto 0px 48px;
+    
 `;
 //Footer 텍스트(아이디, 비밀번호 찾기)
 export const FindText = styled.div`
@@ -53,4 +89,3 @@ export const SignInText = styled(FindText)`
     color: ${props => props.theme.colors.red1};
     cursor: pointer;
 `;
-

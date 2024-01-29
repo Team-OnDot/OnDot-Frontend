@@ -81,33 +81,6 @@ export const LoginBtn = styled.button<{toggle:boolean}>`
     background: ${props=>(props.toggle ? `${props.theme.colors.red1}`: `${props.theme.colors.gray5}`)};
 `;
 
-//구글 로그인버튼
-export const GoogleLoginBtn = styled(LoginBtn)`
-    margin-top: 19px;
-    background-color: ${props => props.theme.colors.gray2};
-    justify-content: left;
-    align-items: left;
-`;
-
-//구글 로고 박스
-export const GoogleLogo = styled.div`
-    width: 21.209px;
-    height: 21.343px;
-    margin-left: 21px;
-`;
-
-
-//구글 로고 이미지
-export const GoogleLogoImg = styled.img`
-    width: 100%;
-    height: 100%;
-`;
-
-//구글 로그인 텍스트
-export const GoogleLoginText = styled.div`
-    margin-left: 52px;
-`;
-
 //메시지 박스
 export const ErrorMessage = styled.div`
     font-size: 12px;

@@ -11,6 +11,7 @@ function SignUpId(){
 					<S.LoginHeaderDot/>
 				</S.LoginWrapper>
 			</S.LoginHeader>
+			
             {/*Main*/}
 			<SignUpForm/>
         </div>
