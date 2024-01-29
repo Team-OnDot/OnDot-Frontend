@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const InterviewComponent = styled.div`
+    display: flex;
+`;
+
 //메인 화면
 export const InterviewMain = styled.div`
     margin-left: 420px;

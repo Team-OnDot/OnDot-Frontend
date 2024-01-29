@@ -4,15 +4,7 @@ import * as I from './InterviewApply.style';
 import InterviewInfo from './InterviewInfo';
 import { useNavigate } from 'react-router-dom';
 
-export type Group = {
-	name: String,
-	type: String,
-	link: String,
-	text: String,
-	contact: String
-}
-
-function InterviewSide(group: Group) {
+function InterviewSide() {
 
 	const navigate = useNavigate();
 
@@ -29,11 +21,11 @@ function InterviewSide(group: Group) {
 	return (
 		<S.GroupContainer>
 			<S.GroupImg src={process.env.PUBLIC_URL + '/images/profileImg.svg'}/>
-			<S.GroupName>{group.name}</S.GroupName>
-			<S.GroupType>{group.type}</S.GroupType>
+			<S.GroupName>온닷</S.GroupName>
+			<S.GroupType>동아리</S.GroupType>
 			<S.GroupLink>
 				<img src={process.env.PUBLIC_URL + '/images/iconLink.svg'}/>
-				{group.link}
+				Ondot.co.kr.ondot2024
 			</S.GroupLink>
 
 			{/*면접정보*/}
