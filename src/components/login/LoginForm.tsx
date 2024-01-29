@@ -3,7 +3,7 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 
 type IUserData = {
-    userId: string;
+    email: string;
     userPw: string;
   }
 
@@ -15,11 +15,9 @@ function LoginForm() {
         watch,
         resetField,
         formState: { errors }
-      } = useForm<IUserData>({
-        mode: "onSubmit"
-      });
+      } = useForm<IUserData>({ mode: 'onBlur' })
 
-    //submit이 정상적으로 되었을 때 data를 다루는 함수
+    //submit이 정상적으로 되었을 때 data를 다루는 함수(백엔드 전달)
     const onValid = (data: IUserData) => {
         console.log("# onValid", data);
         
@@ -30,30 +28,16 @@ function LoginForm() {
         console.log("# onInValid", errors);
       };
 
+    //로그인 버튼 활성화    
     const [isActive, setIsActive] = useState(false);
-    const [checkId, setCheckId] = useState(false);
-    const [checkPw, setCheckPw] = useState(false);
-    //길이 변화 감시 변수
-    const onChangeId = watch("userId")?.length ?? 0;
-    const onChangePw = watch("userPw")?.length ?? 0;
-
-    //로그인 버튼 활성화
+    const watchAll = Object.values(watch());
     useEffect(() => {
-        if(onChangeId > 0 && onChangePw > 0)
-            setIsActive(true);
-        else
-            setIsActive(false);
-
-        if(onChangeId > 0)
-            setCheckId(true);
-        else
-            setCheckId(false);
-
-        if(onChangePw > 0)
-            setCheckPw(true);
-        else
-            setCheckPw(false);
-    });
+        if (watchAll.every((el) => el)) {
+        setIsActive(true);
+        } else {
+        setIsActive(false);
+        }
+    }, [watchAll]);
 
     //입력 취소 버튼
     const removeInput = (name:any) => {
@@ -69,20 +53,27 @@ function LoginForm() {
                     <S.Ellipse></S.Ellipse>
                     <S.FormHeaderText>이메일</S.FormHeaderText>
                 </S.FormHeader>
-                <S.LoginInputBox toggle={checkId} color={""}>
+                <S.LoginInputBox
+                    toggle={watch("email")?.length > 0 ? true: false || errors.email ? true: false}  
+                    color={errors.email ? '#FF4A4A': '#606060'}
+                >
                     <S.LoginInput
-                        id="userId"
-                        type="id"
+                        id="email"
+                        type="text"
                         placeholder="이메일을 입력해 주세요"
-                        {...register("userId",{
-                            required: true
+                        {...register("email",{
+                            required: true,
+                            pattern: {
+                                value: /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/,
+                                message: "아이디 또는 비밀번호가 올바르지 않습니다"
+                            },
                         })}
                         
                     />
-                    {onChangeId > 0 && 
+                    {watch("email")?.length > 0 && 
                         <S.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
-                            onClick={e => removeInput("userId")}
+                            onClick={e => removeInput("email")}
                         />
                     }
                 </S.LoginInputBox>
@@ -94,22 +85,34 @@ function LoginForm() {
                     <S.Ellipse></S.Ellipse>
                     <S.FormHeaderText>비밀번호</S.FormHeaderText>
                 </S.FormHeader>
-                <S.LoginInputBox toggle={checkPw} color={""}>
+                <S.LoginInputBox 
+                    toggle={watch("userPw")?.length > 0 ? true: false || errors.userPw ? true: false}  
+                    color={errors.userPw ? '#FF4A4A': '#606060'}>
                     <S.LoginInput
                         id="userPw"
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"
                         {...register("userPw",{
-                            required: true
+                            required: true,
+                            pattern: {
+                                value:/^[a-z0-9#?!@$%^&*-](?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])[a-z0-9#?!@$%^&*-]{8,20}$/,
+                                message: "아이디 또는 비밀번호가 올바르지 않습니다"
+                            },
                         })}
                     />
-                    {onChangePw > 0 && 
+                    {watch("userPw")?.length > 0 && 
                         <S.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
                             onClick={e => removeInput("userPw")}
                         />
                     }
                 </S.LoginInputBox>
+
+                <S.ErrorMessage>
+                    <S.ErrorText error={errors.email ? true : false || errors.userPw ? true : false}>
+                        아이디 또는 비밀번호가 올바르지 않습니다
+                    </S.ErrorText>
+                </S.ErrorMessage>
             </S.PwForm>
 
             {/*버튼*/}

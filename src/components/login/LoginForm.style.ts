@@ -107,3 +107,16 @@ export const GoogleLogoImg = styled.img`
 export const GoogleLoginText = styled.div`
     margin-left: 52px;
 `;
+
+//메시지 박스
+export const ErrorMessage = styled.div`
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 7px;
+`;
+
+//에러메시지
+export const ErrorText = styled.text<{error:boolean}>`
+    color: ${props => props.theme.colors.red1};
+    display: ${props => props.error ? null : 'none'};
+`;
