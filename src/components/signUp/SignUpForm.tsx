@@ -58,7 +58,6 @@ function SignUpForm(){
     const removeInput = (name:any) => {
         clearErrors(name);
         resetField(name);
-        //setClearState(true);
         setError(name, { message: ''});
     }
 
@@ -116,9 +115,7 @@ function SignUpForm(){
                     {watch("email")?.length > 0 && 
                         <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
-                            onClick={(e) => {
-                                removeInput("email");
-                            }}
+                            onClick={(e) => {removeInput("email");}}
                         />
                     }
                 </L.LoginInputBox>

@@ -1,6 +1,7 @@
 import * as S from './LoginForm.style';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 type IUserData = {
     email: string;
@@ -14,19 +15,30 @@ function LoginForm() {
         handleSubmit,
         watch,
         resetField,
+        setError,
         formState: { errors }
-      } = useForm<IUserData>({ mode: 'onBlur' })
+    } = useForm<IUserData>({ mode: 'onBlur' })
 
     //submit이 정상적으로 되었을 때 data를 다루는 함수(백엔드 전달)
     const onValid = (data: IUserData) => {
         console.log("# onValid", data);
+
+        axios({
+            url: '/api/v1/auth/signin',
+            method: 'POST',
+            data: { },
+          }).then((response) => {
+            console.log(response.data);
+          }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
         
-      };
+    };
 
     //유효성 검사에 실패했을 때 errors를 다루는 함수
     const onInValid = (errors: FieldErrors) => {
         console.log("# onInValid", errors);
-      };
+    };
 
     //로그인 버튼 활성화    
     const [isActive, setIsActive] = useState(false);
@@ -42,6 +54,7 @@ function LoginForm() {
     //입력 취소 버튼
     const removeInput = (name:any) => {
         resetField(name);
+        setError(name,  {message: ''});
     }
 
 	return (
