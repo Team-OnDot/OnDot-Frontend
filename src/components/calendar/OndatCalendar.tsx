@@ -2,25 +2,21 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import { format } from 'date-fns';
-import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { selectedDatesAtom } from '../../recoil/selectedDatesAtom';
 
 const OndatCalendar = () => {
-	const [selected, setSelected] = useState<string[]>([]);
-	// const today = new Date();
+	const [selectedDates, setSelectedDates] = useRecoilState(selectedDatesAtom);
 
 	const onClickDay = (value: any, e: React.MouseEvent<HTMLButtonElement>) => {
 		const date = format(value, 'yyyy-MM-dd');
-		if (selected.find((item) => item === date)) {
-			const filtered = selected.filter((item) => item !== date);
-			setSelected(filtered);
+		if (selectedDates.find((item) => item === date)) {
+			const filtered = selectedDates.filter((item) => item !== date);
+			setSelectedDates(filtered);
 			return;
 		}
-		setSelected([...selected, date]);
+		setSelectedDates([...selectedDates, date]);
 	};
-
-	useEffect(() => {
-		console.log(selected);
-	}, [selected]);
 
 	return (
 		<>
@@ -36,7 +32,7 @@ const OndatCalendar = () => {
 				locale="ko"
 				onClickDay={onClickDay}
 				tileClassName={({ date }) => {
-					if (selected!.find((item) => item === format(date, 'yyyy-MM-dd'))) {
+					if (selectedDates!.find((item) => item === format(date, 'yyyy-MM-dd'))) {
 						return 'react-calendar__tile--active';
 					} else {
 						return 'react-calendar__tile--inactive';
