@@ -33,9 +33,10 @@ export const MainTextCircle = styled.div`
 
 export const MakeTextContainer = styled.div`
 	display: flex;
-	margin: 20px auto 5px 0px;
+	align-items: center;
+	margin: 20px auto 0px 0px;
 `;
-export const MakeTextCircle = styled.div`
+export const MakeTextCircle = styled.span`
 	display: inline-block;
 	width: 9px;
 	height: 9px;
@@ -43,33 +44,63 @@ export const MakeTextCircle = styled.div`
 	background-color: ${(props) => props.theme.colors.red1};
 	margin: auto 5px;
 `;
-export const MakeText = styled.div`
-	height: 25px;
+export const MakeText = styled.span`
+	//height: 25px;
 	font-size: 18px;
 	font-weight: 600;
 	line-height: 19px;
 	letter-spacing: 0em;
 `;
 
-export const MakeTextSub = styled.div`
+export const MakeTextSub = styled.span`
 	font-size: 12px;
 	font-weight: 600;
 	line-height: 14px;
 	letter-spacing: 0em;
 	color: ${(props) => props.theme.colors.gray4};
-	margin-bottom: 5px;
-	margin-top: auto;
-	margin-left: 5px;
+	margin-left: 7px;
+`;
+
+export const MakeTextSub2 = styled(MakeTextSub)`
+	position: relative;
+	top: 9px;
 `;
 
 export const CalendarWrapper = styled.div`
 	align-self: flex-start;
+	margin-top: 25px;
 `;
 
 export const TimeTableWrapper = styled.div`
+	position: relative;
 	padding: 42px 47px;
 	border-radius: 15px;
 	border: 1px solid ${(props) => props.theme.colors.gray8};
+	margin-top: 25px;
+
+	&::before {
+		position: absolute;
+		content: '';
+		width: 25px;
+		height: 33px;
+		background: url('/images/iconArrowPrev.svg') no-repeat center center;
+		top: 50%;
+		left: -45px;
+		transform: translateY(-50%);
+		cursor: pointer;
+	}
+
+	&::after {
+		position: absolute;
+		content: '';
+		width: 25px;
+		height: 33px;
+		background: url('/images/iconArrowNext.svg') no-repeat center center;
+		top: 50%;
+		right: -45px;
+		transform: translateY(-50%);
+		cursor: pointer;
+	}
 `;
 
 export const MakeBtnContainer = styled.div`

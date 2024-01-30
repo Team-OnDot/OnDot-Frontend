@@ -40,12 +40,12 @@ function InterviewMake2() {
 			<S.MakeTextContainer>
 				<S.MakeTextCircle />
 				<S.MakeText>면접 시간대*</S.MakeText>
-				<S.MakeTextSub>
+				<S.MakeTextSub2>
 					면접 예상 소요 시간을 설정해면접페이지에 공개할 시간을 드래그하여 설정해 주세요
 					<br /> 지원자는 아래 선택된 시간대 외의 시간을 선택할 수 없습니다 주세요
-				</S.MakeTextSub>
+				</S.MakeTextSub2>
 			</S.MakeTextContainer>
-			{sortedDates.length > 0 ? <TimeTable selectedDates={sortedDates} /> : null}
+			<S.TimeTableWrapper>{sortedDates.length > 0 ? <TimeTable selectedDates={sortedDates} /> : null}</S.TimeTableWrapper>
 			<S.MakeBtnContainer>
 				<S.MakeBtn type="button" value="이전" />
 				<S.MakeBtn type="button" value="다음" isActive={schedule.length > 0} />
