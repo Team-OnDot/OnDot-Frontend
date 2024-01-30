@@ -4,10 +4,15 @@ import React from 'react';
 import * as S from './TimeTable.style';
 import format from 'date-fns/format';
 
-const TimeTable = () => {
+type TimeTable = {
+	selectedDates: string[];
+};
+
+const TimeTable = ({ selectedDates }: TimeTable) => {
 	const [schedule, setSchedule] = React.useState<Array<Date>>([]);
 	const [hourlyChunks, setHourlyChunks] = React.useState<number>(2);
-	const renderingDates = [new Date('2024-01-25'), new Date('2024-01-27'), new Date('2024-01-28'), new Date('2024-01-29'), new Date('2024-01-31')];
+
+	const renderingDates = selectedDates.map((date) => new Date(date));
 
 	const renderCustomDateCell = (date: Date, selected: boolean) => {
 		return <S.DateCell selected={selected}></S.DateCell>;
