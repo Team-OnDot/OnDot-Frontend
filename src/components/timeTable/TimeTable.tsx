@@ -3,13 +3,15 @@ import { SelectionSchemeType } from 'react-schedule-selector/src/lib/selection-s
 import React from 'react';
 import * as S from './TimeTable.style';
 import format from 'date-fns/format';
+import { useRecoilState } from 'recoil';
+import { scheduleAtom } from '../../recoil/interviewMake2Atom';
 
 type TimeTable = {
 	selectedDates: string[];
 };
 
 const TimeTable = ({ selectedDates }: TimeTable) => {
-	const [schedule, setSchedule] = React.useState<Array<Date>>([]);
+	const [schedule, setSchedule] = useRecoilState(scheduleAtom);
 	const [hourlyChunks, setHourlyChunks] = React.useState<number>(2);
 
 	const renderingDates = selectedDates.map((date) => new Date(date));

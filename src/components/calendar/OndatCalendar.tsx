@@ -3,7 +3,7 @@ import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import { format } from 'date-fns';
 import { useRecoilState } from 'recoil';
-import { selectedDatesAtom } from '../../recoil/selectedDatesAtom';
+import { selectedDatesAtom } from '../../recoil/interviewMake2Atom';
 
 const OndatCalendar = () => {
 	const [selectedDates, setSelectedDates] = useRecoilState(selectedDatesAtom);
