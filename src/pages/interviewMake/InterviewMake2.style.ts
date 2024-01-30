@@ -71,3 +71,24 @@ export const TimeTableWrapper = styled.div`
 	border-radius: 15px;
 	border: 1px solid ${(props) => props.theme.colors.gray8};
 `;
+
+export const MakeBtnContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 300px;
+	height: 47px;
+	margin-top: 60px;
+`;
+export const MakeBtn = styled.input<{ value?: string; isActive?: boolean }>`
+	display: inline-block;
+	width: 140px;
+	height: 47px;
+	font-size: 17px;
+	line-height: 18px;
+	letter-spacing: 0em;
+	color: ${(props) => (props.value === '이전' ? props.theme.colors.red1 : props.theme.colors.white)};
+	background-color: ${(props) => (props.value === '이전' ? props.theme.colors.white : props.isActive ? props.theme.colors.red1 : props.theme.colors.gray5)};
+	border: ${(props) => (props.isActive ? `3px solid ${props.theme.colors.red1}` : props.value === '이전' ? `3px solid ${props.theme.colors.red1}` : 'none')};
+	border-radius: 14px;
+	cursor: pointer;
+`;

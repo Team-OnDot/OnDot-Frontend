@@ -2,10 +2,26 @@ import { useRecoilValue } from 'recoil';
 import OndatCalendar from '../../components/calendar/OndatCalendar';
 import TimeTable from '../../components/timeTable/TimeTable';
 import * as S from './InterviewMake2.style';
-import { selectedDatesAtom } from '../../recoil/selectedDatesAtom';
+import { scheduleAtom, selectedDatesAtom } from '../../recoil/interviewMake2Atom';
+import { useEffect, useState } from 'react';
 
 function InterviewMake2() {
 	const selectedDates = useRecoilValue(selectedDatesAtom);
+	const schedule = useRecoilValue(scheduleAtom);
+	const [sortedDates, setSortedDates] = useState<string[]>([]);
+
+	useEffect(() => {
+		if (selectedDates.length > 1) {
+			const sorted = [...selectedDates].sort((a, b) => {
+				return new Date(a).getTime() - new Date(b).getTime();
+			});
+			setSortedDates(sorted);
+			console.log(sorted);
+			return;
+		}
+		setSortedDates(selectedDates);
+	}, [selectedDates]);
+
 	return (
 		<S.MakeContainer>
 			<img src={process.env.PUBLIC_URL + '/images/iconPage3_2.svg'} />
@@ -29,7 +45,11 @@ function InterviewMake2() {
 					<br /> 지원자는 아래 선택된 시간대 외의 시간을 선택할 수 없습니다 주세요
 				</S.MakeTextSub>
 			</S.MakeTextContainer>
-			<S.TimeTableWrapper>{selectedDates.length > 0 ? <TimeTable selectedDates={selectedDates} /> : null}</S.TimeTableWrapper>
+			{sortedDates.length > 0 ? <TimeTable selectedDates={sortedDates} /> : null}
+			<S.MakeBtnContainer>
+				<S.MakeBtn type="button" value="이전" />
+				<S.MakeBtn type="button" value="다음" isActive={schedule.length > 0} />
+			</S.MakeBtnContainer>
 		</S.MakeContainer>
 	);
 }
