@@ -3,7 +3,6 @@ import * as S from './SignUpForm.style';
 import GroupType from './GroupType';
 import {useForm} from 'react-hook-form';
 import { useState, useEffect } from 'react';
-import { getValue } from '@testing-library/user-event/dist/utils';
 
 function SignUpForm(){
 

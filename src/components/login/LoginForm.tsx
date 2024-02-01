@@ -16,7 +16,7 @@ function LoginForm() {
         resetField,
         formState: { errors }
       } = useForm<IUserData>({
-        mode: "onSubmit"
+        mode: "onBlur"
       });
 
     //submit이 정상적으로 되었을 때 data를 다루는 함수

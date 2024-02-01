@@ -8,19 +8,70 @@ export const InputInfoHeader = styled.div`
     font-weight: 600;
 `;
 
-//원 아이콘
+//큰 원 아이콘
 export const Ellipse1 = styled.div`
     display: flex;
     width: 12px;
     height: 12px;
     border-radius: 20px;
     background-color: ${props => props.theme.colors.red1};
-    margin: auto 13px auto auto;
+    margin: auto 13px auto 0px;
 `;
 
 //지원 정보 입력폼
 export const ApplyForm = styled.form`
-    border: 1px solid black;
-    margin-top: 56px;
+    margin-top: 35px;
     margin-left: 65px;
+`;
+
+//입력폼 제목 박스
+export const ApplyTitle = styled.div`
+    display: flex; 
+    margin-top: 21px;
+`;
+
+//작은 원 아이콘
+export const Ellipse2 = styled(Ellipse1)`
+    display: flex;
+    width: 9px;
+    height: 9px;
+    border-radius: 20px;
+    background-color: ${props => props.theme.colors.red1};
+    margin: auto 6px auto 0px;
+`;
+
+//지원자 폼 제목
+export const ApplyTitleText = styled.text`
+    display: flex; 
+    font-size: 16px;
+    font-weight: 600;
+`;
+
+//비밀번호 안내 문구
+export const PwTxt = styled.text`
+    display: flex;
+    margin-top: 4px; 
+    margin-left: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: ${props => props.theme.colors.gray4};
+`;
+
+export const Footer = styled.div`
+    margin-top: 171px;
+`;
+
+export const NextBtn = styled.button<{toggle:boolean}>`
+    background: ${props=>(props.toggle ? `${props.theme.colors.red1}`: `${props.theme.colors.gray5}`)};
+    width: 122px;
+    height: 45px;
+    border: none;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+    margin-left: 768px;
 `;
