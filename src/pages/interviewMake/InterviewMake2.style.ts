@@ -77,30 +77,30 @@ export const TimeTableWrapper = styled.div`
 	border-radius: 15px;
 	border: 1px solid ${(props) => props.theme.colors.gray8};
 	margin-top: 25px;
+`;
 
-	&::before {
-		position: absolute;
-		content: '';
-		width: 25px;
-		height: 33px;
-		background: url('/images/iconArrowPrev.svg') no-repeat center center;
-		top: 50%;
-		left: -45px;
-		transform: translateY(-50%);
-		cursor: pointer;
-	}
+export const BtnTimeTablePrev = styled.span<{ isMultiplePage: boolean }>`
+	display: ${(props) => (props.isMultiplePage ? 'inline-block' : 'none')};
+	position: absolute;
+	width: 25px;
+	height: 33px;
+	background: url('/images/iconArrowPrev.svg') no-repeat center center;
+	top: 50%;
+	left: -45px;
+	transform: translateY(-50%);
+	cursor: pointer;
+`;
 
-	&::after {
-		position: absolute;
-		content: '';
-		width: 25px;
-		height: 33px;
-		background: url('/images/iconArrowNext.svg') no-repeat center center;
-		top: 50%;
-		right: -45px;
-		transform: translateY(-50%);
-		cursor: pointer;
-	}
+export const BtnTimeTableNext = styled.span<{ isMultiplePage: boolean }>`
+	display: ${(props) => (props.isMultiplePage ? 'inline-block' : 'none')};
+	position: absolute;
+	width: 25px;
+	height: 33px;
+	background: url('/images/iconArrowNext.svg') no-repeat center center;
+	top: 50%;
+	right: -45px;
+	transform: translateY(-50%);
+	cursor: pointer;
 `;
 
 export const MakeBtnContainer = styled.div`

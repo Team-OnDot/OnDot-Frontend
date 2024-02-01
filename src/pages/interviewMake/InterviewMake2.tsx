@@ -3,12 +3,32 @@ import OndatCalendar from '../../components/calendar/OndatCalendar';
 import TimeTable from '../../components/timeTable/TimeTable';
 import * as S from './InterviewMake2.style';
 import { scheduleAtom, selectedDatesAtom } from '../../recoil/interviewMake2Atom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, MutableRefObject } from 'react';
+// @ts-ignore
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css/core';
+import { chunkArray } from '../../utils/chunkArray';
 
 function InterviewMake2() {
 	const selectedDates = useRecoilValue(selectedDatesAtom);
 	const schedule = useRecoilValue(scheduleAtom);
 	const [sortedDates, setSortedDates] = useState<string[]>([]);
+
+	const splideRef = useRef<Splide>(null);
+
+	const goPrev = () => {
+		if (splideRef.current) {
+			splideRef.current.go('<');
+			return;
+		}
+	};
+
+	const goNext = () => {
+		if (splideRef.current) {
+			splideRef.current.go('>');
+			return;
+		}
+	};
 
 	useEffect(() => {
 		if (selectedDates.length > 1) {
@@ -45,7 +65,27 @@ function InterviewMake2() {
 					<br /> 지원자는 아래 선택된 시간대 외의 시간을 선택할 수 없습니다 주세요
 				</S.MakeTextSub2>
 			</S.MakeTextContainer>
-			<S.TimeTableWrapper>{sortedDates.length > 0 ? <TimeTable selectedDates={sortedDates} /> : null}</S.TimeTableWrapper>
+			{sortedDates.length > 0 ? (
+				<S.TimeTableWrapper>
+					<Splide
+						ref={splideRef}
+						options={{
+							pagination: false,
+							arrows: false,
+							width: 831,
+						}}
+					>
+						{/* sortedDates를 5개씩 끊어서 SplideSlide에 전달 */}
+						{chunkArray(sortedDates, 5).map((chunk, index) => (
+							<SplideSlide key={index}>
+								<TimeTable selectedDates={chunk} />
+							</SplideSlide>
+						))}
+					</Splide>
+					<S.BtnTimeTablePrev isMultiplePage={selectedDates.length > 5} onClick={goPrev} />
+					<S.BtnTimeTableNext isMultiplePage={selectedDates.length > 5} onClick={goNext} />
+				</S.TimeTableWrapper>
+			) : null}
 			<S.MakeBtnContainer>
 				<S.MakeBtn type="button" value="이전" />
 				<S.MakeBtn type="button" value="다음" isActive={schedule.length > 0} />
