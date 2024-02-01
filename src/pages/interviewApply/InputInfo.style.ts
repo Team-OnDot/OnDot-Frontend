@@ -57,10 +57,7 @@ export const PwTxt = styled.text`
     color: ${props => props.theme.colors.gray4};
 `;
 
-export const Footer = styled.div`
-    margin-top: 171px;
-`;
-
+//다음 버튼
 export const NextBtn = styled.button<{toggle:boolean}>`
     background: ${props=>(props.toggle ? `${props.theme.colors.red1}`: `${props.theme.colors.gray5}`)};
     width: 122px;
@@ -74,4 +71,5 @@ export const NextBtn = styled.button<{toggle:boolean}>`
     font-size: 18px;
     color: white;
     margin-left: 768px;
+    margin-top: 171px;
 `;

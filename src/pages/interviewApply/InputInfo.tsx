@@ -23,7 +23,7 @@ function InputInfo() {
         clearErrors,
         getValues,
         formState: { errors }
-    } = useForm<IUserData>({mode: "onSubmit"});
+    } = useForm<IUserData>({mode: "onBlur"});
 
     //비밀번호 일치 확인
     useEffect(() => {
@@ -58,7 +58,7 @@ function InputInfo() {
     const onValid = (data: IUserData) => {
         console.log("성공");
         console.log(data);        
-        };
+    };
 
     //값이 다 비정상적으로 입력되었을 때 실행되는 함수
     const onError = (error:any) => {
@@ -95,8 +95,8 @@ function InputInfo() {
                         {...register("userName",{
                             required: true,
                             pattern: {
-                                value: /^[a-zA-Z0-9]{4,16}$/,
-                                message: "4~16자 영문, 숫자"
+                                value: /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,10}$/,
+                                message: ""
                             },
                         })}
                     />
@@ -124,8 +124,8 @@ function InputInfo() {
                         {...register("userPhone",{
                             required: true,
                             pattern: {
-                                value: /^(01[0]{1})[0-9]{4}[0-9]{4}$/,
-                                message: ""
+                                value: /^(010)-[0-9]{4}-[0-9]{4}$/,
+                                message: "d"
                             },
                         })}
                     />
@@ -137,6 +137,7 @@ function InputInfo() {
                     }
                 </L.LoginInputBox>
 
+                {/*비밀번호*/}
                 <I.ApplyTitle>
                     <I.Ellipse2/>
                     <I.ApplyTitleText>비밀번호</I.ApplyTitleText>
@@ -171,6 +172,7 @@ function InputInfo() {
                     <S.ErrorText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.ErrorText>
                 </S.ErrorMessage>
 
+                {/*비밀번호 확인*/}
                 <I.ApplyTitle>
                     <I.Ellipse2/>
                     <I.ApplyTitleText>비밀번호 확인</I.ApplyTitleText>
@@ -205,13 +207,11 @@ function InputInfo() {
                     {watch("pwCheck")?.length === 0 && <S.HeplerText error={errors.pwCheck ? true : false}>비밀번호가 일치하지 않습니다</S.HeplerText>}
                     <S.ErrorText error={errors.pwCheck ? true : false}>{errors?.pwCheck?.message}</S.ErrorText>
                 </S.ErrorMessage>
-            </I.ApplyForm>
 
-            <I.Footer>
                 <I.NextBtn type="submit" toggle={isActive}>
                     다음
                 </I.NextBtn>
-            </I.Footer>
+            </I.ApplyForm>
 
         </div>
 	);
