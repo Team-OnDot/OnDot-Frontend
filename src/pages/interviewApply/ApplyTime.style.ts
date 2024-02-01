@@ -51,7 +51,7 @@ export const BackBtn = styled.button`
 `;
 
 //완료 버튼
-export const ClearBtn = styled(BackBtn)`
+export const CompleteBtn = styled(BackBtn)`
     background-color: ${props => props.theme.colors.gray5};
     color: white;
     border: none;

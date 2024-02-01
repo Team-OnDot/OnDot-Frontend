@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import * as I from './InputInfo.style';
+import * as I from './ApplyInfo.style';
 import * as In from './InterviewApply.style';
 import * as L from '../../components/login/LoginForm.style';
 import * as S from '../../components/signUp/SignUpForm.style';

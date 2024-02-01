@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import * as I from './InputTime.style';
+import * as I from './ApplyTime.style';
 import * as In from './InterviewApply.style';
 import TimeTable from '../../components/interviewApply/InputTimeTable';
 
@@ -7,9 +7,16 @@ function InputTime() {
 
 	const navigate = useNavigate();
 
+    //이전 버튼 클릭 시
     const onClickBackBtn = () => {
         navigate('/apply-info');
     }
+  
+    //완료 버튼 클릭 시
+    const onClickCompleteBtn = () => {
+        navigate('/apply-complete');
+    }
+
 	return (
 		<div>
             {/*Header*/}
@@ -39,7 +46,7 @@ function InputTime() {
              {/*Footer*/}
              <I.InputTimeFooter>
                 <I.BackBtn onClick={onClickBackBtn}>이전</I.BackBtn>
-                <I.ClearBtn>완료</I.ClearBtn>
+                <I.CompleteBtn onClick={onClickCompleteBtn}>완료</I.CompleteBtn>
              </I.InputTimeFooter>
         </div>
 	);

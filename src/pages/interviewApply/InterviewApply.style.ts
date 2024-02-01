@@ -76,3 +76,7 @@ export const Ellipse2 = styled(Ellipse1)`
     background-color: ${props => props.theme.colors.red1};
     margin: auto 6px auto 0px;
 `;
+
+export const ProfileBtn = styled(ApplyBtn)`
+    margin-top: 19px;
+`;
