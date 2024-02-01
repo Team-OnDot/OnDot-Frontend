@@ -73,6 +73,7 @@ function InterviewMake2() {
 							pagination: false,
 							arrows: false,
 							width: 831,
+							drag: false,
 						}}
 					>
 						{/* sortedDates를 5개씩 끊어서 SplideSlide에 전달 */}
