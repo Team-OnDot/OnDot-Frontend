@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import * as I from './InputInfo.style';
+import * as In from './InterviewApply.style';
 import * as L from '../../components/login/LoginForm.style';
 import * as S from '../../components/signUp/SignUpForm.style';
 import { useForm } from 'react-hook-form';
@@ -55,9 +56,11 @@ function InputInfo() {
     }
 
     //값이 다 정상적으로 입력되었을 때 실행되는 함수
+    const navigate = useNavigate();
     const onValid = (data: IUserData) => {
         console.log("성공");
-        console.log(data);        
+        console.log(data);  
+        navigate('/apply-time');      
     };
 
     //값이 다 비정상적으로 입력되었을 때 실행되는 함수
@@ -65,22 +68,20 @@ function InputInfo() {
         console.log(error);
     };
 
-	const navigate = useNavigate();
-
 	return (
 		<div>
             {/*Header*/}
-            <I.InputInfoHeader>
-                <I.Ellipse1/>
+            <In.InputInfoHeader>
+                <In.Ellipse1/>
                 지원 정보 입력
-            </I.InputInfoHeader>
+            </In.InputInfoHeader>
             <img src={process.env.PUBLIC_URL + '/images/lineCircleShort.svg'}/>
 
             {/*Main(지원 정보 입력폼)*/}
             <I.ApplyForm onSubmit={handleSubmit(onValid, onError)}>
 
                 <I.ApplyTitle>
-                    <I.Ellipse2/>
+                    <In.Ellipse2/>
                     <I.ApplyTitleText>지원자 이름</I.ApplyTitleText>
                 </I.ApplyTitle>
 
@@ -109,7 +110,7 @@ function InputInfo() {
                 </L.LoginInputBox>
 
                 <I.ApplyTitle>
-                    <I.Ellipse2/>
+                    <In.Ellipse2/>
                     <I.ApplyTitleText>지원자 전화번호</I.ApplyTitleText>
                 </I.ApplyTitle>
                 
@@ -139,7 +140,7 @@ function InputInfo() {
 
                 {/*비밀번호*/}
                 <I.ApplyTitle>
-                    <I.Ellipse2/>
+                    <In.Ellipse2/>
                     <I.ApplyTitleText>비밀번호</I.ApplyTitleText>
                     <I.PwTxt>지원자 식별에 사용되며 재설정이 불가능합니다.</I.PwTxt>
                 </I.ApplyTitle>
@@ -174,7 +175,7 @@ function InputInfo() {
 
                 {/*비밀번호 확인*/}
                 <I.ApplyTitle>
-                    <I.Ellipse2/>
+                    <In.Ellipse2/>
                     <I.ApplyTitleText>비밀번호 확인</I.ApplyTitleText>
                 </I.ApplyTitle>
                 
