@@ -59,7 +59,8 @@ function ApplyInfoForm() {
     const navigate = useNavigate();
     const onValid = (data: IUserData) => {
         console.log("성공");
-        console.log(data);  
+        console.log(data); 
+        navigate('/apply-time'); 
     };
 
     //값이 다 비정상적으로 입력되었을 때 실행되는 함수
