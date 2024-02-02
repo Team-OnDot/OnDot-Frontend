@@ -1,28 +1,32 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import{ InterviewInfo, interviewAtom } from './../../recoil/interviewAtoms';
 import * as S from './InterviewMake3.style';
+import { useRecoilState } from 'recoil';
 
-type InterviewInfo = {
-    memo: string;
-    memoCheck: boolean;     //최소 0자, 최대 180자
-}
 
 function InterviewMake1() {
+    const interviewInfo = useRecoilState(interviewAtom);
+
     const regExpMemo = /^.{0,180}$/;
 
 	const navigate = useNavigate();
     const { 
         register, watch, setValue,
         formState: { errors, isValid } 
-    } = useForm<InterviewInfo>({
+    } = useForm<{memo: string;}>({
         mode: "onChange",
         defaultValues: {}
     });
     
-    const onSubmit = (data: any) => {
-        console.log(data);
-        navigate('/');
+    const onSubmit = () => {
+        console.log(interviewInfo);
+        console.log(watch('memo'));
+
+        // API 연결
+
+        navigate('/interview-make-complete');
     };
 
 	return (
@@ -41,7 +45,7 @@ function InterviewMake1() {
             />
             <S.MakeBtnContainer>
                 <S.MakeBtn type='button' value='이전' />
-                <S.MakeBtn type='submit' value='다음' />
+                <S.MakeBtn type='submit' value='다음' onClick={onSubmit} />
             </S.MakeBtnContainer>
 		</S.MakeContainer>
 	);

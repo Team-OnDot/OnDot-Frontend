@@ -37,7 +37,7 @@ export const MakeTextCircle = styled.div`
     height : 9px;
     border-radius: 50%;
     background-color: ${props => props.theme.colors.red1};
-    margin: auto 5px;
+    margin: 5px;
 `;
 export const MakeText = styled.div`
     width: 80px;
@@ -76,6 +76,7 @@ export const MakeInput = styled.input<{ src?: string }>`
 export const MakeInputContainer = styled.div<{ src?: string }>`
     width: 352px;
     height: 47px;
+    text-align: left;
     font-size: 15px;
     line-height: 18px;
     letter-spacing: 0em;
@@ -86,6 +87,7 @@ export const MakeInputContainer = styled.div<{ src?: string }>`
     border-radius: 11px;
     border: 2px solid ${props => props.theme.colors.gray4};
     padding-top: 12px;
+    padding-left: 45px;
 `;
 export const MakeInputDate = styled.input`
     width: 110px;
@@ -100,6 +102,7 @@ export const MakeInputDate = styled.input`
 export const MakeInputNum = styled.input`
     width: 20px;
     height: 20px;
+    text-align: right;
     font-size: 15px;
     line-height: 18px;
     letter-spacing: 0em;

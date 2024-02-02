@@ -33,11 +33,11 @@ export const MakeTextContainer = styled.div`
 `;
 export const MakeTextCircle = styled.div`
     display: inline-block;
-    width : 9px;
-    height : 9px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background-color: ${props => props.theme.colors.red1};
-    margin: auto 5px;
+    margin: 5px;
 `;
 export const MakeText = styled.div`
     width: 120px;
