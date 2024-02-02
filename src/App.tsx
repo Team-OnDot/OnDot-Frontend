@@ -2,6 +2,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
+import { RecoilRoot } from 'recoil';
 //pages
 import Header from './pages/header/Header';
 import Login from './pages/login/Login';
@@ -29,6 +30,7 @@ function App() {
 		<>
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
+<<<<<<< HEAD
 				<BrowserRouter>
 					<Routes>
 						{/*헤더가 필요한 컴포넌트 */}
@@ -40,6 +42,38 @@ function App() {
 							<Route path="/interview-make-1" element={<InterviewMake1 />} />
 							<Route path="/interview-make-3" element={<InterviewMake3 />} />
 							<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
+=======
+				<RecoilRoot>
+					<BrowserRouter>
+						<Routes>
+							{/*헤더가 필요한 컴포넌트 */}
+							<Route element={<Header />}>
+								<Route path="/" element={<Home />} />
+								<Route path="/login" element={<Login />} />
+								<Route path="/sign-up-id" element={<SignUpId />} />
+								<Route path="/group-profile" element={<GroupProfile />} />
+								<Route path="/interview-make-1" element={<InterviewMake1 />} />
+								<Route path="/interview-make-3" element={<InterviewMake3 />} />
+								<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
+							</Route>
+							{/*면접 지원자 컴포넌트 */}
+							<Route element={<Interview />}>
+								<Route path="/interview-apply" element={<InterviewApplyMain />} />
+								<Route path="/apply-info" element={<InputInfo />} />
+								<Route path="/apply-time" element={<InputTime />} />
+								<Route path="/apply-complete" element={<ApplyComplete />} />
+								<Route path="/interview-end" element={<InterviewEnd />} />
+								<Route path="/interview-yet" element={<InterviewYet />} />
+								<Route path="/edit-info-check" element={<EditInfo1 />} />
+								<Route path="/edit-info" element={<EditInfo2 />} />
+							
+							</Route>
+							{/*헤더가 필요없는 컴포넌트 */}
+						</Routes>  
+								<Route path="/interview-make-2" element={<InterviewMake2 />} />
+								<Route path="/interview-make-3" element={<InterviewMake3 />} />
+								<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
+>>>>>>> 139320f7401e6e8d3f665247bcd47910238652d5
 
 								{/*면접 지원자 컴포넌트 */}
 								<Route element={<Interview />}>

@@ -1,5 +1,7 @@
 import * as S from './SignUpForm.style';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { GroupTypeAtom } from '../../recoil/SignUpAtoms';
 
 function GroupType(){
 
@@ -10,16 +12,16 @@ function GroupType(){
 	};
 
     //그룹 분류 value값 설정하기
-    const [groupType, setGroupType] = useState("동아리");
+    const [groupTypeAtom, setGroupTypeAtom] = useRecoilState(GroupTypeAtom);
     const handleClickedGroupType = (type: string) => {
-        setGroupType(type);
+        setGroupTypeAtom(type);
         setIsOption(!isOption);
     };
 
     return(
         <div>
             <S.GroupTypeBox toggle={isOption}>
-                <S.GroupTypeLabel onClick={onClickLabel}>{groupType}</S.GroupTypeLabel>
+                <S.GroupTypeLabel onClick={onClickLabel}>{groupTypeAtom}</S.GroupTypeLabel>
                 <S.GroupTypeUl toggle={isOption}>
                     <S.GroupTypeLiTop onClick={(e) => handleClickedGroupType("동아리")}>동아리</S.GroupTypeLiTop>
                     <S.GroupTypeLi onClick={(e) => handleClickedGroupType("학생회")}>학생회</S.GroupTypeLi>
