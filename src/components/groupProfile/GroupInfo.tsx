@@ -16,8 +16,8 @@ function GroupInfo(group: Group) {
 
 	//설정 클릭
 	const onClickSetting = () => {
-		navigate(`/`);
-	};
+		navigate('/group-profile-setting');
+	}
 
 	//로그아웃 클릭
 	const onClickLogout = () => {
