@@ -16,6 +16,8 @@ import InputTime from './pages/interviewApply/ApplyTime';
 import ApplyComplete from './pages/interviewApply/ApplyComplete';
 import InterviewEnd from './pages/interviewApply/InterviewEnd';
 import InterviewYet from './pages/interviewApply/InterviewYet';
+import EditInfo1 from './pages/interviewApply/EditInfo1';
+import EditInfo2 from './pages/interviewApply/EditInfo2';
 
 function App() {
 	return (
@@ -33,12 +35,14 @@ function App() {
 
 							{/*면접 지원자 컴포넌트 */}
 							<Route element={<Interview />}>
-								<Route path="/interview" element={<InterviewApplyMain />} />
+								<Route path="/interview-apply" element={<InterviewApplyMain />} />
 								<Route path="/apply-info" element={<InputInfo />} />
 								<Route path="/apply-time" element={<InputTime />} />
 								<Route path="/apply-complete" element={<ApplyComplete />} />
 								<Route path="/interview-end" element={<InterviewEnd />} />
 								<Route path="/interview-yet" element={<InterviewYet />} />
+								<Route path="/edit-info-check" element={<EditInfo1 />} />
+								<Route path="/edit-info" element={<EditInfo2 />} />
 							</Route>
 						</Route>
 						{/*헤더가 필요없는 컴포넌트 */}

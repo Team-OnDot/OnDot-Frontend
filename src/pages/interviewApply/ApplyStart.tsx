@@ -5,9 +5,14 @@ function InterviewApplyMain() {
 
 	const navigate = useNavigate();
 
-	//회원가입 클릭 시
+	//면접 지원하기 클릭 시
 	const onClickApply = () => {
 		navigate(`/apply-info`);
+	};
+
+	//지원 정보 수정하기 클릭 시
+	const onClickEdit = () => {
+		navigate('/edit-info');
 	};
 
 	return (
@@ -20,7 +25,7 @@ function InterviewApplyMain() {
 				</I.InterviewMainText>
 				<I.ApplyBtnWrap>
 					<I.ApplyBtn onClick={onClickApply}>면접 지원하기</I.ApplyBtn>
-					<I.EditBtn>지원 정보 수정하기</I.EditBtn>
+					<I.EditBtn onClick={onClickEdit}>지원 정보 수정하기</I.EditBtn>
 				</I.ApplyBtnWrap>
 			</I.InterviewMain>
 		</>

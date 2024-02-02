@@ -77,6 +77,7 @@ export const Ellipse2 = styled(Ellipse1)`
     margin: auto 6px auto 0px;
 `;
 
+//프로필 이동 버튼
 export const ProfileBtn = styled(ApplyBtn)`
     margin-top: 19px;
 `;
