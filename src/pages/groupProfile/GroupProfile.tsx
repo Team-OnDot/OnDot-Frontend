@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './GroupProfile.style';
 import GroupInfo from './../../components/groupProfile/GroupInfo';
