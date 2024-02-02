@@ -22,6 +22,7 @@ import InterviewEnd from './pages/interviewApply/InterviewEnd';
 import InterviewYet from './pages/interviewApply/InterviewYet';
 import EditInfo1 from './pages/interviewApply/EditInfo1';
 import EditInfo2 from './pages/interviewApply/EditInfo2';
+import GoogleLogin from './pages/login/GoogleLogin';
 
 function App() {
 	return (
@@ -57,6 +58,7 @@ function App() {
 							<Route path="/interview-make-2" element={<InterviewMake2 />} />
 							<Route path="/interview-make-3" element={<InterviewMake3 />} />
 							<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
+							<Route path="/google" element={<GoogleLogin />} />
 
 							{/*면접 지원자 컴포넌트 */}
 							<Route element={<Interview />}>
