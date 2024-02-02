@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import * as I from './ApplyInfo.style';
+import * as I from './ApplyInfoForm.style';
 import * as In from '../../pages/interviewApply/InterviewApply.style';
 import * as L from '../../components/login/LoginForm.style';
 import * as S from '../../components/signUp/SignUpForm.style';
@@ -60,7 +60,6 @@ function ApplyInfoForm() {
     const onValid = (data: IUserData) => {
         console.log("성공");
         console.log(data);  
-        navigate('/apply-time');      
     };
 
     //값이 다 비정상적으로 입력되었을 때 실행되는 함수
@@ -144,7 +143,7 @@ function ApplyInfoForm() {
                 >
                     <L.LoginInput
                         id="userPw"
-                        type="text"
+                        type="password"
                         placeholder="비밀번호를 입력해주세요"
                         {...register("userPw",{
                             required: true,
@@ -178,7 +177,7 @@ function ApplyInfoForm() {
                 >
                     <L.LoginInput
                         id="pwCheck"
-                        type="text"
+                        type="password"
                         placeholder="비밀번호를 다시 한 번 입력해 주세요"
                         {...register("pwCheck",{
                             required: true,
