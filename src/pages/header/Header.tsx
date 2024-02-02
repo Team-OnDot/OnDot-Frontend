@@ -17,19 +17,19 @@ function Header() {
 
 	return (
 		<>
-			<S.headerDiv>
-				<S.ondotLogoDiv onClick={onClickLogo}>
+			<S.HeaderDiv>
+				<S.OndotLogoDiv onClick={onClickLogo}>
 					<img src={process.env.PUBLIC_URL + '/images/ondotLogo.svg'}></img>
-				</S.ondotLogoDiv>
-				<S.headerWrapper>
-					<S.headerText>서비스 소개</S.headerText>
-					<S.headerText>만든 사람들</S.headerText>
-					<S.headerText>문의하기</S.headerText>
-				</S.headerWrapper>
-				<S.loginBtnBox>
-					<S.loginBtn onClick={onClickLoginBtn}>로그인</S.loginBtn>
-				</S.loginBtnBox>
-			</S.headerDiv>
+				</S.OndotLogoDiv>
+				<S.HeaderWrapper>
+					<S.HeaderText>서비스 소개</S.HeaderText>
+					<S.HeaderText>만든 사람들</S.HeaderText>
+					<S.HeaderText>문의하기</S.HeaderText>
+				</S.HeaderWrapper>
+				<S.LoginBtnBox>
+					<S.LoginBtn onClick={onClickLoginBtn}>로그인</S.LoginBtn>
+				</S.LoginBtnBox>
+			</S.HeaderDiv>
 			<Outlet></Outlet>
 		</>
 	);

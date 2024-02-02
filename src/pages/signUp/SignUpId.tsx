@@ -5,12 +5,12 @@ function SignUpId(){
     return(
         <div>
             {/*Header*/}
-			<S.loginHeader>
-				<S.loginWrapper>
-					<S.loginHeaderText>회원가입</S.loginHeaderText>
-					<S.loginHeaderDot/>
-				</S.loginWrapper>
-			</S.loginHeader>
+			<S.LoginHeader>
+				<S.LoginWrapper>
+					<S.LoginHeaderText>회원가입</S.LoginHeaderText>
+					<S.LoginHeaderDot/>
+				</S.LoginWrapper>
+			</S.LoginHeader>
             {/*Main*/}
 			<SignUpForm/>
         </div>
