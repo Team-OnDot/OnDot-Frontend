@@ -14,7 +14,7 @@ export const MakeContainer = styled.div`
 export const MainText = styled.div`
 	height: 26px;
 	font-size: 22px;
-	font-weight: 600;
+	font-family: 'Pretendard-SemiBold';
 	line-height: 26px;
 	letter-spacing: 0em;
 	margin-top: 30px;
@@ -47,14 +47,14 @@ export const MakeTextCircle = styled.span`
 export const MakeText = styled.span`
 	//height: 25px;
 	font-size: 18px;
-	font-weight: 600;
+	font-family: 'Pretendard-SemiBold';
 	line-height: 19px;
 	letter-spacing: 0em;
 `;
 
 export const MakeTextSub = styled.span`
 	font-size: 12px;
-	font-weight: 600;
+	font-family: 'Pretendard-SemiBold';
 	line-height: 14px;
 	letter-spacing: 0em;
 	color: ${(props) => props.theme.colors.gray4};

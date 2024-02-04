@@ -15,13 +15,13 @@ export const TimeLabel = styled.p`
 	top: -5px;
 	margin-right: 4px;
 	font-size: 12px;
-	font-weight: 600;
+	font-family: 'Pretendard-SemiBold';
 	color: ${(props) => props.theme.colors.gray5};
 `;
 
 export const DateLabel = styled.p`
 	font-size: 15px;
-	font-weight: 600;
+	font-family: 'Pretendard-SemiBold';
 	color: ${(props) => props.theme.colors.gray1};
 	text-align: center;
 	margin-bottom: 15px;
