@@ -9,12 +9,12 @@ function InterviewApplyInputSchedule() {
 
     //이전 버튼 클릭 시
     const onClickBackBtn = () => {
-        navigate('/apply-info');
+        navigate('/interview-apply-input-info');
     }
   
     //완료 버튼 클릭 시
     const onClickCompleteBtn = () => {
-        navigate('/apply-complete');
+        navigate('/interview-apply-complete');
     }
 
 	return (
