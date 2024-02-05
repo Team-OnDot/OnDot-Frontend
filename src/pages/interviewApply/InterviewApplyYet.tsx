@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import * as I from './InterviewApply.style';
 
-function InterviewYet() {
+function InterviewApplyYet() {
 
 	const navigate = useNavigate();
 
@@ -25,4 +25,4 @@ function InterviewYet() {
 	);
 }
 
-export default InterviewYet;
+export default InterviewApplyYet;

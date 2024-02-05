@@ -3,7 +3,7 @@ import * as I from './ApplyTime.style';
 import * as In from './InterviewApply.style';
 import TimeTable from '../../components/interviewApply/InputTimeTable';
 
-function InputTime() {
+function InterviewApplyInputSchedule() {
 
 	const navigate = useNavigate();
 
@@ -52,4 +52,4 @@ function InputTime() {
 	);
 }
 
-export default InputTime;
+export default InterviewApplyInputSchedule;

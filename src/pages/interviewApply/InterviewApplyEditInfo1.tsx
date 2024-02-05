@@ -10,7 +10,7 @@ type IUserData = {
     userPw: string;
   }
 
-function EditInfo1() {
+function InterviewApplyEditInfo1() {
 
     const {
         register,
@@ -131,4 +131,4 @@ function EditInfo1() {
 	);
 }
 
-export default EditInfo1;
+export default InterviewApplyEditInfo1;

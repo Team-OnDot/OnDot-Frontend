@@ -1,6 +1,6 @@
 import * as I from './InterviewApply.style';
 
-function ApplyComplete() {
+function InterviewApplyComplete() {
 
 	return (
 		<div>
@@ -19,4 +19,4 @@ function ApplyComplete() {
 	);
 }
 
-export default ApplyComplete;
+export default InterviewApplyComplete;
