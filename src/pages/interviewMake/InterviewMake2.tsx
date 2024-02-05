@@ -36,7 +36,6 @@ function InterviewMake2() {
 				return new Date(a).getTime() - new Date(b).getTime();
 			});
 			setSortedDates(sorted);
-			console.log(sorted);
 			return;
 		}
 		setSortedDates(selectedDates);
