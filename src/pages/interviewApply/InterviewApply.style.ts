@@ -81,3 +81,11 @@ export const Ellipse2 = styled(Ellipse1)`
 export const ProfileBtn = styled(ApplyBtn)`
 	margin-top: 19px;
 `;
+
+export const TimeTableWrapper = styled.div`
+	position: relative;
+	padding: 42px 47px;
+	border-radius: 15px;
+	border: 1px solid ${(props) => props.theme.colors.gray8};
+	margin: 25px 0px 0px 90px;
+`;
