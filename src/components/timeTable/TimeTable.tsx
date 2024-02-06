@@ -15,9 +15,10 @@ const TimeTable = ({ selectedDates }: TimeTable) => {
 	const [hourlyChunks, setHourlyChunks] = React.useState<number>(2);
 
 	const renderingDates = selectedDates.map((date) => new Date(date));
+	const blockedTimes = [new Date('2024-02-06T10:00:00'), new Date('2024-02-06T13:00:00')];
 
-	const renderCustomDateCell = (date: Date, selected: boolean) => {
-		return <S.DateCell selected={selected}></S.DateCell>;
+	const renderCustomDateCell = (date: Date, selected: boolean, blocked: boolean) => {
+		return <S.DateCell selected={selected} blocked={blocked}></S.DateCell>;
 	};
 
 	const renderCustomTimeLabel = (time: Date) => {
@@ -80,6 +81,7 @@ const TimeTable = ({ selectedDates }: TimeTable) => {
 				renderDateLabel={renderCustomDateLabel}
 				renderTimeLabel={renderCustomTimeLabel}
 				renderDateCell={renderCustomDateCell}
+				blockedTimes={blockedTimes}
 			/>
 		</S.Wrapper>
 	);

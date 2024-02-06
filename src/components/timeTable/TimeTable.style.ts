@@ -4,10 +4,10 @@ export const Wrapper = styled.div`
 	width: 831px;
 `;
 
-export const DateCell = styled.div<{ selected: boolean }>`
+export const DateCell = styled.div<{ selected: boolean, blocked: boolean }>`
 	height: 18px;
 	border: 1px dashed ${(props) => props.theme.colors.gray6};
-	background-color: ${(props) => (props.selected ? props.theme.colors.red3 : props.theme.colors.white)};
+	background-color: ${(props) => (props.blocked ? props.theme.colors.gray8 : props.selected ? props.theme.colors.red3 : props.theme.colors.white)};
 `;
 
 export const TimeLabel = styled.p`
