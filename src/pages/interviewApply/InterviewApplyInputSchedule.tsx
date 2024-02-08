@@ -11,6 +11,7 @@ import { useRef, useState } from 'react';
 function InterviewApplyInputSchedule() {
 	const splideRef = useRef<Splide>(null);
 	const [sortedDates, setSortedDates] = useState(['2024-02-02', '2024-02-06', '2024-02-07', '2024-02-08', '2024-02-09', '2024-02-10']);
+	const availableTimes = [new Date('2024-02-06T10:00:00'), new Date('2024-02-06T13:00:00')];
 	const navigate = useNavigate();
 
 	//이전 버튼 클릭 시
@@ -62,7 +63,7 @@ function InterviewApplyInputSchedule() {
 						{/* sortedDates를 5개씩 끊어서 SplideSlide에 전달 */}
 						{chunkArray(sortedDates, 5).map((chunk, index) => (
 							<SplideSlide key={index}>
-								<TimeTable selectedDates={chunk} />
+								<TimeTable selectedDates={chunk} availableTimes={availableTimes} />
 							</SplideSlide>
 						))}
 					</Splide>
