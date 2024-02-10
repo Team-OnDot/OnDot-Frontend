@@ -14,7 +14,7 @@ function Login() {
 	const onClickGoogleLogin = () => {
 		window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?
 		client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}
-		&redirect_uri=http://localhost:3000/login/oauth2/code/google
+		&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_KEY}
 		&response_type=code
 		&scope=email profile`;
 	}

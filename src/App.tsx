@@ -23,7 +23,7 @@ import InterviewEnd from './pages/interviewApply/InterviewEnd';
 import InterviewYet from './pages/interviewApply/InterviewYet';
 import EditInfo1 from './pages/interviewApply/EditInfo1';
 import EditInfo2 from './pages/interviewApply/EditInfo2';
-import GoogleLogin from './pages/login/GoogleLogin';
+import LoginLoading from './pages/login/LoginLoading';
 
 function App() {
 	return (
@@ -60,7 +60,7 @@ function App() {
 							<Route path="/interview-make-2" element={<InterviewMake2 />} />
 							<Route path="/interview-make-3" element={<InterviewMake3 />} />
 							<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
-							<Route path="/google" element={<GoogleLogin />} />
+							<Route path="/login/oauth2/code/google" element={<LoginLoading />} />
 						</Routes>
 					</BrowserRouter>
 				</RecoilRoot>
