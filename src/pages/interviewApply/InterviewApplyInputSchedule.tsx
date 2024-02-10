@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import * as I from './ApplyTime.style';
 import * as In from './InterviewApply.style';
 import TimeTable from '../../components/timeTable/TimeTable';
 import { BtnTimeTablePrev, BtnTimeTableNext } from '../interviewMake/InterviewMake2.style';
@@ -46,7 +45,7 @@ function InterviewApplyInputSchedule() {
 				2024년 1월 1일 ~ 2024년 1월 5일
 			</In.InputInfoHeader>
 			<img src={process.env.PUBLIC_URL + '/images/lineCircleLong.svg'} />
-			<I.HeaderTxt>가능한 면접 시간을 클릭하여 선택해 주세요. 한 번 더 클릭하면 선택된 시간이 삭제됩니다.</I.HeaderTxt>
+			<In.HeaderTxt>가능한 면접 시간을 클릭하여 선택해 주세요. 한 번 더 클릭하면 선택된 시간이 삭제됩니다.</In.HeaderTxt>
 
 			{/*Main*/}
 			{sortedDates.length > 0 ? (
@@ -73,10 +72,10 @@ function InterviewApplyInputSchedule() {
 			) : null}
 
 			{/*Footer*/}
-			<I.InputTimeFooter>
-				<I.BackBtn onClick={onClickBackBtn}>이전</I.BackBtn>
-				<I.CompleteBtn onClick={onClickCompleteBtn}>완료</I.CompleteBtn>
-			</I.InputTimeFooter>
+			<In.InputTimeFooter>
+				<In.BackBtn onClick={onClickBackBtn}>이전</In.BackBtn>
+				<In.CompleteBtn onClick={onClickCompleteBtn}>완료</In.CompleteBtn>
+			</In.InputTimeFooter>
 		</div>
 	);
 }
