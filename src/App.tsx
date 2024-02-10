@@ -54,8 +54,7 @@ function App() {
 								<Route path="/interview-end" element={<InterviewEnd />} />
 								<Route path="/interview-yet" element={<InterviewYet />} />
 								<Route path="/edit-info-check" element={<EditInfo1 />} />
-								<Route path="/edit-info" element={<EditInfo2 />} />
-							
+								<Route path="/edit-info" element={<EditInfo2 />} />							
 							</Route>
 							{/*헤더가 필요없는 컴포넌트 */} 
 							<Route path="/interview-make-2" element={<InterviewMake2 />} />
