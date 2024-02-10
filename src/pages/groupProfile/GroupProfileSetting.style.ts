@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
+export const BtnBack = styled.button`
+	display: inline;
+	border-radius: 50%;
+	border: 2px solid black;
+	margin-right: -100px;
+`;
 //전체 컨테이너
-export const MakeContainer = styled.div`
+export const SettingContainer = styled.div`
 	width: 352px;
 	display: flex;
 	flex-direction: column;
@@ -13,10 +19,8 @@ export const MainText = styled.div`
 	height: 26px;
 	font-size: 22px;
 	font-family: 'Pretendard-SemiBold';
-	line-height: 26px;
+	line-height: 22px;
 	letter-spacing: 0em;
-	margin-top: 30px;
-	margin-bottom: 10px;
 	padding-left: 11px;
 `;
 export const MainTextCircle = styled.div`
@@ -25,92 +29,72 @@ export const MainTextCircle = styled.div`
 	height: 6px;
 	border-radius: 50%;
 	background-color: ${(props) => props.theme.colors.red1};
-	margin: auto 5px 0px;
+	margin: auto 10px 0px;
 `;
-export const MakeTextContainer = styled.div`
+export const TextContainer = styled.div`
 	display: flex;
 	margin: 20px auto 5px 0px;
 `;
-export const MakeTextCircle = styled.div`
+export const TextCircle = styled.div`
 	display: inline-block;
 	width: 9px;
 	height: 9px;
 	border-radius: 50%;
 	background-color: ${(props) => props.theme.colors.red1};
-	margin: 5px;
+	margin: 5px 5px 5px 0px;
 `;
-export const MakeText = styled.div`
-	width: 80px;
-	height: 25px;
-	font-size: 18px;
+export const Text = styled.div`
+	font-size: 16px;
 	font-family: 'Pretendard-SemiBold';
 	line-height: 19px;
 	letter-spacing: 0em;
 `;
-export const MakeTextSub = styled.div`
+export const TextSub = styled.div`
 	font-size: 12px;
 	font-family: 'Pretendard-SemiBold';
 	line-height: 14px;
 	letter-spacing: 0em;
 	color: ${(props) => props.theme.colors.gray4};
-	margin-bottom: 5px;
-	margin-top: auto;
-	margin-left: 5px;
+	margin: 2px auto 0px 2px;
 `;
-
-export const MakeInput = styled.input<{ src?: string }>`
-	width: 352px;
-	height: 47px;
-	font-size: 15px;
-	line-height: 18px;
-	letter-spacing: 0em;
+export const Profile = styled.button<{ src?: string }>`
+	width: 69px;
+	height: 69px;
 	background-image: url(${(props) => props.src});
 	background-repeat: no-repeat;
-	background-position: 10px center;
-	color: ${(props) => props.theme.colors.gray4};
-	border-radius: 11px;
+	background-size: cover;
+	border-radius: 50%;
 	border: 2px solid ${(props) => props.theme.colors.gray4};
-	padding-left: ${(props) => (props.src ? '45px' : '15px')};
-`;
-export const MakeInputContainer = styled.div<{ src?: string }>`
-	width: 352px;
-	height: 47px;
-	text-align: left;
-	font-size: 15px;
-	line-height: 18px;
-	letter-spacing: 0em;
-	background-image: url(${(props) => props.src});
-	background-repeat: no-repeat;
-	background-position: 10px center;
-	color: ${(props) => props.theme.colors.gray4};
-	border-radius: 11px;
-	border: 2px solid ${(props) => props.theme.colors.gray4};
-	padding-top: 12px;
-	padding-left: 45px;
-`;
-export const MakeInputDate = styled.input`
-	width: 110px;
-	font-size: 15px;
-	line-height: 18px;
-	letter-spacing: 0em;
-	color: ${(props) => props.theme.colors.gray4};
-	border: none;
 	margin-left: 0px;
-	margin-right: 10px;
+	margin-right: auto;
 `;
-export const MakeInputNum = styled.input`
-	width: 20px;
-	height: 20px;
-	text-align: right;
+export const ProfilePlus = styled.button<{ src?: string }>`
+	width: 26.87px;
+	height: 26.87px;
+	background-image: url(${(props) => props.src});
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: transparent;
+	border: none;
+	margin-top: 40px;
+	margin-left: 40px;
+`;
+
+export const SettingInput = styled.input<{ src?: string }>`
+	width: 352px;
+	height: 47px;
 	font-size: 15px;
 	line-height: 18px;
 	letter-spacing: 0em;
+	background-image: url(${(props) => props.src});
+	background-repeat: no-repeat;
+	background-position: 10px center;
 	color: ${(props) => props.theme.colors.gray4};
-	border: none;
-	border-bottom: 2px solid ${(props) => props.theme.colors.gray4};
+	border-radius: 11px;
+	border: 2px solid ${(props) => props.theme.colors.gray4};
+	padding-left: 15px;
 `;
-
-export const MakeNextBtn = styled.input`
+export const NextBtn = styled.input`
 	width: 352px;
 	height: 47px;
 	font-size: 17px;
