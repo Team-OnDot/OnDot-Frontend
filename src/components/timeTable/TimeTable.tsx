@@ -1,6 +1,6 @@
 import ScheduleSelector from 'react-schedule-selector';
 import { SelectionSchemeType } from 'react-schedule-selector/src/lib/selection-schemes';
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './TimeTable.style';
 import format from 'date-fns/format';
 import { useRecoilState } from 'recoil';
@@ -10,17 +10,26 @@ type TimeTable = {
 	selectedDates: string[];
 	availableTimes?: Date[];
 	isConfirmed?: boolean;
+	clickedTime?: Date;
+	setClickedTime?: (time: Date) => void;
 };
 
-const TimeTable = ({ selectedDates, availableTimes, isConfirmed }: TimeTable) => {
+const TimeTable = ({ selectedDates, availableTimes, isConfirmed, clickedTime, setClickedTime }: TimeTable) => {
 	const [schedule, setSchedule] = useRecoilState(scheduleAtom);
-	const [hourlyChunks, setHourlyChunks] = React.useState<number>(2);
+	// const [clickedTime, setClickedTime] = useState<Date>();
+	const [hourlyChunks, setHourlyChunks] = useState<number>(2);
+
+	const handleClickDateCell = (time: Date, blocked: boolean) => {
+		if (!blocked) {
+			setClickedTime!(time);
+		}
+	};
 
 	const renderingDates = selectedDates.map((date) => new Date(date));
 	// const blockedTimes = [new Date('2024-02-06T10:00:00'), new Date('2024-02-06T13:00:00')];
 
-	const renderCustomDateCell = (date: Date, selected: boolean, blocked: boolean, clicked: boolean, onClick: (time: Date, blocked: boolean) => void) => {
-		return <S.DateCell selected={selected} blocked={blocked} clicked={clicked} onClick={() => onClick(date, blocked)}></S.DateCell>;
+	const renderCustomDateCell = (date: Date, selected: boolean, blocked: boolean, clicked: boolean) => {
+		return <S.DateCell selected={selected} blocked={blocked} clicked={clicked} onClick={() => handleClickDateCell(date, blocked)}></S.DateCell>;
 	};
 
 	const renderCustomTimeLabel = (time: Date) => {
@@ -75,6 +84,7 @@ const TimeTable = ({ selectedDates, availableTimes, isConfirmed }: TimeTable) =>
 				renderingDates={renderingDates}
 				selection={schedule}
 				onChange={setSchedule}
+				clickedTime={clickedTime}
 				hourlyChunks={hourlyChunks}
 				timeFormat="H:mm"
 				selectionScheme={'square'}
