@@ -29,7 +29,10 @@ const TimeTable = ({ selectedDates, availableTimes, isConfirmed, clickedTime, se
 	// const blockedTimes = [new Date('2024-02-06T10:00:00'), new Date('2024-02-06T13:00:00')];
 
 	const renderCustomDateCell = (date: Date, selected: boolean, blocked: boolean, clicked: boolean) => {
-		return <S.DateCell selected={selected} blocked={blocked} clicked={clicked} onClick={() => handleClickDateCell(date, blocked)}></S.DateCell>;
+		if (setClickedTime) {
+			return <S.DateCell selected={selected} blocked={blocked} clicked={clicked} onClick={() => handleClickDateCell(date, blocked)}></S.DateCell>;
+		}
+		return <S.DateCell selected={selected} blocked={blocked} clicked={clicked}></S.DateCell>;
 	};
 
 	const renderCustomTimeLabel = (time: Date) => {
@@ -93,7 +96,7 @@ const TimeTable = ({ selectedDates, availableTimes, isConfirmed, clickedTime, se
 				renderDateLabel={renderCustomDateLabel}
 				renderTimeLabel={renderCustomTimeLabel}
 				renderDateCell={renderCustomDateCell}
-				availableTimes={availableTimes ?? []}
+				availableTimes={availableTimes ?? undefined}
 				isConfirmed={isConfirmed ?? false}
 			/>
 		</S.Wrapper>
