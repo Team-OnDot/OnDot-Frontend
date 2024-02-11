@@ -11,6 +11,14 @@ function Login() {
 		navigate(`/sign-up-id`);
 	};
 
+	const onClickGoogleLogin = () => {
+		window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?
+		client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}
+		&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_KEY}
+		&response_type=code
+		&scope=email profile`;
+	}
+
 	return (
 		<div>
 			{/*Header*/}
@@ -29,7 +37,7 @@ function Login() {
 				<S.GoogleLogo>
 					<S.GoogleLogoImg src={`${process.env.PUBLIC_URL}/images/googleLogo.svg`}></S.GoogleLogoImg>
 				</S.GoogleLogo>
-				<S.GoogleLoginText>구글 계정으로 로그인</S.GoogleLoginText>
+				<S.GoogleLoginText onClick={onClickGoogleLogin}>구글 계정으로 로그인</S.GoogleLoginText>
 			</S.GoogleLoginBtn>
 
 			{/*Footer*/}

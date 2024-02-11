@@ -59,7 +59,7 @@ export const GoogleLogoImg = styled.img`
 
 //구글 로그인 텍스트
 export const GoogleLoginText = styled.div`
-	margin-left: 52px;
+	margin-left: 60px;
 `;
 
 //Footer
@@ -77,7 +77,7 @@ export const LoginFooterWrap = styled.div`
 export const FindText = styled.div`
 	font-family: 'Pretendard-SemiBold';
 	font-size: 15px;
-	margin-right: 27px;
+	margin-right: 20px;
 	text-align: center;
 	color: ${(props) => props.theme.colors.gray2};
 `;

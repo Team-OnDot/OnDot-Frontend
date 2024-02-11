@@ -23,6 +23,7 @@ import InterviewApplyEnd from './pages/interviewApply/InterviewApplyEnd';
 import InterviewApplyYet from './pages/interviewApply/InterviewApplyYet';
 import InterviewApplyEditInfo1 from './pages/interviewApply/InterviewApplyEditInfo1';
 import InterviewApplyEditInfo2 from './pages/interviewApply/InterviewApplyEditInfo2';
+import LoginLoading from './pages/login/LoginLoading';
 
 function App() {
 	return (
@@ -54,9 +55,9 @@ function App() {
 								<Route path="/interview-apply-yet" element={<InterviewApplyYet />} />
 								<Route path="/interview-apply-edit-info-check" element={<InterviewApplyEditInfo1 />} />
 								<Route path="/interview-apply-edit-info" element={<InterviewApplyEditInfo2 />} />
-							
 							</Route>
 							{/*헤더가 필요없는 컴포넌트 */}
+							<Route path="/login/oauth2/code/google" element={<LoginLoading />} />
 						</Routes>
 					</BrowserRouter>
 				</RecoilRoot>
