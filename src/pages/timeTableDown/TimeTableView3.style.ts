@@ -3,6 +3,8 @@ import styled from "styled-components";
 //전체
 export const TimeTableView3 = styled.div`
     display: flex;
+    position: relative;
+    z-index: 0;
 `;
 
 //헤더
@@ -97,4 +99,45 @@ export const PdfBtn = styled.button<{color:boolean}>`
 //png 버튼
 export const PngBtn = styled(PdfBtn)`
     margin-left: 17px;
+`;
+
+//공유하기 alert창
+export const AlertBox = styled.div`
+    width: 568px;
+    height: 173px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1;
+    position: absolute;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 13.5px 0 rgba(0, 0, 0, 0.25);
+`;
+
+//공유하기 alert 텍스트
+export const AlertText = styled.div`
+    font-size: 18px;
+    font-weight: 600;
+    color: ${props => props.theme.colors.gray2};
+    margin-top: 47px;
+    margin-left: 48px;
+`;
+
+//공유하기 alert 닫기 버튼
+export const AlertCloseBtn = styled.button`
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background-color: ${props => props.theme.colors.gray2};
+    width: 74px;
+    height: 37px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6.2px;
+    box-shadow: 0 0 2.2px 0 rgba(255, 74, 74, 0.25);
+    border: none;
+    margin-top: 42px;
+    margin-left: 460px;
 `;

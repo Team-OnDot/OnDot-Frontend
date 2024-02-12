@@ -24,7 +24,7 @@ import InterviewYet from './pages/interviewApply/InterviewYet';
 import EditInfo1 from './pages/interviewApply/EditInfo1';
 import EditInfo2 from './pages/interviewApply/EditInfo2';
 import LoginLoading from './pages/login/LoginLoading';
-import TimeTableView3 from './pages/timeView/TimeTableView3';
+import TimeTableView3 from './pages/timeTableDown/TimeTableView3';
 
 function App() {
 	return (
