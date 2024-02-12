@@ -73,6 +73,13 @@ export const ContactBox = styled.div`
 	margin-bottom: 20px;
 `;
 
+//contact 아이콘
+export const ContactIcon = styled.img`
+	width: 20px;
+	height: 16px;
+	margin-top: 22px;
+`;
+
 //contact 텍스트 박스
 export const ContactTextBox = styled.div`
 	margin-top: 24px;
