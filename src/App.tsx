@@ -24,6 +24,7 @@ import InterviewApplyYet from './pages/interviewApply/InterviewApplyYet';
 import InterviewApplyEditInfo1 from './pages/interviewApply/InterviewApplyEditInfo1';
 import InterviewApplyEditInfo2 from './pages/interviewApply/InterviewApplyEditInfo2';
 import LoginLoading from './pages/login/LoginLoading';
+import TimeTableProgress from './pages/interviewTimetable/progress/TimeTableProgress';
 
 function App() {
 	return (
@@ -44,6 +45,7 @@ function App() {
 								<Route path="/interview-make-2" element={<InterviewMake2 />} />
 								<Route path="/interview-make-3" element={<InterviewMake3 />} />
 								<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
+								<Route path="/timetable-progress" element={<TimeTableProgress />} />
 							</Route>
 							{/*면접 지원자 컴포넌트 */}
 							<Route element={<InterviewApply />}>
