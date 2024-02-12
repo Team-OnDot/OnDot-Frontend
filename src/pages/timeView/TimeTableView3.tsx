@@ -3,7 +3,6 @@ import Side from "../../components/interviewApply/InterviewApplySide"
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 import { jsPDF } from "jspdf";
-import ReactDOMServer from 'react-dom/server';
 import { useRef } from "react";
 
 function TimeTableView3(){
