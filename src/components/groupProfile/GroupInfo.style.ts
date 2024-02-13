@@ -10,7 +10,7 @@ export const GroupContainer = styled.div`
 	width: 25%;
 	text-align: center;
 	border-radius: 0px 0px 185px 0px;
-	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 4px 15.9px 0 rgba(0, 0, 0, 0.05);
 	padding: 60px 50px;
 `;
 export const GroupImg = styled.img`
