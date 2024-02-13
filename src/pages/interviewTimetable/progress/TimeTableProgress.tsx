@@ -38,6 +38,13 @@ function TimeTableProgress() {
 	const [sortedDates, setSortedDates] = useState<string[]>([]);
 	const [clickedTime, setClickedTime] = useState<Date>();
 
+	const dummyList = [
+		{ name: '이선호', phone: '010-0000-0000' },
+		{ name: '오설란', phone: '010-0000-0000' },
+		{ name: '이미지', phone: '010-0000-0000' },
+		{ name: '이다솔', phone: '010-0000-0000' },
+	];
+
 	useEffect(() => {
 		if (selectedDates.length > 1) {
 			const sorted = [...selectedDates].sort((a, b) => {
@@ -77,6 +84,23 @@ function TimeTableProgress() {
 						<S.BtnTimeTableNext isMultiplePage={selectedDates.length > 5} onClick={goNext} />
 					</S.TimeTableWrapper>
 				) : null}
+				<S.TextApplicant>오전 10:00 - 오전 10:30에 면접 가능한 지원자</S.TextApplicant>
+				<S.AvailableApplicantContainer>
+					{dummyList.map((item) => {
+						return (
+							<S.AvailableApplicantWrapper>
+								<S.IconApplicant />
+								<div>
+									<span>{item.name}</span>
+									<span>{item.phone}</span>
+								</div>
+							</S.AvailableApplicantWrapper>
+						);
+					})}
+				</S.AvailableApplicantContainer>
+				<S.BtnWrapper>
+					<S.BtnConfirm>타임테이블 생성하기</S.BtnConfirm>
+				</S.BtnWrapper>
 			</S.Container>
 		</>
 	);
