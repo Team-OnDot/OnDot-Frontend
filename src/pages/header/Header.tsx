@@ -1,6 +1,7 @@
 import * as S from './Header.style';
 import { useNavigate } from 'react-router-dom';
 import { Outlet } from "react-router-dom";
+import React, { forwardRef } from "react";
 
 function Header() {
 	const navigate = useNavigate();

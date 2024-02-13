@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import * as S from '../groupProfile/GroupInfo.style';
 import * as I from './InterviewApply.style';
 import InterviewInfo from './InterviewInfo';
@@ -44,7 +43,7 @@ function InterviewSide() {
 
 			{/*contact 정보*/}
 			<I.ContactBox>
-				<img src={process.env.PUBLIC_URL + '/images/iconContact.svg'}/>
+				<I.ContactIcon src={process.env.PUBLIC_URL + '/images/iconContact.svg'}/>
 				<I.ContactTextBox>
 					<I.ContactText>회장 김회장 010-0000-0000</I.ContactText>
 					<I.ContactText>이메일 Ondot@gmail.com</I.ContactText>
