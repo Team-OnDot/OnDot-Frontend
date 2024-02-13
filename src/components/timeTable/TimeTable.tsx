@@ -80,7 +80,6 @@ const TimeTable = ({ selectedDates, availableTimes, isConfirmed, clickedTime, se
 	};
 
 	return (
-		<S.Wrapper>
 			<ScheduleSelector
 				minTime={8}
 				maxTime={22}
@@ -99,7 +98,6 @@ const TimeTable = ({ selectedDates, availableTimes, isConfirmed, clickedTime, se
 				availableTimes={availableTimes ?? undefined}
 				isConfirmed={isConfirmed ?? false}
 			/>
-		</S.Wrapper>
 	);
 };
 
