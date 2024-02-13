@@ -3,7 +3,7 @@ import * as I from './InterviewApply.style';
 import InterviewSide from '../../components/interviewApply/InterviewApplySide';
 import { Outlet } from "react-router-dom";
 
-function Interview() {
+function InterviewApply() {
 
 	const navigate = useNavigate();
 
@@ -15,4 +15,4 @@ function Interview() {
 	);
 }
 
-export default Interview;
+export default InterviewApply;

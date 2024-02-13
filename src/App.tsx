@@ -14,15 +14,15 @@ import InterviewMake1 from './pages/interviewMake/InterviewMake1';
 import InterviewMake2 from './pages/interviewMake/InterviewMake2';
 import InterviewMake3 from './pages/interviewMake/InterviewMake3';
 import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
-import Interview from './pages/interviewApply/InterviewApply';
-import InterviewApplyMain from './pages/interviewApply/ApplyStart';
-import InputInfo from './pages/interviewApply/ApplyInfo';
-import InputTime from './pages/interviewApply/ApplyTime';
-import ApplyComplete from './pages/interviewApply/ApplyComplete';
-import InterviewEnd from './pages/interviewApply/InterviewEnd';
-import InterviewYet from './pages/interviewApply/InterviewYet';
-import EditInfo1 from './pages/interviewApply/EditInfo1';
-import EditInfo2 from './pages/interviewApply/EditInfo2';
+import InterviewApply from './pages/interviewApply/InterviewApply';
+import InterviewApplyMain from './pages/interviewApply/InterviewApplyMain';
+import InterviewApplyInputInfo from './pages/interviewApply/InterviewApplyInputInfo';
+import InterviewApplyInputSchedule from './pages/interviewApply/InterviewApplyInputSchedule';
+import InterviewApplyComplete from './pages/interviewApply/InterviewApplyComplete';
+import InterviewApplyEnd from './pages/interviewApply/InterviewApplyEnd';
+import InterviewApplyYet from './pages/interviewApply/InterviewApplyYet';
+import InterviewApplyEditInfo1 from './pages/interviewApply/InterviewApplyEditInfo1';
+import InterviewApplyEditInfo2 from './pages/interviewApply/InterviewApplyEditInfo2';
 import LoginLoading from './pages/login/LoginLoading';
 import TimeTableView3 from './pages/timeTableDown/TimeTableView3';
 
@@ -48,20 +48,17 @@ function App() {
 								<Route path="/timetable-view3" element={<TimeTableView3 />} />
 							</Route>
 							{/*면접 지원자 컴포넌트 */}
-							<Route element={<Interview />}>
+							<Route element={<InterviewApply />}>
 								<Route path="/interview-apply" element={<InterviewApplyMain />} />
-								<Route path="/apply-info" element={<InputInfo />} />
-								<Route path="/apply-time" element={<InputTime />} />
-								<Route path="/apply-complete" element={<ApplyComplete />} />
-								<Route path="/interview-end" element={<InterviewEnd />} />
-								<Route path="/interview-yet" element={<InterviewYet />} />
-								<Route path="/edit-info-check" element={<EditInfo1 />} />
-								<Route path="/edit-info" element={<EditInfo2 />} />							
+								<Route path="/interview-apply-input-info" element={<InterviewApplyInputInfo />} />
+								<Route path="/interview-apply-input-schedule" element={<InterviewApplyInputSchedule />} />
+								<Route path="/interview-apply-complete" element={<InterviewApplyComplete />} />
+								<Route path="/interview-apply-end" element={<InterviewApplyEnd />} />
+								<Route path="/interview-apply-yet" element={<InterviewApplyYet />} />
+								<Route path="/interview-apply-edit-info-check" element={<InterviewApplyEditInfo1 />} />
+								<Route path="/interview-apply-edit-info" element={<InterviewApplyEditInfo2 />} />
 							</Route>
-							{/*헤더가 필요없는 컴포넌트 */} 
-							<Route path="/interview-make-2" element={<InterviewMake2 />} />
-							<Route path="/interview-make-3" element={<InterviewMake3 />} />
-							<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
+							{/*헤더가 필요없는 컴포넌트 */}
 							<Route path="/login/oauth2/code/google" element={<LoginLoading />} />
 						</Routes>
 					</BrowserRouter>

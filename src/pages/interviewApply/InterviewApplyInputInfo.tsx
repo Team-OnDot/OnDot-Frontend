@@ -4,7 +4,7 @@ import ApplyInfoForm from '../../components/interviewApply/ApplyInfoForm';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 
-function InputInfo() {
+function InterviewApplyInputInfo() {
 
 	return (
 		<div>
@@ -22,4 +22,4 @@ function InputInfo() {
 	);
 }
 
-export default  InputInfo;
+export default InterviewApplyInputInfo;

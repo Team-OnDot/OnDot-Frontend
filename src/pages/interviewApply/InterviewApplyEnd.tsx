@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import * as I from './InterviewApply.style';
 
-function InterviewEnd() {
+function InterviewApplyEnd() {
 
 	const navigate = useNavigate();
 
@@ -26,4 +26,4 @@ function InterviewEnd() {
 	);
 }
 
-export default InterviewEnd;
+export default InterviewApplyEnd;
