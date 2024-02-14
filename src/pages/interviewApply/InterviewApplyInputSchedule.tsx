@@ -38,7 +38,7 @@ function InterviewApplyInputSchedule() {
 	};
 
 	return (
-		<div>
+		<div style={{ width: 'calc(100% - 375px)', paddingRight: '60px' }}>
 			{/*Header*/}
 			<In.InputInfoHeader>
 				<In.Ellipse1 />
@@ -55,7 +55,7 @@ function InterviewApplyInputSchedule() {
 						options={{
 							pagination: false,
 							arrows: false,
-							width: 831,
+							// width: 831,
 							drag: false,
 						}}
 					>

@@ -83,6 +83,7 @@ export const ProfileBtn = styled(ApplyBtn)`
 `;
 
 export const TimeTableWrapper = styled.div`
+	/* max-width: 920px; */
 	position: relative;
 	padding: 42px 47px;
 	border-radius: 15px;
