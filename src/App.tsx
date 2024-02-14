@@ -35,7 +35,7 @@ function App() {
 				<RecoilRoot>
 					<BrowserRouter>
 						<Routes>
-							{/*헤더가 필요한 컴포넌트 */}
+							{/*헤더가 필요한 페이지 */}
 							<Route element={<Header />}>
 								<Route path="/" element={<Home />} />
 								<Route path="/login" element={<Login />} />
@@ -48,19 +48,19 @@ function App() {
 								<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
 								<Route path="/timetable-progress" element={<TimeTableProgress />} />
 								<Route path="/timetable-view3" element={<TimeTableView3 />} />
+								{/* 면접 지원자 페이지 */}
+								<Route element={<InterviewApply />}>
+									<Route path="/interview-apply" element={<InterviewApplyMain />} />
+									<Route path="/interview-apply-input-info" element={<InterviewApplyInputInfo />} />
+									<Route path="/interview-apply-input-schedule" element={<InterviewApplyInputSchedule />} />
+									<Route path="/interview-apply-complete" element={<InterviewApplyComplete />} />
+									<Route path="/interview-apply-end" element={<InterviewApplyEnd />} />
+									<Route path="/interview-apply-yet" element={<InterviewApplyYet />} />
+									<Route path="/interview-apply-edit-info-check" element={<InterviewApplyEditInfo1 />} />
+									<Route path="/interview-apply-edit-info" element={<InterviewApplyEditInfo2 />} />
+								</Route>
 							</Route>
-							{/*면접 지원자 컴포넌트 */}
-							<Route element={<InterviewApply />}>
-								<Route path="/interview-apply" element={<InterviewApplyMain />} />
-								<Route path="/interview-apply-input-info" element={<InterviewApplyInputInfo />} />
-								<Route path="/interview-apply-input-schedule" element={<InterviewApplyInputSchedule />} />
-								<Route path="/interview-apply-complete" element={<InterviewApplyComplete />} />
-								<Route path="/interview-apply-end" element={<InterviewApplyEnd />} />
-								<Route path="/interview-apply-yet" element={<InterviewApplyYet />} />
-								<Route path="/interview-apply-edit-info-check" element={<InterviewApplyEditInfo1 />} />
-								<Route path="/interview-apply-edit-info" element={<InterviewApplyEditInfo2 />} />
-							</Route>
-							{/*헤더가 필요없는 컴포넌트 */}
+							{/*헤더가 필요없는 페이지 */}
 							<Route path="/login/oauth2/code/google" element={<LoginLoading />} />
 						</Routes>
 					</BrowserRouter>
