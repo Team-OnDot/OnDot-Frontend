@@ -102,8 +102,9 @@ export const SideMenuCloseBtn= styled.img`
 		margin: 20px 200px;
 	}
 `;
-export const SideMenuItem = styled.li`
 
+//사이드바 옵션
+export const SideMenuItem = styled.li`
 	display: none;
 	@media screen and (max-width: 1000px) {
 		list-style-type: none;
@@ -119,5 +120,12 @@ export const SideMenuItem = styled.li`
 			background: ${(props) => props.theme.colors.gray7};
 			color: ${(props) => props.theme.colors.gray1};
 		}
+	}
+`
+
+//프로필 이미지
+export const HeaderProfile = styled.img`
+	@media screen and (max-width: 1000px) {
+		display: none;
 	}
 `

@@ -4,7 +4,7 @@ import GroupType from './GroupType';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { GroupTypeAtom } from '../../recoil/SignUpAtoms';
+import { groupTypeAtom } from '../../recoil/signupAtoms';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -64,17 +64,17 @@ function SignUpForm(){
     }
 
     //값이 다 정상적으로 입력되었을 때 실행되는 함수(백엔드 전달)
-    const groupTypeAtom = useRecoilValue(GroupTypeAtom);
+    const groupTypeValue = useRecoilValue(groupTypeAtom);
     const navigate = useNavigate();
     const onValid = (data: FormValue) => {
 
-        if(groupTypeAtom === "동아리"){
+        if(groupTypeValue === "동아리"){
             data.type = "STUDENT_COUNCIL"
         }
-        else if(groupTypeAtom === "학생회"){
+        else if(groupTypeValue === "학생회"){
             data.type = "STUDENT_CLUB"
         }
-        else if(groupTypeAtom === "학생회"){
+        else if(groupTypeValue === "학생회"){
             data.type = "ACADEMIC_CLUB"
         }
         else{

@@ -2,6 +2,8 @@ import * as S from './Header.style';
 import { useNavigate } from 'react-router-dom';
 import { Outlet } from "react-router-dom";
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { loginAtom } from '../../recoil/loginAtoms';
 
 function Header() {
 	const navigate = useNavigate();
@@ -22,6 +24,8 @@ function Header() {
 		setMenuOpen(!menuOpen);
 	};
 
+	const isLoginAtom = useRecoilValue(loginAtom);
+
 	return (
 		<>
 			<S.HeaderDiv>
@@ -34,7 +38,8 @@ function Header() {
 					<S.HeaderText>문의하기</S.HeaderText>
 				</S.HeaderWrapper>
 				<S.LoginBtnBox>
-					<S.LoginBtn onClick={onClickLoginBtn}>로그인</S.LoginBtn>
+					{isLoginAtom ? <S.HeaderProfile src={process.env.PUBLIC_URL + '/images/headerProfile.svg'}></S.HeaderProfile>:
+					<S.LoginBtn onClick={onClickLoginBtn}>로그인</S.LoginBtn>}
 					<S.MenuBtn onClick={onClickMenuBtn} src={process.env.PUBLIC_URL + '/images/menuBtn.svg'}></S.MenuBtn>
 					<S.SideMenuBox state={menuOpen}>
 						<S.SideMenu state={menuOpen}>
