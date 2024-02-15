@@ -1,5 +1,4 @@
 import * as S from './TimeTableProgress.style';
-import GroupInfo from '../../../components/groupProfile/GroupInfo';
 import { useRef, useEffect, useState } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { chunkArray } from '../../../utils/chunkArray';

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
 	position: relative;
 	padding: 38px 90px 90px;
-	border: 1px solid black;
+	width: calc(100% - 375px);
 `;
 
 export const TextPeriod = styled.h2`
