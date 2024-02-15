@@ -3,8 +3,6 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { loginAtom } from '../../recoil/loginAtoms';
 
 type IUserData = {
     email: string;
@@ -24,7 +22,6 @@ function LoginForm() {
 
     //submit이 정상적으로 되었을 때 data를 다루는 함수(백엔드 전달)
     const navigate = useNavigate();
-    const [isLoginAtom, setIsLoginAtom] = useRecoilState(loginAtom);
     const onValid = (data: IUserData) => {
 
         axios({
@@ -36,7 +33,7 @@ function LoginForm() {
             },
           }).then((response) => {
             if(response.data.statusCode == "OK"){
-                setIsLoginAtom(true); //로그인 성공 여부
+                localStorage.setItem('isLogin', 'true'); //로그인 성공 여부
                 navigate("/"); //로그인 성공 시 페이지 이동
             }
             else{ //로그인 실패
