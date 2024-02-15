@@ -6,11 +6,13 @@ import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { GroupTypeAtom } from '../../recoil/SignUpAtoms';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function SignUpForm(){
 
     type FormValue = {
         email: string;
+        recoveryEmail: string,
         password: string;
         confirmPassword: string;
         name: string;
@@ -63,6 +65,7 @@ function SignUpForm(){
 
     //값이 다 정상적으로 입력되었을 때 실행되는 함수(백엔드 전달)
     const groupTypeAtom = useRecoilValue(GroupTypeAtom);
+    const navigate = useNavigate();
     const onValid = (data: FormValue) => {
 
         if(groupTypeAtom === "동아리"){
@@ -83,7 +86,7 @@ function SignUpForm(){
             method: 'post',
             data: {
                 email: data.email,
-                recoveryEmail: data.email,
+                recoveryEmail: data.recoveryEmail,
                 name: data.name,
                 password: data.password,
                 confirmPassword: data.confirmPassword,
@@ -93,6 +96,8 @@ function SignUpForm(){
           }).then((response) => {
             console.log("성공");  
             console.log(response.data);
+            navigate("/login");
+
           }).catch((error) => {
             console.log("실패");  
             console.error('AxiosError:', error);
@@ -142,6 +147,42 @@ function SignUpForm(){
                     <S.ErrorText error={errors.email ? true : false}>ex. ondot@email.com</S.ErrorText>
                 </S.ErrorMessage>
             </L.IdForm>
+
+            {/*복구이메일*/}
+            <L.PwForm>
+            <L.FormHeader>
+                    <L.Ellipse></L.Ellipse>
+                    <L.FormHeaderText>복구 이메일</L.FormHeaderText>
+                </L.FormHeader>
+                <L.LoginInputBox
+                    toggle={watch("recoveryEmail")?.length > 0 ? true: false || errors.recoveryEmail ? true: false} 
+                    color={errors.recoveryEmail ? '#FF4A4A': '#606060'}                
+                >
+                    <L.LoginInput
+                        id="recoveryEmail"
+                        type="text"
+                        placeholder="복구 이메일을 입력해 주세요"
+                        {...register("recoveryEmail",{
+                            required: true,
+                            pattern: {
+                                value: /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/,
+                                message: "ex. ondot@email.com"
+                            },
+                        })}
+                    />
+                
+                    {watch("recoveryEmail")?.length > 0 && 
+                        <L.InputCancelBtn 
+                            src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
+                            onClick={(e) => {removeInput("recoveryEmail");}}
+                        />
+                    }
+                </L.LoginInputBox>
+                <S.ErrorMessage>
+                    {watch("recoveryEmail")?.length === 0 && <S.HeplerText error={errors.recoveryEmail ? true : false}>ex. ondot@email.com</S.HeplerText>}
+                    <S.ErrorText error={errors.recoveryEmail ? true : false}>ex. ondot@email.com</S.ErrorText>
+                </S.ErrorMessage>
+            </L.PwForm>
 
             {/*비밀번호*/}
             <L.PwForm>
