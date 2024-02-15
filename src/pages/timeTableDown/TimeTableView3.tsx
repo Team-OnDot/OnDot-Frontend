@@ -1,5 +1,5 @@
 import * as T from "./TimeTableView3.style";
-import Side from "../../components/interviewApply/InterviewApplySide"
+import Side from "../../components/interviewApply/side/InterviewApplySide"
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 import { jsPDF } from "jspdf";

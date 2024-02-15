@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import * as In from './InterviewApply.style';
 import * as L from '../../components/login/LoginForm.style';
-import * as I from '../../components/interviewApply/InfoForm/InterviewApplyInfoForm.style';
+import * as I from '../../components/interviewApply/infoForm/InterviewApplyInfoForm.style';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 
