@@ -1,7 +1,7 @@
 import * as In from './InterviewApply.style';
 import ApplyInfoForm from '../../components/interviewApply/ApplyInfoForm';
 
-function EditInfo2() {
+function InterviewApplyEditInfo2() {
 
 	return (
 		<div>	
@@ -18,4 +18,4 @@ function EditInfo2() {
 	);
 }
 
-export default EditInfo2;
+export default InterviewApplyEditInfo2;

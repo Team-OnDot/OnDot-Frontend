@@ -3,7 +3,7 @@ import OndatCalendar from '../../components/calendar/OndatCalendar';
 import TimeTable from '../../components/timeTable/TimeTable';
 import * as S from './InterviewMake2.style';
 import { scheduleAtom, selectedDatesAtom } from '../../recoil/interviewMake2Atom';
-import { useEffect, useState, useRef, MutableRefObject } from 'react';
+import { useEffect, useState, useRef } from 'react';
 // @ts-ignore
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
@@ -36,7 +36,6 @@ function InterviewMake2() {
 				return new Date(a).getTime() - new Date(b).getTime();
 			});
 			setSortedDates(sorted);
-			console.log(sorted);
 			return;
 		}
 		setSortedDates(selectedDates);

@@ -81,3 +81,51 @@ export const Ellipse2 = styled(Ellipse1)`
 export const ProfileBtn = styled(ApplyBtn)`
 	margin-top: 19px;
 `;
+
+export const TimeTableWrapper = styled.div`
+	position: relative;
+	padding: 42px 47px;
+	border-radius: 15px;
+	border: 1px solid ${(props) => props.theme.colors.gray8};
+	margin: 25px 0px 0px 90px;
+`;
+
+//헤더 문구
+export const HeaderTxt = styled.div`
+	color: ${(props) => props.theme.colors.gray2};
+	font-size: 15px;
+	font-family: 'Pretendard-SemiBold';
+	margin-top: 15px;
+	margin-left: 90px;
+`;
+
+//footer
+export const InputTimeFooter = styled.div`
+	display: flex;
+	margin-top: 56px;
+`;
+
+//이전 버튼
+export const BackBtn = styled.button`
+	display: flex;
+	border-radius: 14px;
+	width: 122px;
+	height: 45px;
+	padding: 10px;
+	justify-content: center;
+	align-items: center;
+	border: 3px solid ${(props) => props.theme.colors.red1};
+	background-color: white;
+	font-size: 18px;
+	font-family: 'Pretendard-Bold';
+	color: ${(props) => props.theme.colors.red1};
+	margin-left: 634px;
+`;
+
+//완료 버튼
+export const CompleteBtn = styled(BackBtn)`
+	background-color: ${(props) => props.theme.colors.gray5};
+	color: white;
+	border: none;
+	margin-left: 12px;
+`;
