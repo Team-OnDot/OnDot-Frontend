@@ -54,6 +54,7 @@ footer, header, hgroup, main, menu, nav, section {
 html,body {
   line-height: 1;
   max-width: 100%;
+  height: 100%;
   overflow-x: hidden;
   font-family: 'Pretendard-Regular';
   

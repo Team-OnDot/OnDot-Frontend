@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 //전체 컨테이너
 export const InterviewsZone = styled.div`
-	margin-left: 25%;
+	width: calc(100% - 375px);
 `;
 export const NavWrap = styled.div`
 	display: flex;
