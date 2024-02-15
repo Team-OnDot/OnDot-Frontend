@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import * as S from './InterviewApplySide.style';
 
-function InterviewSide() {
+function InterviewApplySide() {
 	const groupInfo = {
 		groupName: '온닷',
 		groupType: '동아리',
@@ -76,4 +76,4 @@ function InterviewSide() {
 	);
 }
 
-export default InterviewSide;
+export default InterviewApplySide;
