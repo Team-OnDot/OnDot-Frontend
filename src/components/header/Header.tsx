@@ -28,6 +28,7 @@ function Header() {
 				</S.HeaderWrapper>
 				<S.LoginBtnBox>
 					<S.LoginBtn onClick={onClickLoginBtn}>로그인</S.LoginBtn>
+					<S.MenuBtn src={process.env.PUBLIC_URL + '/images/menuBtn.svg'}></S.MenuBtn>
 				</S.LoginBtnBox>
 			</S.HeaderDiv>
 			<Outlet></Outlet>
