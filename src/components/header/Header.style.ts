@@ -33,6 +33,10 @@ export const HeaderText = styled.div`
 //로그인 버튼 박스
 export const LoginBtnBox = styled.div`
 	margin: auto 159px auto 39px;	
+
+	@media screen and (max-width: 1000px) {
+		margin: auto 50px auto auto;	
+	}
 `;
 
 //로그인 버튼
@@ -61,6 +65,59 @@ export const MenuBtn = styled.img`
 		display: inline;
 		width: 30px;
 		height: 30px;
-		margin-left: 400px;	
+		margin-top: 28px;
 	}
 `;
+
+export const SideMenuBox = styled.div<{state: boolean}>`
+	@media screen and (max-width: 1000px) {
+		margin-top: -60px;
+		margin-right: -900px;
+	}
+`;
+
+//사이드 바
+export const SideMenu = styled.div<{state: boolean}>`
+	@media screen and (max-width: 1000px) {
+		width: 320px;
+		margin-top: 10px;
+		margin-left: auto;
+		border-radius: 20px;
+		height: 600px;
+		background-color: white;
+		border: 3px solid ${(props) => props.theme.colors.red1};
+		transition: 0.5s ease;
+		transform: ${(props) => (props.state ? "translateX(-800px)" : "translateX(800px)")};	
+	}
+`;
+
+//사이드바 닫기 버튼
+export const SideMenuCloseBtn= styled.img`
+	display: none;
+	@media screen and (max-width: 1000px) {
+		display: flex;
+		transform: rotate(180deg);
+		width: 40px;
+		height: 40px;
+		margin: 20px 200px;
+	}
+`;
+export const SideMenuItem = styled.li`
+
+	display: none;
+	@media screen and (max-width: 1000px) {
+		list-style-type: none;
+		text-align: left;
+		flex-direction: column;
+		display: flex;
+		padding: 32px 40px;
+		font-weight: 600;
+		font-size: 17px;
+
+		//마우스 닿으면 색변경
+		&:hover {
+			background: ${(props) => props.theme.colors.gray7};
+			color: ${(props) => props.theme.colors.gray1};
+		}
+	}
+`
