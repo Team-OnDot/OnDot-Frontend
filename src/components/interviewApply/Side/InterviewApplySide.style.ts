@@ -38,6 +38,7 @@ export const GroupLink = styled.p`
 	color: ${(props) => props.theme.colors.gray2};
 	margin: 22px auto 36px;
 	background: ${(props) => props.theme.colors.gray8} url(${process.env.PUBLIC_URL + '/images/iconLink.svg'}) no-repeat left 10px center;
+	cursor: pointer;
 `;
 
 export const InterviewInfoContainer = styled.ul`
