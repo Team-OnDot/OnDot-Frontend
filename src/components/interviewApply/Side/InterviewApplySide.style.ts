@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 	width: 375px;
-	height: calc(100vh - 87px); // 화면 최대 높이 - 헤더 높이
+	min-height: calc(100vh - 87px); // 화면 최대 높이 - 헤더 높이
 	flex-shrink: 0;
 	padding: 63px 38px 0px;
 	box-shadow: 0 4px 15.9px 0 rgba(0, 0, 0, 0.05);
