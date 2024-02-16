@@ -4,7 +4,7 @@ import GroupType from '../signupId/GroupType';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { GroupTypeAtom } from '../../../recoil/SignUpAtoms';
+import { groupTypeAtom } from '../../../recoil/SignUpAtoms';
 import axios from 'axios';
 
 function SignUpGoogleForm(){
@@ -46,10 +46,10 @@ function SignUpGoogleForm(){
     }
 
     //값이 다 정상적으로 입력되었을 때 실행되는 함수(백엔드 전달)
-    const groupTypeAtom = useRecoilValue(GroupTypeAtom);
+    const groupTypeValue = useRecoilValue(groupTypeAtom);
     const onValid = (data: FormValue) => {
 
-        data.groupType = groupTypeAtom;
+        data.groupType = groupTypeValue;
         
         console.log("성공");
         console.log(data);  
