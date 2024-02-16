@@ -4,7 +4,7 @@ import GroupType from './GroupType';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { groupTypeAtom } from '../../recoil/signupAtoms';
+import { groupTypeAtom } from '../../recoil/signUpAtoms';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
