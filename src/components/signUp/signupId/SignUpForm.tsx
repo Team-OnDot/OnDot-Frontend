@@ -1,10 +1,10 @@
-import * as L from '../login/LoginForm.style';
+import * as L from '../../login/LoginForm.style';
 import * as S from './SignUpForm.style';
 import GroupType from './GroupType';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { groupTypeAtom } from '../../recoil/signUpAtoms';
+import { groupTypeAtom } from '../../../recoil/SignUpAtoms';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 

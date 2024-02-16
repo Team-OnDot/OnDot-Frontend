@@ -34,11 +34,11 @@ function Login() {
 			<LoginForm/>
 
 			{/*구글로그인*/}
-			<S.GoogleLoginBtn>
+			<S.GoogleLoginBtn onClick={onClickGoogleLogin}>
 				<S.GoogleLogo>
 					<S.GoogleLogoImg src={`${process.env.PUBLIC_URL}/images/googleLogo.svg`}></S.GoogleLogoImg>
 				</S.GoogleLogo>
-				<S.GoogleLoginText onClick={onClickGoogleLogin}>구글 계정으로 로그인</S.GoogleLoginText>
+				<S.GoogleLoginText>구글 계정으로 로그인</S.GoogleLoginText>
 			</S.GoogleLoginBtn>
 
 			{/*Footer*/}

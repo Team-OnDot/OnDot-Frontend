@@ -25,6 +25,7 @@ import InterviewApplyEditInfo1 from './pages/interviewApply/InterviewApplyEditIn
 import InterviewApplyEditInfo2 from './pages/interviewApply/InterviewApplyEditInfo2';
 import LoginLoading from './pages/login/LoginLoading';
 import TimeTableView3 from './pages/timeTableDown/TimeTableView3';
+import SignUpGoogle from './pages/signUp/SignUpGoogle';
 
 function App() {
 	return (
@@ -39,6 +40,7 @@ function App() {
 								<Route path="/" element={<Home />} />
 								<Route path="/login" element={<Login />} />
 								<Route path="/sign-up-id" element={<SignUpId />} />
+								<Route path="/sign-up-google" element={<SignUpGoogle />} />
 								<Route path="/group-profile" element={<GroupProfile />} />
 								<Route path="/group-profile-setting" element={<GroupProfileSetting />} />
 								<Route path="/interview-make-1" element={<InterviewMake1 />} />
