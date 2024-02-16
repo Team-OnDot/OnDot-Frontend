@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import { RecoilRoot } from 'recoil';
 //pages
-import Header from './pages/header/Header';
+import Header from './components/header/Header';
 import Login from './pages/login/Login';
 import SignUpId from './pages/signUp/SignUpId';
 import Home from './pages/home/Home';
@@ -27,6 +27,7 @@ import LoginLoading from './pages/login/LoginLoading';
 import TimeTableProgress from './pages/interviewTimetable/progress/TimeTableProgress';
 import TimeTableView3 from './pages/timeTableDown/TimeTableView3';
 import GroupProfile from './components/groupProfile/GroupProfile';
+import SignUpGoogle from './pages/signUp/SignUpGoogle';
 
 function App() {
 	return (
@@ -41,6 +42,8 @@ function App() {
 								<Route path="/" element={<Home />} />
 								<Route path="/login" element={<Login />} />
 								<Route path="/sign-up-id" element={<SignUpId />} />
+								<Route path="/sign-up-google" element={<SignUpGoogle />} />
+								<Route path="/group-profile" element={<GroupProfile />} />
 								<Route path="/group-profile-setting" element={<GroupProfileSetting />} />
 								<Route path="/interview-make-1" element={<InterviewMake1 />} />
 								<Route path="/interview-make-2" element={<InterviewMake2 />} />

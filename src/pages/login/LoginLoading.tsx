@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
 const LoginLoading = () => {
     const navigate = useNavigate();
@@ -11,22 +13,20 @@ const LoginLoading = () => {
   
     // 처음 가입한 유저일 시 : 닉네임 설정 페이지로 이동
     const handleNickName = () => {
-      navigate("/nickname");
+      navigate("/sign-up-google");
       window.location.reload();
     };
   
     // 현재 url에서 code 부분 추출
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
-  
-    /*
-    const handleLoginPost = async code => {
+    const code = new URL(window.location.href).searchParams.get("code");
+    
+    const handleLoginPost = async (code:string) => {
       const data = {
         code: code,
       };
       try {
         const res = await axios.post(
-          "https://server.bageasy.net/auth/login",
+          "/api/v1/oauth2/google",
           data,
         );
          // 토큰 localstorage에 저장
@@ -47,11 +47,11 @@ const LoginLoading = () => {
         console.log("로그인 재시도하세요.");
       }
     }, [code, navigate]);
-    */
   
     return (
       <div>
         <div>로그인중입니다...</div>
+        <div>{code}</div>
       </div>
     );
   };

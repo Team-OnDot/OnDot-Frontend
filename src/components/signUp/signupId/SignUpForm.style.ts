@@ -53,6 +53,10 @@ export const GroupTypeUl = styled.ul<{ toggle: boolean }>`
 	margin: 22px 0 0 -16px; //label기준으로 위치 조정
 	cursor: pointer;
 	display: ${(props) => (props.toggle ? 'null' : 'none')};
+
+	@media screen and (max-width: 1000px) {
+		margin: 22px 0 0 -17px; //label기준으로 위치 조정
+	}
 `;
 
 //그룹 분류 option
