@@ -13,7 +13,7 @@ const LoginLoading = () => {
   
     // 처음 가입한 유저일 시 : 닉네임 설정 페이지로 이동
     const handleNickName = () => {
-      navigate("/signup");
+      navigate("/sign-up-google");
       window.location.reload();
     };
   
