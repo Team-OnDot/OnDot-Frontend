@@ -1,7 +1,7 @@
 import * as S from './SignUpForm.style';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { GroupTypeAtom } from '../../recoil/SignUpAtoms';
+import { GroupTypeAtom } from '../../../recoil/SignUpAtoms';
 
 function GroupType(){
 

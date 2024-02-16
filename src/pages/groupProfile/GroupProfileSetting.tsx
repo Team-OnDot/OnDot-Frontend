@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { GroupInfo, groupInfoAtom } from './../../recoil/groupAtoms';
 import * as S from './GroupProfileSetting.style';
-import GroupType from './../../components/signUp/GroupType';
+import GroupType from '../../components/signUp/signupId/GroupType';
 
 
 function GroupProfileSetting() {

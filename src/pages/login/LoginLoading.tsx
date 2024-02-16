@@ -51,6 +51,7 @@ const LoginLoading = () => {
     return (
       <div>
         <div>로그인중입니다...</div>
+        <div>{code}</div>
       </div>
     );
   };

@@ -1,7 +1,7 @@
 import * as S from '../login/Login.style';
-import SignUpForm from '../../components/signUp/signupId/SignUpForm';
+import SignUpGoogleForm from '../../components/signUp/signupGoogle/SignupGoogleForm';
 
-function SignUpId(){
+function SignUpGoogle(){
     return(
         <div>
             {/*Header*/}
@@ -13,9 +13,9 @@ function SignUpId(){
 			</S.LoginHeader>
 			
             {/*Main*/}
-			<SignUpForm/>
+			<SignUpGoogleForm/>
         </div>
     );
 }
 
-export default SignUpId;
+export default SignUpGoogle;

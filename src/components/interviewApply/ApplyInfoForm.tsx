@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import * as I from './ApplyInfoForm.style';
 import * as In from '../../pages/interviewApply/InterviewApply.style';
 import * as L from '../../components/login/LoginForm.style';
-import * as S from '../../components/signUp/SignUpForm.style';
+import * as S from '../signUp/signupId/SignUpForm.style';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 

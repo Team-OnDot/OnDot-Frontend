@@ -1,18 +1,16 @@
-import * as L from '../login/LoginForm.style';
-import * as S from './SignUpForm.style';
-import GroupType from './GroupType';
+import * as L from '../../login/LoginForm.style';
+import * as S from '../signupId/SignUpForm.style';
+import GroupType from '../signupId/GroupType';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { GroupTypeAtom } from '../../recoil/SignUpAtoms';
+import { GroupTypeAtom } from '../../../recoil/SignUpAtoms';
 import axios from 'axios';
 
-function SignUpForm(){
+function SignUpGoogleForm(){
 
     type FormValue = {
         email: string;
-        userPw: string;
-        pwCheck: string;
         groupName: string;
         groupType: string;
         groupProfile: string;
@@ -28,20 +26,6 @@ function SignUpForm(){
         getValues,
         formState: { errors },
     } = useForm<FormValue>({ mode: 'onBlur' });
-
-    //비밀번호 일치 확인
-    useEffect(() => {
-
-        if (watch('userPw') !== watch('pwCheck') && watch('pwCheck')) {
-            setError('pwCheck', {
-                type: 'password-mismatch',
-                message: '비밀번호가 일치하지 않습니다'
-            })
-            } else { // 비밀번호 일치시 오류 제거
-            clearErrors('pwCheck');
-            }
-    }, [watch('userPw'), watch('pwCheck')])
-
     
     //회원가입 버튼 활성화    
     const [isActive, setIsActive] = useState(false);
@@ -93,7 +77,7 @@ function SignUpForm(){
             <L.IdForm>
                 <L.FormHeader>
                     <L.Ellipse></L.Ellipse>
-                    <L.FormHeaderText>이메일</L.FormHeaderText>
+                    <L.FormHeaderText>구글 이메일</L.FormHeaderText>
                 </L.FormHeader>
                 <L.LoginInputBox
                     toggle={watch("email")?.length > 0 ? true: false || errors.email ? true: false} 
@@ -125,78 +109,6 @@ function SignUpForm(){
                 </S.ErrorMessage>
             </L.IdForm>
 
-            {/*비밀번호*/}
-            <L.PwForm>
-                <L.FormHeader>
-                    <L.Ellipse></L.Ellipse>
-                    <L.FormHeaderText>비밀번호</L.FormHeaderText>
-                </L.FormHeader>
-                <L.LoginInputBox 
-                    toggle={watch("userPw")?.length > 0 ? true: false || errors.userPw ? true: false} 
-                    color={errors.userPw ? '#FF4A4A': '#606060'}    
-                >
-                    <L.LoginInput
-                        id="userPw"
-                        type="password"
-                        placeholder="비밀번호를 입력해 주세요"
-                        {...register("userPw",{
-                            required: true,
-                            pattern: {
-                                value:/^[a-z0-9#?!@$%^&*-](?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])[a-z0-9#?!@$%^&*-]{8,20}$/,
-                                message: "8~20자 영문, 숫자, 특수기호(_ @ ? !)"
-                            },
-                        })}
-                    />
-                    {watch("userPw")?.length > 0 && 
-                        <L.InputCancelBtn 
-                            src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
-                            onClick={e => removeInput("userPw")}
-                        />
-                    }
-                </L.LoginInputBox>
-                <S.ErrorMessage>
-                    {watch("userPw")?.length === 0 && <S.HeplerText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.HeplerText>}
-                    <S.ErrorText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.ErrorText>
-                </S.ErrorMessage>
-            </L.PwForm>
-
-            {/*비밀번호 확인*/}
-            <L.PwForm>
-                <L.FormHeader>
-                    <L.Ellipse></L.Ellipse>
-                    <L.FormHeaderText>비밀번호 확인</L.FormHeaderText>
-                </L.FormHeader>
-                <L.LoginInputBox 
-                    toggle={watch("pwCheck")?.length ? true: false || errors.pwCheck ? true: false} 
-                    color={errors.pwCheck ? '#FF4A4A': '#606060'}    
-                >
-                    <L.LoginInput
-                        id="pwCheck"
-                        type="password"
-                        placeholder="비밀번호를 다시 한 번 입력해 주세요"
-                        {...register("pwCheck",{
-                            required: true,
-                            validate: {
-                                matchPassword: (value) => {
-                                  const { userPw } = getValues();
-                                  return userPw === value || '비밀번호가 일치하지 않습니다'
-                                }
-                            }
-                        })}
-                    />
-                    {watch("pwCheck")?.length > 0 && 
-                        <L.InputCancelBtn 
-                            src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
-                            onClick={e => removeInput("pwCheck")}
-                        />
-                    }
-                </L.LoginInputBox>
-                <S.ErrorMessage>
-                    {watch("pwCheck")?.length === 0 && <S.HeplerText error={errors.pwCheck ? true : false}>비밀번호가 일치하지 않습니다</S.HeplerText>}
-                    <S.ErrorText error={errors.pwCheck ? true : false}>{errors?.pwCheck?.message}</S.ErrorText>
-                </S.ErrorMessage>
-            </L.PwForm>
-  
             {/*그룹 이름*/}
             <L.PwForm>
                 <L.FormHeader>
@@ -280,4 +192,4 @@ function SignUpForm(){
     );
 }
 
-export default SignUpForm;
+export default SignUpGoogleForm;
