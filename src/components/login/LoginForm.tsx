@@ -2,6 +2,7 @@ import * as S from './LoginForm.style';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 type IUserData = {
     email: string;
@@ -20,16 +21,27 @@ function LoginForm() {
     } = useForm<IUserData>({ mode: 'onBlur' })
 
     //submit이 정상적으로 되었을 때 data를 다루는 함수(백엔드 전달)
+    const navigate = useNavigate();
     const onValid = (data: IUserData) => {
-        console.log("# onValid", data);
 
         axios({
             url: '/api/v1/auth/signin',
-            method: 'POST',
-            data: { },
+            method: 'post',
+            data: {
+                organizationId: data.email,
+                password: data.userPw,
+            },
           }).then((response) => {
-            console.log(response.data);
+            if(response.data.statusCode == "OK"){
+                localStorage.setItem('isLogin', 'true'); //로그인 성공 여부
+                navigate("/group-profile"); //로그인 성공 시 페이지 이동
+            }
+            else{ //로그인 실패
+                setError("email", { message: "아이디 또는 비밀번호가 올바르지 않습니다" },{ shouldFocus: true });
+                setError("userPw", { message: "아이디 또는 비밀번호가 올바르지 않습니다" },{ shouldFocus: true });
+            }
           }).catch((error) => {
+            console.log("실패");  
             console.error('AxiosError:', error);
         });
         
@@ -79,7 +91,7 @@ function LoginForm() {
                             pattern: {
                                 value: /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/,
                                 message: "아이디 또는 비밀번호가 올바르지 않습니다"
-                            },
+                            },                            
                         })}
                         
                     />

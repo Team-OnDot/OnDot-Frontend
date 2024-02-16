@@ -11,12 +11,13 @@ function Login() {
 		navigate(`/sign-up-id`);
 	};
 
+	//구글 로그인 클릭 시
 	const onClickGoogleLogin = () => {
 		window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?
 		client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}
 		&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_KEY}
 		&response_type=code
-		&scope=email profile`;
+		&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`;
 	}
 
 	return (

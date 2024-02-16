@@ -4,18 +4,20 @@ import GroupType from './GroupType';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { GroupTypeAtom } from '../../recoil/SignUpAtoms';
+import { groupTypeAtom } from '../../recoil/signUpAtoms';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function SignUpForm(){
 
     type FormValue = {
         email: string;
-        userPw: string;
-        pwCheck: string;
-        groupName: string;
-        groupType: string;
-        groupProfile: string;
+        recoveryEmail: string,
+        password: string;
+        confirmPassword: string;
+        name: string;
+        type: string;
+        profileUrl: string;
     }
 
     const {
@@ -32,15 +34,15 @@ function SignUpForm(){
     //비밀번호 일치 확인
     useEffect(() => {
 
-        if (watch('userPw') !== watch('pwCheck') && watch('pwCheck')) {
-            setError('pwCheck', {
+        if (watch('password') !== watch('confirmPassword') && watch('confirmPassword')) {
+            setError('confirmPassword', {
                 type: 'password-mismatch',
                 message: '비밀번호가 일치하지 않습니다'
             })
             } else { // 비밀번호 일치시 오류 제거
-            clearErrors('pwCheck');
+            clearErrors('confirmPassword');
             }
-    }, [watch('userPw'), watch('pwCheck')])
+    }, [watch('password'), watch('confirmPassword')])
 
     
     //회원가입 버튼 활성화    
@@ -62,21 +64,42 @@ function SignUpForm(){
     }
 
     //값이 다 정상적으로 입력되었을 때 실행되는 함수(백엔드 전달)
-    const groupTypeAtom = useRecoilValue(GroupTypeAtom);
+    const groupTypeValue = useRecoilValue(groupTypeAtom);
+    const navigate = useNavigate();
     const onValid = (data: FormValue) => {
 
-        data.groupType = groupTypeAtom;
-        
-        console.log("성공");
-        console.log(data);  
+        if(groupTypeValue === "동아리"){
+            data.type = "STUDENT_COUNCIL"
+        }
+        else if(groupTypeValue === "학생회"){
+            data.type = "STUDENT_CLUB"
+        }
+        else if(groupTypeValue === "학생회"){
+            data.type = "ACADEMIC_CLUB"
+        }
+        else{
+            data.type = "OTHER"
+        }
         
         axios({
             url: '/api/v1/auth/signup',
-            method: 'POST',
-            data: { },
+            method: 'post',
+            data: {
+                email: data.email,
+                recoveryEmail: data.recoveryEmail,
+                name: data.name,
+                password: data.password,
+                confirmPassword: data.confirmPassword,
+                type: data.type,
+                profileUrl: data.profileUrl
+            },
           }).then((response) => {
+            console.log("성공");  
             console.log(response.data);
+            navigate("/login");
+
           }).catch((error) => {
+            console.log("실패");  
             console.error('AxiosError:', error);
         });
     };
@@ -125,6 +148,42 @@ function SignUpForm(){
                 </S.ErrorMessage>
             </L.IdForm>
 
+            {/*복구이메일*/}
+            <L.PwForm>
+            <L.FormHeader>
+                    <L.Ellipse></L.Ellipse>
+                    <L.FormHeaderText>복구 이메일</L.FormHeaderText>
+                </L.FormHeader>
+                <L.LoginInputBox
+                    toggle={watch("recoveryEmail")?.length > 0 ? true: false || errors.recoveryEmail ? true: false} 
+                    color={errors.recoveryEmail ? '#FF4A4A': '#606060'}                
+                >
+                    <L.LoginInput
+                        id="recoveryEmail"
+                        type="text"
+                        placeholder="복구 이메일을 입력해 주세요"
+                        {...register("recoveryEmail",{
+                            required: true,
+                            pattern: {
+                                value: /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/,
+                                message: "ex. ondot@email.com"
+                            },
+                        })}
+                    />
+                
+                    {watch("recoveryEmail")?.length > 0 && 
+                        <L.InputCancelBtn 
+                            src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
+                            onClick={(e) => {removeInput("recoveryEmail");}}
+                        />
+                    }
+                </L.LoginInputBox>
+                <S.ErrorMessage>
+                    {watch("recoveryEmail")?.length === 0 && <S.HeplerText error={errors.recoveryEmail ? true : false}>ex. ondot@email.com</S.HeplerText>}
+                    <S.ErrorText error={errors.recoveryEmail ? true : false}>ex. ondot@email.com</S.ErrorText>
+                </S.ErrorMessage>
+            </L.PwForm>
+
             {/*비밀번호*/}
             <L.PwForm>
                 <L.FormHeader>
@@ -132,14 +191,14 @@ function SignUpForm(){
                     <L.FormHeaderText>비밀번호</L.FormHeaderText>
                 </L.FormHeader>
                 <L.LoginInputBox 
-                    toggle={watch("userPw")?.length > 0 ? true: false || errors.userPw ? true: false} 
-                    color={errors.userPw ? '#FF4A4A': '#606060'}    
+                    toggle={watch("password")?.length > 0 ? true: false || errors.password ? true: false} 
+                    color={errors.password ? '#FF4A4A': '#606060'}    
                 >
                     <L.LoginInput
-                        id="userPw"
+                        id="password"
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"
-                        {...register("userPw",{
+                        {...register("password",{
                             required: true,
                             pattern: {
                                 value:/^[a-z0-9#?!@$%^&*-](?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])[a-z0-9#?!@$%^&*-]{8,20}$/,
@@ -147,16 +206,16 @@ function SignUpForm(){
                             },
                         })}
                     />
-                    {watch("userPw")?.length > 0 && 
+                    {watch("password")?.length > 0 && 
                         <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
-                            onClick={e => removeInput("userPw")}
+                            onClick={e => removeInput("password")}
                         />
                     }
                 </L.LoginInputBox>
                 <S.ErrorMessage>
-                    {watch("userPw")?.length === 0 && <S.HeplerText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.HeplerText>}
-                    <S.ErrorText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.ErrorText>
+                    {watch("password")?.length === 0 && <S.HeplerText error={errors.password ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.HeplerText>}
+                    <S.ErrorText error={errors.password ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.ErrorText>
                 </S.ErrorMessage>
             </L.PwForm>
 
@@ -167,24 +226,24 @@ function SignUpForm(){
                     <L.FormHeaderText>비밀번호 확인</L.FormHeaderText>
                 </L.FormHeader>
                 <L.LoginInputBox 
-                    toggle={watch("pwCheck")?.length ? true: false || errors.pwCheck ? true: false} 
-                    color={errors.pwCheck ? '#FF4A4A': '#606060'}    
+                    toggle={watch("confirmPassword")?.length ? true: false || errors.confirmPassword ? true: false} 
+                    color={errors.confirmPassword ? '#FF4A4A': '#606060'}    
                 >
                     <L.LoginInput
-                        id="pwCheck"
+                        id="confirmPassword"
                         type="password"
                         placeholder="비밀번호를 다시 한 번 입력해 주세요"
-                        {...register("pwCheck",{
+                        {...register("confirmPassword",{
                             required: true,
                             validate: {
                                 matchPassword: (value) => {
-                                  const { userPw } = getValues();
-                                  return userPw === value || '비밀번호가 일치하지 않습니다'
+                                  const { password } = getValues();
+                                  return password === value || '비밀번호가 일치하지 않습니다'
                                 }
                             }
                         })}
                     />
-                    {watch("pwCheck")?.length > 0 && 
+                    {watch("confirmPassword")?.length > 0 && 
                         <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
                             onClick={e => removeInput("pwCheck")}
@@ -192,8 +251,8 @@ function SignUpForm(){
                     }
                 </L.LoginInputBox>
                 <S.ErrorMessage>
-                    {watch("pwCheck")?.length === 0 && <S.HeplerText error={errors.pwCheck ? true : false}>비밀번호가 일치하지 않습니다</S.HeplerText>}
-                    <S.ErrorText error={errors.pwCheck ? true : false}>{errors?.pwCheck?.message}</S.ErrorText>
+                    {watch("confirmPassword")?.length === 0 && <S.HeplerText error={errors.confirmPassword ? true : false}>비밀번호가 일치하지 않습니다</S.HeplerText>}
+                    <S.ErrorText error={errors.confirmPassword ? true : false}>{errors?.confirmPassword?.message}</S.ErrorText>
                 </S.ErrorMessage>
             </L.PwForm>
   
@@ -204,14 +263,14 @@ function SignUpForm(){
                     <L.FormHeaderText>그룹 이름</L.FormHeaderText>
                 </L.FormHeader>
                 <L.LoginInputBox 
-                    toggle={watch("groupName")?.length > 0 ? true: false || errors.groupName ? true: false} 
-                    color={errors.groupName ? '#FF4A4A': '#606060'}    
+                    toggle={watch("name")?.length > 0 ? true: false || errors.name ? true: false} 
+                    color={errors.name ? '#FF4A4A': '#606060'}    
                 >
                     <L.LoginInput
-                        id="grounName"
+                        id="name"
                         type="text"
                         placeholder="그룹이름을 입력해 주세요"
-                        {...register("groupName",{
+                        {...register("name",{
                             required: true,
                             pattern: {
                                 value:/^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,12}$/,
@@ -219,16 +278,16 @@ function SignUpForm(){
                             },
                         })}
                     />
-                    {watch("groupName")?.length > 0 && 
+                    {watch("name")?.length > 0 && 
                         <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
-                            onClick={e => removeInput("groupName")}
+                            onClick={e => removeInput("name")}
                         />
                     }
                 </L.LoginInputBox>
                 <S.ErrorMessage>
-                    {watch("groupName")?.length === 0 && <S.HeplerText error={errors.groupName ? true : false}>2~12자 한글, 영문, 숫자</S.HeplerText>}
-                    <S.ErrorText error={errors.groupName ? true : false}>2~12자 한글, 영문, 숫자</S.ErrorText>
+                    {watch("name")?.length === 0 && <S.HeplerText error={errors.name ? true : false}>2~12자 한글, 영문, 숫자</S.HeplerText>}
+                    <S.ErrorText error={errors.name ? true : false}>2~12자 한글, 영문, 숫자</S.ErrorText>
                 </S.ErrorMessage>
             </L.PwForm>
 
@@ -248,26 +307,26 @@ function SignUpForm(){
                     <L.FormHeaderText>그룹 프로필 주소</L.FormHeaderText>
                 </L.FormHeader>
                 <L.LoginInputBox 
-                    toggle={watch("groupProfile")?.length > 0 ? true: false || errors.groupProfile ? true: false} 
-                    color={errors.groupProfile ? '#FF4A4A': '#606060'}     
+                    toggle={watch("profileUrl")?.length > 0 ? true: false || errors.profileUrl ? true: false} 
+                    color={errors.profileUrl ? '#FF4A4A': '#606060'}     
                 >
                     <L.LoginInput
-                        id="groupProfile"
+                        id="profileUrl"
                         type="text"
                         placeholder="Ondot.co.kr"
-                        {...register("groupProfile",{
+                        {...register("profileUrl",{
                             required: true,
                             pattern: {
-                                value: /^[a-zA-Z0-9]{1,100}$/,
+                                value: /^[a-z0-9.]{2,12}$/,
                                 message: ""
                             },
                         })}
                     />
                     {/*clear버튼*/}
-                    {watch("groupProfile")?.length > 0 && 
+                    {watch("profileUrl")?.length > 0 && 
                         <L.InputCancelBtn 
                             src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
-                            onClick={e => removeInput("groupProfile")}
+                            onClick={e => removeInput("profileUrl")}
                         />
                     }
                 </L.LoginInputBox>

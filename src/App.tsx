@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import { RecoilRoot } from 'recoil';
 //pages
-import Header from './pages/header/Header';
+import Header from './components/header/Header';
 import Login from './pages/login/Login';
 import SignUpId from './pages/signUp/SignUpId';
 import Home from './pages/home/Home';
