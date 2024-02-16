@@ -22,6 +22,16 @@ function Header() {
 		setMenuOpen(!menuOpen);
 	};
 
+	//프로필 사진 클릭시
+	const onClickProfile = () => {
+
+		setMenuOpen(false);
+		if (localStorage.getItem('isLogin') === "true")
+			navigate("/group-profile");
+		else
+			navigate("/login");
+	}
+
 	return (
 		<>
 			<S.HeaderDiv>
@@ -34,12 +44,13 @@ function Header() {
 					<S.HeaderText>문의하기</S.HeaderText>
 				</S.HeaderWrapper>
 				<S.LoginBtnBox>
-					{localStorage.getItem('isLogin') === "true" ? <S.HeaderProfile src={process.env.PUBLIC_URL + '/images/headerProfile.svg'}></S.HeaderProfile>:
+					{localStorage.getItem('isLogin') === "true" ? <S.HeaderProfile onClick={onClickProfile} src={process.env.PUBLIC_URL + '/images/headerProfile.svg'}></S.HeaderProfile>:
 					<S.LoginBtn onClick={onClickLoginBtn}>로그인</S.LoginBtn>}
 					<S.MenuBtn onClick={onClickMenuBtn} src={process.env.PUBLIC_URL + '/images/menuBtn.svg'}></S.MenuBtn>
 					<S.SideMenuBox state={menuOpen}>
 						<S.SideMenu state={menuOpen}>
 							<S.SideMenuCloseBtn onClick={onClickMenuBtn} src={process.env.PUBLIC_URL + '/images/iconBack.svg'}></S.SideMenuCloseBtn>
+							<S.SideMenuItem onClick={onClickProfile}>프로필</S.SideMenuItem>
 							<S.SideMenuItem>서비스 소개</S.SideMenuItem>
 							<S.SideMenuItem>만든 사람들</S.SideMenuItem>
 							<S.SideMenuItem>문의하기</S.SideMenuItem>

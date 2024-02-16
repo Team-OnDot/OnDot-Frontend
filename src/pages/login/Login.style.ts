@@ -65,7 +65,7 @@ export const GoogleLoginText = styled.div`
 //Footer
 export const LoginFooter = styled.div`
 	width: 352px;
-	margin: 23px auto 30px auto;
+	margin: 23px auto 100px auto;
 	display: flex;
 `;
 

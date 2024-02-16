@@ -21,7 +21,8 @@ function GroupInfo(group: Group) {
 
 	//로그아웃 클릭
 	const onClickLogout = () => {
-		navigate(`/`);
+		localStorage.removeItem('isLogin');
+		navigate('/');
 	};
 
 	return (
@@ -38,7 +39,7 @@ function GroupInfo(group: Group) {
 				<img src={process.env.PUBLIC_URL + '/images/iconContact.svg'}/>
 				{group.contact}
 			</S.GroupContact>
-			<S.IconWrap onClick={onClickSetting}>
+			<S.IconWrap>
 				<S.Icon onClick={onClickSetting}>
 					<img src={process.env.PUBLIC_URL + '/images/iconSetting.svg'}/>설정
 				</S.Icon>

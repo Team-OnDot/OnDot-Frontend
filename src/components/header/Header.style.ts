@@ -69,6 +69,7 @@ export const MenuBtn = styled.img`
 	}
 `;
 
+//사이드바 박스
 export const SideMenuBox = styled.div<{state: boolean}>`
 	@media screen and (max-width: 1000px) {
 		margin-top: -60px;
@@ -128,4 +129,6 @@ export const HeaderProfile = styled.img`
 	@media screen and (max-width: 1000px) {
 		display: none;
 	}
+
+	cursor: pointer;
 `
