@@ -1,5 +1,5 @@
-import * as In from './InterviewApply.style';
-import ApplyInfoForm from '../../components/interviewApply/infoForm/InterviewApplyInfoForm';
+import * as In from './InterviewApplyEditInfo.style';
+import ApplyInfoForm from '../../../components/interviewApply/infoForm/InterviewApplyInfoForm';
 
 function InterviewApplyEditInfo2() {
 	return (

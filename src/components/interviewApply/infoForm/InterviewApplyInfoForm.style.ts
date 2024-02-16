@@ -45,3 +45,23 @@ export const NextBtn = styled.button<{ toggle: boolean }>`
 	margin-left: 768px;
 	margin-top: 171px;
 `;
+
+//큰 원 아이콘
+export const Ellipse1 = styled.div`
+	display: flex;
+	width: 12px;
+	height: 12px;
+	border-radius: 20px;
+	background-color: ${(props) => props.theme.colors.red1};
+	margin: auto 13px auto 0px;
+`;
+
+//작은 원 아이콘
+export const Ellipse2 = styled(Ellipse1)`
+	display: flex;
+	width: 9px;
+	height: 9px;
+	border-radius: 20px;
+	background-color: ${(props) => props.theme.colors.red1};
+	margin: auto 6px auto 0px;
+`;

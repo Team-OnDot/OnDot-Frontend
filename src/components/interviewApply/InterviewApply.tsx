@@ -1,16 +1,20 @@
 import { useNavigate } from 'react-router-dom';
-import * as I from './InterviewApply.style';
-import InterviewApplySide from '../../components/interviewApply/side/InterviewApplySide';
+import InterviewApplySide from './side/InterviewApplySide';
 import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
 
 function InterviewApply() {
 	const navigate = useNavigate();
 
+	const InterviewComponent = styled.div`
+		display: flex;
+	`;
+
 	return (
-		<I.InterviewComponent>
+		<InterviewComponent>
 			<InterviewApplySide />
 			<Outlet></Outlet>
-		</I.InterviewComponent>
+		</InterviewComponent>
 	);
 }
 

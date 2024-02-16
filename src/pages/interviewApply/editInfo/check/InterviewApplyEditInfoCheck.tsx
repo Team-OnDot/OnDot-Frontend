@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import * as In from './InterviewApply.style';
-import * as L from '../../components/login/LoginForm.style';
-import * as I from '../../components/interviewApply/infoForm/InterviewApplyInfoForm.style';
+import * as In from './InterviewApplyEditInfoCheck.style';
+import * as L from '../../../../components/login/LoginForm.style';
+import * as I from '../../../../components/interviewApply/infoForm/InterviewApplyInfoForm.style';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 
@@ -10,7 +10,7 @@ type IUserData = {
 	userPw: string;
 };
 
-function InterviewApplyEditInfo1() {
+function InterviewApplyEditInfoCheck() {
 	const {
 		register,
 		handleSubmit,
@@ -112,4 +112,4 @@ function InterviewApplyEditInfo1() {
 	);
 }
 
-export default InterviewApplyEditInfo1;
+export default InterviewApplyEditInfoCheck;

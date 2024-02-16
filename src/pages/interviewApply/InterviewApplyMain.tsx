@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import * as I from './InterviewApply.style';
+import * as I from './InterviewApplyMain.style';
 
 function InterviewApplyMain() {
-
 	const navigate = useNavigate();
 
 	//면접 지원하기 클릭 시
@@ -16,11 +15,12 @@ function InterviewApplyMain() {
 	};
 
 	return (
-		<>	
-            {/*Main*/}
+		<>
+			{/*Main*/}
 			<I.InterviewMain>
 				<I.InterviewMainText>
-					안녕하세요!<br/>
+					안녕하세요!
+					<br />
 					온닷 1기 운영진 면접 페이지입니다 :)
 				</I.InterviewMainText>
 				<I.ApplyBtnWrap>

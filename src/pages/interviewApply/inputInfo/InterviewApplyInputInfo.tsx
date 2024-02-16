@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import * as In from './InterviewApply.style';
-import ApplyInfoForm from '../../components/interviewApply/infoForm/InterviewApplyInfoForm';
+import * as In from './InterviewApplyInputInfo.style';
+import ApplyInfoForm from '../../../components/interviewApply/infoForm/InterviewApplyInfoForm';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 

@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import * as In from './InterviewApply.style';
-import TimeTable from '../../components/timeTable/TimeTable';
-import { BtnTimeTablePrev, BtnTimeTableNext } from '../interviewMake/InterviewMake2.style';
-import { TimeTableWrapper } from './InterviewApply.style';
+import * as In from './InterviewApplyInputSchedule.style';
+import TimeTable from '../../../components/timeTable/TimeTable';
+import { BtnTimeTablePrev, BtnTimeTableNext } from '../../interviewMake/InterviewMake2.style';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import { chunkArray } from '../../utils/chunkArray';
+import { chunkArray } from '../../../utils/chunkArray';
 import { useRef, useState } from 'react';
 
 function InterviewApplyInputSchedule() {
@@ -49,7 +48,7 @@ function InterviewApplyInputSchedule() {
 
 			{/*Main*/}
 			{sortedDates.length > 0 ? (
-				<TimeTableWrapper>
+				<In.TimeTableWrapper>
 					<Splide
 						ref={splideRef}
 						options={{
@@ -68,7 +67,7 @@ function InterviewApplyInputSchedule() {
 					</Splide>
 					<BtnTimeTablePrev isMultiplePage={sortedDates.length > 5} onClick={goPrev} />
 					<BtnTimeTableNext isMultiplePage={sortedDates.length > 5} onClick={goNext} />
-				</TimeTableWrapper>
+				</In.TimeTableWrapper>
 			) : null}
 
 			{/*Footer*/}

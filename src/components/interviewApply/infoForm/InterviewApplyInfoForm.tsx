@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import * as I from './InterviewApplyInfoForm.style';
-import * as In from '../../../pages/interviewApply/InterviewApply.style';
 import * as L from '../../login/LoginForm.style';
 import * as S from '../../signUp/signupId/SignUpForm.style';
 import { useForm } from 'react-hook-form';
@@ -72,7 +71,7 @@ function ApplyInfoForm() {
 			{/*Main(지원 정보 입력폼)*/}
 			<I.ApplyForm onSubmit={handleSubmit(onValid, onError)}>
 				<I.ApplyTitle>
-					<In.Ellipse2 />
+					<I.Ellipse2 />
 					<I.ApplyTitleText>지원자 이름</I.ApplyTitleText>
 				</I.ApplyTitle>
 
@@ -93,7 +92,7 @@ function ApplyInfoForm() {
 				</L.LoginInputBox>
 
 				<I.ApplyTitle>
-					<In.Ellipse2 />
+					<I.Ellipse2 />
 					<I.ApplyTitleText>지원자 전화번호</I.ApplyTitleText>
 				</I.ApplyTitle>
 
@@ -115,7 +114,7 @@ function ApplyInfoForm() {
 
 				{/*비밀번호*/}
 				<I.ApplyTitle>
-					<In.Ellipse2 />
+					<I.Ellipse2 />
 					<I.ApplyTitleText>비밀번호</I.ApplyTitleText>
 					<I.PwTxt>지원자 식별에 사용되며 재설정이 불가능합니다.</I.PwTxt>
 				</I.ApplyTitle>
@@ -142,7 +141,7 @@ function ApplyInfoForm() {
 
 				{/*비밀번호 확인*/}
 				<I.ApplyTitle>
-					<In.Ellipse2 />
+					<I.Ellipse2 />
 					<I.ApplyTitleText>비밀번호 확인</I.ApplyTitleText>
 				</I.ApplyTitle>
 

@@ -14,15 +14,15 @@ import InterviewMake1 from './pages/interviewMake/InterviewMake1';
 import InterviewMake2 from './pages/interviewMake/InterviewMake2';
 import InterviewMake3 from './pages/interviewMake/InterviewMake3';
 import InterviewMakeComplete from './pages/interviewMake/InterviewMakeComplete';
-import InterviewApply from './pages/interviewApply/InterviewApply';
+import InterviewApply from './components/interviewApply/InterviewApply';
 import InterviewApplyMain from './pages/interviewApply/InterviewApplyMain';
-import InterviewApplyInputInfo from './pages/interviewApply/InterviewApplyInputInfo';
-import InterviewApplyInputSchedule from './pages/interviewApply/InterviewApplyInputSchedule';
-import InterviewApplyComplete from './pages/interviewApply/InterviewApplyComplete';
-import InterviewApplyEnd from './pages/interviewApply/InterviewApplyEnd';
-import InterviewApplyYet from './pages/interviewApply/InterviewApplyYet';
-import InterviewApplyEditInfo1 from './pages/interviewApply/InterviewApplyEditInfo1';
-import InterviewApplyEditInfo2 from './pages/interviewApply/InterviewApplyEditInfo2';
+import InterviewApplyInputInfo from './pages/interviewApply/inputInfo/InterviewApplyInputInfo';
+import InterviewApplyInputSchedule from './pages/interviewApply/inputSchedule/InterviewApplyInputSchedule';
+import InterviewApplyComplete from './pages/interviewApply/complete/InterviewApplyComplete';
+import InterviewApplyEnd from './pages/interviewApply/end/InterviewApplyEnd';
+import InterviewApplyYet from './pages/interviewApply/yet/InterviewApplyYet';
+import InterviewApplyEditInfoCheck from './pages/interviewApply/editInfo/check/InterviewApplyEditInfoCheck';
+import InterviewApplyEditInfo from './pages/interviewApply/editInfo/InterviewApplyEditInfo';
 import LoginLoading from './pages/login/LoginLoading';
 import TimeTableProgress from './pages/interviewTimetable/progress/TimeTableProgress';
 import TimeTableView3 from './pages/timeTableDown/TimeTableView3';
@@ -63,8 +63,8 @@ function App() {
 									<Route path="/interview-apply-complete" element={<InterviewApplyComplete />} />
 									<Route path="/interview-apply-end" element={<InterviewApplyEnd />} />
 									<Route path="/interview-apply-yet" element={<InterviewApplyYet />} />
-									<Route path="/interview-apply-edit-info-check" element={<InterviewApplyEditInfo1 />} />
-									<Route path="/interview-apply-edit-info" element={<InterviewApplyEditInfo2 />} />
+									<Route path="/interview-apply-edit-info-check" element={<InterviewApplyEditInfoCheck />} />
+									<Route path="/interview-apply-edit-info" element={<InterviewApplyEditInfo />} />
 								</Route>
 							</Route>
 							{/*헤더가 필요없는 페이지 */}
