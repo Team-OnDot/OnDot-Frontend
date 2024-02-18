@@ -112,14 +112,14 @@ export const MakeInputNum = styled.input`
 `;
 
 //다음 버튼
-export const MakeNextBtn = styled.input`
+export const MakeNextBtn = styled.input<{toggle: boolean}>`
 	width: 352px;
 	height: 47px;
 	font-size: 17px;
 	line-height: 18px;
 	letter-spacing: 0em;
 	color: ${(props) => props.theme.colors.white};
-	background-color: ${(props) => props.theme.colors.gray5};
+	background: ${(props) => (props.toggle ? `${props.theme.colors.red1}` : `${props.theme.colors.gray5}`)};
 	border-radius: 30px;
 	border: none;
 	margin-top: 40px;

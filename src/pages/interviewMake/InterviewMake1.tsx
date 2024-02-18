@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from 'recoil';
@@ -22,6 +22,19 @@ function InterviewMake1() {
         defaultValues: {}
     });
     
+
+    //회원가입 버튼 활성화    
+    const [isActive, setIsActive] = useState(false);
+    const watchAll = Object.values(watch());
+    useEffect(() => {
+        if (watchAll.every((el) => el)) {
+            setIsActive(true);
+        } else {
+            setIsActive(false);
+        }
+    }, [watchAll]);
+
+    //다음 버튼 클릭 시
     const onSubmitFun = (() => {
         const data = {
             name: watch('name'),
@@ -111,7 +124,7 @@ function InterviewMake1() {
                 {...register("place", { required: true })}
                 src={process.env.PUBLIC_URL + '/images/iconPlace_gray.svg'}
             />
-            <S.MakeNextBtn type='submit' value='다음' onClick={onSubmitFun}/>
+            <S.MakeNextBtn type='submit' value='다음' toggle={isActive} onClick={onSubmitFun}/>
         </S.MakeContainer>
 	);
 }
