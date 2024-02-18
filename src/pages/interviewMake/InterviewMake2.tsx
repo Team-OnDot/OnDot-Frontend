@@ -4,6 +4,7 @@ import TimeTable from '../../components/timeTable/TimeTable';
 import * as S from './InterviewMake2.style';
 import { scheduleAtom, selectedDatesAtom } from '../../recoil/interviewMake2Atom';
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 // @ts-ignore
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
@@ -40,6 +41,13 @@ function InterviewMake2() {
 		}
 		setSortedDates(selectedDates);
 	}, [selectedDates]);
+
+	//다음 버튼 클릭시
+	const navigate = useNavigate();
+	const onClickNextBtn = () => {
+		if(schedule.length > 0)
+			navigate('/interview-make-3');
+	}
 
 	return (
 		<S.MakeContainer>
@@ -88,7 +96,7 @@ function InterviewMake2() {
 			) : null}
 			<S.MakeBtnContainer>
 				<S.MakeBtn type="button" value="이전" />
-				<S.MakeBtn type="button" value="다음" isActive={schedule.length > 0} />
+				<S.MakeBtn type="button" value="다음" isActive={schedule.length > 0} onClick={onClickNextBtn}/>
 			</S.MakeBtnContainer>
 		</S.MakeContainer>
 	);

@@ -59,6 +59,7 @@ export const MakeTextSub = styled.div`
 	margin-left: 5px;
 `;
 
+//입력 input
 export const MakeInput = styled.input<{ src?: string }>`
 	width: 352px;
 	height: 47px;

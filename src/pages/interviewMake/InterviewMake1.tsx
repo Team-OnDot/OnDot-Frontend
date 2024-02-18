@@ -15,7 +15,11 @@ function InterviewMake1() {
 	const navigate = useNavigate();
 
     const { 
-        register, watch, handleSubmit, 
+        register,
+        handleSubmit,
+        watch,
+        resetField,
+        setError,
         formState: { errors, isValid } 
     } = useForm<InterviewInfo>({
         mode: "onChange",
@@ -33,6 +37,12 @@ function InterviewMake1() {
             setIsActive(false);
         }
     }, [watchAll]);
+
+    //입력 취소 버튼
+    const removeInput = (name:any) => {
+        resetField(name);
+        setError(name,  {message: ''});
+    }
 
     //다음 버튼 클릭 시
     const onValid = () => {
