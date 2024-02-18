@@ -1,7 +1,6 @@
-import * as I from './InterviewApply.style';
+import * as I from './InterviewApplyComplete.style';
 
 function InterviewApplyComplete() {
-
 	return (
 		<div>
 			{/*Main*/}

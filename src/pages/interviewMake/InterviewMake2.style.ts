@@ -3,12 +3,14 @@ import { Calendar } from 'react-calendar';
 
 //전체 컨테이너
 export const MakeContainer = styled.div`
-	width: 930px;
+	max-width: 930px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	/* text-align: center; */
 	margin: 50px auto;
+	padding: 0px 60px;
 `;
 
 export const MainText = styled.div`
@@ -73,6 +75,7 @@ export const CalendarWrapper = styled.div`
 
 export const TimeTableWrapper = styled.div`
 	position: relative;
+	width: 100%;
 	padding: 42px 47px;
 	border-radius: 15px;
 	border: 1px solid ${(props) => props.theme.colors.gray8};

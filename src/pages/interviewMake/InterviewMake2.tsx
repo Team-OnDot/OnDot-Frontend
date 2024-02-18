@@ -71,7 +71,7 @@ function InterviewMake2() {
 						options={{
 							pagination: false,
 							arrows: false,
-							width: 831,
+							// width: 831,
 							drag: false,
 						}}
 					>

@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-	width: 831px;
-`;
-
 export const DateCell = styled.div<{ selected: boolean; blocked: boolean; clicked: boolean }>`
 	height: 18px;
 	border: ${(props) => (props.clicked ? `1px solid ${props.theme.colors.black}` : `1px dashed ${props.theme.colors.gray6}`)};
