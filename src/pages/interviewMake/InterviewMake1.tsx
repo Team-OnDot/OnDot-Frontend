@@ -15,7 +15,7 @@ function InterviewMake1() {
 	const navigate = useNavigate();
 
     const { 
-        register, watch, handleSubmit, setValue,
+        register, watch, handleSubmit, 
         formState: { errors, isValid } 
     } = useForm<InterviewInfo>({
         mode: "onChange",
@@ -23,7 +23,7 @@ function InterviewMake1() {
     });
     
 
-    //회원가입 버튼 활성화    
+    //다음 버튼 활성화    
     const [isActive, setIsActive] = useState(false);
     const watchAll = Object.values(watch());
     useEffect(() => {
@@ -35,26 +35,29 @@ function InterviewMake1() {
     }, [watchAll]);
 
     //다음 버튼 클릭 시
-    const onSubmitFun = (() => {
+    const onValid = () => {
         const data = {
-            name: watch('name'),
+            interviewName: watch('interviewName'),
             startDate: watch('startDate'),
             endDate: watch('endDate'),
             timeType: watch('timeType'),
             format1: watch('format1'),
             format2: watch('format2'),
-            place: watch('place')
+            interviewPlace: watch('interviewPlace')
         }
         console.log(data);
         // 아톰에 값 저장
         setInterviewAtom(data);
         navigate('/interview-make-2');
-    });
+
+    }
 
 	return (
-        <S.MakeContainer>
+        <S.MakeContainer onSubmit={handleSubmit(onValid)}>
             <img src={process.env.PUBLIC_URL + '/images/iconPage3_1.svg'} />
             <S.MainText>면접 페이지 만들기<S.MainTextCircle /></S.MainText>
+
+            {/*면접 이름 */}
             <S.MakeTextContainer>
                 <S.MakeTextCircle />
                 <S.MakeText>면접 이름*</S.MakeText>
@@ -64,7 +67,7 @@ function InterviewMake1() {
                 type="text"
                 id="interviewName"
                 required
-                {...register("name", { required: true, pattern: regExpName })}
+                {...register("interviewName", { required: true, pattern: regExpName })}
             />
             <S.MakeTextContainer>
                 <S.MakeTextCircle />
@@ -86,12 +89,14 @@ function InterviewMake1() {
                     {...register("endDate", { required: true })} 
                 />
             </S.MakeInputContainer>
+
             <S.MakeTextContainer>
                 <S.MakeTextCircle />
                 <S.MakeText>면접 시간*</S.MakeText>
                 <S.MakeTextSub>면접 예상 소요 시간을 설정해 주세요</S.MakeTextSub>
             </S.MakeTextContainer>
             <TimeType />
+
             <S.MakeTextContainer>
                 <S.MakeTextCircle />
                 <S.MakeText>면접 방식*</S.MakeText>
@@ -112,6 +117,7 @@ function InterviewMake1() {
                     {...register("format2", { required: true ,pattern: regExpFormat })} 
                 />명
             </S.MakeInputContainer>
+
             <S.MakeTextContainer>
                 <S.MakeTextCircle />
                 <S.MakeText>면접 장소*</S.MakeText>
@@ -121,10 +127,10 @@ function InterviewMake1() {
                 type="text"
                 id="interviewPlace"
                 required
-                {...register("place", { required: true })}
+                {...register("interviewPlace", { required: true })}
                 src={process.env.PUBLIC_URL + '/images/iconPlace_gray.svg'}
             />
-            <S.MakeNextBtn type='submit' value='다음' toggle={isActive} onClick={onSubmitFun}/>
+            <S.MakeNextBtn type='submit' value='다음' toggle={isActive}/>
         </S.MakeContainer>
 	);
 }

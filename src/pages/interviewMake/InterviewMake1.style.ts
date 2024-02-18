@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 //전체 컨테이너
-export const MakeContainer = styled.div`
+export const MakeContainer = styled.form`
 	width: 352px;
 	display: flex;
 	flex-direction: column;
@@ -31,6 +31,7 @@ export const MakeTextContainer = styled.div`
 	display: flex;
 	margin: 20px auto 5px 0px;
 `;
+
 export const MakeTextCircle = styled.div`
 	display: inline-block;
 	width: 9px;
@@ -88,6 +89,7 @@ export const MakeInputContainer = styled.div<{ src?: string }>`
 	padding-top: 12px;
 	padding-left: 45px;
 `;
+
 export const MakeInputDate = styled.input`
 	width: 110px;
 	font-size: 15px;
