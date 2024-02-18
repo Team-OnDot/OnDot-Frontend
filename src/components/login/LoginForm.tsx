@@ -32,8 +32,8 @@ function LoginForm() {
                 password: data.userPw,
             },
           }).then((response) => {
-            if(response.data.statusCode == "OK"){
-                localStorage.setItem('isLogin', 'true'); //로그인 성공 여부
+            if(response.data.statusCode === "OK"){
+                localStorage.setItem('isLogin', data.email); //로그인 성공 여부
                 navigate("/group-profile"); //로그인 성공 시 페이지 이동
             }
             else{ //로그인 실패

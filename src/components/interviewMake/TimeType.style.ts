@@ -8,7 +8,7 @@ export const timeTypeBox = styled.div<{ toggle: boolean }>`
     font-size: 15px;
     line-height: 18px;
     letter-spacing: 0em;
-    background-image: url(${process.env.PUBLIC_URL + '/images/iconTime_red.svg'});
+    background-image: url(${process.env.PUBLIC_URL + '/images/iconTime_red.svg'}); //화살표 이미지
     background-repeat: no-repeat;
     background-position: 10px center;
     color: ${(props) => props.theme.colors.gray4};
@@ -25,7 +25,7 @@ export const timeTypeBox = styled.div<{ toggle: boolean }>`
     &:after {
         content: '';
         position: absolute;
-        top: 38%;
+        top: 33%;
         right: 23px;
         width: 14px;
         height: 14px;
@@ -64,9 +64,13 @@ export const timeTypeUl = styled.ul<{ toggle: boolean }>`
 	border: 2px solid ${(props) => props.theme.colors.red1};
 	position: absolute;
 	background: white;
-	margin: 15px 0 0 -45px; //label기준으로 위치 조정
+	margin: 20px 0 0 -46px; //label기준으로 위치 조정
 	cursor: pointer;
 	display: ${(props) => (props.toggle ? 'null' : 'none')};
+
+	@media screen and (max-width: 1000px) {
+		margin: 22px 0 0 -47px; //label기준으로 위치 조정
+	}
 `;
 
 //그룹 분류 option

@@ -43,7 +43,6 @@ function App() {
 								<Route path="/login" element={<Login />} />
 								<Route path="/sign-up-id" element={<SignUpId />} />
 								<Route path="/sign-up-google" element={<SignUpGoogle />} />
-								<Route path="/group-profile" element={<GroupProfile />} />
 								<Route path="/group-profile-setting" element={<GroupProfileSetting />} />
 								<Route path="/interview-make-1" element={<InterviewMake1 />} />
 								<Route path="/interview-make-2" element={<InterviewMake2 />} />

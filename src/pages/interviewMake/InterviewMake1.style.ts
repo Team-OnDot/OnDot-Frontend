@@ -98,6 +98,7 @@ export const MakeInputDate = styled.input`
 	margin-left: 0px;
 	margin-right: 10px;
 `;
+
 export const MakeInputNum = styled.input`
 	width: 20px;
 	height: 20px;
@@ -110,6 +111,7 @@ export const MakeInputNum = styled.input`
 	border-bottom: 2px solid ${(props) => props.theme.colors.gray4};
 `;
 
+//다음 버튼
 export const MakeNextBtn = styled.input`
 	width: 352px;
 	height: 47px;
