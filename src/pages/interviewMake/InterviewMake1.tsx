@@ -35,7 +35,7 @@ function InterviewMake1() {
         console.log(data);
         // 아톰에 값 저장
         setInterviewAtom(data);
-        navigate('/interview-make-3');
+        navigate('/interview-make-2');
     });
 
 	return (
