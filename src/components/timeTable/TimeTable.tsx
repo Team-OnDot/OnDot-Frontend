@@ -25,6 +25,8 @@ const TimeTable = ({ selectedDates, availableTimes, isConfirmed, clickedTime, se
 		}
 	};
 
+	let applycantCount = 5;
+
 	const renderingDates = selectedDates.map((date) => new Date(date));
 	// const blockedTimes = [new Date('2024-02-06T10:00:00'), new Date('2024-02-06T13:00:00')];
 
@@ -80,24 +82,24 @@ const TimeTable = ({ selectedDates, availableTimes, isConfirmed, clickedTime, se
 	};
 
 	return (
-			<ScheduleSelector
-				minTime={8}
-				maxTime={22}
-				renderingDates={renderingDates}
-				selection={schedule}
-				onChange={setSchedule}
-				clickedTime={clickedTime}
-				hourlyChunks={hourlyChunks}
-				timeFormat="H:mm"
-				selectionScheme={'square'}
-				rowGap="0px"
-				columnGap="13px"
-				renderDateLabel={renderCustomDateLabel}
-				renderTimeLabel={renderCustomTimeLabel}
-				renderDateCell={renderCustomDateCell}
-				availableTimes={availableTimes ?? undefined}
-				isConfirmed={isConfirmed ?? false}
-			/>
+		<ScheduleSelector
+			minTime={8}
+			maxTime={22}
+			renderingDates={renderingDates}
+			selection={schedule}
+			onChange={setSchedule}
+			clickedTime={clickedTime}
+			hourlyChunks={hourlyChunks}
+			timeFormat="H:mm"
+			selectionScheme={'square'}
+			rowGap="0px"
+			columnGap="13px"
+			renderDateLabel={renderCustomDateLabel}
+			renderTimeLabel={renderCustomTimeLabel}
+			renderDateCell={renderCustomDateCell}
+			availableTimes={availableTimes ?? undefined}
+			isConfirmed={isConfirmed ?? false}
+		/>
 	);
 };
 

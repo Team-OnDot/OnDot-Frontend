@@ -7,5 +7,5 @@ export const selectedDatesAtom = atom<string[]>({
 
 export const scheduleAtom = atom<Date[]>({
 	key: 'scheduleAtom',
-	default: [],
+	default: [new Date('2024-02-13T10:00:00'), new Date('2024-02-13T12:00:00')],
 });
