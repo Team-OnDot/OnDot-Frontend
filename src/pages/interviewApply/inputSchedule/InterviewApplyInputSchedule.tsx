@@ -9,7 +9,7 @@ import { useRef, useState } from 'react';
 function InterviewApplyInputSchedule() {
 	const splideRef = useRef<Splide>(null);
 	const [sortedDates, setSortedDates] = useState(['2024-02-02', '2024-02-06', '2024-02-07', '2024-02-08', '2024-02-09', '2024-02-10']);
-	const availableTimes = [new Date('2024-02-06T10:00:00'), new Date('2024-02-06T13:00:00')];
+	const availableTimes = ['2024-02-06T10:00:00', '2024-02-06T13:00:00'];
 	const navigate = useNavigate();
 
 	//이전 버튼 클릭 시

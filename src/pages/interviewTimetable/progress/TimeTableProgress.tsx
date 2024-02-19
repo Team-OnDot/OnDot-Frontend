@@ -5,15 +5,17 @@ import { chunkArray } from '../../../utils/chunkArray';
 import { useRecoilValue } from 'recoil';
 import TimeTable from '../../../components/timeTable/TimeTable';
 import { selectedDatesAtom, scheduleAtom } from '../../../recoil/interviewMake2Atom';
+import { addMinutes, format } from 'date-fns';
+import axios from 'axios';
 
 function TimeTableProgress() {
-	const group = {
-		name: '온닷',
-		type: '동아리',
-		link: 'Ondot.co.kr',
-		text: '안녕하세요. 온닷입니다.',
-		contact: 'ondot@gmail.com',
-	};
+	// const group = {
+	// 	name: '온닷',
+	// 	type: '동아리',
+	// 	link: 'Ondot.co.kr',
+	// 	text: '안녕하세요. 온닷입니다.',
+	// 	contact: 'ondot@gmail.com',
+	// };
 
 	const splideRef = useRef<Splide>(null);
 
@@ -31,19 +33,69 @@ function TimeTableProgress() {
 		}
 	};
 
-	const [selectedDates, setSelectedDates] = useState<string[]>(['2024-02-13', '2024-02-14', '2024-02-15', '2024-02-16', '2024-02-17', '2024-02-18']);
-	const availableTimes = [new Date('2024-02-13T10:00:00'), new Date('2024-02-13T12:00:00'), new Date('2024-02-13T12:30:00'), new Date('2024-02-13T15:00:00')];
+	type TimeCells = {
+		dateTime: string;
+		applicants: [
+			{
+				name: string;
+				phone: string;
+			},
+		];
+	};
+
+	type InterviewData = {
+		name: string;
+		description: string;
+		applyStartDate: string;
+		applyEndDate: string;
+		requiredTime: number;
+		interviewerCount: number;
+		applicantCount: number;
+		location: string;
+		interviewStartDate: string;
+		interviewEndDate: string;
+		timeCells: TimeCells[];
+	};
+
+	const [selectedDates, setSelectedDates] = useState<string[]>(['2024-02-24']);
 	const schedule = useRecoilValue(scheduleAtom);
 	const [sortedDates, setSortedDates] = useState<string[]>([]);
 	const [clickedTime, setClickedTime] = useState<Date>();
+	const [matchedIndex, setMatchedIndex] = useState<number>(-1);
+	const [matchedStartTime, setMatchedStartTime] = useState<string>();
+	const [matchedEndTime, setMatchedEndTime] = useState<string>();
 
-	const dummyList = [
-		{ name: '이선호', phone: '010-0000-0000' },
-		{ name: '오설란', phone: '010-0000-0000' },
-		{ name: '이미지', phone: '010-0000-0000' },
-		{ name: '이다솔', phone: '010-0000-0000' },
-	];
+	const [interviewData, setInterviewData] = useState<InterviewData>();
+	const [availableTimes, setAvailableTimes] = useState<string[]>();
+	const accessToken = localStorage.getItem('isLogin');
 
+	useEffect(() => {
+		const getData = async () => {
+			try {
+				const response = await axios({
+					url: `/api/v1/interviews/9`,
+					method: 'get',
+					headers: {
+						Authorization: 'Bearer ' + accessToken,
+					},
+				});
+				console.log(response.data.content);
+				setInterviewData(response.data.content);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getData();
+	}, []);
+
+	useEffect(() => {
+		if (interviewData) {
+			const temp = interviewData.timeCells.map((cell) => cell.dateTime);
+			setAvailableTimes(temp);
+		}
+	}, [interviewData]);
+
+	/* 날짜 정렬 */
 	useEffect(() => {
 		if (selectedDates.length > 1) {
 			const sorted = [...selectedDates].sort((a, b) => {
@@ -55,6 +107,27 @@ function TimeTableProgress() {
 		}
 		setSortedDates(selectedDates);
 	}, [selectedDates]);
+
+	/* 선택한 셀 인덱스 구하기 */
+	useEffect(() => {
+		if (clickedTime) {
+			const index = interviewData!.timeCells.findIndex((cell) => format(new Date(cell.dateTime), 'yyyy-MM-dd HH:mm') === format(clickedTime, 'yyyy-MM-dd HH:mm'));
+			setMatchedIndex(index);
+		}
+	}, [clickedTime]);
+
+	/* 선택한 셀 시간 포맷팅 */
+	useEffect(() => {
+		if (matchedIndex !== -1) {
+			const startTime = new Date(interviewData!.timeCells[matchedIndex].dateTime);
+			const formattedStartTime = format(startTime, 'a h시 mm분').replace('AM', '오전').replace('PM', '오후');
+			const formattedEndTime = format(addMinutes(startTime, interviewData!.requiredTime), 'a h시 mm분').replace('AM', '오전').replace('PM', '오후');
+
+			setMatchedStartTime(formattedStartTime);
+			setMatchedEndTime(formattedEndTime);
+		}
+	}, [matchedIndex]);
+
 	return (
 		<>
 			<S.Container>
@@ -83,19 +156,19 @@ function TimeTableProgress() {
 						<S.BtnTimeTableNext isMultiplePage={selectedDates.length > 5} onClick={goNext} />
 					</S.TimeTableWrapper>
 				) : null}
-				<S.TextApplicant>오전 10:00 - 오전 10:30에 면접 가능한 지원자</S.TextApplicant>
+				<S.TextApplicant>{matchedStartTime ? `${matchedStartTime} ~ ${matchedEndTime}에 면접 가능한 지원자` : null}</S.TextApplicant>
 				<S.AvailableApplicantContainer>
-					{dummyList.map((item) => {
-						return (
-							<S.AvailableApplicantWrapper>
-								<S.IconApplicant />
-								<div>
-									<span>{item.name}</span>
-									<span>{item.phone}</span>
-								</div>
-							</S.AvailableApplicantWrapper>
-						);
-					})}
+					{matchedIndex !== -1
+						? interviewData!.timeCells[matchedIndex].applicants.map((item, index) => (
+								<S.AvailableApplicantWrapper key={index}>
+									<S.IconApplicant />
+									<div>
+										<span>{item.name}</span>
+										<span>{item.phone}</span>
+									</div>
+								</S.AvailableApplicantWrapper>
+						  ))
+						: null}
 				</S.AvailableApplicantContainer>
 				<S.BtnWrapper>
 					<S.BtnConfirm>타임테이블 생성하기</S.BtnConfirm>
