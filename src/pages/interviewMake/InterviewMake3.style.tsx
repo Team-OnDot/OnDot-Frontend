@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 //전체 컨테이너
-export const MakeContainer = styled.div`
+export const MakeContainer = styled.form`
 	width: 352px;
 	display: flex;
 	flex-direction: column;

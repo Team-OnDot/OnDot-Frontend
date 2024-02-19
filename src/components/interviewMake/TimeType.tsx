@@ -1,5 +1,7 @@
 import * as S from './TimeType.style';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import {interviewTimeAtom} from '../../recoil/interviewAtoms';
 
 function TimeType(){
 
@@ -10,7 +12,7 @@ function TimeType(){
 	};
 
     //시간 value값 설정하기
-    const [timeType, setTimeType] = useState("5분");
+    const [timeType, setTimeType] = useRecoilState(interviewTimeAtom);
     const handleClickedTimeType = (time: string) => {
         setTimeType(time);
         setIsOption(!isOption);

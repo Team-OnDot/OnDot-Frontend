@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from 'recoil';
-import{ InterviewInfo, interviewAtom } from './../../recoil/interviewAtoms';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import{ InterviewInfo, interviewAtom, interviewTimeAtom } from './../../recoil/interviewAtoms';
 import * as S from './InterviewMake1.style';
 import TimeType from './../../components/interviewMake/TimeType';
 
@@ -20,7 +20,7 @@ function InterviewMake1() {
         watch,
         resetField,
         setError,
-        formState: { errors, isValid } 
+        formState: { errors } 
     } = useForm<InterviewInfo>({
         mode: "onBlur",
         defaultValues: {}
@@ -49,13 +49,15 @@ function InterviewMake1() {
         setError(name,  {message: ''});
     }
 
-    //다음 버튼 클릭 시
+   
+    const interviewTime = useRecoilValue(interviewTimeAtom); //인터뷰 시간 값 가져오기
+     //다음 버튼 클릭 시
     const onValid = () => {
         const data = {
             interviewName: watch('interviewName'),
             startDate: watch('startDate'),
             endDate: watch('endDate'),
-            timeType: watch('timeType'),
+            timeType: interviewTime,
             format1: watch('format1'),
             format2: watch('format2'),
             interviewPlace: watch('interviewPlace')

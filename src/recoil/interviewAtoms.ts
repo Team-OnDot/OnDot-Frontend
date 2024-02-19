@@ -23,3 +23,9 @@ export const interviewAtom = atom<InterviewInfo>({
         interviewPlace: ''
     },
   });
+
+//면접 시간
+export const interviewTimeAtom = atom<string>({
+    key: 'interviewTimeAtom',
+    default: '5분',
+  });
