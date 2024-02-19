@@ -37,12 +37,14 @@ function InterviewMake1() {
                 <S.MakeTextCircle />
                 <S.MakeText>면접 안내 문구</S.MakeText>
             </S.MakeTextContainer>
-            <S.MakeInput
-                placeholder="180자 이내로 입력해주세요"
-                id="interviewName"
-                required
-                {...register("memo", { required: true, pattern: regExpMemo })}
-            />
+                <S.MakeInputBox toggle={watch("memo")?.length > 0 ? true: false}>
+                <S.MakeInput
+                    placeholder="180자 이내로 입력해주세요"
+                    id="interviewMemo"
+                    required
+                    {...register("memo", { required: true, pattern: regExpMemo })}
+                />
+                </S.MakeInputBox>
             <S.MakeBtnContainer>
                 <S.MakeBtn type='button' value='이전' />
                 <S.MakeBtn type='submit' value='다음' onClick={onSubmit} />
