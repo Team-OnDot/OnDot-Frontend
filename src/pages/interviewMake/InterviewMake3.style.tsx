@@ -78,4 +78,5 @@ export const MakeBtn = styled.input<{ value?: string }>`
 	background-color: ${(props) => (props.value === '이전' ? props.theme.colors.white : props.theme.colors.red1)};
 	border: 3px solid ${(props) => props.theme.colors.red1};
 	border-radius: 14px;
+	cursor: pointer;
 `;

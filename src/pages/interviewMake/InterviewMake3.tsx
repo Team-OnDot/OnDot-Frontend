@@ -29,6 +29,11 @@ function InterviewMake1() {
         navigate('/interview-make-complete');
     };
 
+    //이전 버튼 클릭 시
+    const onClickPreBtn = () => {
+        navigate('/interview-make-2');
+    }
+
 	return (
 		<S.MakeContainer>
             <img src={process.env.PUBLIC_URL + '/images/iconPage3_3.svg'} />
@@ -46,7 +51,7 @@ function InterviewMake1() {
                 />
                 </S.MakeInputBox>
             <S.MakeBtnContainer>
-                <S.MakeBtn type='button' value='이전' />
+                <S.MakeBtn type='button' value='이전' onClick={onClickPreBtn}/>
                 <S.MakeBtn type='submit' value='다음' onClick={onSubmit} />
             </S.MakeBtnContainer>
 		</S.MakeContainer>
