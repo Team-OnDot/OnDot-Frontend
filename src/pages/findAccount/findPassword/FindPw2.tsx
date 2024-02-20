@@ -9,7 +9,7 @@ type IUserData = {
     email: string;
   }
 
-function FindPw1() {
+function FindPw2() {
 
     const {
         register,
@@ -27,7 +27,6 @@ function FindPw1() {
         setError(name,  {message: ''});
     }
 
-    //API연결
     const setSendEmail = useSetRecoilState(findEmailAtom);
     const setHashValue = useSetRecoilState(hashValueAtom);
     const navigate = useNavigate();
@@ -40,12 +39,12 @@ function FindPw1() {
                 email: data.email,
             },
           }).then((response) => {
-            if(response.data.statusCode === "OK"){
+            if(response.data.statusCode == "OK"){
                 setSendEmail(data.email);
                 setHashValue(response.data.content.hashValue);
-                navigate("/find-password-2"); //성공 시 페이지 이동
+                //navigate("/group-profile"); //로그인 성공 시 페이지 이동
             }
-            else{ //존재하지 않는 이메일인 경우
+            else{ //존재하지 않는 이메일
                 setError("email", { message: "존재하지 않는 이메일입니다." },{ shouldFocus: true });
             }
           }).catch((error) => {
@@ -107,4 +106,4 @@ function FindPw1() {
     );
 }
 
-export default FindPw1;
+export default FindPw2;
