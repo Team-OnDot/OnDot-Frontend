@@ -28,6 +28,8 @@ import TimeTableProgress from './pages/interviewTimetable/progress/TimeTableProg
 import TimeTableView3 from './pages/timeTableDown/TimeTableView3';
 import GroupProfile from './components/groupProfile/GroupProfile';
 import SignUpGoogle from './pages/signUp/SignUpGoogle';
+import FindId1 from './pages/findAccount/findId/FindId1';
+import FindPw1 from './pages/findAccount/findPassword/FindPw1'
 
 function App() {
 	return (
@@ -50,6 +52,8 @@ function App() {
 								<Route path="/interview-make-3" element={<InterviewMake3 />} />
 								<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
 								<Route path="/timetable-view3" element={<TimeTableView3 />} />
+								<Route path="/find-id-1" element={<FindId1/>}/>
+								<Route path="/find-password-1" element={<FindPw1/>}/>
 								{/* 그룹 페이지 */}
 								<Route element={<GroupProfile />}>
 									<Route path="/group-profile" element={<GroupProfileMain />} />
