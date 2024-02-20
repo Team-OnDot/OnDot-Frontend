@@ -1,11 +1,15 @@
 import * as F from '../FindAccount.style';
-import { FieldErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
+import { findEmailAtom } from '../../../recoil/findAccount';
+import { useNavigate } from 'react-router-dom';
 
 type IUserData = {
     email: string;
   }
 
-function FindId() {
+function FindId1() {
 
     const {
         register,
@@ -23,8 +27,31 @@ function FindId() {
         setError(name,  {message: ''});
     }
 
-    const onValid = (data: IUserData) => {
+    const setSnedEmail = useSetRecoilState(findEmailAtom);
+    const navigate = useNavigate();
+    //API연결(이메일 전송)
+    const onValid =  async(data: IUserData) => {
+        await new Promise((r) => setTimeout(r, 1000)); //중복제출 방지
 
+        axios({
+            url: '/api/v1/auth/find/id',
+            method: 'get',
+            params: {
+                recovery: data.email,
+            },
+          }).then((response) => {
+            if(response.data.statusCode === "OK"){
+                console.log(response.data);
+                setSnedEmail(data.email);
+                navigate("/find-id-2"); //성공 시 페이지 이동
+            }
+            else{ //존재하지 않는 이메일인 경우
+                setError("email", { message: "존재하지 않는 이메일입니다." },{ shouldFocus: true });
+            }
+          }).catch((error) => {
+            console.log("실패");  
+            console.error('AxiosError:', error);
+        });
     }
 
     return(
@@ -80,4 +107,4 @@ function FindId() {
     );
 }
 
-export default FindId;
+export default FindId1;

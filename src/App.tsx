@@ -30,6 +30,7 @@ import GroupProfile from './components/groupProfile/GroupProfile';
 import SignUpGoogle from './pages/signUp/SignUpGoogle';
 //findAccount
 import FindId1 from './pages/findAccount/findId/FindId1';
+import FindId2 from './pages/findAccount/findId/FindId2';
 import FindPw1 from './pages/findAccount/findPassword/FindPw1'
 import FindPw2 from './pages/findAccount/findPassword/FindPw2'
 
@@ -55,6 +56,7 @@ function App() {
 								<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
 								<Route path="/timetable-view3" element={<TimeTableView3 />} />
 								<Route path="/find-id-1" element={<FindId1/>}/>
+								<Route path="/find-id-2" element={<FindId2/>}/>
 								<Route path="/find-password-1" element={<FindPw1/>}/>
 								<Route path="/find-password-2" element={<FindPw2/>}/>
 								{/* 그룹 페이지 */}
