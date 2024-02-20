@@ -1,29 +1,13 @@
 import * as F from '../FindAccount.style';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import { findEmailAtom, hashValueAtom } from '../../../recoil/findAccount';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
-type IUserData = {
-    email: string;
-  }
 
 function FindPw2() {
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        resetField,
-        setError,
-        formState: { errors }
-    } = useForm<IUserData>({ mode: 'onBlur' })
-
     const sendEmail = useRecoilValue(findEmailAtom);
     const hashValue = useRecoilValue(hashValueAtom);
-    const navigate = useNavigate();
 
     //API연결(이메일 전송)
     useEffect(() => {
@@ -35,9 +19,8 @@ function FindPw2() {
                 code: hashValue
             },
           }).then((response) => {
-            if(response.data.statusCode == "OK"){
+            if(response.data.statusCode === "OK"){
                 console.log("성공");
-                //navigate("/group-profile"); //로그인 성공 시 페이지 이동
             }
           }).catch((error) => {
             console.log("실패");  

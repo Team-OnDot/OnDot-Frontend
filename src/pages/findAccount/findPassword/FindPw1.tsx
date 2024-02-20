@@ -17,7 +17,7 @@ function FindPw1() {
         watch,
         resetField,
         setError,
-        formState: { errors }
+        formState: { isSubmitting, errors }
     } = useForm<IUserData>({ mode: 'onBlur' })
 
     
@@ -31,7 +31,8 @@ function FindPw1() {
     const setSendEmail = useSetRecoilState(findEmailAtom);
     const setHashValue = useSetRecoilState(hashValueAtom);
     const navigate = useNavigate();
-    const onValid = (data: IUserData) => {
+    const onValid = async(data: IUserData) => {
+        await new Promise((r) => setTimeout(r, 1000)); //중복제출 방지
 
         axios({
             url: '/api/v1/auth/find/pw',
@@ -100,7 +101,7 @@ function FindPw1() {
                     </F.ErrorMessage>
 
                     {/*버튼*/}
-                    <F.SubmitBtn type="submit">메일보내기</F.SubmitBtn>
+                    <F.SubmitBtn type="submit" disabled={isSubmitting}>메일보내기</F.SubmitBtn>
                 </F.FindForm>
             </F.Main>
         </div>
