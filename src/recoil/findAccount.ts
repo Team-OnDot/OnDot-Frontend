@@ -11,3 +11,9 @@ export const hashValueAtom = atom<string>({
     key: 'hashValueAtom',
     default:'',
 });
+
+//인증번호
+export const emailCodeAtom = atom<string>({
+    key: 'emailCodeAtom',
+    default:'',
+});

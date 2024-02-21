@@ -2,7 +2,7 @@ import * as F from '../FindAccount.style';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
-import { findEmailAtom } from '../../../recoil/findAccount';
+import { findEmailAtom, emailCodeAtom } from '../../../recoil/findAccount';
 import { useNavigate } from 'react-router-dom';
 
 type IUserData = {
@@ -28,21 +28,23 @@ function FindId1() {
     }
 
     const setSnedEmail = useSetRecoilState(findEmailAtom);
+    const setEmailCode = useSetRecoilState(emailCodeAtom);
     const navigate = useNavigate();
     //API연결(이메일 전송)
     const onValid =  async(data: IUserData) => {
         await new Promise((r) => setTimeout(r, 1000)); //중복제출 방지
 
         axios({
-            url: '/api/v1/auth/find/id',
+            url: '/api/v1/auth/email',
             method: 'get',
             params: {
-                recovery: data.email,
+                email: data.email,
             },
           }).then((response) => {
             if(response.data.statusCode === "OK"){
-                console.log(response.data);
                 setSnedEmail(data.email);
+                setEmailCode(response.data.content);
+                console.log(response.data.content);
                 navigate("/find-id-2"); //성공 시 페이지 이동
             }
             else{ //존재하지 않는 이메일인 경우
