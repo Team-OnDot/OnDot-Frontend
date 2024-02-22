@@ -5,7 +5,7 @@ import{ selectedDatesAtom, scheduleAtom } from '../../recoil/interviewMake2Atom'
 import * as S from './InterviewMake3.style';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import axios from 'axios';
-import { useState } from 'react';
+import { format } from 'date-fns';
 
 type MemoData = {
     interviewMemo: string;
@@ -28,25 +28,15 @@ function InterviewMake3() {
     //다음 클릭 시(API 연결)
     const selectedDates = useRecoilValue(selectedDatesAtom);
     const selectedTimes = useRecoilValue(scheduleAtom);
-    const [interviewTime, setInterviewTime] = useState(0);
+
     const onValid = (data: MemoData) => {
 
-        console.log(interviewInfo[0].timeType);
-
-        const dd = {
-            name: interviewInfo[0].interviewName,
-            description: data.interviewMemo,
-            applyStartDate: interviewInfo[0].startDate,
-            applyEndDate: interviewInfo[0].endDate,
-            requiredTime: interviewTime,
-            interviewerCount: interviewInfo[0].format1,
-            applicantCount: interviewInfo[0].format2,
-            location: interviewInfo[0].interviewPlace,
-            dates: selectedDates,
-            dateTimes: selectedTimes
+        //시간 string으로 변환
+        const time = [];
+        for (let i = 0; i < selectedTimes.length; i++){
+            time[i] = format(selectedTimes[i], "yyyy-MM-dd 'T'HH:mm:ss");
         }
-        console.log(dd);
-        /*
+
         // API 연결
         axios({
             url: '/api/v1/interviews',
@@ -56,11 +46,12 @@ function InterviewMake3() {
                 description: data.interviewMemo,
                 applyStartDate: interviewInfo[0].startDate,
                 applyEndDate: interviewInfo[0].endDate,
-                requiredTime: interviewTime,
+                requiredTime: interviewInfo[0].timeType,
                 interviewerCount: interviewInfo[0].format1,
                 applicantCount: interviewInfo[0].format2,
                 location: interviewInfo[0].interviewPlace,
-                dates: selectedDates
+                dates: selectedDates,
+                dateTimes: time
             },
           }).then((response) => {
             console.log("성공");  
@@ -70,7 +61,7 @@ function InterviewMake3() {
           }).catch((error) => {
             console.log("실패");  
             console.error('AxiosError:', error);
-        });*/
+        });
 
     };
 

@@ -129,6 +129,7 @@ export const MakeNextBtn = styled.input<{toggle: boolean}>`
 	border-radius: 30px;
 	border: none;
 	margin-top: 40px;
+	cursor: pointer;
 `;
 
 export const ClearBtn = styled.img`

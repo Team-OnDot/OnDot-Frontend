@@ -45,7 +45,7 @@ function InterviewMake1() {
             resetField('format2');
             setError('format2',  {message: ''});
         }
-        
+
         resetField(name);
         setError(name,  {message: ''});
     }
@@ -62,7 +62,7 @@ function InterviewMake1() {
             format2: watch('format2'),
             interviewPlace: watch('interviewPlace')
         }
-        console.log(data);
+
         // 아톰에 값 저장
         setInterviewAtom(data);
         navigate('/interview-make-2');

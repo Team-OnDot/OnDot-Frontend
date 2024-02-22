@@ -27,5 +27,5 @@ export const interviewAtom = atom<InterviewInfo>({
 //면접 시간
 export const interviewTimeAtom = atom<number>({
     key: 'interviewTimeAtom',
-    default: 0,
+    default: 5,
   });
