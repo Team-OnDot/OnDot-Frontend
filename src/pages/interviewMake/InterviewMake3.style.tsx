@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 //전체 컨테이너
-export const MakeContainer = styled.div`
+export const MakeContainer = styled.form`
 	width: 352px;
 	display: flex;
 	flex-direction: column;
@@ -48,16 +48,17 @@ export const MakeText = styled.div`
 	letter-spacing: 0em;
 	margin-top: 3px;
 `;
+export const MakeInputBox = styled.div<{toggle: boolean}>`
+	color: ${(props) => (props.toggle ? `${props.theme.colors.gray1}` : `${props.theme.colors.gray2}`)};
+`;
 export const MakeInput = styled.textarea`
 	width: 352px;
 	height: 126px;
 	font-size: 15px;
-	line-height: 18px;
-	letter-spacing: 0em;
-	color: ${(props) => props.theme.colors.gray4};
 	border-radius: 11px;
 	border: 2px solid ${(props) => props.theme.colors.gray4};
 	padding: 15px;
+	font-family: 'Pretendard-SemiBold';
 `;
 export const MakeBtnContainer = styled.div`
 	display: flex;
@@ -77,4 +78,5 @@ export const MakeBtn = styled.input<{ value?: string }>`
 	background-color: ${(props) => (props.value === '이전' ? props.theme.colors.white : props.theme.colors.red1)};
 	border: 3px solid ${(props) => props.theme.colors.red1};
 	border-radius: 14px;
+	cursor: pointer;
 `;

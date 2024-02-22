@@ -32,9 +32,10 @@ function LoginForm() {
                 password: data.userPw,
             },
           }).then((response) => {
-            if(response.data.statusCode == "OK"){
-                localStorage.setItem('isLogin', 'true'); //로그인 성공 여부
+            if(response.data.statusCode === "OK"){
+                localStorage.setItem('isLogin', response.data.content.accessToken); //로그인 성공 여부
                 navigate("/group-profile"); //로그인 성공 시 페이지 이동
+                console.log(localStorage.getItem('isLogin'));
             }
             else{ //로그인 실패
                 setError("email", { message: "아이디 또는 비밀번호가 올바르지 않습니다" },{ shouldFocus: true });
