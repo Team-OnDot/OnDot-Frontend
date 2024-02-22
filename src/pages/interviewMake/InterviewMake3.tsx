@@ -28,13 +28,14 @@ function InterviewMake3() {
     //다음 클릭 시(API 연결)
     const selectedDates = useRecoilValue(selectedDatesAtom);
     const selectedTimes = useRecoilValue(scheduleAtom);
+    const accessToken = localStorage.getItem('isLogin');
 
     const onValid = (data: MemoData) => {
 
         //시간 string으로 변환
         const time = [];
         for (let i = 0; i < selectedTimes.length; i++){
-            time[i] = format(selectedTimes[i], "yyyy-MM-dd 'T'HH:mm:ss");
+            time[i] = format(selectedTimes[i], "yyyy-MM-dd'T'HH:mm:ss");
         }
 
         // API 연결
@@ -53,9 +54,8 @@ function InterviewMake3() {
                 dates: selectedDates,
                 dateTimes: time
             },
+            headers: {Authorization: 'Bearer ' + accessToken,},
           }).then((response) => {
-            console.log("성공");  
-            console.log(response.data);
             navigate('/interview-make-complete');
 
           }).catch((error) => {
