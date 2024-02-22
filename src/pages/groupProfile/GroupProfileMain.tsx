@@ -32,7 +32,7 @@ function GroupProfileMain() {
 	const navigate = useNavigate();
 
 	const onClickCreateInterview = () => {
-		navigate('/');
+		navigate('/interview-make-1');
 	};
 
 	return (
