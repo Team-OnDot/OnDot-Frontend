@@ -45,10 +45,10 @@ function InterviewMake1() {
             resetField('format2');
             setError('format2',  {message: ''});
         }
+        
         resetField(name);
         setError(name,  {message: ''});
     }
-
    
     const interviewTime = useRecoilValue(interviewTimeAtom); //인터뷰 시간 값 가져오기
      //다음 버튼 클릭 시

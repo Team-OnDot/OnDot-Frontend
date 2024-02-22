@@ -5,7 +5,7 @@ export type InterviewInfo = {
     interviewName: string;
     startDate: string;
     endDate: string;
-    timeType: string;
+    timeType: number;
     format1: string;
     format2: string;
     interviewPlace: string;
@@ -17,7 +17,7 @@ export const interviewAtom = atom<InterviewInfo>({
         interviewName: '',
         startDate: '',
         endDate: '',
-        timeType: '',
+        timeType: 0,
         format1: '',
         format2: '',
         interviewPlace: ''
@@ -25,7 +25,7 @@ export const interviewAtom = atom<InterviewInfo>({
   });
 
 //면접 시간
-export const interviewTimeAtom = atom<string>({
+export const interviewTimeAtom = atom<number>({
     key: 'interviewTimeAtom',
-    default: '5분',
+    default: 0,
   });
