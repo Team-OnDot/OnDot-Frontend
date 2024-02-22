@@ -39,6 +39,7 @@ function LoginForm() {
             else{ //로그인 실패
                 setError("email", { message: "아이디 또는 비밀번호가 올바르지 않습니다" },{ shouldFocus: true });
                 setError("userPw", { message: "아이디 또는 비밀번호가 올바르지 않습니다" },{ shouldFocus: true });
+                console.log(response.data);
             }
           }).catch((error) => {
             console.log("실패");  

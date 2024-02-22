@@ -12,6 +12,12 @@ export const hashValueAtom = atom<string>({
     default:'',
 });
 
+//토큰값
+export const accessTokenAtom = atom<string>({
+    key: 'accessTokenAtom',
+    default:'',
+});
+
 //인증번호
 export const emailCodeAtom = atom<string>({
     key: 'emailCodeAtom',

@@ -42,10 +42,10 @@ function FindId1() {
             },
           }).then((response) => {
             if(response.data.statusCode === "OK"){
+                navigate("/find-id-2"); //성공 시 페이지 이동
                 setSnedEmail(data.email);
                 setEmailCode(response.data.content);
                 console.log(response.data.content);
-                navigate("/find-id-2"); //성공 시 페이지 이동
             }
             else{ //존재하지 않는 이메일인 경우
                 setError("email", { message: "존재하지 않는 이메일입니다." },{ shouldFocus: true });

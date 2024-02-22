@@ -1,7 +1,7 @@
 import * as F from '../FindAccount.style';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
-import { findEmailAtom, hashValueAtom } from '../../../recoil/findAccount';
+import { findEmailAtom, hashValueAtom, accessTokenAtom } from '../../../recoil/findAccount';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +29,8 @@ function FindPw1() {
 
     //API연결
     const setSendEmail = useSetRecoilState(findEmailAtom);
-    const setHashValue = useSetRecoilState(hashValueAtom);
+    const setHashValue = useSetRecoilState(hashValueAtom); //해시값
+    const setAccessTokenValue = useSetRecoilState(accessTokenAtom); //토큰값
     const navigate = useNavigate();
     const onValid = async(data: IUserData) => {
         await new Promise((r) => setTimeout(r, 1000)); //중복제출 방지
@@ -43,7 +44,8 @@ function FindPw1() {
           }).then((response) => {
             if(response.data.statusCode === "OK"){
                 setSendEmail(data.email);
-                setHashValue(response.data.content.hashValue);
+                setHashValue(response.data.content.hashValue); //해시값 저장
+                setAccessTokenValue(response.data.content.accessToken); //토큰값 저장
                 navigate("/find-password-2"); //성공 시 페이지 이동
             }
             else{ //존재하지 않는 이메일인 경우

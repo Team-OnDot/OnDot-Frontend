@@ -1,13 +1,15 @@
 import * as F from '../FindAccount.style';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { findEmailAtom, hashValueAtom } from '../../../recoil/findAccount';
+import { findEmailAtom, hashValueAtom, accessTokenAtom } from '../../../recoil/findAccount';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function FindPw2() {
 
     const sendEmail = useRecoilValue(findEmailAtom);
     const hashValue = useRecoilValue(hashValueAtom);
+    const navigate = useNavigate();
 
     //API연결(이메일 전송)
     useEffect(() => {
@@ -19,9 +21,7 @@ function FindPw2() {
                 code: hashValue
             },
           }).then((response) => {
-            if(response.data.statusCode === "OK"){
-                console.log("성공");
-            }
+            
           }).catch((error) => {
             console.log("실패");  
             console.error('AxiosError:', error);

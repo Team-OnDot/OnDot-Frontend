@@ -30,7 +30,7 @@ export const FormTitle = styled.div`
     display: flex;
     font-family: 'Pretendard-SemiBold';
     width: 352px;
-    margin: 0 auto;
+    margin: 30px auto 0px auto;
 `;
 
 //header ellipse
@@ -88,6 +88,12 @@ export const ErrorText = styled.text<{ error: boolean }>`
 	display: ${(props) => (props.error ? null : 'none')};
 `;
 
+//헬퍼메시지
+export const HeplerText = styled.text<{ error: boolean }>`
+	color: ${(props) => props.theme.colors.gray4};
+	display: ${(props) => (props.error ? 'none' : null)};
+`;
+
 //전송 버튼
 export const SubmitBtn = styled.button`
 	display: flex;
@@ -102,4 +108,9 @@ export const SubmitBtn = styled.button`
 	align-items: center;
 	border-radius: 30px;
 	background: ${props => props.theme.colors.red1};
+`;
+
+//완료 버튼(비밀번호 변경 page)
+export const ChangePwBtn = styled(SubmitBtn)<{ toggle: boolean }>`
+	background: ${(props) => (props.toggle ? `${props.theme.colors.red1}` : `${props.theme.colors.gray5}`)};
 `;
