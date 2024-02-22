@@ -1,7 +1,7 @@
 import * as S from './TimeType.style';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import {interviewTimeAtom} from '../../recoil/interviewAtoms';
+import {interviewTimeAtom} from '../../../recoil/interviewAtoms';
 
 function TimeType(){
 

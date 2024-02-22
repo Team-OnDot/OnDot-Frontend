@@ -24,6 +24,19 @@ export const interviewAtom = atom<InterviewInfo>({
     },
   });
 
+//지원 기간 시작
+export const applyStartDateAtom = atom<string>({
+  key: 'applyStartDateAtom',
+  default: '',
+});
+
+//지원 기간 끝
+export const applyEndDateAtom = atom<string>({
+  key: 'applyEndDateAtom',
+  default: '',
+});
+
+
 //면접 시간
 export const interviewTimeAtom = atom<number>({
     key: 'interviewTimeAtom',

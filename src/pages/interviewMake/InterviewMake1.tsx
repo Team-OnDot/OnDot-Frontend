@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import{ InterviewInfo, interviewAtom, interviewTimeAtom } from './../../recoil/interviewAtoms';
 import * as S from './InterviewMake1.style';
-import TimeType from './../../components/interviewMake/TimeType';
+import TimeType from '../../components/interviewMake/timeType/TimeType';
+import ApplyCalendar from "../../components/interviewMake/applyCalendar/ApplyCalendar";
 
 function InterviewMake1() {
     const setInterviewAtom = useSetRecoilState(interviewAtom);
@@ -103,7 +104,7 @@ function InterviewMake1() {
                 <S.MakeTextSub>지원 가능한 날짜 범위를 설정해 주세요</S.MakeTextSub>
             </S.MakeTextContainer>
 
-            <S.MakeInputContainer
+            {/* <S.MakeInputContainer
                  toggle={watch("endDate")?.length > 0 ? true: false || 
                  errors.startDate && errors.endDate ? true: false}  
                  color={errors.startDate && errors.endDate ? '#FF4A4A': '#606060'}
@@ -124,7 +125,8 @@ function InterviewMake1() {
                         {...register("endDate", { required: true })} 
                     />
                 </S.InputWrap>
-            </S.MakeInputContainer>
+            </S.MakeInputContainer> */}
+            <ApplyCalendar />
 
             <S.MakeTextContainer>
                 <S.MakeTextCircle />
