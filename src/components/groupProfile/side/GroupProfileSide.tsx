@@ -19,7 +19,6 @@ function GroupProfileSide() {
 	//로그아웃 클릭
 	const onClickLogout = () => {
 		localStorage.removeItem('isLogin');
-		navigate(`/`);
 	};
 
 	const linkRef = useRef<HTMLAnchorElement>(null);

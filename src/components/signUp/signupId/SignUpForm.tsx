@@ -39,9 +39,9 @@ function SignUpForm(){
                 type: 'password-mismatch',
                 message: '비밀번호가 일치하지 않습니다'
             })
-            } else { // 비밀번호 일치시 오류 제거
+        } else { // 비밀번호 일치시 오류 제거
             clearErrors('confirmPassword');
-            }
+        }
     }, [watch('password'), watch('confirmPassword')])
 
     

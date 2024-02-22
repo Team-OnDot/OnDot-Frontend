@@ -73,6 +73,7 @@ export const LoginFooterWrap = styled.div`
 	display: inline-flex;
 	margin: 0px auto 0px 48px;
 `;
+
 //Footer 텍스트(아이디, 비밀번호 찾기)
 export const FindText = styled.div`
 	font-family: 'Pretendard-SemiBold';
@@ -80,6 +81,7 @@ export const FindText = styled.div`
 	margin-right: 20px;
 	text-align: center;
 	color: ${(props) => props.theme.colors.gray2};
+	cursor: pointer;
 `;
 
 //Footer 텍스트(회원가입)

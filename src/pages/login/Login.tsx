@@ -8,8 +8,18 @@ function Login() {
 
 	//회원가입 클릭 시
 	const onClickSignIn = () => {
-		navigate(`/sign-up-id`);
+		navigate('/sign-up-id');
 	};
+
+	//아이디 찾기 클릭 시
+	const onClickFindId = () => {
+		navigate('/find-id-1');
+	}
+
+	//비밀번호 찾기 클릭 시
+	const onClickFindPw = () => {
+		navigate('/find-password-1');
+	}
 
 	//구글 로그인 클릭 시
 	const onClickGoogleLogin = () => {
@@ -44,8 +54,8 @@ function Login() {
 			{/*Footer*/}
 			<S.LoginFooter>
 				<S.LoginFooterWrap>
-					<S.FindText>아이디 찾기</S.FindText>
-					<S.FindText>비밀번호 찾기</S.FindText>
+					<S.FindText onClick={onClickFindId}>아이디 찾기</S.FindText>
+					<S.FindText onClick={onClickFindPw}>비밀번호 찾기</S.FindText>
 					<S.SignInText onClick={onClickSignIn}>회원가입</S.SignInText>
 				</S.LoginFooterWrap>
 			</S.LoginFooter>
