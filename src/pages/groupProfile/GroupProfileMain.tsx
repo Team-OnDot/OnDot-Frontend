@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './GroupProfileMain.style';
 import InterviewPreview from '../../components/interviewPreview/InterviewPreview';
 import * as I from '../../components/interviewPreview/InterviewPreview';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function GroupProfileMain() {
 	const interviews: I.Interview[] = [
@@ -27,13 +29,30 @@ function GroupProfileMain() {
 			place: '장소',
 		},
 	];
-	// const interviews : I.interview[] = [];
 
 	const navigate = useNavigate();
 
 	const onClickCreateInterview = () => {
 		navigate('/interview-make-1');
 	};
+
+	//면접 조회 API
+	useEffect(() => {
+        axios({
+            url: `/api/v1/interviews/11`,
+            method: 'get',
+            params: {
+                interviewId: 11
+            },
+			headers: {Authorization: "Bearer " + localStorage.getItem('isLogin'),},
+          }).then((response) => {
+			console.log(response.data);
+            
+          }).catch((error) => {
+            console.log("실패");  
+            console.error('AxiosError:', error);
+        });
+    }, []);
 
 	return (
 		<>
