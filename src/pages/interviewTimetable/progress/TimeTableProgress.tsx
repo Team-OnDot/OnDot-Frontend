@@ -75,7 +75,7 @@ function TimeTableProgress() {
 							{/* sortedDates를 5개씩 끊어서 SplideSlide에 전달 */}
 							{chunkArray(sortedDates, 5).map((chunk, index) => (
 								<SplideSlide key={index}>
-									<TimeTable selectedDates={chunk} availableTimes={availableTimes} isConfirmed={true} clickedTime={clickedTime} setClickedTime={setClickedTime} />
+									<TimeTable interviewTime={30} selectedDates={chunk} availableTimes={availableTimes} isConfirmed={true} clickedTime={clickedTime} setClickedTime={setClickedTime} />
 								</SplideSlide>
 							))}
 						</Splide>
