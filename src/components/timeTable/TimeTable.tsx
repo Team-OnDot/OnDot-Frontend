@@ -7,6 +7,7 @@ import { useRecoilState } from 'recoil';
 import { scheduleAtom } from '../../recoil/interviewMake2Atom';
 
 type TimeTable = {
+	interviewTime: number;
 	selectedDates: string[];
 	availableTimes?: Date[];
 	isConfirmed?: boolean;
@@ -14,10 +15,9 @@ type TimeTable = {
 	setClickedTime?: (time: Date) => void;
 };
 
-const TimeTable = ({ selectedDates, availableTimes, isConfirmed, clickedTime, setClickedTime }: TimeTable) => {
+const TimeTable = ({ interviewTime, selectedDates, availableTimes, isConfirmed, clickedTime, setClickedTime }: TimeTable) => {
 	const [schedule, setSchedule] = useRecoilState(scheduleAtom);
-	// const [clickedTime, setClickedTime] = useState<Date>();
-	const [hourlyChunks, setHourlyChunks] = useState<number>(2);
+	const hourlyChunks = 60 / interviewTime;
 
 	const handleClickDateCell = (time: Date, blocked: boolean) => {
 		if (!blocked) {
@@ -26,7 +26,6 @@ const TimeTable = ({ selectedDates, availableTimes, isConfirmed, clickedTime, se
 	};
 
 	const renderingDates = selectedDates.map((date) => new Date(date));
-	// const blockedTimes = [new Date('2024-02-06T10:00:00'), new Date('2024-02-06T13:00:00')];
 
 	const renderCustomDateCell = (date: Date, selected: boolean, blocked: boolean, clicked: boolean) => {
 		if (setClickedTime) {

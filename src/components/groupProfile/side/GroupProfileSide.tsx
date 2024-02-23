@@ -1,13 +1,48 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as S from './GroupProfile.style';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { groupInfoAtom } from '../../../recoil/groupAtoms';
 
 function GroupProfileSide() {
-	const groupInfo = {
-		groupName: '온닷',
-		groupType: '동아리',
-		groupLink: 'Ondot.co.kr.ondot2024',
-	};
+	// type GroupInfo = {
+	// 	name?: string,
+  //   type?: string,
+  //   profileUrl?: string,
+  //   imageUrl?: string,
+  //   contact?: string,
+  //   description?: string,
+  //   interviews?: number[],
+	// }
+	// const [groupInfo, setGroupInfo] = useState<GroupInfo>({
+	// 	name: "",
+  //   type: "",
+  //   profileUrl: "",
+  //   imageUrl: "",
+  //   contact: "",
+  //   description: "",
+  //   interviews: [],
+	// });
+
+	const accessToken = localStorage.getItem('isLogin');
+	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
+
+	useEffect(() => {
+		const getData = async () => {
+			await axios({
+				url: '/api/v1/organizations',
+				method: 'get',
+				headers: {
+					Authorization: 'Bearer ' + accessToken
+				}
+			}).then((response) => {
+				console.log(response.data);
+				setGroupInfo(response.data.content);
+			}).catch((error) => console.log((error)));
+		}
+		getData();
+	}, [])
 
 	const navigate = useNavigate();
 
@@ -36,18 +71,19 @@ function GroupProfileSide() {
 			}
 		}
 	};
+
 	return (
 		<S.Container>
 			<div>
 				<S.GroupImg src={process.env.PUBLIC_URL + '/images/profileImg.svg'} />
-				<S.GroupName>{groupInfo.groupName}</S.GroupName>
-				<S.GroupType>{groupInfo.groupType}</S.GroupType>
+				<S.GroupName>{groupInfo.name}</S.GroupName>
+				<S.GroupType>{groupInfo.type}</S.GroupType>
 				<S.GroupLink onClick={handleCopyLink}>
-					<a ref={linkRef} href={groupInfo.groupLink}>
-						{groupInfo.groupLink}
+					<a ref={linkRef} href={groupInfo.profileUrl}>
+						{groupInfo.profileUrl}
 					</a>
 				</S.GroupLink>
-				<S.GroupTextArea>안녕하세요. 온닷입니다.</S.GroupTextArea>
+				<S.GroupTextArea>{groupInfo.description}</S.GroupTextArea>
 			</div>
 			<div>
 				<S.IconBtnWrapper onClick={onClickSetting}>
