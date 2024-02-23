@@ -28,7 +28,7 @@ function LoginForm() {
             url: '/api/v1/auth/signin',
             method: 'post',
             data: {
-                organizationId: data.email,
+                email: data.email,
                 password: data.userPw,
             },
           }).then((response) => {

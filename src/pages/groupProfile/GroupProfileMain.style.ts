@@ -39,9 +39,38 @@ export const InterviewComponentsZone = styled.div`
 	justify-content: space-between;
 	margin: 40px 120px auto 60px;
 `;
+
+//진행중인 면접이 없는 경우
 export const InterviewNull = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	margin: 40px 120px auto 60px;
+	margin: 304px auto auto auto;
+	font-family: 'Pretendard-SemiBold';
+	color: ${props => props.theme.colors.gray3};
+	font-size: 23px;
+`;
+
+//진행중인 면접이 없는 경우 텍스트 양쪽 옆 아이콘 박스
+export const NullIconBox = styled.div`
+	display: flex;
+	margin: auto 7px;
+`;
+
+export const NullIcon1 = styled.div`
+	width: 20px;
+	height: 20px;
+	border-radius: 30px;
+	background-color: ${props => props.theme.colors.gray5};
+	margin: auto 7px;
+`;
+
+export const NullIcon2 = styled(NullIcon1)`
+	width: 15px;
+	height: 15px;
+`;
+
+export const NullIcon3 = styled(NullIcon1)`
+	width: 10px;
+	height: 10px;
 `;
