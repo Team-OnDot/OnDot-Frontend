@@ -2,28 +2,31 @@ import { useEffect, useRef, useState } from 'react';
 import * as S from './GroupProfile.style';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { groupInfoAtom } from '../../../recoil/groupAtoms';
 
 function GroupProfileSide() {
-	type GroupInfo = {
-		name?: string,
-    type?: string,
-    profileUrl?: string,
-    imageUrl?: string,
-    contact?: string,
-    description?: string,
-    interviews?: number[],
-	}
-	const [groupInfo, setGroupInfo] = useState<GroupInfo>({
-		name: "",
-    type: "",
-    profileUrl: "",
-    imageUrl: "",
-    contact: "",
-    description: "",
-    interviews: [],
-	});
+	// type GroupInfo = {
+	// 	name?: string,
+  //   type?: string,
+  //   profileUrl?: string,
+  //   imageUrl?: string,
+  //   contact?: string,
+  //   description?: string,
+  //   interviews?: number[],
+	// }
+	// const [groupInfo, setGroupInfo] = useState<GroupInfo>({
+	// 	name: "",
+  //   type: "",
+  //   profileUrl: "",
+  //   imageUrl: "",
+  //   contact: "",
+  //   description: "",
+  //   interviews: [],
+	// });
 
 	const accessToken = localStorage.getItem('isLogin');
+	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
 
 	useEffect(() => {
 		const getData = async () => {

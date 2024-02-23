@@ -8,7 +8,7 @@ import GroupType from '../../../components/signUp/signupId/GroupType';
 
 function GroupProfileSetting() {
 	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
-	const [imgFile, setImgFile] = useState(groupInfo.profile);
+	const [imgFile, setImgFile] = useState(groupInfo.imageUrl);
 
 	const regExpName = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,12}$/;
 
@@ -29,8 +29,8 @@ function GroupProfileSetting() {
 		const data = {
 			name: watch('name'),
 			type: watch('type'),
-			link: watch('link'),
-			text: watch('text'),
+			link: watch('profileUrl'),
+			text: watch('description'),
 			contact: watch('contact'),
 		};
 		console.log(data);
@@ -71,12 +71,12 @@ function GroupProfileSetting() {
 				<S.TextCircle />
 				<S.Text>그룹 프로필 주소</S.Text>
 			</S.TextContainer>
-			<S.SettingInput type="text" id="link" required {...register('link', { required: true })} />
+			<S.SettingInput type="text" id="link" required {...register('profileUrl', { required: true })} />
 			<S.TextContainer>
 				<S.TextCircle />
 				<S.Text>프로필 인사말</S.Text>
 			</S.TextContainer>
-			<S.SettingInput type="text" id="text" required {...register('text', { required: true, maxLength: 140 })} />
+			<S.SettingInput type="text" id="text" required {...register('description', { required: true, maxLength: 140 })} />
 			<S.TextSub>140자 이내</S.TextSub>
 			<S.TextContainer>
 				<S.TextCircle />
