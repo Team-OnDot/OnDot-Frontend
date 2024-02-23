@@ -5,7 +5,8 @@ export type Interview = {
 	date: String,
 	time: String,
 	format: String,
-	place: String
+	place: String, 
+	applyDate : String
 };
 
 function InterviewPreview(interview: Interview) {
@@ -13,7 +14,7 @@ function InterviewPreview(interview: Interview) {
 		<S.PreviewContainer>
 			<S.PreviewWrap>
 				<S.PreviewTitle>{interview.title}</S.PreviewTitle>
-				<S.PreviewDate>{interview.date}</S.PreviewDate>
+				<S.PreviewDate>{interview.applyDate}</S.PreviewDate>
 			</S.PreviewWrap>
 			<S.PreviewText>
 				<img src={process.env.PUBLIC_URL + '/images/iconDate.svg'}/>
