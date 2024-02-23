@@ -7,27 +7,7 @@ import axios from 'axios';
 
 function GroupProfileMain() {
 	const interviews: I.Interview[] = [
-		{
-			title: '제목',
-			date: '12/20 ~ 12/23',
-			time: '시간',
-			format: '형태',
-			place: '장소',
-		},
-		{
-			title: '제목2',
-			date: '날짜',
-			time: '시간',
-			format: '형태',
-			place: '장소',
-		},
-		{
-			title: '제목3',
-			date: '날짜',
-			time: '시간',
-			format: '형태',
-			place: '장소',
-		},
+
 	];
 
 	const navigate = useNavigate();
@@ -47,6 +27,11 @@ function GroupProfileMain() {
 			headers: {Authorization: "Bearer " + localStorage.getItem('isLogin'),},
           }).then((response) => {
 			console.log(response.data);
+
+			for(let i = 0; i < 1; i++){
+				interviews[i].title = response.data.content.name
+			}
+			console.log(interviews[0].title)
             
           }).catch((error) => {
             console.log("실패");  
@@ -71,7 +56,11 @@ function GroupProfileMain() {
 							return <InterviewPreview {...interview} />;
 						})
 					) : (
-						<S.InterviewNull>진행중인 면접이 없습니다.</S.InterviewNull>
+						<S.InterviewNull>
+							<S.NullIconBox><S.NullIcon3/><S.NullIcon2/><S.NullIcon1/></S.NullIconBox>
+							진행중인 면접이 없습니다
+							<S.NullIconBox><S.NullIcon1/><S.NullIcon2/><S.NullIcon3/></S.NullIconBox>
+						</S.InterviewNull>
 					)}
 				</S.InterviewComponentsZone>
 			</S.InterviewsZone>
