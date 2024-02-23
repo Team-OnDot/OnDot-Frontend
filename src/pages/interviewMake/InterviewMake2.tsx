@@ -9,11 +9,13 @@ import { useNavigate } from 'react-router-dom';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
 import { chunkArray } from '../../utils/chunkArray';
+import { interviewTimeAtom } from '../../recoil/interviewAtoms';
 
 function InterviewMake2() {
 	const selectedDates = useRecoilValue(selectedDatesAtom);
 	const schedule = useRecoilValue(scheduleAtom);
 	const [sortedDates, setSortedDates] = useState<string[]>([]);
+	const interviewTime = useRecoilValue(interviewTimeAtom);
 
 	const splideRef = useRef<Splide>(null);
 
@@ -91,7 +93,7 @@ function InterviewMake2() {
 						{/* sortedDates를 5개씩 끊어서 SplideSlide에 전달 */}
 						{chunkArray(sortedDates, 5).map((chunk, index) => (
 							<SplideSlide key={index}>
-								<TimeTable selectedDates={chunk} />
+								<TimeTable interviewTime={interviewTime} selectedDates={chunk} />
 							</SplideSlide>
 						))}
 					</Splide>

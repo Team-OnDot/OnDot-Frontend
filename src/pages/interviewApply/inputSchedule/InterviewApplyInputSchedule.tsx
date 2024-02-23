@@ -61,7 +61,7 @@ function InterviewApplyInputSchedule() {
 						{/* sortedDates를 5개씩 끊어서 SplideSlide에 전달 */}
 						{chunkArray(sortedDates, 5).map((chunk, index) => (
 							<SplideSlide key={index}>
-								<TimeTable selectedDates={chunk} availableTimes={availableTimes} />
+								<TimeTable interviewTime={30} selectedDates={chunk} availableTimes={availableTimes} />
 							</SplideSlide>
 						))}
 					</Splide>
