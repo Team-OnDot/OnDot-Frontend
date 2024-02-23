@@ -31,6 +31,7 @@ export const PreviewDate = styled.div`
 	padding: 7px 10px;
 	margin-left: auto;
 	margin-right: 0px;
+	font-family: 'Pretendard-SemiBold';
 `;
 export const PreviewText = styled.div`
 	display: flex;

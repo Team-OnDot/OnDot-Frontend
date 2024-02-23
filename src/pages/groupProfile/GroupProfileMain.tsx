@@ -2,13 +2,21 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './GroupProfileMain.style';
 import InterviewPreview from '../../components/interviewPreview/InterviewPreview';
 import * as I from '../../components/interviewPreview/InterviewPreview';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function GroupProfileMain() {
-	const interviews: I.Interview[] = [
-
-	];
+    const [interviews, setInterviews] = useState<I.Interview[]>([
+        {
+            title: '',
+            date: '',
+            time: '',
+            format: '',
+            place: '',
+			applyDate: ''
+        }
+    ]);
+    
 
 	const navigate = useNavigate();
 
@@ -28,10 +36,21 @@ function GroupProfileMain() {
           }).then((response) => {
 			console.log(response.data);
 
+            // 면접 데이터 주입
 			for(let i = 0; i < 1; i++){
-				interviews[i].title = response.data.content.name
+				setInterviews(prevInterviews => {
+					const updatedInterviews = [...prevInterviews];
+					updatedInterviews[i].title = response.data.content.name;
+					updatedInterviews[i].applyDate 
+					= response.data.content.applyStartDate.substr(5, 2) + "/" + response.data.content.applyStartDate.substr(8, 2) + 
+					" ~ " + response.data.content.applyEndDate.substr(5, 2) + "/" + response.data.content.applyEndDate.substr(8, 2)
+					updatedInterviews[i].date = response.data.content.applyStartDate + " ~ " + response.data.content.applyEndDate;
+					updatedInterviews[i].place = response.data.content.location;
+					updatedInterviews[i].time = response.data.content.requiredTime + "분";
+					updatedInterviews[i].format = response.data.content.interviewerCount + ":" + response.data.content.applicantCount + " 면접"
+					return updatedInterviews;
+				});
 			}
-			console.log(interviews[0].title)
             
           }).catch((error) => {
             console.log("실패");  
