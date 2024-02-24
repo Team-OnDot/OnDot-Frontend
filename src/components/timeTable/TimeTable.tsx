@@ -25,6 +25,8 @@ const TimeTable = ({ interviewTime, selectedDates, availableTimes, isConfirmed, 
 		}
 	};
 
+	let applycantCount = 5;
+
 	const renderingDates = selectedDates.map((date) => new Date(date));
 	const availableTimesFormatted: Date[] = [];
 
