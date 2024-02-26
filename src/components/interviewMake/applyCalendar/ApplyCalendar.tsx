@@ -18,33 +18,39 @@ const ApplyCalendar = () => {
     };
 
     const onChangeDate = (e: any) => { 
-        const startDateFormat = moment(e[0]).format("YYYY/MM/DD");
-        const endDateFormat = moment(e[1]).format("YYYY/MM/DD");
+        const startDateFormat = moment(e[0]).format("YYYY-MM-DD");
+        const endDateFormat = moment(e[1]).format("YYYY-MM-DD");
 
         setApplyStartDate(startDateFormat);
         setApplyEndDate(endDateFormat);
+        setIsCalendar(!isCalendar);
     };
 
 	return (
 		<>
-        <S.MakeInputContainer
-            toggle={isCalendar ? true: false}  
-            color={applyStartDate != '' && applyEndDate != '' ? '#FF4A4A': '#606060'}
-            onClick={onCalendar}
-        >
-            <S.InterviewIcon src={process.env.PUBLIC_URL + '/images/iconDate_gray.svg'}></S.InterviewIcon>
-            <S.InputWrap toggle={isCalendar? true:false}>
-                <S.MakeInputDate type='text' value={applyStartDate} /> 
-                &nbsp;~&nbsp; 
-                <S.MakeInputDate type='text' value={applyEndDate} />
-            </S.InputWrap>
-        </S.MakeInputContainer>
-			<Calendar
-				onChange={onChangeDate} 
-                selectRange={true} 
-                formatDay={(locale, date) => moment(date).format('DD')} 
-                showNeighboringMonth={false} 
-			/>
+            <S.MakeInputContainer
+                toggle={isCalendar ? true: false}  
+                color={(applyStartDate==='' && applyEndDate==='') ? '#FF4A4A': '#606060'}
+            >
+                <S.InterviewIcon src={process.env.PUBLIC_URL + '/images/iconDate_gray.svg'}></S.InterviewIcon>
+                <S.InputWrap toggle={isCalendar? true:false} onClick={onCalendar}>
+                    <S.MakeInputDate 
+                        type='text' 
+                        id='startDate'
+                        value={(applyStartDate===''? '____년 _월 _일': applyStartDate) + " ~ " + (applyEndDate===''? '____년 _월 _일':applyEndDate)} 
+                    /> 
+                </S.InputWrap>
+                <S.CalendarWrap className='apply-calendar' onCalendar={isCalendar} >
+                    <Calendar
+                        onChange={onChangeDate} 
+                        selectRange={true}
+                        next2Label={null}
+                        prev2Label={null} 
+                        formatDay={(locale, date) => moment(date).format('DD')} 
+                        showNeighboringMonth={false} 
+                    />
+                </S.CalendarWrap>
+            </S.MakeInputContainer>  
 		</>
 	);
 };

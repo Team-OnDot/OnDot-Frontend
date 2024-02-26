@@ -57,6 +57,7 @@ function InterviewMake3() {
             headers: {Authorization: 'Bearer ' + accessToken,},
           }).then((response) => {
             navigate('/interview-make-complete');
+            // 아톰 리셋
 
           }).catch((error) => {
             console.log("실패");  

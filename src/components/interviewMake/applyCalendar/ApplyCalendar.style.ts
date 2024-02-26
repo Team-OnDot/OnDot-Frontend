@@ -39,10 +39,18 @@ export const InputWrap = styled.div<{toggle: boolean}>`
 
 //지원 기간 입력
 export const MakeInputDate = styled.input`
-	width: 115px;
+	width: 250px;
 	font-size: 15px;
 	color: ${(props) => props.theme.colors.gray4};
 	border: none;
 	padding-bottom: 12px;
 	font-family: Pretendard-SemiBold;
+`;
+
+//캘린더박스
+export const CalendarWrap = styled.div<{onCalendar: boolean}>`
+	display: ${(props) => (props.onCalendar? '': 'none' )};
+	position: relative;
+	z-index: 2;
+	margin: 50px 0 0 -302px;
 `;
