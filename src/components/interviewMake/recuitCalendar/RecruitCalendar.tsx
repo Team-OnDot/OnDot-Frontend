@@ -1,16 +1,15 @@
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './ApplyCalendar.css';
+import './RecruitCalendar.css';
 import { format } from 'date-fns';
-import moment from "moment";
-import * as S from './ApplyCalendar.style';
+import * as S from './RecruitCalendar.style';
 import { useRecoilState } from 'recoil';
-import { applyStartDateAtom, applyEndDateAtom } from '../../../recoil/interviewAtoms';
+import { recruitStartDateAtom, recruitEndDateAtom } from '../../../recoil/interviewAtoms';
 import { useState } from 'react';
 
-const ApplyCalendar = () => {
-	const [applyStartDate, setApplyStartDate] = useRecoilState(applyStartDateAtom);
-    const [applyEndDate, setApplyEndDate] = useRecoilState(applyEndDateAtom);
+const RecruitCalendar = () => {
+	const [startDate, setStartDate] = useRecoilState(recruitStartDateAtom);
+    const [endDate, setEndDate] = useRecoilState(recruitEndDateAtom);
     const [isCalendar, setIsCalendar] = useState(false);
 
     const onCalendar = () => { 
@@ -18,11 +17,11 @@ const ApplyCalendar = () => {
     };
 
     const onChangeDate = (e: any) => { 
-        const startDateFormat = moment(e[0]).format("YYYY-MM-DD");
-        const endDateFormat = moment(e[1]).format("YYYY-MM-DD");
+        const startDateFormat = format(e[0], "yyyy-MM-dd");
+        const endDateFormat = format(e[1], "yyyy-MM-dd");
 
-        setApplyStartDate(startDateFormat);
-        setApplyEndDate(endDateFormat);
+        setStartDate(startDateFormat);
+        setEndDate(endDateFormat);
         setIsCalendar(!isCalendar);
     };
 
@@ -30,14 +29,14 @@ const ApplyCalendar = () => {
 		<>
             <S.MakeInputContainer
                 toggle={isCalendar ? true: false}  
-                color={(applyStartDate==='' && applyEndDate==='') ? '#FF4A4A': '#606060'}
+                color={(startDate==='' && endDate==='') ? '#FF4A4A': '#606060'}
             >
                 <S.InterviewIcon src={process.env.PUBLIC_URL + '/images/iconDate_gray.svg'}></S.InterviewIcon>
                 <S.InputWrap toggle={isCalendar? true:false} onClick={onCalendar}>
                     <S.MakeInputDate 
                         type='text' 
                         id='startDate'
-                        value={(applyStartDate===''? '____년 _월 _일': applyStartDate) + " ~ " + (applyEndDate===''? '____년 _월 _일':applyEndDate)} 
+                        value={(startDate===''? '____년 _월 _일': startDate) + " ~ " + (endDate===''? '____년 _월 _일':endDate)} 
                     /> 
                 </S.InputWrap>
                 <S.CalendarWrap className='apply-calendar' onCalendar={isCalendar} >
@@ -46,7 +45,7 @@ const ApplyCalendar = () => {
                         selectRange={true}
                         next2Label={null}
                         prev2Label={null} 
-                        formatDay={(locale, date) => moment(date).format('DD')} 
+                        formatDay={(locale, date) => format(date,'dd')} 
                         showNeighboringMonth={false} 
                     />
                 </S.CalendarWrap>
@@ -55,4 +54,4 @@ const ApplyCalendar = () => {
 	);
 };
 
-export default ApplyCalendar;
+export default RecruitCalendar;

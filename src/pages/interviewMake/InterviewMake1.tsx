@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
-import{ InterviewInfo, applyEndDateAtom, applyStartDateAtom, interviewAtom, interviewTimeAtom } from './../../recoil/interviewAtoms';
+import{ InterviewInfo, recruitEndDateAtom, recruitStartDateAtom, interviewAtom, interviewTimeAtom } from './../../recoil/interviewAtoms';
 import * as S from './InterviewMake1.style';
 import TimeType from '../../components/interviewMake/timeType/TimeType';
-import ApplyCalendar from "../../components/interviewMake/applyCalendar/ApplyCalendar";
+import RecruitCalendar from "../../components/interviewMake/recuitCalendar/RecruitCalendar";
 
 function InterviewMake1() {
     const setInterviewAtom = useSetRecoilState(interviewAtom);
-    const applyStartDate = useRecoilValue(applyStartDateAtom);  //지원기간 시작
-    const applyEndDate = useRecoilValue(applyEndDateAtom);      //지원기간 끝
+    const recruitStartDate = useRecoilValue(recruitStartDateAtom);  //지원기간 시작
+    const recruitEndDate = useRecoilValue(recruitEndDateAtom);      //지원기간 끝
     const interviewTime = useRecoilValue(interviewTimeAtom);    //인터뷰 시간 값 가져오기
 
-    const resetApplyStartDate = useResetRecoilState(applyStartDateAtom);
-    const resetApplyEndDate = useResetRecoilState(applyEndDateAtom);
+    const resetRecruitStartDate = useResetRecoilState(recruitStartDateAtom);
+    const resetRecruitEndDate = useResetRecoilState(recruitEndDateAtom);
     const resetInterviewTimetDate = useResetRecoilState(interviewTimeAtom);
 
     const regExpName = /^.{2,20}$/;
@@ -39,12 +39,12 @@ function InterviewMake1() {
     const [isActive, setIsActive] = useState(false);
     const watchAll = Object.values(watch());
     useEffect(() => {
-        if (watchAll.every((el) => el) && applyEndDate!=='' && applyEndDate!=='') {
+        if (watchAll.every((el) => el) && recruitEndDate!=='' && recruitEndDate!=='') {
             setIsActive(true);
         } else {
             setIsActive(false);
         }
-    }, [watchAll, applyEndDate, applyEndDate]);
+    }, [watchAll, recruitEndDate, recruitEndDate]);
 
     //입력 취소 버튼
     const removeInput = (name:any) => {
@@ -62,8 +62,8 @@ function InterviewMake1() {
     const onValid = () => {
         const data = {
             interviewName: watch('interviewName'),
-            startDate: applyStartDate,
-            endDate: applyEndDate,
+            startDate: recruitStartDate,
+            endDate: recruitEndDate,
             timeType: interviewTime,
             format1: watch('format1'),
             format2: watch('format2'),
@@ -74,8 +74,8 @@ function InterviewMake1() {
             setInterviewAtom(data);
 
             // 아톰에 들어있는 값 리셋
-            resetApplyStartDate();
-            resetApplyEndDate();
+            resetRecruitStartDate();
+            resetRecruitEndDate();
             resetInterviewTimetDate();
 
             // 다음 페이지 이동
@@ -120,7 +120,7 @@ function InterviewMake1() {
                 <S.MakeText>지원 기간*</S.MakeText>
                 <S.MakeTextSub>지원 가능한 날짜 범위를 설정해 주세요</S.MakeTextSub>
             </S.MakeTextContainer>
-               <ApplyCalendar /> 
+               <RecruitCalendar /> 
 
             <S.MakeTextContainer>
                 <S.MakeTextCircle />
