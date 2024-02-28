@@ -2,22 +2,14 @@ import * as S from './TimeTableProgress.style';
 import { useRef, useEffect, useState } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { chunkArray } from '../../../utils/chunkArray';
-import { useRecoilValue } from 'recoil';
 import TimeTable from '../../../components/timeTable/TimeTable';
-import { selectedDatesAtom, scheduleAtom } from '../../../recoil/interviewMake2Atom';
 import { addMinutes, format } from 'date-fns';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function TimeTableProgress() {
-	// const group = {
-	// 	name: '온닷',
-	// 	type: '동아리',
-	// 	link: 'Ondot.co.kr',
-	// 	text: '안녕하세요. 온닷입니다.',
-	// 	contact: 'ondot@gmail.com',
-	// };
-
 	const splideRef = useRef<Splide>(null);
+	const { interviewId } = useParams();
 
 	const goPrev = () => {
 		if (splideRef.current) {
@@ -54,18 +46,35 @@ function TimeTableProgress() {
 		location: string;
 		interviewStartDate: string;
 		interviewEndDate: string;
+		interviewDates: string[];
 		timeCells: TimeCells[];
 	};
 
-	const [selectedDates, setSelectedDates] = useState<string[]>(['2024-02-24']);
-	const schedule = useRecoilValue(scheduleAtom);
+	const defaultInterviewData: InterviewData = {
+		name: '',
+		description: '',
+		applyStartDate: '',
+		applyEndDate: '',
+		requiredTime: 0,
+		interviewerCount: 0,
+		applicantCount: 0,
+		location: '',
+		interviewStartDate: '',
+		interviewEndDate: '',
+		interviewDates: [],
+		timeCells: [],
+	};
+
 	const [sortedDates, setSortedDates] = useState<string[]>([]);
 	const [clickedTime, setClickedTime] = useState<Date>();
 	const [matchedIndex, setMatchedIndex] = useState<number>(-1);
 	const [matchedStartTime, setMatchedStartTime] = useState<string>();
 	const [matchedEndTime, setMatchedEndTime] = useState<string>();
 
-	const [interviewData, setInterviewData] = useState<InterviewData>();
+	const [startDateString, setStartDateString] = useState<string>();
+	const [endDateString, setEndDateString] = useState<string>();
+
+	const [interviewData, setInterviewData] = useState<InterviewData>(defaultInterviewData);
 	const [availableTimes, setAvailableTimes] = useState<string[]>();
 	const accessToken = localStorage.getItem('isLogin');
 
@@ -73,13 +82,15 @@ function TimeTableProgress() {
 		const getData = async () => {
 			try {
 				const response = await axios({
-					url: `/api/v1/interviews/9`,
+					url: `/api/v1/interviews/${interviewId}`,
 					method: 'get',
+					params: {
+						interviewId: interviewId,
+					},
 					headers: {
 						Authorization: 'Bearer ' + accessToken,
 					},
 				});
-				console.log(response.data.content);
 				setInterviewData(response.data.content);
 			} catch (error) {
 				console.log(error);
@@ -88,8 +99,9 @@ function TimeTableProgress() {
 		getData();
 	}, []);
 
+	/* availableTimes 설정 */
 	useEffect(() => {
-		if (interviewData) {
+		if (interviewData.timeCells.length > 0) {
 			const temp = interviewData.timeCells.map((cell) => cell.dateTime);
 			setAvailableTimes(temp);
 		}
@@ -97,21 +109,23 @@ function TimeTableProgress() {
 
 	/* 날짜 정렬 */
 	useEffect(() => {
-		if (selectedDates.length > 1) {
-			const sorted = [...selectedDates].sort((a, b) => {
-				return new Date(a).getTime() - new Date(b).getTime();
-			});
-			setSortedDates(sorted);
-			console.log(sorted);
-			return;
+		if (interviewData) {
+			if (interviewData.interviewDates.length > 1) {
+				const sorted = [...interviewData.interviewDates].sort((a, b) => {
+					return new Date(a).getTime() - new Date(b).getTime();
+				});
+				setSortedDates(sorted);
+				console.log(sorted);
+				return;
+			}
+			setSortedDates(interviewData.interviewDates);
 		}
-		setSortedDates(selectedDates);
-	}, [selectedDates]);
+	}, [interviewData.interviewDates]);
 
 	/* 선택한 셀 인덱스 구하기 */
 	useEffect(() => {
-		if (clickedTime) {
-			const index = interviewData!.timeCells.findIndex((cell) => format(new Date(cell.dateTime), 'yyyy-MM-dd HH:mm') === format(clickedTime, 'yyyy-MM-dd HH:mm'));
+		if (clickedTime && interviewData.timeCells.length > 0) {
+			const index = interviewData.timeCells.findIndex((cell) => format(new Date(cell.dateTime), 'yyyy-MM-dd HH:mm') === format(clickedTime, 'yyyy-MM-dd HH:mm'));
 			setMatchedIndex(index);
 		}
 	}, [clickedTime]);
@@ -119,7 +133,7 @@ function TimeTableProgress() {
 	/* 선택한 셀 시간 포맷팅 */
 	useEffect(() => {
 		if (matchedIndex !== -1) {
-			const startTime = new Date(interviewData!.timeCells[matchedIndex].dateTime);
+			const startTime = new Date(interviewData.timeCells[matchedIndex].dateTime);
 			const formattedStartTime = format(startTime, 'a h시 mm분').replace('AM', '오전').replace('PM', '오후');
 			const formattedEndTime = format(addMinutes(startTime, interviewData!.requiredTime), 'a h시 mm분').replace('AM', '오전').replace('PM', '오후');
 
@@ -128,10 +142,17 @@ function TimeTableProgress() {
 		}
 	}, [matchedIndex]);
 
+	useEffect(() => {
+		if (interviewData && interviewData.interviewStartDate && interviewData.interviewEndDate) {
+			setStartDateString(format(new Date(interviewData.interviewStartDate), 'yyyy년 M월 d일'));
+			setEndDateString(format(new Date(interviewData.interviewEndDate), 'yyyy년 M월 d일'));
+		}
+	});
+
 	return (
 		<>
 			<S.Container>
-				<S.TextPeriod>2024년 1월 1일 ~ 2024년 1월 5일</S.TextPeriod>
+				<S.TextPeriod>{interviewData.interviewDates.length === 1 ? startDateString : `${startDateString} ~ ${endDateString}`}</S.TextPeriod>
 				<S.Line src={process.env.PUBLIC_URL + '/images/lineCircleLong.svg'} />
 				<S.TextDescription>가능한 면접 시간을 클릭하여 선택해 주세요. 한 번 더 클릭하면 선택된 시간이 삭제됩니다.</S.TextDescription>
 				{sortedDates.length > 0 ? (
@@ -152,8 +173,8 @@ function TimeTableProgress() {
 								</SplideSlide>
 							))}
 						</Splide>
-						<S.BtnTimeTablePrev isMultiplePage={selectedDates.length > 5} onClick={goPrev} />
-						<S.BtnTimeTableNext isMultiplePage={selectedDates.length > 5} onClick={goNext} />
+						<S.BtnTimeTablePrev isMultiplePage={interviewData.interviewDates.length > 5} onClick={goPrev} />
+						<S.BtnTimeTableNext isMultiplePage={interviewData.interviewDates.length > 5} onClick={goNext} />
 					</S.TimeTableWrapper>
 				) : null}
 				<S.TextApplicant>{matchedStartTime ? `${matchedStartTime} ~ ${matchedEndTime}에 면접 가능한 지원자` : null}</S.TextApplicant>
