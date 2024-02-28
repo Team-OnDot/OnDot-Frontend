@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import * as S from './GroupProfileMain.style';
 import InterviewPreview from '../../components/interviewPreview/InterviewPreview';
-import * as I from '../../components/interviewPreview/InterviewPreview';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { groupInfoAtom } from '../../recoil/groupAtoms';
 
@@ -19,36 +16,6 @@ function GroupProfileMain() {
 	//그룹별 interviewId 조회
 	const groupInfo = useRecoilValue(groupInfoAtom); 
 	const interviewList = groupInfo.interviews;
-
-	useEffect(() => {
-        fetchInterviews(interviewList);
-    }, [interviewList]);
-
-    async function fetchInterviews(interviewList:any) {
-        try {
-            for (let i = 0; i < interviewList.length; i++) {
-                await getRes(interviewList[i]);
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    async function getRes(num:any) {
-        try {
-            const response = await axios({
-                url: `/api/v1/interviews/${num}`,
-                method: 'get',
-                params: {
-                    interviewId: num
-                },
-                headers: { Authorization: "Bearer " + localStorage.getItem('isLogin') },
-            });
-            console.log(response.data);
-        } catch (error) {
-            console.error('AxiosError:', error);
-        }
-    }
 	  
 	return (
 		<>
