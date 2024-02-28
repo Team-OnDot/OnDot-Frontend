@@ -155,10 +155,10 @@ function InterviewMake1() {
                         {...register("format2", { required: true ,pattern: regExpFormat })} 
                     />명
                 </S.InputWrap>
-                {watch("format1")?.length > 0 && 
+                {watch("format2")?.length > 0 && 
                     <S.ClearBtn
                         src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
-                        onClick={e => removeInput("format1")}
+                        onClick={e => removeInput("format2")}
                     />
                 }
             </S.MakeInputContainer>

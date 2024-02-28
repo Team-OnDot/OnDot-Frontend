@@ -31,8 +31,8 @@ import SignUpGoogle from './pages/signUp/SignUpGoogle';
 //findAccount
 import FindId1 from './pages/findAccount/findId/FindId1';
 import FindId2 from './pages/findAccount/findId/FindId2';
-import FindPw1 from './pages/findAccount/findPassword/FindPw1'
-import FindPw2 from './pages/findAccount/findPassword/FindPw2'
+import FindPw1 from './pages/findAccount/findPassword/FindPw1';
+import FindPw2 from './pages/findAccount/findPassword/FindPw2';
 import ChangePw from './pages/findAccount/findPassword/ChangePw';
 
 function App() {
@@ -55,15 +55,15 @@ function App() {
 								<Route path="/interview-make-3" element={<InterviewMake3 />} />
 								<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
 								<Route path="/timetable-view3" element={<TimeTableView3 />} />
-								<Route path="/find-id-1" element={<FindId1/>}/>
-								<Route path="/find-id-2" element={<FindId2/>}/>
-								<Route path="/find-password-1" element={<FindPw1/>}/>
-								<Route path="/find-password-2" element={<FindPw2/>}/>
-								<Route path="/change-password" element={<ChangePw/>}/>
+								<Route path="/find-id-1" element={<FindId1 />} />
+								<Route path="/find-id-2" element={<FindId2 />} />
+								<Route path="/find-password-1" element={<FindPw1 />} />
+								<Route path="/find-password-2" element={<FindPw2 />} />
+								<Route path="/change-password" element={<ChangePw />} />
 								{/* 그룹 페이지 */}
 								<Route element={<GroupProfile />}>
 									<Route path="/group-profile" element={<GroupProfileMain />} />
-									<Route path="/timetable-progress" element={<TimeTableProgress />} />
+									<Route path="/timetable-progress/:interviewId" element={<TimeTableProgress />} />
 								</Route>
 								{/* 면접 지원자 페이지 */}
 								<Route element={<InterviewApply />}>

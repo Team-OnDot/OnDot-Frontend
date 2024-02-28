@@ -11,6 +11,7 @@ export const PreviewContainer = styled.div`
 	padding: 20px;
 	margin-right: 40px;
 	margin-bottom: 40px;
+	cursor: pointer;
 `;
 export const PreviewWrap = styled.div`
 	display: flex;
