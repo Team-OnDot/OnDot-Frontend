@@ -154,7 +154,7 @@ function TimeTableProgress() {
 			<S.Container>
 				<S.TextPeriod>{interviewData.interviewDates.length === 1 ? startDateString : `${startDateString} ~ ${endDateString}`}</S.TextPeriod>
 				<S.Line src={process.env.PUBLIC_URL + '/images/lineCircleLong.svg'} />
-				<S.TextDescription>가능한 면접 시간을 클릭하여 선택해 주세요. 한 번 더 클릭하면 선택된 시간이 삭제됩니다.</S.TextDescription>
+				<S.TextDescription>시간대를 클릭하여 해당 시간에 면접 가능한 지원자를 확인할 수 있습니다.</S.TextDescription>
 				{sortedDates.length > 0 ? (
 					<S.TimeTableWrapper>
 						<Splide
