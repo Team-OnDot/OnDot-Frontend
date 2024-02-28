@@ -4,60 +4,52 @@ import InterviewPreview from '../../components/interviewPreview/InterviewPreview
 import * as I from '../../components/interviewPreview/InterviewPreview';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { groupInfoAtom } from '../../recoil/groupAtoms';
 
 function GroupProfileMain() {
-    const [interviews, setInterviews] = useState<I.Interview[]>([
-        {
-            title: '',
-            date: '',
-            time: '',
-            format: '',
-            place: '',
-			applyDate: ''
-        }
-    ]);
-    
 
-	const navigate = useNavigate();
+    const navigate = useNavigate();
 
+	//만들기 버튼 클릭 시
 	const onClickCreateInterview = () => {
 		navigate('/interview-make-1');
 	};
 
-	//면접 조회 API
+	//그룹별 interviewId 조회
+	const groupInfo = useRecoilValue(groupInfoAtom); 
+	const interviewList = groupInfo.interviews;
+
 	useEffect(() => {
-        axios({
-            url: `/api/v1/interviews/11`,
-            method: 'get',
-            params: {
-                interviewId: 11
-            },
-			headers: {Authorization: "Bearer " + localStorage.getItem('isLogin'),},
-          }).then((response) => {
-			console.log(response.data);
+        fetchInterviews(interviewList);
+    }, [interviewList]);
 
-            // 면접 데이터 주입
-			for(let i = 0; i < 1; i++){
-				setInterviews(prevInterviews => {
-					const updatedInterviews = [...prevInterviews];
-					updatedInterviews[i].title = response.data.content.name;
-					updatedInterviews[i].applyDate 
-					= response.data.content.applyStartDate.substr(5, 2) + "/" + response.data.content.applyStartDate.substr(8, 2) + 
-					" ~ " + response.data.content.applyEndDate.substr(5, 2) + "/" + response.data.content.applyEndDate.substr(8, 2)
-					updatedInterviews[i].date = response.data.content.applyStartDate + " ~ " + response.data.content.applyEndDate;
-					updatedInterviews[i].place = response.data.content.location;
-					updatedInterviews[i].time = response.data.content.requiredTime + "분";
-					updatedInterviews[i].format = response.data.content.interviewerCount + ":" + response.data.content.applicantCount + " 면접"
-					return updatedInterviews;
-				});
-			}
-            
-          }).catch((error) => {
-            console.log("실패");  
+    async function fetchInterviews(interviewList:any) {
+        try {
+            for (let i = 0; i < interviewList.length; i++) {
+                await getRes(interviewList[i]);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async function getRes(num:any) {
+        try {
+            const response = await axios({
+                url: `/api/v1/interviews/${num}`,
+                method: 'get',
+                params: {
+                    interviewId: num
+                },
+                headers: { Authorization: "Bearer " + localStorage.getItem('isLogin') },
+            });
+            console.log(response.data);
+        } catch (error) {
             console.error('AxiosError:', error);
-        });
-    }, []);
-
+        }
+    }
+	  
 	return (
 		<>
 			<S.InterviewsZone>
@@ -70,14 +62,13 @@ function GroupProfileMain() {
 					<S.CreateInterviewBtn onClick={onClickCreateInterview} />
 				</S.NavWrap>
 				<S.InterviewComponentsZone>
-					{interviews.length ? (
-						interviews.map((interview, index) => {
-							return <InterviewPreview {...interview} />;
-						})
-					) : (
+					{interviewList.length ? (
+						interviewList.map((id, index) => {
+							return <InterviewPreview interviewId={id}/>;
+					})) : (
 						<S.InterviewNull>
 							<S.NullIconBox><S.NullIcon3/><S.NullIcon2/><S.NullIcon1/></S.NullIconBox>
-							진행중인 면접이 없습니다
+								진행중인 면접이 없습니다
 							<S.NullIconBox><S.NullIcon1/><S.NullIcon2/><S.NullIcon3/></S.NullIconBox>
 						</S.InterviewNull>
 					)}

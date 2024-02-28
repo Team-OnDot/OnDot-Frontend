@@ -21,6 +21,7 @@ function FindPw2() {
                 code: hashValue
             },
           }).then((response) => {
+            console.log(hashValue);
             
           }).catch((error) => {
             console.log("실패");  
