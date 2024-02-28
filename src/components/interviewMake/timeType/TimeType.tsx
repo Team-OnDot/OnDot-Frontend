@@ -1,7 +1,7 @@
 import * as S from './TimeType.style';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import {interviewTimeAtom} from '../../recoil/interviewAtoms';
+import {interviewTimeAtom} from '../../../recoil/interviewAtoms';
 
 function TimeType(){
 
@@ -31,10 +31,7 @@ function TimeType(){
                     <S.timeTypeLi onClick={(e) => handleClickedTimeType(30)}>30분</S.timeTypeLi>
                     <S.timeTypeLi onClick={(e) => handleClickedTimeType(35)}>40분</S.timeTypeLi>
                     <S.timeTypeLi onClick={(e) => handleClickedTimeType(40)}>45분</S.timeTypeLi>
-                    <S.timeTypeLi onClick={(e) => handleClickedTimeType(60)}>60분</S.timeTypeLi>
-                    <S.timeTypeLi onClick={(e) => handleClickedTimeType(75)}>75분</S.timeTypeLi>
-                    <S.timeTypeLi onClick={(e) => handleClickedTimeType(90)}>90분</S.timeTypeLi>
-                    <S.timeTypeLiBottom onClick={(e: any) => handleClickedTimeType(120)}>120분</S.timeTypeLiBottom>
+                    <S.timeTypeLiBottom onClick={(e: any) => handleClickedTimeType(60)}>60분</S.timeTypeLiBottom>
                 </S.timeTypeUl>
             </S.timeTypeBox>
         </div>

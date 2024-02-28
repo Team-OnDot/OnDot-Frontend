@@ -27,14 +27,14 @@
 .react-calendar__navigation__prev-button {
 	height: 18px;
 	color: transparent;
-	background: #fff url('/public/images/iconArrowPrev.svg') no-repeat center center;
+	background: #fff url('/public/images/iconBeforeMonth.svg') no-repeat center center !important;
 	background-size: contain;
 }
 
 .react-calendar__navigation__next-button {
 	height: 18px;
 	color: transparent;
-	background: #fff url('/public/images/iconArrowNext.svg') no-repeat center center;
+	background: #fff url('/public/images/iconNextMonth.svg') no-repeat center center !important;
 	background-size: contain;
 }
 

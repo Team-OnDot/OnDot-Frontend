@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import{ InterviewInfo, interviewAtom, interviewTimeAtom } from './../../recoil/interviewAtoms';
+import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import{ InterviewInfo, recruitEndDateAtom, recruitStartDateAtom, interviewAtom, interviewTimeAtom } from './../../recoil/interviewAtoms';
 import * as S from './InterviewMake1.style';
-import TimeType from './../../components/interviewMake/TimeType';
+import TimeType from '../../components/interviewMake/timeType/TimeType';
+import RecruitCalendar from "../../components/interviewMake/recuitCalendar/RecruitCalendar";
 
 function InterviewMake1() {
     const setInterviewAtom = useSetRecoilState(interviewAtom);
+    const recruitStartDate = useRecoilValue(recruitStartDateAtom);  //지원기간 시작
+    const recruitEndDate = useRecoilValue(recruitEndDateAtom);      //지원기간 끝
+    const interviewTime = useRecoilValue(interviewTimeAtom);    //인터뷰 시간 값 가져오기
+
+    const resetRecruitStartDate = useResetRecoilState(recruitStartDateAtom);
+    const resetRecruitEndDate = useResetRecoilState(recruitEndDateAtom);
+    const resetInterviewTimetDate = useResetRecoilState(interviewTimeAtom);
 
     const regExpName = /^.{2,20}$/;
     const regExpFormat = /^\d{1,2}$/;
@@ -31,12 +39,12 @@ function InterviewMake1() {
     const [isActive, setIsActive] = useState(false);
     const watchAll = Object.values(watch());
     useEffect(() => {
-        if (watchAll.every((el) => el)) {
+        if (watchAll.every((el) => el) && recruitEndDate!=='' && recruitEndDate!=='') {
             setIsActive(true);
         } else {
             setIsActive(false);
         }
-    }, [watchAll]);
+    }, [watchAll, recruitEndDate, recruitEndDate]);
 
     //입력 취소 버튼
     const removeInput = (name:any) => {
@@ -50,23 +58,33 @@ function InterviewMake1() {
         setError(name,  {message: ''});
     }
    
-    const interviewTime = useRecoilValue(interviewTimeAtom); //인터뷰 시간 값 가져오기
      //다음 버튼 클릭 시
     const onValid = () => {
         const data = {
             interviewName: watch('interviewName'),
-            startDate: watch('startDate'),
-            endDate: watch('endDate'),
+            startDate: recruitStartDate,
+            endDate: recruitEndDate,
             timeType: interviewTime,
             format1: watch('format1'),
             format2: watch('format2'),
             interviewPlace: watch('interviewPlace')
         }
+        if (isActive) {
+            // 아톰에 값 저장
+            setInterviewAtom(data);
 
-        // 아톰에 값 저장
-        setInterviewAtom(data);
-        navigate('/interview-make-2');
+            // 아톰에 들어있는 값 리셋
+            resetRecruitStartDate();
+            resetRecruitEndDate();
+            resetInterviewTimetDate();
 
+            // 다음 페이지 이동
+            navigate('/interview-make-2');
+        }
+        else if (data.startDate==='' || data.endDate==='') {
+            setError('startDate', { message: '지원 시작일과 종료일을 설정해주세요.' });
+            setError('endDate', { message: '지원 시작일과 종료일을 설정해주세요.' });
+        }   
     }
 
 	return (
@@ -102,29 +120,7 @@ function InterviewMake1() {
                 <S.MakeText>지원 기간*</S.MakeText>
                 <S.MakeTextSub>지원 가능한 날짜 범위를 설정해 주세요</S.MakeTextSub>
             </S.MakeTextContainer>
-
-            <S.MakeInputContainer
-                 toggle={watch("endDate")?.length > 0 ? true: false || 
-                 errors.startDate && errors.endDate ? true: false}  
-                 color={errors.startDate && errors.endDate ? '#FF4A4A': '#606060'}
-            >
-                <S.InterviewIcon src={process.env.PUBLIC_URL + '/images/iconDate_gray.svg'}></S.InterviewIcon>
-                <S.InputWrap toggle={watch("endDate")?.length > 0 ? true:false}>
-                    <S.MakeInputDate 
-                        type='date' 
-                        id="startDate"
-                        required
-                        {...register("startDate", { required: true })}
-                    /> 
-                    &nbsp;~&nbsp; 
-                    <S.MakeInputDate 
-                        type='date' 
-                        id="endDate"
-                        required
-                        {...register("endDate", { required: true })} 
-                    />
-                </S.InputWrap>
-            </S.MakeInputContainer>
+               <RecruitCalendar /> 
 
             <S.MakeTextContainer>
                 <S.MakeTextCircle />
