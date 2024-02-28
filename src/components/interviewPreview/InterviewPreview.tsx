@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 export type Interview = {
 	interviewId: number;
@@ -17,6 +18,7 @@ function InterviewPreview(I: Interview) {
 	const [interviewTime, setInterviewTime] = useState('') //면접 진행 시간
 	const [interviewCount, setInterviewCount] = useState('') //면접 진행 방식
 
+	//면접 조회 API연결
 	useEffect(() => {
 		axios({
 			url: `/api/v1/interviews/${I.interviewId}`,
@@ -43,8 +45,14 @@ function InterviewPreview(I: Interview) {
 		
     }, []);
 
+	//면접 페이지로 이동
+	const navigate = useNavigate();
+	const onClickInterview = (id : number) => {
+		navigate(`timetable-progress/${id}`);
+	}
+
 	return (
-		<S.PreviewContainer>
+		<S.PreviewContainer onClick = {(e) => onClickInterview(I.interviewId)}>
 			<S.PreviewWrap>
 				<S.PreviewTitle>{interviewName}</S.PreviewTitle>
 				<S.PreviewDate>{applyDate}</S.PreviewDate>
