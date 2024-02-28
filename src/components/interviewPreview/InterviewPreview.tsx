@@ -9,68 +9,67 @@ export type Interview = {
 	interviewId: number;
 };
 
-function InterviewPreview(I: Interview) {
-
+function InterviewPreview({ interviewId }: Interview) {
 	const [interviewName, setInterview] = useState(''); //면접 제목
 	const [interviewLocation, setInterviewLocation] = useState(''); //면접 장소
 	const [interviewDate, setInterviewDate] = useState(''); //면접 기간
 	const [applyDate, setApplyDate] = useState(''); //면접 기간
-	const [interviewTime, setInterviewTime] = useState('') //면접 진행 시간
-	const [interviewCount, setInterviewCount] = useState('') //면접 진행 방식
+	const [interviewTime, setInterviewTime] = useState(''); //면접 진행 시간
+	const [interviewCount, setInterviewCount] = useState(''); //면접 진행 방식
 
 	//면접 조회 API연결
 	useEffect(() => {
 		axios({
-			url: `/api/v1/interviews/${I.interviewId}`,
+			url: `/api/v1/interviews/${interviewId}`,
 			method: 'get',
 			params: {
-				interviewId: I.interviewId
+				interviewId: interviewId,
 			},
-			headers: { Authorization: "Bearer " + localStorage.getItem('isLogin') },
-          }).then((response) => {
-			console.log(response.data);
-			setInterview(response.data.content.name);
-			setApplyDate(`${format(response.data.content.applyStartDate, "MM/dd")} ~ 
-							${format(response.data.content.applyEndDate, "MM/dd")}`);
-			setInterviewDate(`${format(response.data.content.interviewStartDate, "yyyy년 MM월 dd일")} ~ 
-							${format(response.data.content.interviewEndDate, "yyyy년 MM월 dd일")}`);
-			setInterviewLocation(response.data.content.location);
-			setInterviewTime(response.data.content.requiredTime);
-			setInterviewCount(`${response.data.content.interviewerCount}:${response.data.content.applicantCount}`)
-			
-          }).catch((error) => {
-            console.log("실패");  
-            console.error('AxiosError:', error);
-        });
-		
-    }, []);
+			headers: { Authorization: 'Bearer ' + localStorage.getItem('isLogin') },
+		})
+			.then((response) => {
+				console.log(response.data);
+				setInterview(response.data.content.name);
+				setApplyDate(`${format(response.data.content.applyStartDate, 'MM/dd')} ~ 
+							${format(response.data.content.applyEndDate, 'MM/dd')}`);
+				setInterviewDate(`${format(response.data.content.interviewStartDate, 'yyyy년 MM월 dd일')} ~ 
+							${format(response.data.content.interviewEndDate, 'yyyy년 MM월 dd일')}`);
+				setInterviewLocation(response.data.content.location);
+				setInterviewTime(response.data.content.requiredTime);
+				setInterviewCount(`${response.data.content.interviewerCount}:${response.data.content.applicantCount}`);
+			})
+			.catch((error) => {
+				console.log('실패');
+				console.error('AxiosError:', error);
+			});
+	}, []);
 
 	//면접 페이지로 이동
 	const navigate = useNavigate();
-	const onClickInterview = (id : number) => {
-		navigate(`timetable-progress/${id}`);
-	}
+	const onClickInterview = (interviewId: number) => {
+		navigate(`/timetable-progress/${interviewId}`);
+	};
 
 	return (
-		<S.PreviewContainer onClick = {(e) => onClickInterview(I.interviewId)}>
+		<S.PreviewContainer onClick={() => onClickInterview(interviewId)}>
 			<S.PreviewWrap>
 				<S.PreviewTitle>{interviewName}</S.PreviewTitle>
 				<S.PreviewDate>{applyDate}</S.PreviewDate>
 			</S.PreviewWrap>
 			<S.PreviewText>
-				<img src={process.env.PUBLIC_URL + '/images/iconDate.svg'}/>
+				<img src={process.env.PUBLIC_URL + '/images/iconDate.svg'} />
 				{interviewDate}
 			</S.PreviewText>
 			<S.PreviewText>
-				<img src={process.env.PUBLIC_URL + '/images/iconTime.svg'}/>
+				<img src={process.env.PUBLIC_URL + '/images/iconTime.svg'} />
 				{interviewTime}분
 			</S.PreviewText>
 			<S.PreviewText>
-				<img src={process.env.PUBLIC_URL + '/images/iconFormat.svg'}/>
+				<img src={process.env.PUBLIC_URL + '/images/iconFormat.svg'} />
 				{interviewCount} 면접
 			</S.PreviewText>
 			<S.PreviewText>
-				<img src={process.env.PUBLIC_URL + '/images/iconPlace.svg'}/>
+				<img src={process.env.PUBLIC_URL + '/images/iconPlace.svg'} />
 				{interviewLocation}
 			</S.PreviewText>
 			<S.PreviewShare>공유</S.PreviewShare>
