@@ -136,3 +136,10 @@ export const ClearBtn = styled.img`
 	margin-left: auto;
 	margin-right: 8px;
 `;
+//캘린더박스
+export const CalendarWrap = styled.div<{onCalendar: boolean}>`
+	display: ${(props) => (props.onCalendar? '': 'none' )};
+	position: relative;
+	z-index: 2;
+	margin: 50px 0 0 -302px;
+`;
