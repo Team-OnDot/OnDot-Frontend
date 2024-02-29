@@ -9,7 +9,7 @@ import { scheduleAtom } from '../../recoil/interviewMake2Atom';
 type TimeTable = {
 	interviewTime: number;
 	selectedDates: string[];
-	availableTimes?: Date[];
+	availableTimes?: string[];
 	isConfirmed?: boolean;
 	clickedTime?: Date;
 	setClickedTime?: (time: Date) => void;
@@ -25,7 +25,14 @@ const TimeTable = ({ interviewTime, selectedDates, availableTimes, isConfirmed, 
 		}
 	};
 
+	let applycantCount = 5;
+
 	const renderingDates = selectedDates.map((date) => new Date(date));
+	const availableTimesFormatted: Date[] = [];
+
+	if (availableTimes) {
+		availableTimes.map((cell) => availableTimesFormatted.push(new Date(cell)));
+	}
 
 	const renderCustomDateCell = (date: Date, selected: boolean, blocked: boolean, clicked: boolean) => {
 		if (setClickedTime) {
@@ -79,24 +86,24 @@ const TimeTable = ({ interviewTime, selectedDates, availableTimes, isConfirmed, 
 	};
 
 	return (
-			<ScheduleSelector
-				minTime={8}
-				maxTime={22}
-				renderingDates={renderingDates}
-				selection={schedule}
-				onChange={setSchedule}
-				clickedTime={clickedTime}
-				hourlyChunks={hourlyChunks}
-				timeFormat="H:mm"
-				selectionScheme={'square'}
-				rowGap="0px"
-				columnGap="13px"
-				renderDateLabel={renderCustomDateLabel}
-				renderTimeLabel={renderCustomTimeLabel}
-				renderDateCell={renderCustomDateCell}
-				availableTimes={availableTimes ?? undefined}
-				isConfirmed={isConfirmed ?? false}
-			/>
+		<ScheduleSelector
+			minTime={8}
+			maxTime={22}
+			renderingDates={renderingDates}
+			selection={isConfirmed ? availableTimesFormatted : schedule}
+			onChange={setSchedule}
+			clickedTime={clickedTime}
+			hourlyChunks={hourlyChunks}
+			timeFormat="H:mm"
+			selectionScheme={'square'}
+			rowGap="0px"
+			columnGap="13px"
+			renderDateLabel={renderCustomDateLabel}
+			renderTimeLabel={renderCustomTimeLabel}
+			renderDateCell={renderCustomDateCell}
+			availableTimes={availableTimes ? availableTimesFormatted : undefined}
+			isConfirmed={isConfirmed ?? false}
+		/>
 	);
 };
 
