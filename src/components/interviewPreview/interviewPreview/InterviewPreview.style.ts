@@ -44,11 +44,14 @@ export const PreviewText = styled.div`
 	margin-bottom: 15px;
 	gap: 10px;
 `;
+
+//삭제, 공유 아이콘 박스
 export const InterviewPreIconBox = styled.div`
 	display: flex;
 	padding: 0px 0px 0px 260px;
 `;
 
+//삭제, 공유 아이콘
 export const InterviewPreIcon = styled.img`
 	margin-left: 6px;
 `;
