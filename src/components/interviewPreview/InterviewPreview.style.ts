@@ -44,17 +44,11 @@ export const PreviewText = styled.div`
 	margin-bottom: 15px;
 	gap: 10px;
 `;
-export const PreviewShare = styled.div`
-	width: 60px;
-	font-size: 16px;
-	font-family: 'Pretendard-SemiBold';
-	line-height: 19px;
-	letter-spacing: 0em;
-	color: ${(props) => props.theme.colors.red1};
-	border: 2px solid ${(props) => props.theme.colors.red1};
-	border-radius: 9px;
-	text-align: center;
-	padding: 5px 14px;
-	margin-left: auto;
-	margin-right: 0px;
+export const InterviewPreIconBox = styled.div`
+	display: flex;
+	padding: 0px 0px 0px 260px;
+`;
+
+export const InterviewPreIcon = styled.img`
+	margin-left: 6px;
 `;

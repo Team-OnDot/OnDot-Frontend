@@ -72,7 +72,10 @@ function InterviewPreview({ interviewId }: Interview) {
 				<img src={process.env.PUBLIC_URL + '/images/iconPlace.svg'} />
 				{interviewLocation}
 			</S.PreviewText>
-			<S.PreviewShare>공유</S.PreviewShare>
+			<S.InterviewPreIconBox>
+				<S.InterviewPreIcon src={process.env.PUBLIC_URL + '/images/interviewDeleteIcon.svg'} />
+				<S.InterviewPreIcon src={process.env.PUBLIC_URL + '/images/interviewShareIcon.svg'} />
+			</S.InterviewPreIconBox>
 		</S.PreviewContainer>
 	);
 }
