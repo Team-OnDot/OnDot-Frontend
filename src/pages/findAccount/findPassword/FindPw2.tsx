@@ -1,7 +1,7 @@
 import * as F from '../FindAccount.style';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { findEmailAtom, hashValueAtom, accessTokenAtom } from '../../../recoil/findAccount';
+import { findEmailAtom, hashValueAtom, accessTokenAtom } from '../../../recoil/findAccountAtoms';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 

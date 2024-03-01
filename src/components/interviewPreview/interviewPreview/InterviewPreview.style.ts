@@ -13,6 +13,9 @@ export const PreviewContainer = styled.div`
 	margin-bottom: 40px;
 	cursor: pointer;
 `;
+
+export const PreviewBox = styled.div`
+`;
 export const PreviewWrap = styled.div`
 	display: flex;
 	align-items: center; /* 수직 정렬 */
@@ -46,11 +49,13 @@ export const PreviewText = styled.div`
 `;
 
 //삭제, 공유 아이콘 박스
-export const InterviewPreIconBox = styled.div`
+export const BtnBox = styled.div`
 	display: flex;
 	padding: 0px 0px 0px 260px;
 `;
 
+export const Btn = styled.div`
+`;
 //삭제, 공유 아이콘
 export const InterviewPreIcon = styled.img`
 	margin-left: 6px;

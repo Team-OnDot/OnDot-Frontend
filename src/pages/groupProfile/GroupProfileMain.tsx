@@ -4,6 +4,7 @@ import InterviewPreview from '../../components/interviewPreview/interviewPreview
 import InterviewDelModal from '../../components/interviewPreview/interviewDelete/InterviewDelModal';
 import { useRecoilValue } from 'recoil';
 import { groupInfoAtom } from '../../recoil/groupAtoms';
+import { interviewDelAtom } from '../../recoil/modalAtoms';
 
 function GroupProfileMain() {
 	const navigate = useNavigate();
@@ -17,6 +18,9 @@ function GroupProfileMain() {
 	const groupInfo = useRecoilValue(groupInfoAtom);
 	const interviewList = groupInfo.interviews;
 
+	//삭제 모달창 상태 조회
+	const delModalState = useRecoilValue(interviewDelAtom);
+
 	return (
 		<>
 			<S.InterviewsZone>
@@ -28,10 +32,13 @@ function GroupProfileMain() {
 					</S.NavText>
 					<S.CreateInterviewBtn onClick={onClickCreateInterview} />
 				</S.NavWrap>
+
 				{/*면접 삭제 모달*/}
-				<S.DeleteMain>
-					<InterviewDelModal/>
-				</S.DeleteMain>
+				{delModalState ? (
+					<S.DeleteMain>
+						<InterviewDelModal/>
+					</S.DeleteMain>): null}
+
 				{/*면접 리스트 출력*/}
 				<S.InterviewComponentsZone>
 					{interviewList.length ? (
