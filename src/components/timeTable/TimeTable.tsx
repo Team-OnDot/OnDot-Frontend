@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import * as S from './TimeTable.style';
 import format from 'date-fns/format';
 import { useRecoilState } from 'recoil';
-import { scheduleAtom } from '../../recoil/interviewMake2Atom';
+import { scheduleAtom } from '../../recoil/interviewMakeAtom';
 
 type TimeTable = {
 	interviewTime: number;
