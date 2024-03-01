@@ -1,91 +1,242 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { GroupInfo, groupInfoAtom } from '../../../recoil/groupAtoms';
 import * as S from './GroupProfileSetting.style';
 import GroupType from '../../../components/signUp/signupId/GroupType';
+import { groupTypeAtom } from '../../../recoil/signUpAtoms';
+import axios from 'axios';
 
 function GroupProfileSetting() {
 	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
-	const [imgFile, setImgFile] = useState(groupInfo.imageUrl);
+	const [groupType, setGroupType] = useRecoilState(groupTypeAtom);
+	const [imgFile, setImgFile] = useState<File | null>(null);
+	const [imgUrl, setImgUrl] = useState(groupInfo.imageUrl);
 
 	const regExpName = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,12}$/;
 
 	const navigate = useNavigate();
 
+	const onBack = () => {
+		navigate(-1);
+	}
+
 	const {
 		register,
-		watch,
-		handleSubmit,
-		setValue,
-		formState: { errors, isValid },
+        handleSubmit,
+        watch,
+        setError,
+        resetField,
+        clearErrors,
+        getValues,
+        formState: { errors },
 	} = useForm<GroupInfo>({
 		mode: 'onChange',
 		defaultValues: groupInfo,
 	});
 
-	const onSubmitFun = () => {
-		const data = {
-			name: watch('name'),
-			type: watch('type'),
-			link: watch('profileUrl'),
-			text: watch('description'),
-			contact: watch('contact'),
-		};
+	//완료 버튼 활성화    
+    const [isActive, setIsActive] = useState(false);
+    const watchName = watch('name');
+	const watchProfileUrl = watch('profileUrl');
+
+    useEffect(() => {
+        if (watchName && watchProfileUrl && groupType) {
+            setIsActive(true);
+        } else {
+            setIsActive(false);
+        }
+    }, [watchName, watchProfileUrl]);
+
+    //입력 취소 버튼
+    const removeInput = (name:any) => {
+        clearErrors(name);
+        resetField(name);
+        setError(name, { message: ''});
+    }
+
+	const onchangeImage = ( e: React.ChangeEvent<HTMLInputElement> ) => {
+		if (e.target.files && e.target.files[0]) {
+		  const newFileURL = URL.createObjectURL(e.target.files[0]);
+		  setImgFile(e.target.files[0]);
+		  setImgUrl(newFileURL);
+		  console.log('프로필 사진 교체');
+	  };
+	}
+
+	const accessToken = localStorage.getItem('isLogin');
+	const onValid = (data: GroupInfo) => {
 		console.log(data);
-		// API 연결
+		if(groupType === "동아리"){
+            data.type = "STUDENT_COUNCIL"
+        }
+        else if(groupType === "학생회"){
+            data.type = "STUDENT_CLUB"
+        }
+        else if(groupType === "학술 모임"){
+            data.type = "ACADEMIC_CLUB"
+        }
+        else{
+            data.type = "OTHER"
+        }
+        
+        axios({
+            url: '/api/v1/organizations',
+            method: 'patch',
+            data: {
+                name: data.name,
+                type: data.type,
+                profileUrl: data.profileUrl,
+				imageUrl: data.imageUrl,
+				contact: data.contact,
+				description: data.description
+            },
+			headers: {Authorization: 'Bearer ' + accessToken,},
+          }).then((response) => {
+            console.log("성공");  
+            console.log(response.data);
+			navigate('/group-profile');
+          }).catch((error) => {
+            console.log("실패");  
+            console.error('AxiosError:', error);
+        });
+		
+		if (imgFile) {
+			const formData = new FormData();
+			formData.append("img",  imgFile);
+			axios({
+				url: '/api/v1/auth/profile',
+				method: 'patch',
+				data: formData,
+				headers: {
+					"Content-Type": "multipart/form-data",
+					Authorization: 'Bearer ' + accessToken,
+				},
+			  }).then((response) => {
+				console.log("성공");  
+				console.log(response.data);	
+			  }).catch((error) => {
+				console.log("실패");  
+				console.error('AxiosError:', error);
+			});
+		}
 	};
-	/*
-        <S.BtnBack>
-            <img src={process.env.PUBLIC_URL + '/images/iconBack.svg'} />
-        </S.BtnBack>
-        */
+
 	return (
-		<S.SettingContainer>
-			<S.MainText>
-				그룹프로필 설정
-				<S.MainTextCircle />
-			</S.MainText>
+		<>
+		<S.SettingHeader>
+			<S.BtnBack onClick={onBack} />
+			<S.MainText>그룹프로필 설정</S.MainText>
+			<S.SettingBlock />
+		</S.SettingHeader>
+			
+		<S.SettingContainer encType='multipart/form-data' onSubmit={handleSubmit(onValid)}>
 			<S.TextContainer>
 				<S.TextCircle />
 				<S.Text>프로필 사진</S.Text>
 			</S.TextContainer>
-			<S.Profile src={imgFile ? imgFile : process.env.PUBLIC_URL + '/images/profileImg.svg'}>
-				<S.ProfilePlus src={process.env.PUBLIC_URL + '/images/iconProfilePlus.svg'} />
-			</S.Profile>
-
+			<S.LabelForImage 
+				htmlFor="imageUrl"
+				src={imgUrl? imgUrl : process.env.PUBLIC_URL + '/images/profileImg.svg'}
+			>
+				<S.ProfilePlus />
+			</S.LabelForImage>
+			<S.SettingInputImage type="file" id="imageUrl" accept='image/*' onChange={onchangeImage}/>
 			<S.TextSub>00Mb 이상</S.TextSub>
 			<S.TextContainer>
 				<S.TextCircle />
 				<S.Text>그룹 이름</S.Text>
 			</S.TextContainer>
-			<S.SettingInput type="text" id="name" required {...register('name', { required: true, pattern: regExpName })} />
+			<S.InputContainer
+                toggle={watch("name")?.length > 0 ? true: false || errors.name ? true: false}  
+                color={errors.name ? '#FF4A4A': '#606060'}
+            >
+                <S.SettingInput
+                    type = "text"
+                    id = "name"
+                    required
+                    {...register("name",{
+						required: true,
+						pattern: {
+							value:/^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,12}$/,
+							message: "2~12자 한글, 영문, 숫자"
+						},
+					})}
+                />
+                {watch("name")?.length > 0 && 
+                    <S.ClearBtn
+                        src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
+                        onClick={(e) => {removeInput("name");}}
+                    />
+                }
+            </S.InputContainer>
 			<S.TextSub>2~12자 한글, 영문, 숫자</S.TextSub>
+			
 			<S.TextContainer>
 				<S.TextCircle />
 				<S.Text>그룹분류</S.Text>
 			</S.TextContainer>
 			<GroupType />
+
 			<S.TextContainer>
 				<S.TextCircle />
 				<S.Text>그룹 프로필 주소</S.Text>
 			</S.TextContainer>
-			<S.SettingInput type="text" id="link" required {...register('profileUrl', { required: true })} />
+			<S.InputContainer
+                toggle={watch("profileUrl")?.length > 0 ? true: false || errors.profileUrl ? true: false}  
+                color={errors.profileUrl ? '#FF4A4A': '#606060'}
+            >
+				<S.SettingInput 
+					type="text" 
+					id="profileUrl" 
+					required 
+					{...register("profileUrl",{
+                        required: true,
+                        pattern: {
+                            value: /^[a-z0-9.]{2,12}$/,
+                            message: ""
+                        },
+                    })}
+				/>	
+				{watch("profileUrl")?.length > 0 && 
+                    <S.ClearBtn
+                        src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'}
+                        onClick={(e) => {removeInput("profileUrl");}}
+                    />
+                }
+			</S.InputContainer>
+			
 			<S.TextContainer>
 				<S.TextCircle />
 				<S.Text>프로필 인사말</S.Text>
 			</S.TextContainer>
-			<S.SettingInput type="text" id="text" required {...register('description', { required: true, maxLength: 140 })} />
+			<S.SettingLongInput 
+				id="description"
+				rows={3} cols={30}
+				toggle={watch("description")?.length > 0 ? true: false || errors.description ? true: false}  
+                color={errors.description ? '#FF4A4A': '#606060'}
+				required 
+				{...register('description', { required: true, maxLength: 140 })} 
+			/>
 			<S.TextSub>140자 이내</S.TextSub>
+
 			<S.TextContainer>
 				<S.TextCircle />
 				<S.Text>연락처</S.Text>
 			</S.TextContainer>
-			<S.SettingInput placeholder="전화번호 이메일 혹은 SNS를 입력해주세요" type="text" id="contact" required {...register('contact', { required: true, maxLength: 80 })} />
+			<S.SettingLongInput 
+				id="contact"
+				rows={2} cols={30}
+				toggle={watch("contact")?.length > 0 ? true: false || errors.description ? true: false}  
+                color={errors.contact ? '#FF4A4A': '#606060'}
+				required 
+				{...register('contact', { required: true, maxLength: 80 })} 
+			/>
 			<S.TextSub>80자 이내</S.TextSub>
-			<S.NextBtn type="submit" value="완료" onClick={onSubmitFun} />
+			<S.SubmitBtn type="submit" value="완료" toggle={isActive} />
 		</S.SettingContainer>
+		</>	
 	);
 }
 
