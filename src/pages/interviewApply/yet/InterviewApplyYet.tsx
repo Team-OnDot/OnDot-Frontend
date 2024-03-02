@@ -13,6 +13,7 @@ function InterviewApplyYet() {
 		<>
 			{/*Main*/}
 			<I.InterviewMain>
+			<I.InterviewMainImg src={process.env.PUBLIC_URL + '/images/interviewPageGuestYet.svg'} />
 				<I.InterviewMainText>아직 지원기간이 아닙니다!</I.InterviewMainText>
 				<I.ApplyBtnWrap>
 					<I.ApplyBtn onClick={onClickProfile}>프로필 페이지로 이동</I.ApplyBtn>
