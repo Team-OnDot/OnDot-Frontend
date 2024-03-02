@@ -12,7 +12,7 @@ export type InterviewMake = {
 };
 
 export const interviewMakeAtom = atom<InterviewMake>({
-	key: 'interviewAtom',
+	key: 'interviewMakeAtom',
 	default: {
 		interviewName: '',
 		startDate: '',
