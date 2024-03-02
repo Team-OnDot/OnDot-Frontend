@@ -172,7 +172,7 @@ function TimeTableProgress() {
 						Authorization: 'Bearer ' + accessToken,
 					},
 				});
-				navigate('/timetable-view3');
+				navigate(`/timetable-confirm/${interviewId}`);
 			} catch (error) {
 				console.log(error);
 			}
