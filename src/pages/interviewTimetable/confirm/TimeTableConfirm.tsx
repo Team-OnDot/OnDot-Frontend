@@ -2,12 +2,19 @@ import * as T from './TimeTableConfirm.style';
 import html2canvas from 'html2canvas';
 import saveAs from 'file-saver';
 import { jsPDF } from 'jspdf';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import FinalTable from '../../../components/finalTable/FinalTable';
+import { useRecoilState } from 'recoil';
+import { interviewFinalAtom } from '../../../recoil/interviewFinalAtom';
 
-function TimeTableView3() {
+function TimeTableConfirm() {
+	const { interviewId } = useParams();
 	//공유하기 버튼
 	const popUpRef = useRef<HTMLDivElement>(null);
 	const [shareClicked, setShareClicked] = useState(false);
+	const [interviewFinal, setInterviewFinal] = useRecoilState(interviewFinalAtom);
 
 	const onClickShareBtn = () => {
 		//alert열기
@@ -76,46 +83,80 @@ function TimeTableView3() {
 		setPngClicked(true);
 	};
 
+	const accessToken = localStorage.getItem('isLogin');
+
+	useEffect(() => {
+		const getData = async () => {
+			await axios({
+				url: `/api/v1/interviews/${interviewId}/final`,
+				method: 'get',
+				headers: {
+					Authorization: 'Bearer ' + accessToken,
+				},
+			})
+				.then((response) => {
+					console.log(response.data.content);
+					setInterviewFinal(response.data.content);
+				})
+				.catch((error) => console.log(error));
+		};
+		getData();
+	});
+
 	return (
-		<div ref={popUpRef}>
+		<T.Container ref={popUpRef}>
 			{shareClicked ? (
 				<T.AlertBox>
 					<T.AlertText>클립보드에 복사가 완료되었습니다!</T.AlertText>
 					<T.AlertCloseBtn onClick={onClickCloseBtn}>완료</T.AlertCloseBtn>
 				</T.AlertBox>
 			) : null}
-			<T.TimeTableView3>
-				<T.Main>
-					{/*header*/}
-					<T.Header>
-						<T.Ellipse39 />
-						<T.Title>면접 테이블 확정</T.Title>
-					</T.Header>
-					<img src={process.env.PUBLIC_URL + '/images/lineCircleLong.svg'} />
-					<T.TitleText>최종 면접 타임테이블이 확정되었습니다.</T.TitleText>
+			<div>
+				{/*header*/}
+				<T.Header>
+					<T.Ellipse39 />
+					<T.Title>면접 테이블 확정</T.Title>
+				</T.Header>
+				<img src={process.env.PUBLIC_URL + '/images/lineCircleLong.svg'} />
+				<T.TitleText>최종 면접 타임테이블이 확정되었습니다.</T.TitleText>
 
-					{/*타임테이블(main) */}
-					<div ref={divRef}>
-						<T.TimeTable />
-					</div>
+				{/*타임테이블*/}
+				<T.TableWrapper ref={divRef}>
+					<FinalTable />
+				</T.TableWrapper>
 
-					{/*footer*/}
-					<T.ShareBtn onClick={onClickShareBtn}>공유하기</T.ShareBtn>
-					{/*pdf, png btn box*/}
-					<T.PdfPngBtnBox>
-						<T.PdfBtn onClick={onClickPdfBtn} color={pdfClicked}>
-							{pdfClicked ? <T.BtnIcon src={process.env.PUBLIC_URL + '/images/clickedPdfIcon.svg'} /> : <T.BtnIcon src={process.env.PUBLIC_URL + '/images/pdfIcon.svg'} />}
-							PDF
-						</T.PdfBtn>
-						<T.PngBtn onClick={onClickPngBtn} color={pngClicked}>
-							{pngClicked ? <T.BtnIcon src={process.env.PUBLIC_URL + '/images/clickedPngIcon.svg'} /> : <T.BtnIcon src={process.env.PUBLIC_URL + '/images/pngIcon.svg'} />}
-							PNG
-						</T.PngBtn>
-					</T.PdfPngBtnBox>
-				</T.Main>
-			</T.TimeTableView3>
-		</div>
+				{interviewFinal.notMatchedApplicants.length > 0 ? (
+					<T.NotMatchedWrapper>
+						<h3>매칭되지 않은 지원자</h3>
+						<T.AvailableApplicantContainer>
+							{interviewFinal.notMatchedApplicants.map((p) => (
+								<T.AvailableApplicantWrapper>
+									<T.IconApplicant />
+									<div>
+										<span>{`${p.name}(${p.phone.slice(9)})`}</span>
+									</div>
+								</T.AvailableApplicantWrapper>
+							))}
+						</T.AvailableApplicantContainer>
+					</T.NotMatchedWrapper>
+				) : null}
+
+				{/*footer*/}
+				<T.ShareBtn onClick={onClickShareBtn}>공유하기</T.ShareBtn>
+				{/*pdf, png btn box*/}
+				<T.PdfPngBtnBox>
+					<T.PdfBtn onClick={onClickPdfBtn} color={pdfClicked}>
+						{pdfClicked ? <T.BtnIcon src={process.env.PUBLIC_URL + '/images/clickedPdfIcon.svg'} /> : <T.BtnIcon src={process.env.PUBLIC_URL + '/images/pdfIcon.svg'} />}
+						PDF
+					</T.PdfBtn>
+					<T.PngBtn onClick={onClickPngBtn} color={pngClicked}>
+						{pngClicked ? <T.BtnIcon src={process.env.PUBLIC_URL + '/images/clickedPngIcon.svg'} /> : <T.BtnIcon src={process.env.PUBLIC_URL + '/images/pngIcon.svg'} />}
+						PNG
+					</T.PngBtn>
+				</T.PdfPngBtnBox>
+			</div>
+		</T.Container>
 	);
 }
 
-export default TimeTableView3;
+export default TimeTableConfirm;
