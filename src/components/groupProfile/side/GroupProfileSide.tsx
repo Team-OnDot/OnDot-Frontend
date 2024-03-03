@@ -6,25 +6,6 @@ import { useRecoilState } from 'recoil';
 import { groupInfoAtom } from '../../../recoil/groupAtoms';
 
 function GroupProfileSide() {
-	// type GroupInfo = {
-	// 	name?: string,
-	//   type?: string,
-	//   profileUrl?: string,
-	//   imageUrl?: string,
-	//   contact?: string,
-	//   description?: string,
-	//   interviews?: number[],
-	// }
-	// const [groupInfo, setGroupInfo] = useState<GroupInfo>({
-	// 	name: "",
-	//   type: "",
-	//   profileUrl: "",
-	//   imageUrl: "",
-	//   contact: "",
-	//   description: "",
-	//   interviews: [],
-	// });
-
 	const accessToken = localStorage.getItem('isLogin');
 	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
 
@@ -79,7 +60,7 @@ function GroupProfileSide() {
 			<div>
 				<S.GroupImg src={process.env.PUBLIC_URL + '/images/profileImg.svg'} />
 				<S.GroupName>{groupInfo.name}</S.GroupName>
-				<S.GroupType>{groupInfo.type}</S.GroupType>
+				<S.GroupType>{groupInfo.type === 'STUDENT_COUNCIL' ? '학생회' : groupInfo.type === 'STUDENT_CLUB' ? '동아리' : groupInfo.type === 'ACADEMIC_CLUB' ? '학술모임' : '기타'}</S.GroupType>
 				<S.GroupLink onClick={handleCopyLink}>
 					<a ref={linkRef} href={groupInfo.profileUrl}>
 						{groupInfo.profileUrl}

@@ -45,7 +45,7 @@ export const GroupLink = styled.p`
 `;
 
 export const Line = styled.img`
-	margin: 5px 0px;
+	margin: 10px 0px;
 	-webkit-user-drag: none;
 `;
 
@@ -56,6 +56,7 @@ export const GroupTextArea = styled.div`
 	word-break: keep-all;
 	border-radius: 15px;
 	border: 2px solid ${(props) => props.theme.colors.gray6};
+	margin-bottom: 30px;
 `;
 
 export const IconBtnWrapper = styled.p`
@@ -63,7 +64,7 @@ export const IconBtnWrapper = styled.p`
 	align-items: center;
 	gap: 10px;
 	width: 100px;
-	padding: 15px;
+	padding-left: 15px;
 	font-size: 15px;
 	font-family: 'Pretendard-SemiBold';
 	white-space: nowrap;
