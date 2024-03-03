@@ -44,7 +44,7 @@ function Header() {
 					<S.HeaderText>문의하기</S.HeaderText>
 				</S.HeaderWrapper>
 				<S.LoginBtnBox>
-					{localStorage.getItem('isLogin') !== null ? <S.HeaderProfile onClick={onClickProfile} src={process.env.PUBLIC_URL + '/images/headerProfile.svg'}></S.HeaderProfile>:
+					{sessionStorage.getItem('isLogin') !== null ? <S.HeaderProfile onClick={onClickProfile} src={process.env.PUBLIC_URL + '/images/headerProfile.svg'}></S.HeaderProfile>:
 					<S.LoginBtn onClick={onClickLoginBtn}>로그인</S.LoginBtn>}
 					<S.MenuBtn onClick={onClickMenuBtn} src={process.env.PUBLIC_URL + '/images/menuBtn.svg'}></S.MenuBtn>
 					<S.SideMenuBox state={menuOpen}>
