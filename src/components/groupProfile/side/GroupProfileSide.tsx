@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import * as S from './GroupProfile.style';
+import * as S from './GroupProfileSide.style';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
@@ -8,21 +8,21 @@ import { groupInfoAtom } from '../../../recoil/groupAtoms';
 function GroupProfileSide() {
 	// type GroupInfo = {
 	// 	name?: string,
-  //   type?: string,
-  //   profileUrl?: string,
-  //   imageUrl?: string,
-  //   contact?: string,
-  //   description?: string,
-  //   interviews?: number[],
+	//   type?: string,
+	//   profileUrl?: string,
+	//   imageUrl?: string,
+	//   contact?: string,
+	//   description?: string,
+	//   interviews?: number[],
 	// }
 	// const [groupInfo, setGroupInfo] = useState<GroupInfo>({
 	// 	name: "",
-  //   type: "",
-  //   profileUrl: "",
-  //   imageUrl: "",
-  //   contact: "",
-  //   description: "",
-  //   interviews: [],
+	//   type: "",
+	//   profileUrl: "",
+	//   imageUrl: "",
+	//   contact: "",
+	//   description: "",
+	//   interviews: [],
 	// });
 
 	const accessToken = localStorage.getItem('isLogin');
@@ -34,15 +34,17 @@ function GroupProfileSide() {
 				url: '/api/v1/organizations',
 				method: 'get',
 				headers: {
-					Authorization: 'Bearer ' + accessToken
-				}
-			}).then((response) => {
-				console.log(response.data);
-				setGroupInfo(response.data.content);
-			}).catch((error) => console.log((error)));
-		}
+					Authorization: 'Bearer ' + accessToken,
+				},
+			})
+				.then((response) => {
+					console.log(response.data);
+					setGroupInfo(response.data.content);
+				})
+				.catch((error) => console.log(error));
+		};
 		getData();
-	}, [])
+	}, []);
 
 	const navigate = useNavigate();
 

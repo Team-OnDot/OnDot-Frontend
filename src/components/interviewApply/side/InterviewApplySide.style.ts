@@ -4,7 +4,7 @@ export const Container = styled.div`
 	width: 375px;
 	min-height: calc(100vh - 87px); // 화면 최대 높이 - 헤더 높이
 	flex-shrink: 0;
-	padding: 63px 38px 0px;
+	padding: 63px 38px 150px;
 	box-shadow: 0 4px 15.9px 0 rgba(0, 0, 0, 0.05);
 	border-radius: 0px 0px 185px 0px;
 	text-align: center;
