@@ -1,4 +1,7 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
 
 export type GroupInfo = {
 	organizationId: number | null;
@@ -23,4 +26,5 @@ export const groupInfoAtom = atom<GroupInfo>({
 		description: '',
 		interviews: [],
 	},
+	effects_UNSTABLE: [persistAtom],
 });

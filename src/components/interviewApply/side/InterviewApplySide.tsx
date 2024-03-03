@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import * as S from './InterviewApplySide.style';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { interviewInfoAtom } from '../../../recoil/interviewAtom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
+import { groupInfoAtom } from '../../../recoil/groupAtoms';
 
 function InterviewApplySide() {
 	const [interviewInfo, setInterviewInfo] = useRecoilState(interviewInfoAtom);
+	const groupInfo = useRecoilValue(groupInfoAtom);
 	const { interviewId } = useParams();
 	const accessToken = localStorage.getItem('isLogin');
 	const [startDateString, setStartDateString] = useState<string>();
@@ -41,11 +43,11 @@ function InterviewApplySide() {
 		}
 	});
 
-	const groupInfo = {
-		groupName: '온닷',
-		groupType: '동아리',
-		groupLink: 'Ondot.co.kr.ondot2024',
-	};
+	// const groupInfo = {
+	// 	groupName: '온닷',
+	// 	groupType: '동아리',
+	// 	groupLink: 'Ondot.co.kr.ondot2024',
+	// };
 
 	// const interviewInfo = {
 	// 	interviewTitle: '온닷 1기 운영진 면접',
@@ -73,11 +75,11 @@ function InterviewApplySide() {
 	return (
 		<S.Container>
 			<S.GroupImg src={process.env.PUBLIC_URL + '/images/profileImg.svg'} />
-			<S.GroupName>{groupInfo.groupName}</S.GroupName>
-			<S.GroupType>{groupInfo.groupType}</S.GroupType>
+			<S.GroupName>{groupInfo.name}</S.GroupName>
+			<S.GroupType>{groupInfo.type === 'STUDENT_COUNCIL' ? '학생회' : groupInfo.type === 'STUDENT_CLUB' ? '동아리' : groupInfo.type === 'ACADEMIC_CLUB' ? '학술모임' : '기타'}</S.GroupType>
 			<S.GroupLink onClick={handleCopyLink}>
-				<a ref={linkRef} href={groupInfo.groupLink}>
-					{groupInfo.groupLink}
+				<a ref={linkRef} href={groupInfo.profileUrl}>
+					{groupInfo.profileUrl}
 				</a>
 			</S.GroupLink>
 			<S.InterviewInfoContainer>
