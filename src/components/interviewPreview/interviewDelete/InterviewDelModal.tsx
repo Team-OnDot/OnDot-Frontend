@@ -17,7 +17,7 @@ function InterviewDelModal() {
 			params: {
 				interviewId: interviewId,
 			},
-			headers: { Authorization: 'Bearer ' + localStorage.getItem('isLogin') },
+			headers: { Authorization: 'Bearer ' + sessionStorage.getItem('isLogin') },
 		})
         .then((response) => {
             console.log(response.data);

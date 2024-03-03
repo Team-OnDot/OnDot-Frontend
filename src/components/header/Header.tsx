@@ -26,7 +26,7 @@ function Header() {
 	const onClickProfile = () => {
 
 		setMenuOpen(false);
-		if (localStorage.getItem('isLogin') !== null)
+		if (sessionStorage.getItem('isLogin') !== null)
 			navigate("/group-profile");
 		else
 			navigate("/login");
