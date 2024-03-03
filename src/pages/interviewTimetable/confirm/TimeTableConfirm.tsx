@@ -8,28 +8,24 @@ import { useParams } from 'react-router-dom';
 import FinalTable from '../../../components/finalTable/FinalTable';
 import { useRecoilState } from 'recoil';
 import { interviewFinalAtom } from '../../../recoil/interviewFinalAtom';
+import ShareModal from '../../../components/modal/share/ShareModal';
 
 function TimeTableConfirm() {
 	const { interviewId } = useParams();
 	//공유하기 버튼
 	const popUpRef = useRef<HTMLDivElement>(null);
-	const [shareClicked, setShareClicked] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 	const [interviewFinal, setInterviewFinal] = useRecoilState(interviewFinalAtom);
 
 	const onClickShareBtn = () => {
 		//alert열기
-		setShareClicked(true);
+		setIsOpen(true);
 		//alert로 이동
-		popUpRef.current?.scrollIntoView({ behavior: 'smooth' });
+		// popUpRef.current?.scrollIntoView({ behavior: 'smooth' });
 
 		//클립보드 복사
 		const currentUrl = window.location.href;
 		navigator.clipboard.writeText(currentUrl);
-	};
-
-	//alert 닫기 버튼
-	const onClickCloseBtn = () => {
-		setShareClicked(false);
 	};
 
 	const divRef = useRef<HTMLDivElement>(null);
@@ -104,58 +100,55 @@ function TimeTableConfirm() {
 	});
 
 	return (
-		<T.Container ref={popUpRef}>
-			{shareClicked ? (
-				<T.AlertBox>
-					<T.AlertText>클립보드에 복사가 완료되었습니다!</T.AlertText>
-					<T.AlertCloseBtn onClick={onClickCloseBtn}>완료</T.AlertCloseBtn>
-				</T.AlertBox>
-			) : null}
-			<div>
-				{/*header*/}
-				<T.Header>
-					<T.Ellipse39 />
-					<T.Title>면접 테이블 확정</T.Title>
-				</T.Header>
-				<img src={process.env.PUBLIC_URL + '/images/lineCircleLong.svg'} />
-				<T.TitleText>최종 면접 타임테이블이 확정되었습니다.</T.TitleText>
+		<>
+			<T.Container ref={popUpRef}>
+				<div>
+					{/*header*/}
+					<T.Header>
+						<T.Ellipse39 />
+						<T.Title>면접 테이블 확정</T.Title>
+					</T.Header>
+					<img src={process.env.PUBLIC_URL + '/images/lineCircleLong.svg'} />
+					<T.TitleText>최종 면접 타임테이블이 확정되었습니다.</T.TitleText>
 
-				{/*타임테이블*/}
-				<T.TableWrapper ref={divRef}>
-					<FinalTable />
-				</T.TableWrapper>
+					{/*타임테이블*/}
+					<T.TableWrapper ref={divRef}>
+						<FinalTable />
+					</T.TableWrapper>
 
-				{interviewFinal.notMatchedApplicants.length > 0 ? (
-					<T.NotMatchedWrapper>
-						<h3>매칭되지 않은 지원자</h3>
-						<T.AvailableApplicantContainer>
-							{interviewFinal.notMatchedApplicants.map((p) => (
-								<T.AvailableApplicantWrapper>
-									<T.IconApplicant />
-									<div>
-										<span>{`${p.name}(${p.phone.slice(9)})`}</span>
-									</div>
-								</T.AvailableApplicantWrapper>
-							))}
-						</T.AvailableApplicantContainer>
-					</T.NotMatchedWrapper>
-				) : null}
+					{interviewFinal.notMatchedApplicants.length > 0 ? (
+						<T.NotMatchedWrapper>
+							<h3>매칭되지 않은 지원자</h3>
+							<T.AvailableApplicantContainer>
+								{interviewFinal.notMatchedApplicants.map((p) => (
+									<T.AvailableApplicantWrapper>
+										<T.IconApplicant />
+										<div>
+											<span>{`${p.name}(${p.phone.slice(9)})`}</span>
+										</div>
+									</T.AvailableApplicantWrapper>
+								))}
+							</T.AvailableApplicantContainer>
+						</T.NotMatchedWrapper>
+					) : null}
 
-				{/*footer*/}
-				<T.ShareBtn onClick={onClickShareBtn}>공유하기</T.ShareBtn>
-				{/*pdf, png btn box*/}
-				<T.PdfPngBtnBox>
-					<T.PdfBtn onClick={onClickPdfBtn} color={pdfClicked}>
-						{pdfClicked ? <T.BtnIcon src={process.env.PUBLIC_URL + '/images/clickedPdfIcon.svg'} /> : <T.BtnIcon src={process.env.PUBLIC_URL + '/images/pdfIcon.svg'} />}
-						PDF
-					</T.PdfBtn>
-					<T.PngBtn onClick={onClickPngBtn} color={pngClicked}>
-						{pngClicked ? <T.BtnIcon src={process.env.PUBLIC_URL + '/images/clickedPngIcon.svg'} /> : <T.BtnIcon src={process.env.PUBLIC_URL + '/images/pngIcon.svg'} />}
-						PNG
-					</T.PngBtn>
-				</T.PdfPngBtnBox>
-			</div>
-		</T.Container>
+					{/*footer*/}
+					<T.ShareBtn onClick={onClickShareBtn}>공유하기</T.ShareBtn>
+					{/*pdf, png btn box*/}
+					<T.PdfPngBtnBox>
+						<T.PdfBtn onClick={onClickPdfBtn} color={pdfClicked}>
+							{pdfClicked ? <T.BtnIcon src={process.env.PUBLIC_URL + '/images/clickedPdfIcon.svg'} /> : <T.BtnIcon src={process.env.PUBLIC_URL + '/images/pdfIcon.svg'} />}
+							PDF
+						</T.PdfBtn>
+						<T.PngBtn onClick={onClickPngBtn} color={pngClicked}>
+							{pngClicked ? <T.BtnIcon src={process.env.PUBLIC_URL + '/images/clickedPngIcon.svg'} /> : <T.BtnIcon src={process.env.PUBLIC_URL + '/images/pngIcon.svg'} />}
+							PNG
+						</T.PngBtn>
+					</T.PdfPngBtnBox>
+				</div>
+			</T.Container>
+			{isOpen ? <ShareModal setIsOpen={setIsOpen} /> : null}
+		</>
 	);
 }
 

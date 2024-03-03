@@ -1,12 +1,12 @@
 import * as S from './ConfirmModal.style';
 
-type ConfirmPopup = {
+type ConfirmModal = {
 	setIsOpen: (state: boolean) => void;
 	confirmInterview: (interviewId: string) => void;
 	interviewId: string;
 };
 
-function ConfirmPopup({ setIsOpen, confirmInterview, interviewId }: ConfirmPopup) {
+function ConfirmModal({ setIsOpen, confirmInterview, interviewId }: ConfirmModal) {
 	return (
 		<S.Background>
 			<S.Box>
@@ -21,4 +21,4 @@ function ConfirmPopup({ setIsOpen, confirmInterview, interviewId }: ConfirmPopup
 	);
 }
 
-export default ConfirmPopup;
+export default ConfirmModal;
