@@ -1,5 +1,8 @@
 import { TimeCells } from './interviewAtom';
+import { recoilPersist } from 'recoil-persist';
+
 import { atom } from 'recoil';
+const { persistAtom } = recoilPersist();
 
 export type NotMatchedApplicants = {
 	name: string;
@@ -17,4 +20,5 @@ export const interviewFinalAtom = atom<InterviewFinal>({
 		timeCells: [],
 		notMatchedApplicants: [],
 	},
+	effects_UNSTABLE: [persistAtom],
 });

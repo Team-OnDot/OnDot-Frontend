@@ -1,4 +1,7 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
 
 export type TimeCells = {
 	dateTime: string;
@@ -41,4 +44,5 @@ export const interviewInfoAtom = atom<InterviewInfo>({
 		interviewDates: [],
 		timeCells: [],
 	},
+	effects_UNSTABLE: [persistAtom],
 });
