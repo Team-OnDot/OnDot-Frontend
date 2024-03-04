@@ -2,14 +2,13 @@ import { useRecoilValue } from 'recoil';
 import OndatCalendar from '../../components/calendar/OndatCalendar';
 import TimeTable from '../../components/timeTable/TimeTable';
 import * as S from './InterviewMake2.style';
-import { scheduleAtom, selectedDatesAtom } from '../../recoil/interviewMake2Atom';
+import { scheduleAtom, selectedDatesAtom, interviewTimeAtom } from '../../recoil/interviewMakeAtom';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 // @ts-ignore
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
 import { chunkArray } from '../../utils/chunkArray';
-import { interviewTimeAtom } from '../../recoil/interviewAtoms';
 
 function InterviewMake2() {
 	const selectedDates = useRecoilValue(selectedDatesAtom);
@@ -47,14 +46,13 @@ function InterviewMake2() {
 	//다음 버튼 클릭시
 	const navigate = useNavigate();
 	const onClickNextBtn = () => {
-		if(schedule.length > 0)
-			navigate('/interview-make-3');
-	}
+		if (schedule.length > 0) navigate('/interview-make-3');
+	};
 
 	//이전 버튼 클릭 시
 	const onClickPreBtn = () => {
 		navigate('/interview-make-1');
-	}
+	};
 
 	return (
 		<S.MakeContainer>
@@ -102,8 +100,8 @@ function InterviewMake2() {
 				</S.TimeTableWrapper>
 			) : null}
 			<S.MakeBtnContainer>
-				<S.MakeBtn type="button" value="이전" onClick={onClickPreBtn}/>
-				<S.MakeBtn type="button" value="다음" isActive={schedule.length > 0} onClick={onClickNextBtn}/>
+				<S.MakeBtn type="button" value="이전" onClick={onClickPreBtn} />
+				<S.MakeBtn type="button" value="다음" isActive={schedule.length > 0} onClick={onClickNextBtn} />
 			</S.MakeBtnContainer>
 		</S.MakeContainer>
 	);

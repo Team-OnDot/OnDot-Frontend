@@ -25,7 +25,7 @@ import InterviewApplyEditInfoCheck from './pages/interviewApply/editInfo/check/I
 import InterviewApplyEditInfo from './pages/interviewApply/editInfo/InterviewApplyEditInfo';
 import LoginLoading from './pages/login/LoginLoading';
 import TimeTableProgress from './pages/interviewTimetable/progress/TimeTableProgress';
-import TimeTableView3 from './pages/timeTableDown/TimeTableView3';
+import TimeTableViewConfirm from './pages/interviewTimetable/confirm/TimeTableConfirm';
 import GroupProfile from './components/groupProfile/GroupProfile';
 import SignUpGoogle from './pages/signUp/SignUpGoogle';
 //findAccount
@@ -54,7 +54,6 @@ function App() {
 								<Route path="/interview-make-2" element={<InterviewMake2 />} />
 								<Route path="/interview-make-3" element={<InterviewMake3 />} />
 								<Route path="/interview-make-complete" element={<InterviewMakeComplete />} />
-								<Route path="/timetable-view3" element={<TimeTableView3 />} />
 								<Route path="/find-id-1" element={<FindId1 />} />
 								<Route path="/find-id-2" element={<FindId2 />} />
 								<Route path="/find-password-1" element={<FindPw1 />} />
@@ -63,10 +62,11 @@ function App() {
 								{/* 그룹 페이지 */}
 								<Route element={<GroupProfile />}>
 									<Route path="/group-profile" element={<GroupProfileMain />} />
-									<Route path="/timetable-progress/:interviewId" element={<TimeTableProgress />} />
 								</Route>
 								{/* 면접 지원자 페이지 */}
 								<Route element={<InterviewApply />}>
+									<Route path="/timetable-progress/:interviewId" element={<TimeTableProgress />} />
+									<Route path="/timetable-confirm/:interviewId" element={<TimeTableViewConfirm />} />
 									<Route path="/interview-apply" element={<InterviewApplyMain />} />
 									<Route path="/interview-apply-input-info" element={<InterviewApplyInputInfo />} />
 									<Route path="/interview-apply-input-schedule" element={<InterviewApplyInputSchedule />} />
