@@ -84,7 +84,7 @@ function TimeTableProgress() {
 
 	const [interviewData, setInterviewData] = useState<InterviewData>(defaultInterviewData);
 	const [availableTimes, setAvailableTimes] = useState<string[]>();
-	const accessToken = localStorage.getItem('isLogin');
+	const accessToken = sessionStorage.getItem('isLogin');
 
 	useEffect(() => {
 		const getData = async () => {

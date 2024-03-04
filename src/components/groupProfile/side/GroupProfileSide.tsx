@@ -6,25 +6,6 @@ import { useRecoilState } from 'recoil';
 import { groupInfoAtom } from '../../../recoil/groupAtoms';
 
 function GroupProfileSide() {
-	// type GroupInfo = {
-	// 	name?: string,
-	//   type?: string,
-	//   profileUrl?: string,
-	//   imageUrl?: string,
-	//   contact?: string,
-	//   description?: string,
-	//   interviews?: number[],
-	// }
-	// const [groupInfo, setGroupInfo] = useState<GroupInfo>({
-	// 	name: "",
-	//   type: "",
-	//   profileUrl: "",
-	//   imageUrl: "",
-	//   contact: "",
-	//   description: "",
-	//   interviews: [],
-	// });
-
 	const accessToken = sessionStorage.getItem('isLogin');
 	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
 
@@ -34,15 +15,26 @@ function GroupProfileSide() {
 				url: '/api/v1/organizations',
 				method: 'get',
 				headers: {
-					Authorization: 'Bearer ' + accessToken,
-				},
-			})
-				.then((response) => {
-					console.log(response.data);
-					setGroupInfo(response.data.content);
-				})
-				.catch((error) => console.log(error));
-		};
+					Authorization: 'Bearer ' + accessToken
+				}
+			}).then((response) => {
+				console.log(response.data);
+				const getGroupInfo = response.data.content;
+				if(getGroupInfo.type === "STUDENT_COUNCIL"){
+					getGroupInfo.type = "동아리";
+				}
+				else if(getGroupInfo.type === "STUDENT_CLUB"){
+					getGroupInfo.type = "학생회";
+				}
+				else if(getGroupInfo.type === "ACADEMIC_CLUB"){
+					getGroupInfo.type = "학술 모임";
+				}
+				else{
+					getGroupInfo.type = "기타";
+				}
+				setGroupInfo(getGroupInfo);
+			}).catch((error) => console.log((error)));
+		}
 		getData();
 	}, []);
 
@@ -77,7 +69,7 @@ function GroupProfileSide() {
 	return (
 		<S.Container>
 			<div>
-				<S.GroupImg src={process.env.PUBLIC_URL + '/images/profileImg.svg'} />
+				<S.GroupImg src={groupInfo.imageUrl? groupInfo.imageUrl: process.env.PUBLIC_URL + '/images/profileImg.svg'} />
 				<S.GroupName>{groupInfo.name}</S.GroupName>
 				<S.GroupType>{groupInfo.type}</S.GroupType>
 				<S.GroupLink onClick={handleCopyLink}>

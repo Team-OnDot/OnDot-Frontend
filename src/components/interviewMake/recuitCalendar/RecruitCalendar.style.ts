@@ -10,8 +10,8 @@ export const MakeInputContainer = styled.div<{ toggle: boolean; color: string }>
 	background-position: 10px center;
 	border-radius: 11px;
 	display: flex;
-	border: 2px solid ${(props) => (props.toggle ? props.color : `${props.theme.colors.gray4}`)};
-	color: ${(props) => (props.toggle ? `${props.theme.colors.gray1}` : `${props.theme.colors.gray2}`)};
+	border: 2px solid ${(props) => props.color };
+	color: ${(props) => props.color };
 `;
 
 //입력 input

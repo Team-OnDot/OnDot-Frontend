@@ -8,21 +8,15 @@ export const NavWrap = styled.div`
 	display: flex;
 	margin-top: 40px;
 `;
-export const NavText = styled.div`
+export const NavTextBox = styled.div`
 	width: 300px;
+`;
+export const NavText = styled.div`
 	text-align: left;
 	font-size: 22px;
 	font-family: 'Pretendard-SemiBold';
 	letter-spacing: 0em;
-`;
-export const NavCircle = styled.div`
-	display: inline-block;
-	width: 12px;
-	height: 12px;
-	border-radius: 50%;
-	background-color: ${(props) => props.theme.colors.red1};
-	margin-left: 60px;
-	margin-right: 10px;
+	padding-left: 80px;
 `;
 export const CreateInterviewBtn = styled.button`
 	width: 100px;

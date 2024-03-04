@@ -2,9 +2,10 @@ import * as I from './InterviewApplyComplete.style';
 
 function InterviewApplyComplete() {
 	return (
-		<div>
+		<>
 			{/*Main*/}
 			<I.InterviewMain>
+				<I.InterviewMainImg src={process.env.PUBLIC_URL + '/images/interviewPageGuestComplete.svg'} />
 				<I.InterviewMainText>
 					지원해주셔서 감사합니다.
 					<br />
@@ -15,7 +16,7 @@ function InterviewApplyComplete() {
 					<I.ProfileBtn>프로필 페이지로 이동</I.ProfileBtn>
 				</I.ApplyBtnWrap>
 			</I.InterviewMain>
-		</div>
+		</>
 	);
 }
 

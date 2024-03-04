@@ -20,6 +20,11 @@ export const HeaderText = styled.div`
     margin-top: 22px;
 `;
 
+//헤더 텍스트
+export const iconImg = styled.img`
+	margin: 80px auto 0px;
+`;
+
 //메인
 export const Main = styled.div`
     margin-top: 35px;
