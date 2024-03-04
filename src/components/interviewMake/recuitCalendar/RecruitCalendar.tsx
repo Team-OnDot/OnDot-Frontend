@@ -39,7 +39,7 @@ const RecruitCalendar = () => {
                         value={(startDate===''? '____년 _월 _일': startDate) + " ~ " + (endDate===''? '____년 _월 _일':endDate)} 
                     /> 
                 </S.InputWrap>
-                <S.CalendarWrap className='apply-calendar' onCalendar={isCalendar} >
+                <S.CalendarWrap className='recuit-calendar' onCalendar={isCalendar} >
                     <Calendar
                         onChange={onChangeDate} 
                         selectRange={true}
