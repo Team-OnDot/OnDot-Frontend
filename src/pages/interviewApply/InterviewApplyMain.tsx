@@ -1,17 +1,39 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as I from './InterviewApplyMain.style';
+import { interviewApplyAtom } from '../../recoil/interviewApplyAtom';
+import { useRecoilState } from 'recoil';
 
 function InterviewApplyMain() {
 	const navigate = useNavigate();
+	const [interviewApply, setInterviewApply] = useRecoilState(interviewApplyAtom);
+	const { organizationId, interviewId } = useParams();
 
 	//면접 지원하기 클릭 시
 	const onClickApply = () => {
-		navigate('/interview-apply-input-info');
+		if (organizationId !== undefined && interviewId !== undefined) {
+			setInterviewApply({
+				organizationId: organizationId,
+				interviewId: interviewId,
+				applyName: interviewApply.applyName,
+				applyPhone: interviewApply.applyPhone,
+				applyEmail: interviewApply.applyEmail,
+			});
+			navigate('/interview-apply-input-info');
+		}
 	};
 
 	//지원 정보 수정하기 클릭 시
 	const onClickEdit = () => {
-		navigate('/interview-apply-edit-info');
+		if (organizationId !== undefined && interviewId !== undefined) {
+			setInterviewApply({
+				organizationId: organizationId,
+				interviewId: interviewId,
+				applyName: interviewApply.applyName,
+				applyPhone: interviewApply.applyPhone,
+				applyEmail: interviewApply.applyEmail,
+			});
+			navigate('/interview-apply-edit-info');
+		}
 	};
 
 	return (
