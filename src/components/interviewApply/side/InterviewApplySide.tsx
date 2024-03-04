@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 function InterviewApplySide() {
 	const [interviewInfo, setInterviewInfo] = useRecoilState(interviewInfoAtom);
 	const { interviewId } = useParams();
-	const accessToken = localStorage.getItem('isLogin');
+	const accessToken = sessionStorage.getItem('isLogin');
 	const [startDateString, setStartDateString] = useState<string>();
 	const [endDateString, setEndDateString] = useState<string>();
 

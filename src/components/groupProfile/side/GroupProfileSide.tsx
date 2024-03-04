@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 import { groupInfoAtom } from '../../../recoil/groupAtoms';
 
 function GroupProfileSide() {
-	const accessToken = localStorage.getItem('isLogin');
+	const accessToken = sessionStorage.getItem('isLogin');
 	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
 
 	useEffect(() => {

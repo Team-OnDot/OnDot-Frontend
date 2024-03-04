@@ -9,7 +9,7 @@ import { groupTypeAtom } from '../../../recoil/signUpAtoms';
 import axios from 'axios';
 
 function GroupProfileSetting() {
-	const accessToken = localStorage.getItem('isLogin');
+	const accessToken = sessionStorage.getItem('isLogin');
 	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
 	const [groupType, setGroupType] = useRecoilState(groupTypeAtom);
 	const [imgFile, setImgFile] = useState<File | null>(null);
