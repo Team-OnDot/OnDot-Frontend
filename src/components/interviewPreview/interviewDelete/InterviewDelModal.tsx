@@ -22,7 +22,7 @@ function InterviewDelModal() {
         .then((response) => {
             console.log(response.data);
             setDelModal(false);
-            window.location.reload();
+            //window.location.reload();
         })
         .catch((error) => {
             console.log('실패');
