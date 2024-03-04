@@ -27,15 +27,29 @@ const RecruitCalendar = () => {
 
 	return (
 		<>
-			<S.MakeInputContainer toggle={isCalendar ? true : false} color={startDate === '' && endDate === '' ? '#FF4A4A' : '#606060'}>
-				<S.InterviewIcon src={process.env.PUBLIC_URL + '/images/iconDate_gray.svg'}></S.InterviewIcon>
-				<S.InputWrap toggle={isCalendar ? true : false} onClick={onCalendar}>
-					<S.MakeInputDate type="text" id="startDate" value={(startDate === '' ? '____년 _월 _일' : startDate) + ' ~ ' + (endDate === '' ? '____년 _월 _일' : endDate)} />
-				</S.InputWrap>
-				<S.CalendarWrap className="apply-calendar" onCalendar={isCalendar}>
-					<Calendar onChange={onChangeDate} selectRange={true} next2Label={null} prev2Label={null} formatDay={(locale, date) => format(date, 'dd')} showNeighboringMonth={false} />
-				</S.CalendarWrap>
-			</S.MakeInputContainer>
+            <S.MakeInputContainer
+                toggle={isCalendar ? true: false}  
+                color={(startDate==='' && endDate==='') ? '#959595': '#606060'}
+            >
+                <S.InterviewIcon src={process.env.PUBLIC_URL + '/images/iconDate_gray.svg'}></S.InterviewIcon>
+                <S.InputWrap toggle={isCalendar? true:false} onClick={onCalendar}>
+                    <S.MakeInputDate 
+                        type='text' 
+                        id='startDate'
+                        value={(startDate===''? '____년 _월 _일': startDate) + " ~ " + (endDate===''? '____년 _월 _일':endDate)} 
+                    /> 
+                </S.InputWrap>
+                <S.CalendarWrap className='recuit-calendar' onCalendar={isCalendar} >
+                    <Calendar
+                        onChange={onChangeDate} 
+                        selectRange={true}
+                        next2Label={null}
+                        prev2Label={null} 
+                        formatDay={(locale, date) => format(date,'dd')} 
+                        showNeighboringMonth={false} 
+                    />
+                </S.CalendarWrap>
+            </S.MakeInputContainer>  
 		</>
 	);
 };

@@ -30,7 +30,7 @@ function InterviewMake3() {
 	//다음 클릭 시(API 연결)
 	const selectedDates = useRecoilValue(selectedDatesAtom);
 	const selectedTimes = useRecoilValue(scheduleAtom);
-	const accessToken = localStorage.getItem('isLogin');
+	const accessToken = sessionStorage.getItem('isLogin');
 
 	const onValid = (data: MemoData) => {
 		//시간 string으로 변환

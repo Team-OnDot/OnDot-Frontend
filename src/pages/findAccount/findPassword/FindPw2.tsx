@@ -1,7 +1,7 @@
 import * as F from '../FindAccount.style';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { findEmailAtom, hashValueAtom, accessTokenAtom } from '../../../recoil/findAccount';
+import { findEmailAtom, hashValueAtom, accessTokenAtom } from '../../../recoil/findAccountAtoms';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,6 +37,7 @@ function FindPw2() {
                     비밀번호 변경 링크가 포함된 이메일이 {sendEmail}으로 전송되었습니다.<br/>
                     메일을 확인하여 비밀번호를 변경해 주세요.
                 </F.HeaderText>
+                <F.iconImg  src={process.env.PUBLIC_URL + '/images/iconFindPassword.svg'} />
             </F.Header>
         </div>
     );

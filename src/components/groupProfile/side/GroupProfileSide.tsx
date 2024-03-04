@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 import { groupInfoAtom } from '../../../recoil/groupAtoms';
 
 function GroupProfileSide() {
-	const accessToken = localStorage.getItem('isLogin');
+	const accessToken = sessionStorage.getItem('isLogin');
 	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
 
 	useEffect(() => {
@@ -15,15 +15,26 @@ function GroupProfileSide() {
 				url: '/api/v1/organizations',
 				method: 'get',
 				headers: {
-					Authorization: 'Bearer ' + accessToken,
-				},
-			})
-				.then((response) => {
-					console.log(response.data);
-					setGroupInfo(response.data.content);
-				})
-				.catch((error) => console.log(error));
-		};
+					Authorization: 'Bearer ' + accessToken
+				}
+			}).then((response) => {
+				console.log(response.data);
+				const getGroupInfo = response.data.content;
+				if(getGroupInfo.type === "STUDENT_COUNCIL"){
+					getGroupInfo.type = "동아리";
+				}
+				else if(getGroupInfo.type === "STUDENT_CLUB"){
+					getGroupInfo.type = "학생회";
+				}
+				else if(getGroupInfo.type === "ACADEMIC_CLUB"){
+					getGroupInfo.type = "학술 모임";
+				}
+				else{
+					getGroupInfo.type = "기타";
+				}
+				setGroupInfo(getGroupInfo);
+			}).catch((error) => console.log((error)));
+		}
 		getData();
 	}, []);
 
@@ -58,7 +69,7 @@ function GroupProfileSide() {
 	return (
 		<S.Container>
 			<div>
-				<S.GroupImg src={process.env.PUBLIC_URL + '/images/profileImg.svg'} />
+				<S.GroupImg src={groupInfo.imageUrl? groupInfo.imageUrl: process.env.PUBLIC_URL + '/images/profileImg.svg'} />
 				<S.GroupName>{groupInfo.name}</S.GroupName>
 				<S.GroupType>{groupInfo.type === 'STUDENT_COUNCIL' ? '학생회' : groupInfo.type === 'STUDENT_CLUB' ? '동아리' : groupInfo.type === 'ACADEMIC_CLUB' ? '학술모임' : '기타'}</S.GroupType>
 				<S.GroupLink onClick={handleCopyLink}>

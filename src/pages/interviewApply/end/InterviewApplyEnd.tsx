@@ -13,6 +13,7 @@ function InterviewApplyEnd() {
 		<>
 			{/*Main*/}
 			<I.InterviewMain>
+			<I.InterviewMainImg src={process.env.PUBLIC_URL + '/images/interviewPageGuestEnd.svg'} />
 				<I.InterviewMainText>
 					지원기간이 마감되었습니다.
 					<br />

@@ -6,7 +6,7 @@ function InterviewApplyMain() {
 
 	//면접 지원하기 클릭 시
 	const onClickApply = () => {
-		navigate(`/interview-apply-input-info`);
+		navigate('/interview-apply-input-info');
 	};
 
 	//지원 정보 수정하기 클릭 시
@@ -18,6 +18,7 @@ function InterviewApplyMain() {
 		<>
 			{/*Main*/}
 			<I.InterviewMain>
+				<I.InterviewMainImg src={process.env.PUBLIC_URL + '/images/interviewPageGuest.svg'} />
 				<I.InterviewMainText>
 					안녕하세요!
 					<br />
