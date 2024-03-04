@@ -1,6 +1,6 @@
 import * as F from '../FindAccount.style';
 import { useRecoilValue } from 'recoil';
-import { emailCodeAtom, findEmailAtom } from '../../../recoil/findAccount';
+import { emailCodeAtom, findEmailAtom } from '../../../recoil/findAccountAtoms';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 

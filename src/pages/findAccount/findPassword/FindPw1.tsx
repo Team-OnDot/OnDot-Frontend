@@ -1,7 +1,7 @@
 import * as F from '../FindAccount.style';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
-import { findEmailAtom, hashValueAtom, accessTokenAtom } from '../../../recoil/findAccount';
+import { findEmailAtom, hashValueAtom, accessTokenAtom } from '../../../recoil/findAccountAtoms';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 

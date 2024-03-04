@@ -25,7 +25,7 @@ function GroupProfileSide() {
   //   interviews: [],
 	// });
 
-	const accessToken = localStorage.getItem('isLogin');
+	const accessToken = sessionStorage.getItem('isLogin');
 	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
 
 	useEffect(() => {
