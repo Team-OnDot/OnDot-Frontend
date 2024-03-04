@@ -2,27 +2,30 @@ import * as T from './TimeTableConfirm.style';
 import html2canvas from 'html2canvas';
 import saveAs from 'file-saver';
 import { jsPDF } from 'jspdf';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import FinalTable from '../../../components/finalTable/FinalTable';
+import { useRecoilState } from 'recoil';
+import { interviewFinalAtom } from '../../../recoil/interviewFinalAtom';
+import ShareModal from '../../../components/modal/share/ShareModal';
 
-function TimeTableView3() {
+function TimeTableConfirm() {
+	const { interviewId } = useParams();
 	//공유하기 버튼
 	const popUpRef = useRef<HTMLDivElement>(null);
-	const [shareClicked, setShareClicked] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
+	const [interviewFinal, setInterviewFinal] = useRecoilState(interviewFinalAtom);
 
 	const onClickShareBtn = () => {
 		//alert열기
-		setShareClicked(true);
+		setIsOpen(true);
 		//alert로 이동
-		popUpRef.current?.scrollIntoView({ behavior: 'smooth' });
+		// popUpRef.current?.scrollIntoView({ behavior: 'smooth' });
 
 		//클립보드 복사
 		const currentUrl = window.location.href;
 		navigator.clipboard.writeText(currentUrl);
-	};
-
-	//alert 닫기 버튼
-	const onClickCloseBtn = () => {
-		setShareClicked(false);
 	};
 
 	const divRef = useRef<HTMLDivElement>(null);
@@ -76,16 +79,30 @@ function TimeTableView3() {
 		setPngClicked(true);
 	};
 
+	const accessToken = localStorage.getItem('isLogin');
+
+	useEffect(() => {
+		const getData = async () => {
+			await axios({
+				url: `/api/v1/interviews/${interviewId}/final`,
+				method: 'get',
+				headers: {
+					Authorization: 'Bearer ' + accessToken,
+				},
+			})
+				.then((response) => {
+					console.log(response.data.content);
+					setInterviewFinal(response.data.content);
+				})
+				.catch((error) => console.log(error));
+		};
+		getData();
+	});
+
 	return (
-		<div ref={popUpRef}>
-			{shareClicked ? (
-				<T.AlertBox>
-					<T.AlertText>클립보드에 복사가 완료되었습니다!</T.AlertText>
-					<T.AlertCloseBtn onClick={onClickCloseBtn}>완료</T.AlertCloseBtn>
-				</T.AlertBox>
-			) : null}
-			<T.TimeTableView3>
-				<T.Main>
+		<>
+			<T.Container ref={popUpRef}>
+				<div>
 					{/*header*/}
 					<T.Header>
 						<T.Ellipse39 />
@@ -94,10 +111,26 @@ function TimeTableView3() {
 					<img src={process.env.PUBLIC_URL + '/images/lineCircleLong.svg'} />
 					<T.TitleText>최종 면접 타임테이블이 확정되었습니다.</T.TitleText>
 
-					{/*타임테이블(main) */}
-					<div ref={divRef}>
-						<T.TimeTable />
-					</div>
+					{/*타임테이블*/}
+					<T.TableWrapper ref={divRef}>
+						<FinalTable />
+					</T.TableWrapper>
+
+					{interviewFinal.notMatchedApplicants.length > 0 ? (
+						<T.NotMatchedWrapper>
+							<h3>매칭되지 않은 지원자</h3>
+							<T.AvailableApplicantContainer>
+								{interviewFinal.notMatchedApplicants.map((p) => (
+									<T.AvailableApplicantWrapper>
+										<T.IconApplicant />
+										<div>
+											<span>{`${p.name}(${p.phone.slice(9)})`}</span>
+										</div>
+									</T.AvailableApplicantWrapper>
+								))}
+							</T.AvailableApplicantContainer>
+						</T.NotMatchedWrapper>
+					) : null}
 
 					{/*footer*/}
 					<T.ShareBtn onClick={onClickShareBtn}>공유하기</T.ShareBtn>
@@ -112,10 +145,11 @@ function TimeTableView3() {
 							PNG
 						</T.PngBtn>
 					</T.PdfPngBtnBox>
-				</T.Main>
-			</T.TimeTableView3>
-		</div>
+				</div>
+			</T.Container>
+			{isOpen ? <ShareModal setIsOpen={setIsOpen} /> : null}
+		</>
 	);
 }
 
-export default TimeTableView3;
+export default TimeTableConfirm;
