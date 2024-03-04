@@ -71,7 +71,7 @@ function GroupProfileSide() {
 			<div>
 				<S.GroupImg src={groupInfo.imageUrl? groupInfo.imageUrl: process.env.PUBLIC_URL + '/images/profileImg.svg'} />
 				<S.GroupName>{groupInfo.name}</S.GroupName>
-				<S.GroupType>{groupInfo.type}</S.GroupType>
+				<S.GroupType>{groupInfo.type === 'STUDENT_COUNCIL' ? '학생회' : groupInfo.type === 'STUDENT_CLUB' ? '동아리' : groupInfo.type === 'ACADEMIC_CLUB' ? '학술모임' : '기타'}</S.GroupType>
 				<S.GroupLink onClick={handleCopyLink}>
 					<a ref={linkRef} href={groupInfo.profileUrl}>
 						{groupInfo.profileUrl}

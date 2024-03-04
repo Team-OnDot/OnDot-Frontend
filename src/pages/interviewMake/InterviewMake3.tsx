@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { interviewMakeAtom, selectedDatesAtom, scheduleAtom } from './../../recoil/interviewMakeAtom';
 import {} from '../../recoil/interviewMakeAtom';
 import * as S from './InterviewMake3.style';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import axios from 'axios';
 import { format } from 'date-fns';
 
@@ -30,6 +30,7 @@ function InterviewMake3() {
 	//다음 클릭 시(API 연결)
 	const selectedDates = useRecoilValue(selectedDatesAtom);
 	const selectedTimes = useRecoilValue(scheduleAtom);
+	const scheduleAtomReset = useResetRecoilState(scheduleAtom);
 	const accessToken = sessionStorage.getItem('isLogin');
 
 	const onValid = (data: MemoData) => {
@@ -58,8 +59,8 @@ function InterviewMake3() {
 			headers: { Authorization: 'Bearer ' + accessToken },
 		})
 			.then((response) => {
+				scheduleAtomReset();
 				navigate('/interview-make-complete');
-				// 아톰 리셋
 			})
 			.catch((error) => {
 				console.log('실패');

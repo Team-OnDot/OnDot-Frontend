@@ -1,30 +1,36 @@
 import { useEffect, useRef, useState } from 'react';
 import * as S from './InterviewApplySide.style';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { interviewInfoAtom } from '../../../recoil/interviewAtom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
+import { groupInfoAtom } from '../../../recoil/groupAtoms';
+import { interviewApplyAtom } from '../../../recoil/interviewApplyAtom';
 
 function InterviewApplySide() {
 	const [interviewInfo, setInterviewInfo] = useRecoilState(interviewInfoAtom);
-	const { interviewId } = useParams();
-	const accessToken = sessionStorage.getItem('isLogin');
+	const [interviewApply, setInterviewApply] = useRecoilState(interviewApplyAtom);
+	const groupInfo = useRecoilValue(groupInfoAtom);
+	const { organizationId, interviewId } = useParams();
 	const [startDateString, setStartDateString] = useState<string>();
 	const [endDateString, setEndDateString] = useState<string>();
 
 	useEffect(() => {
 		const getData = async () => {
+			if (organizationId !== undefined && interviewId !== undefined) {
+				setInterviewApply({
+					organizationId: organizationId,
+					interviewId: interviewId,
+					applyName: interviewApply.applyName,
+					applyPhone: interviewApply.applyPhone,
+					applyEmail: interviewApply.applyEmail,
+				});
+			}
 			try {
 				const response = await axios({
-					url: `/api/v1/interviews/${interviewId}`,
+					url: `/api/v1/organizations/applicants/${interviewApply.organizationId}/${interviewApply.interviewId}`,
 					method: 'get',
-					params: {
-						interviewId: interviewId,
-					},
-					headers: {
-						Authorization: 'Bearer ' + accessToken,
-					},
 				});
 				setInterviewInfo(response.data.content);
 			} catch (error) {
@@ -40,20 +46,6 @@ function InterviewApplySide() {
 			setEndDateString(format(new Date(interviewInfo.interviewEndDate), 'yyyy년 M월 d일'));
 		}
 	});
-
-	const groupInfo = {
-		groupName: '온닷',
-		groupType: '동아리',
-		groupLink: 'Ondot.co.kr.ondot2024',
-	};
-
-	// const interviewInfo = {
-	// 	interviewTitle: '온닷 1기 운영진 면접',
-	// 	interviewPeriod: '2024년 1월 1일 ~ 2024년 1월 3일',
-	// 	interviewTime: '30분',
-	// 	interviewType: '1:1 면접',
-	// 	interviewPlace: '숭실대학교 정보과학관 205호',
-	// };
 
 	const linkRef = useRef<HTMLAnchorElement>(null);
 	//링크 복사 이벤트
@@ -72,12 +64,12 @@ function InterviewApplySide() {
 
 	return (
 		<S.Container>
-			<S.GroupImg src={process.env.PUBLIC_URL + '/images/profileImg.svg'} />
-			<S.GroupName>{groupInfo.groupName}</S.GroupName>
-			<S.GroupType>{groupInfo.groupType}</S.GroupType>
+			<S.GroupImg src={groupInfo.imageUrl? groupInfo.imageUrl : process.env.PUBLIC_URL + '/images/profileImg.svg'} />
+			<S.GroupName>{groupInfo.name}</S.GroupName>
+			<S.GroupType>{groupInfo.type === 'STUDENT_COUNCIL' ? '학생회' : groupInfo.type === 'STUDENT_CLUB' ? '동아리' : groupInfo.type === 'ACADEMIC_CLUB' ? '학술모임' : '기타'}</S.GroupType>
 			<S.GroupLink onClick={handleCopyLink}>
-				<a ref={linkRef} href={groupInfo.groupLink}>
-					{groupInfo.groupLink}
+				<a ref={linkRef} href={groupInfo.profileUrl}>
+					{groupInfo.profileUrl}
 				</a>
 			</S.GroupLink>
 			<S.InterviewInfoContainer>

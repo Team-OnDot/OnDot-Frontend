@@ -19,6 +19,9 @@ export const ApplyTitleText = styled.text`
 	font-family: 'Pretendard-SemiBold';
 `;
 
+export const InputContainer = styled.div`
+	display: flex;
+`;
 //비밀번호 안내 문구
 export const PwTxt = styled.text`
 	display: flex;
@@ -29,8 +32,23 @@ export const PwTxt = styled.text`
 	color: ${(props) => props.theme.colors.gray4};
 `;
 
+//인증번호 전송 버튼
+export const AuthBtn = styled.button<{ toggle: boolean }>`
+	background: ${(props) => (props.toggle ? `${props.theme.colors.red1}` : `${props.theme.colors.gray5}`)};
+	width: 112px;
+	height: 46px;
+	border-radius: 11px;
+	border: none;
+	padding: 10px;
+	font-family: 'Pretendard-Bold';
+	font-size: 15px;
+	color: white;
+	margin: auto auto 0px 10px;
+`;
+
 //다음 버튼
 export const NextBtn = styled.button<{ toggle: boolean }>`
+	display: inline-block;
 	background: ${(props) => (props.toggle ? `${props.theme.colors.red1}` : `${props.theme.colors.gray5}`)};
 	width: 122px;
 	height: 45px;
@@ -40,7 +58,7 @@ export const NextBtn = styled.button<{ toggle: boolean }>`
 	align-items: center;
 	border-radius: 14px;
 	font-family: 'Pretendard-Bold';
-	font-size: 18px;
+	font-size: 15px;
 	color: white;
 	margin-left: 768px;
 	margin-top: 171px;

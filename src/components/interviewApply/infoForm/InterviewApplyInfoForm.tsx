@@ -1,18 +1,24 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as I from './InterviewApplyInfoForm.style';
 import * as L from '../../login/LoginForm.style';
 import * as S from '../../signUp/signupId/SignUpForm.style';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { interviewApplyAtom } from '../../../recoil/interviewApplyAtom';
 
 type IUserData = {
 	userName: string;
 	userPhone: string;
-	userPw: string;
-	pwCheck: string;
+	userEmail: string;
+	userAuth: string;
 };
 
 function ApplyInfoForm() {
+	const [ authNumber, setAuthNumber ] = useState('');
+	const [interviewApply, setInterviewApply] = useRecoilState(interviewApplyAtom);
+	
 	const {
 		register,
 		handleSubmit,
@@ -24,18 +30,18 @@ function ApplyInfoForm() {
 		formState: { errors },
 	} = useForm<IUserData>({ mode: 'onBlur' });
 
-	//비밀번호 일치 확인
+	//인증번호 일치 확인
 	useEffect(() => {
-		if (watch('userPw') !== watch('pwCheck') && watch('pwCheck')) {
-			setError('pwCheck', {
-				type: 'password-mismatch',
-				message: '비밀번호가 일치하지 않습니다',
+		if (watch('userAuth') !== authNumber && watch('userAuth')) {
+			setError('userAuth', {
+				type: 'auth-mismatch',
+				message: '인증번호가 일치하지 않습니다',
 			});
 		} else {
 			// 비밀번호 일치시 오류 제거
-			clearErrors('pwCheck');
+			clearErrors('userAuth');
 		}
-	}, [watch('userPw'), watch('pwCheck')]);
+	}, [watch('userAuth')]);
 
 	//회원가입 버튼 활성화
 	const [isActive, setIsActive] = useState(false);
@@ -53,12 +59,58 @@ function ApplyInfoForm() {
 		resetField(name);
 	};
 
+	// 인증번호 전송 버튼
+	const onAuth = () => {
+		// API 연결
+		axios({
+			url: `/api/v1/auth/email`,
+			method: 'get',
+			params: {
+				email: watch('userEmail'),
+			},
+		})
+		.then((response) => {
+			console.log(response.data);
+			setAuthNumber(response.data.content);
+		})
+		.catch((error) => {
+			console.log('실패');
+			console.error('AxiosError:', error);
+		});
+		
+	};
+
 	//값이 다 정상적으로 입력되었을 때 실행되는 함수
 	const navigate = useNavigate();
 	const onValid = (data: IUserData) => {
 		console.log('성공');
 		console.log(data);
-		navigate('/interview-apply-input-schedule');
+
+		// API 연결
+		axios({
+			url: `/api/v1/interviews/${interviewApply.interviewId}/applicants/signin`,
+			method: 'post',
+			data: {
+				name: data.userName,
+				email: data.userEmail,
+				phone: data.userPhone
+			},
+		})
+		.then((response) => {
+			setInterviewApply({
+				organizationId: interviewApply.organizationId,
+				interviewId: interviewApply.interviewId,
+				applyName: data.userName,
+				applyPhone: data.userPhone,
+				applyEmail: data.userEmail,
+			});
+			navigate('/interview-apply-input-schedule');
+		})
+		.catch((error) => {
+			console.log('실패');
+			console.error('AxiosError:', error);
+		});
+		
 	};
 
 	//값이 다 비정상적으로 입력되었을 때 실행되는 함수
@@ -112,59 +164,64 @@ function ApplyInfoForm() {
 					{watch('userPhone')?.length > 0 && <L.InputCancelBtn src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'} onClick={(e) => removeInput('userPhone')} />}
 				</L.LoginInputBox>
 
-				{/*비밀번호*/}
+				{/*이메일*/}
 				<I.ApplyTitle>
 					<I.Ellipse2 />
-					<I.ApplyTitleText>비밀번호</I.ApplyTitleText>
+					<I.ApplyTitleText>이메일</I.ApplyTitleText>
 					<I.PwTxt>지원자 식별에 사용되며 재설정이 불가능합니다.</I.PwTxt>
 				</I.ApplyTitle>
 
-				<L.LoginInputBox toggle={watch('userPw')?.length > 0 ? true : false || errors.userPw ? true : false} color={errors.userPw ? '#FF4A4A' : '#606060'}>
-					<L.LoginInput
-						id="userPw"
-						type="password"
-						placeholder="비밀번호를 입력해주세요"
-						{...register('userPw', {
-							required: true,
-							pattern: {
-								value: /^[a-z0-9#?!@$%^&*-](?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])[a-z0-9#?!@$%^&*-]{8,20}$/,
-								message: '8~20자 영문, 숫자, 특수기호(_ @ ? !)',
-							},
-						})}
-					/>
-					{watch('userPw')?.length > 0 && <L.InputCancelBtn src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'} onClick={(e) => removeInput('userPw')} />}
-				</L.LoginInputBox>
+				<I.InputContainer>
+					<L.LoginInputBox toggle={watch('userEmail')?.length > 0 ? true : false || errors.userEmail ? true : false} color={errors.userEmail ? '#FF4A4A' : '#606060'}>
+						<L.LoginInput
+							id="userEmail"
+							type="text"
+							placeholder="이메일를 입력해주세요"
+							{...register('userEmail', {
+								required: true,
+								pattern: {
+									value: /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/,
+									message: "ex. ondot@email.com"
+								},
+							})}
+						/>
+						{watch('userEmail')?.length > 0 && <L.InputCancelBtn src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'} onClick={(e) => removeInput('userEmail')} />}
+					</L.LoginInputBox>
+					<I.AuthBtn toggle={watch('userEmail')?.length > 0 ? true : false || errors.userEmail ? true : false} onClick={onAuth}>
+						인증번호 전송
+					</I.AuthBtn>
+				</I.InputContainer>
 				<S.ErrorMessage>
-					{watch('userPw')?.length === 0 && <S.HeplerText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.HeplerText>}
-					<S.ErrorText error={errors.userPw ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.ErrorText>
+					{/* {watch('userEmail')?.length === 0 && <S.HeplerText error={errors.userEmail ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.HeplerText>}
+					<S.ErrorText error={errors.userEmail ? true : false}>8~20자 영문, 숫자, 특수기호(_ @ ? !)</S.ErrorText> */}
 				</S.ErrorMessage>
 
 				{/*비밀번호 확인*/}
 				<I.ApplyTitle>
 					<I.Ellipse2 />
-					<I.ApplyTitleText>비밀번호 확인</I.ApplyTitleText>
+					<I.ApplyTitleText>인증번호</I.ApplyTitleText>
 				</I.ApplyTitle>
 
-				<L.LoginInputBox toggle={watch('pwCheck')?.length > 0 ? true : false || errors.pwCheck ? true : false} color={errors.pwCheck ? '#FF4A4A' : '#606060'}>
+				<L.LoginInputBox toggle={watch('userAuth')?.length > 0 ? true : false || errors.userAuth ? true : false} color={errors.userAuth ? '#FF4A4A' : '#606060'}>
 					<L.LoginInput
-						id="pwCheck"
+						id="userAuth"
 						type="password"
-						placeholder="비밀번호를 다시 한 번 입력해 주세요"
-						{...register('pwCheck', {
+						placeholder="인증번호를 입력해 주세요"
+						{...register('userAuth', {
 							required: true,
-							validate: {
-								matchPassword: (value) => {
-									const { userPw } = getValues();
-									return userPw === value || '비밀번호가 일치하지 않습니다';
-								},
-							},
+							// validate: {
+							// 	matchAuth: (value) => {
+							// 		const { authNumber } = getValues();
+							// 		return authNumber === value || '비밀번호가 일치하지 않습니다';
+							// 	},
+							// },
 						})}
 					/>
-					{watch('pwCheck')?.length > 0 && <L.InputCancelBtn src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'} onClick={(e) => removeInput('pwCheck')} />}
+					{watch('userAuth')?.length > 0 && <L.InputCancelBtn src={process.env.PUBLIC_URL + '/images/inputCancelIcon.svg'} onClick={(e) => removeInput('userAuth')} />}
 				</L.LoginInputBox>
 				<S.ErrorMessage>
-					{watch('pwCheck')?.length === 0 && <S.HeplerText error={errors.pwCheck ? true : false}>비밀번호가 일치하지 않습니다</S.HeplerText>}
-					<S.ErrorText error={errors.pwCheck ? true : false}>{errors?.pwCheck?.message}</S.ErrorText>
+					{watch('userAuth')?.length === 0 && <S.HeplerText error={errors.userAuth ? true : false}>인증번호가 일치하지 않습니다</S.HeplerText>}
+					<S.ErrorText error={errors.userAuth ? true : false}>{errors?.userAuth?.message}</S.ErrorText>
 				</S.ErrorMessage>
 
 				<I.NextBtn type="submit" toggle={isActive}>

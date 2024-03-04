@@ -67,7 +67,7 @@ function App() {
 								<Route element={<InterviewApply />}>
 									<Route path="/timetable-progress/:interviewId" element={<TimeTableProgress />} />
 									<Route path="/timetable-confirm/:interviewId" element={<TimeTableViewConfirm />} />
-									<Route path="/interview-apply" element={<InterviewApplyMain />} />
+									<Route path="/interview-apply/:organizationId/:interviewId" element={<InterviewApplyMain />} />
 									<Route path="/interview-apply-input-info" element={<InterviewApplyInputInfo />} />
 									<Route path="/interview-apply-input-schedule" element={<InterviewApplyInputSchedule />} />
 									<Route path="/interview-apply-complete" element={<InterviewApplyComplete />} />
