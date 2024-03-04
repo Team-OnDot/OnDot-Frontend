@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import * as S from './GroupProfile.style';
+import * as S from './GroupProfileSide.style';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
@@ -36,7 +36,7 @@ function GroupProfileSide() {
 			}).catch((error) => console.log((error)));
 		}
 		getData();
-	}, [])
+	}, []);
 
 	const navigate = useNavigate();
 

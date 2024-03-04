@@ -4,26 +4,26 @@ import './RecruitCalendar.css';
 import { format } from 'date-fns';
 import * as S from './RecruitCalendar.style';
 import { useRecoilState } from 'recoil';
-import { recruitStartDateAtom, recruitEndDateAtom } from '../../../recoil/interviewAtoms';
+import { recruitStartDateAtom, recruitEndDateAtom } from '../../../recoil/interviewMakeAtom';
 import { useState } from 'react';
 
 const RecruitCalendar = () => {
 	const [startDate, setStartDate] = useRecoilState(recruitStartDateAtom);
-    const [endDate, setEndDate] = useRecoilState(recruitEndDateAtom);
-    const [isCalendar, setIsCalendar] = useState(false);
+	const [endDate, setEndDate] = useRecoilState(recruitEndDateAtom);
+	const [isCalendar, setIsCalendar] = useState(false);
 
-    const onCalendar = () => { 
-        setIsCalendar(!isCalendar);
-    };
+	const onCalendar = () => {
+		setIsCalendar(!isCalendar);
+	};
 
-    const onChangeDate = (e: any) => { 
-        const startDateFormat = format(e[0], "yyyy-MM-dd");
-        const endDateFormat = format(e[1], "yyyy-MM-dd");
+	const onChangeDate = (e: any) => {
+		const startDateFormat = format(e[0], 'yyyy-MM-dd');
+		const endDateFormat = format(e[1], 'yyyy-MM-dd');
 
-        setStartDate(startDateFormat);
-        setEndDate(endDateFormat);
-        setIsCalendar(!isCalendar);
-    };
+		setStartDate(startDateFormat);
+		setEndDate(endDateFormat);
+		setIsCalendar(!isCalendar);
+	};
 
 	return (
 		<>

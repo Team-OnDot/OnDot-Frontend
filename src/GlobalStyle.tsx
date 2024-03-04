@@ -57,7 +57,11 @@ html,body {
   height: 100%;
   overflow-x: hidden;
   font-family: 'Pretendard-Regular';
-  
+  position: relative;
+}
+
+#root {
+  position: relative;
 }
 menu, ol, ul {
   list-style: none;

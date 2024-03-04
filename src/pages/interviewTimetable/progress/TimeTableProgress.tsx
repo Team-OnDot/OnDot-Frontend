@@ -5,11 +5,19 @@ import { chunkArray } from '../../../utils/chunkArray';
 import TimeTable from '../../../components/timeTable/TimeTable';
 import { addMinutes, format } from 'date-fns';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import ConfirmModal from '../../../components/modal/confirm/ConfirmModal';
 
 function TimeTableProgress() {
 	const splideRef = useRef<Splide>(null);
 	const { interviewId } = useParams();
+	const [isOpen, setIsOpen] = useState(false);
+
+	const onClick = () => {
+		if (!isOpen) {
+			setIsOpen(true);
+		}
+	};
 
 	const goPrev = () => {
 		if (splideRef.current) {
@@ -149,6 +157,28 @@ function TimeTableProgress() {
 		}
 	});
 
+	const navigate = useNavigate();
+
+	const confirmInterview = async (interviewId: string) => {
+		if (interviewId) {
+			try {
+				await axios({
+					url: `/api/v1/interviews/${interviewId}`,
+					method: 'post',
+					params: {
+						interviewId: parseInt(interviewId),
+					},
+					headers: {
+						Authorization: 'Bearer ' + accessToken,
+					},
+				});
+				navigate(`/timetable-confirm/${interviewId}`);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	};
+
 	return (
 		<>
 			<S.Container>
@@ -192,9 +222,10 @@ function TimeTableProgress() {
 						: null}
 				</S.AvailableApplicantContainer>
 				<S.BtnWrapper>
-					<S.BtnConfirm>타임테이블 생성하기</S.BtnConfirm>
+					<S.BtnConfirm onClick={onClick}>타임테이블 생성하기</S.BtnConfirm>
 				</S.BtnWrapper>
 			</S.Container>
+			{isOpen ? <ConfirmModal setIsOpen={setIsOpen} interviewId={interviewId!} confirmInterview={confirmInterview} /> : null}
 		</>
 	);
 }

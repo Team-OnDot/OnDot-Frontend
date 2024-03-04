@@ -13,6 +13,9 @@ export const PreviewContainer = styled.div`
 	margin-bottom: 40px;
 	cursor: pointer;
 `;
+
+export const PreviewBox = styled.div`
+`;
 export const PreviewWrap = styled.div`
 	display: flex;
 	align-items: center; /* 수직 정렬 */
@@ -44,17 +47,16 @@ export const PreviewText = styled.div`
 	margin-bottom: 15px;
 	gap: 10px;
 `;
-export const PreviewShare = styled.div`
-	width: 60px;
-	font-size: 16px;
-	font-family: 'Pretendard-SemiBold';
-	line-height: 19px;
-	letter-spacing: 0em;
-	color: ${(props) => props.theme.colors.red1};
-	border: 2px solid ${(props) => props.theme.colors.red1};
-	border-radius: 9px;
-	text-align: center;
-	padding: 5px 14px;
-	margin-left: auto;
-	margin-right: 0px;
+
+//삭제, 공유 아이콘 박스
+export const BtnBox = styled.div`
+	display: flex;
+	padding: 0px 0px 0px 260px;
+`;
+
+export const Btn = styled.div`
+`;
+//삭제, 공유 아이콘
+export const InterviewPreIcon = styled.img`
+	margin-left: 6px;
 `;
