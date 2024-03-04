@@ -5,6 +5,8 @@ import InterviewDelModal from '../../components/interviewPreview/interviewDelete
 import { useRecoilValue } from 'recoil';
 import { groupInfoAtom } from '../../recoil/groupAtoms';
 import { interviewDelAtom } from '../../recoil/modalAtoms';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function GroupProfileMain() {
 	const navigate = useNavigate();
@@ -17,10 +19,36 @@ function GroupProfileMain() {
 	//그룹별 interviewId 조회
 	const groupInfo = useRecoilValue(groupInfoAtom);
 	const interviewList = groupInfo.interviews;
+	const [interview, setInterview] = useState<number[]>([]);
 
 	//삭제 모달창 상태 조회
 	const delModalState = useRecoilValue(interviewDelAtom);
 
+	//면접 조회 API연결
+	useEffect(() => {
+		console.log(interviewList);
+		const fetchData = async () => {
+			for (let i = 0; i < groupInfo.interviews.length; i++) {
+				try {
+					const response = await axios.get(`/api/v1/interviews/${interviewList[i]}`, {
+						params: {
+							interviewId: interviewList[i],
+						},
+						headers: { Authorization: 'Bearer ' + sessionStorage.getItem('isLogin') },
+					});
+	
+					// 삭제되지 않은 면접만 값 출력
+					if (response.data.content.interviewStatus === 'SCHEDULED') {
+						setInterview(prevState => [...prevState, interviewList[i]]);
+					}
+				} catch (error) {
+					console.error('AxiosError:', error);
+				}
+			}
+		};
+	
+		fetchData();
+	}, []);
 	return (
 		<>
 			<S.InterviewsZone>
@@ -40,8 +68,8 @@ function GroupProfileMain() {
 
 				{/*면접 리스트 출력*/}
 				<S.InterviewComponentsZone>
-					{interviewList.length ? (
-						interviewList.map((interviewId) => {
+					{interview.length ? (
+						interview.map((interviewId) => {
 							return <InterviewPreview key={interviewId} interviewId={interviewId} />;
 						})
 					) : (

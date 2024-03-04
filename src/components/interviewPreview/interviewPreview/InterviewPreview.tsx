@@ -30,15 +30,17 @@ function InterviewPreview({ interviewId }: Interview) {
 			headers: { Authorization: 'Bearer ' + sessionStorage.getItem('isLogin') },
 		})
 		.then((response) => {
-			//console.log(response.data);
-			setInterview(response.data.content.name);
-			setApplyDate(`${format(response.data.content.applyStartDate, 'MM/dd')} ~ 
-						${format(response.data.content.applyEndDate, 'MM/dd')}`);
-			setInterviewDate(`${format(response.data.content.interviewStartDate, 'yyyy년 MM월 dd일')} ~ 
-						${format(response.data.content.interviewEndDate, 'yyyy년 MM월 dd일')}`);
-			setInterviewLocation(response.data.content.location);
-			setInterviewTime(response.data.content.requiredTime);
-			setInterviewCount(`${response.data.content.interviewerCount}:${response.data.content.applicantCount}`);
+			//삭제되지 않은 면접만 값 출력
+			if(response.data.content.interviewStatus !== 'DEACTIVE'){
+				setInterview(response.data.content.name);
+				setApplyDate(`${format(response.data.content.applyStartDate, 'MM/dd')} ~ 
+							${format(response.data.content.applyEndDate, 'MM/dd')}`);
+				setInterviewDate(`${format(response.data.content.interviewStartDate, 'yyyy년 MM월 dd일')} ~ 
+							${format(response.data.content.interviewEndDate, 'yyyy년 MM월 dd일')}`);
+				setInterviewLocation(response.data.content.location);
+				setInterviewTime(response.data.content.requiredTime);
+				setInterviewCount(`${response.data.content.interviewerCount}:${response.data.content.applicantCount}`);
+			}
 		})
 		.catch((error) => {
 			console.log('실패');
