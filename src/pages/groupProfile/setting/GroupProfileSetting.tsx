@@ -9,12 +9,41 @@ import { groupTypeAtom } from '../../../recoil/signUpAtoms';
 import axios from 'axios';
 
 function GroupProfileSetting() {
+	const accessToken = localStorage.getItem('isLogin');
 	const [groupInfo, setGroupInfo] = useRecoilState(groupInfoAtom);
 	const [groupType, setGroupType] = useRecoilState(groupTypeAtom);
 	const [imgFile, setImgFile] = useState<File | null>(null);
 	const [imgUrl, setImgUrl] = useState(groupInfo.imageUrl);
 
-	const regExpName = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,12}$/;
+	useEffect(() => {
+		const getData = async () => {
+			await axios({
+				url: '/api/v1/organizations',
+				method: 'get',
+				headers: {
+					Authorization: 'Bearer ' + accessToken
+				}
+			}).then((response) => {
+				console.log(response.data);
+				const getGroupInfo = response.data.content;
+				if(getGroupInfo.type === "STUDENT_COUNCIL"){
+					getGroupInfo.type = "동아리";
+				}
+				else if(getGroupInfo.type === "STUDENT_CLUB"){
+					getGroupInfo.type = "학생회";
+				}
+				else if(getGroupInfo.type === "ACADEMIC_CLUB"){
+					getGroupInfo.type = "학술 모임";
+				}
+				else{
+					getGroupInfo.type = "기타";
+				}
+				setGroupInfo(getGroupInfo);
+				setGroupType(getGroupInfo.type);
+			}).catch((error) => console.log((error)));
+		}
+		getData();
+	}, [])
 
 	const navigate = useNavigate();
 
@@ -65,7 +94,6 @@ function GroupProfileSetting() {
 	  };
 	}
 
-	const accessToken = localStorage.getItem('isLogin');
 	const onValid = (data: GroupInfo) => {
 		console.log(data);
 		if(groupType === "동아리"){
@@ -143,7 +171,7 @@ function GroupProfileSetting() {
 				<S.ProfilePlus />
 			</S.LabelForImage>
 			<S.SettingInputImage type="file" id="imageUrl" accept='image/*' onChange={onchangeImage}/>
-			<S.TextSub>00Mb 이상</S.TextSub>
+			<S.TextSub>{imgFile? (imgFile.size/(1024*1024)).toFixed(2): '00'}Mb 이상</S.TextSub>
 			<S.TextContainer>
 				<S.TextCircle />
 				<S.Text>그룹 이름</S.Text>

@@ -20,11 +20,10 @@ function GroupProfileMain() {
 		<>
 			<S.InterviewsZone>
 				<S.NavWrap>
-					<S.NavText>
-						<S.NavCircle />
-						면접 페이지
+					<S.NavTextBox>
+						<S.NavText>면접 페이지</S.NavText>
 						<img src={process.env.PUBLIC_URL + '/images/lineCircleShort.svg'} />
-					</S.NavText>
+					</S.NavTextBox>
 					<S.CreateInterviewBtn onClick={onClickCreateInterview} />
 				</S.NavWrap>
 				<S.InterviewComponentsZone>

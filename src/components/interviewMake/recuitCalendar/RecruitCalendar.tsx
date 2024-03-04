@@ -29,7 +29,7 @@ const RecruitCalendar = () => {
 		<>
             <S.MakeInputContainer
                 toggle={isCalendar ? true: false}  
-                color={(startDate==='' && endDate==='') ? '#FF4A4A': '#606060'}
+                color={(startDate==='' && endDate==='') ? '#959595': '#606060'}
             >
                 <S.InterviewIcon src={process.env.PUBLIC_URL + '/images/iconDate_gray.svg'}></S.InterviewIcon>
                 <S.InputWrap toggle={isCalendar? true:false} onClick={onCalendar}>
